@@ -1,0 +1,258 @@
+<template>
+  <div>
+    <v-app-bar
+      :class="this.$vuetify.theme.dark ? '' : 'bg-claro'"
+    >
+      <div :class="this.$vuetify.breakpoint.md ? '' : 'container'">
+        <v-layout>
+
+          <div class="d-flex d-md-none">
+            <v-app-bar-nav-icon class="white--text" @click.stop="drawer = !drawer">
+            </v-app-bar-nav-icon>
+          </div>
+
+          <div class="d-none d-md-flex">
+            <v-btn class="text-oscuro ml-1" text large to="/">
+              <v-icon left>{{mdiHome}}</v-icon>
+              <span>Inicio</span>
+            </v-btn>
+            <v-btn class="text-oscuro ml-1" text large to="/productos">
+              <v-icon left>{{mdiCart}}</v-icon>
+              <span>Productos</span>
+            </v-btn>
+            <v-btn class="text-oscuro ml-1" text large to="/catalogo">
+              <v-icon left>{{mdiLibrary}}</v-icon>
+              <span>Catálogo</span>
+            </v-btn>
+            <v-btn class="text-oscuro ml-1" text large to="/contacto">
+              <v-icon left>{{mdiCardAccountPhone}}</v-icon>
+              <span>Contacto</span>
+            </v-btn>
+            <v-btn class="text-oscuro ml-1" text large to="/nosotros">
+              <v-icon left>{{mdiAccountGroup}}</v-icon>
+              <span>Nosotros</span>
+            </v-btn>
+            <v-btn class="text-oscuro ml-1" text large to="/buscar">
+              <v-icon left>{{mdiMagnify}}</v-icon>
+              <span>Buscar</span>
+            </v-btn>
+            <v-btn  v-if="existeUsuario" class="text-oscuro ml-1" text large to="/admin">
+              <v-icon left>{{mdiCoffee}}</v-icon>
+              <span>Admin</span>
+            </v-btn>
+            <v-btn  v-if="!existeUsuario" class="text-oscuro ml-1" text large to="/admin/login">
+              <v-icon left>{{mdiCoffee}}</v-icon>
+              <span>Login</span>
+            </v-btn>
+          </div>
+          <v-spacer></v-spacer>
+          <v-tooltip v-model="mostrarTooltip" bottom>
+            <template v-slot:activator="{on, attrs}">
+              <v-btn
+                v-on="on"
+                v-bind="attrs"
+                icon
+                @click="cambiarTema"
+              >
+                <v-icon class="white--text">{{
+                  $vuetify.theme.dark
+                      ? mdiBrightness4
+                      : mdiBrightness7}}
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>{{
+              $vuetify.theme.dark
+                  ? 'Activar modo Claro'
+                  : 'Activar modo Oscuro'}}
+            </span>
+          </v-tooltip>
+        </v-layout>
+      </div>
+      <v-snackbar
+        v-model="snackbar"
+        :timeout="timeout"
+        shaped
+        top
+        :color="
+          $vuetify.theme.dark
+              ? 'primary'
+              : 'grey darken-4'
+        "
+      >
+        {{ textSnackbar }}
+        <template v-slot:action="{ attrs }">
+          <v-btn
+            v-bind="attrs"
+            :color="
+            $vuetify.theme.dark
+                ? 'grey darken-4'
+                : 'primary'
+          "
+            text
+            @click="snackbar = false"
+          >
+            Cerrar
+          </v-btn>
+        </template>
+      </v-snackbar>
+    </v-app-bar>
+
+    <v-navigation-drawer
+      v-model="drawer"
+      dark
+      temporary
+      app
+      clipped
+      color="primary"
+      src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/FondoMenu.jpg?alt=media&token=3109d5d9-8101-46ee-9d42-b3350eacf50b"
+    >
+      <v-list shaped menu>
+        <v-subheader>Menú Principal</v-subheader>
+        <v-divider class="mx-5"></v-divider>
+        <v-list-item-group v-model="group" class="white--text">
+          <v-list-item to="/">
+            <v-list-item-title>
+              <v-icon left>{{mdiHome}}</v-icon>
+              <span>Inicio</span>
+            </v-list-item-title>
+          </v-list-item>
+
+          <v-list-item to="/productos">
+            <v-list-item-title>
+              <v-icon left>{{mdiCart}}</v-icon>
+              <span>Productos</span>
+            </v-list-item-title>
+          </v-list-item>
+
+          <v-list-item to="/catalogo">
+            <v-list-item-title>
+              <v-icon left>{{mdiLibrary}}</v-icon>
+              <span>Catálogo</span>
+            </v-list-item-title>
+          </v-list-item>
+
+          <v-list-item to="/contacto">
+            <v-list-item-title>
+              <v-icon left>{{mdiCardAccountPhone}}</v-icon>
+              <span>Contacto</span>
+            </v-list-item-title>
+          </v-list-item>
+
+          <v-list-item to="/nosotros">
+            <v-list-item-title>
+              <v-icon left>{{mdiAccountGroup}}</v-icon>
+              <span>Nosotros</span>
+            </v-list-item-title>
+          </v-list-item>
+
+          <v-list-item to="/buscar">
+            <v-list-item-title>
+              <v-icon left>{{mdiMagnify}}</v-icon>
+              <span>Buscar</span>
+            </v-list-item-title>
+          </v-list-item>
+
+          <v-list-item v-if="existeUsuario" to="/admin">
+            <v-list-item-title>
+              <v-icon left>{{mdiCoffee}}</v-icon>
+              <span>Admin</span>
+            </v-list-item-title>
+          </v-list-item>
+
+          <v-list-item v-if="!existeUsuario" to="/admin/login">
+            <v-list-item-title>
+              <v-icon left>{{mdiCoffee}}</v-icon>
+              <span>Login</span>
+            </v-list-item-title>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+  </div>
+</template>
+
+<script>
+import {
+  mdiBrightness4,
+  mdiBrightness7,
+  mdiLibrary,
+  mdiCardAccountPhone,
+  mdiCart,
+  mdiAccountGroup,
+  mdiCoffee,
+  mdiHome,
+  mdiMagnify,
+  mdiMenu,
+} from '@mdi/js';
+import { mapGetters } from 'vuex';
+
+export default {
+  data() {
+    return {
+      mdiBrightness4,
+      mdiBrightness7,
+      mdiLibrary,
+      mdiCardAccountPhone,
+      mdiCart,
+      mdiAccountGroup,
+      mdiCoffee,
+      mdiHome,
+      mdiMenu,
+      mdiMagnify,
+      snackbar: false,
+      timeout: 3000,
+      textSnackbar: '',
+      mostrarTooltip: false,
+      drawer: false,
+      group: null,
+    };
+  },
+  watch: {
+    group() {
+      this.drawer = false;
+    },
+  },
+  methods: {
+    cambiarTema() {
+      if (this.$vuetify.theme.dark) {
+        this.textSnackbar = 'Modo Claro Activado';
+        this.snackbar = true;
+        this.$vuetify.theme.dark = false;
+        localStorage.setItem('darkTheme', this.$vuetify.theme.dark.toString());
+      } else {
+        this.textSnackbar = 'Modo Oscuro Activado';
+        this.snackbar = true;
+        this.$vuetify.theme.dark = true;
+        localStorage.setItem('darkTheme', this.$vuetify.theme.dark.toString());
+      }
+    },
+  },
+  computed: {
+    ...mapGetters(['existeUsuario']),
+  },
+};
+</script>
+
+<style>
+a {
+  text-decoration: none;
+  /* margin-top: 15px; */
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.text-oscuro {
+  color: white !important;
+}
+
+.bg-claro {
+  background: #0077bd !important;
+}
+
+.subtitle-1 {
+  margin: 0 !important;
+}
+</style>

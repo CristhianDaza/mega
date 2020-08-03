@@ -24,6 +24,12 @@ export default new Vuex.Store({
       }
     },
   },
-  modules: {
+  getters: {
+    existeUsuario(state) {
+      if (state.usuario === null || state.usuario === '' || state.usuario === undefined) {
+        return false;
+      }
+      return true;
+    },
   },
 });
