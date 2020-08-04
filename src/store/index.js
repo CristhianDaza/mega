@@ -11,6 +11,7 @@ export default new Vuex.Store({
     usuario: '',
     imagenSlider: [],
     imagenInfo: [],
+    catalogos: [],
   },
   mutations: {
     setUsuario(state, valor) {
@@ -21,6 +22,9 @@ export default new Vuex.Store({
     },
     setImagenInfo(state, valor) {
       state.imagenInfo = valor;
+    },
+    setCatalogos(state, valor) {
+      state.catalogos = valor;
     },
   },
   actions: {
@@ -56,6 +60,18 @@ export default new Vuex.Store({
             imagenes.push(imagen);
           });
           commit('setImagenInfo', imagenes);
+        });
+    },
+    async traerCatalogo({ commit }) {
+      await db.collection('catalogo').get()
+        .then((snapshot) => {
+          const catalogos = [];
+          snapshot.forEach((doc) => {
+            const catalogo = doc.data();
+            catalogo.id = doc.id;
+            catalogos.push(catalogo);
+          });
+          commit('setCatalogos', catalogos);
         });
     },
   },

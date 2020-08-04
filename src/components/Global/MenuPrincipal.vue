@@ -20,9 +20,9 @@
               <v-icon left>{{mdiCart}}</v-icon>
               <span>Productos</span>
             </v-btn>
-            <v-btn class="text-oscuro ml-1" text large to="/catalogo">
+            <v-btn class="text-oscuro ml-1" text large to="/catalogos">
               <v-icon left>{{mdiLibrary}}</v-icon>
-              <span>Catálogo</span>
+              <span>Catálogos</span>
             </v-btn>
             <v-btn class="text-oscuro ml-1" text large to="/contacto">
               <v-icon left>{{mdiCardAccountPhone}}</v-icon>
@@ -125,10 +125,10 @@
             </v-list-item-title>
           </v-list-item>
 
-          <v-list-item to="/catalogo">
+          <v-list-item to="/catalogos">
             <v-list-item-title>
               <v-icon left>{{mdiLibrary}}</v-icon>
-              <span>Catálogo</span>
+              <span>Catálogos</span>
             </v-list-item-title>
           </v-list-item>
 

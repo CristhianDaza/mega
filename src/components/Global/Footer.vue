@@ -49,12 +49,12 @@
               class="mx-4 white--text"
               v-on="on"
               v-bind="attrs"
-              icon to="/catalogo"
+              icon to="/catalogos"
             >
               <v-icon>{{mdiLibrary}}</v-icon>
             </v-btn>
           </template>
-          <span>Catalogo</span>
+          <span>Catalogos</span>
         </v-tooltip>
 
         <v-tooltip bottom>
