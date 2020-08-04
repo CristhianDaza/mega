@@ -11,6 +11,12 @@ const routes = [
     component: () => import('../views/Inicio.vue'),
   },
   {
+    path: '/productos',
+    name: 'Productos',
+    exact: true,
+    component: () => import('../views/Productos.vue'),
+  },
+  {
     path: '/catalogos',
     name: 'Catalogos',
     exact: true,
