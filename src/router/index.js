@@ -11,10 +11,10 @@ const routes = [
     component: () => import('../views/Inicio.vue'),
   },
   {
-    path: '/productos',
-    name: 'Productos',
+    path: '/categorias',
+    name: 'Categorias',
     exact: true,
-    component: () => import('../views/Productos.vue'),
+    component: () => import('../views/Categorias.vue'),
   },
   {
     path: '/catalogos',

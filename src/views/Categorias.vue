@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Hero titulo="Productos"/>
+    <Hero titulo="Categorias"/>
     <v-container>
       <v-breadcrumbs :items="items">
         <template v-slot:item="{ item }">

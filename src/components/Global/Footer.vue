@@ -35,12 +35,12 @@
               class="mx-4 white--text"
               v-on="on"
               v-bind="attrs"
-              icon to="/productos"
+              icon to="/categorias"
             >
               <v-icon>{{mdiCart}}</v-icon>
             </v-btn>
           </template>
-          <span>Productos</span>
+          <span>Categorias</span>
         </v-tooltip>
 
         <v-tooltip bottom>

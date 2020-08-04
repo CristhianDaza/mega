@@ -16,9 +16,9 @@
               <v-icon left>{{mdiHome}}</v-icon>
               <span>Inicio</span>
             </v-btn>
-            <v-btn class="text-oscuro ml-1" text large to="/productos">
+            <v-btn class="text-oscuro ml-1" text large to="/categorias">
               <v-icon left>{{mdiCart}}</v-icon>
-              <span>Productos</span>
+              <span>Categorias</span>
             </v-btn>
             <v-btn class="text-oscuro ml-1" text large to="/catalogos">
               <v-icon left>{{mdiLibrary}}</v-icon>
@@ -118,10 +118,10 @@
             </v-list-item-title>
           </v-list-item>
 
-          <v-list-item to="/productos">
+          <v-list-item to="/categorias">
             <v-list-item-title>
               <v-icon left>{{mdiCart}}</v-icon>
-              <span>Productos</span>
+              <span>Categorias</span>
             </v-list-item-title>
           </v-list-item>
 
