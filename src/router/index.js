@@ -17,6 +17,12 @@ const routes = [
     component: () => import('../views/Catalogos.vue'),
   },
   {
+    path: '/contacto',
+    name: 'Contacto',
+    exact: true,
+    component: () => import('../views/Contacto.vue'),
+  },
+  {
     path: '/producto/:codigo',
     name: 'productoCodugo',
     exact: true,
