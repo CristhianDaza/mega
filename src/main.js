@@ -4,6 +4,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import App from './App.vue';
 import router from './router';
+// eslint-disable-next-line import/no-cycle
 import store from './store';
 import vuetify from './plugins/vuetify';
 import '@babel/polyfill';

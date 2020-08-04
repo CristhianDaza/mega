@@ -3,7 +3,7 @@
     <Cabecera />
     <MenuPrincipal />
     <v-main>
-      <router-view></router-view>
+      <router-view :key="$route.fullPath" />
     </v-main>
     <Footer />
     <v-speed-dial>

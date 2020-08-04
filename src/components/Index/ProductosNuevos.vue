@@ -97,7 +97,6 @@ export default {
         res.data.results.forEach((producto) => {
           this.productoNuevo.push(producto);
         });
-        console.log(this.productoNuevo);
       });
     },
   },

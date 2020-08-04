@@ -7,16 +7,19 @@ const routes = [
   {
     path: '/',
     name: 'Inicio',
+    exact: true,
     component: () => import('../views/Inicio.vue'),
   },
   {
     path: '/catalogos',
     name: 'Catalogos',
+    exact: true,
     component: () => import('../views/Catalogos.vue'),
   },
   {
     path: '/producto/:codigo',
     name: 'productoCodugo',
+    exact: true,
     component: () => import('../views/ProductoCodigo.vue'),
   },
 ];
