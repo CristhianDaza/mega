@@ -3,7 +3,7 @@
     <Cabecera />
     <MenuPrincipal />
     <v-main>
-      <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, est.</h1>
+      <router-view></router-view>
     </v-main>
     <Footer />
     <v-speed-dial>
@@ -75,6 +75,16 @@ export default {
       const top = window.pageYOffset || e.target.scrollTop || 0;
       this.mostrarBoton = top > 200;
     },
+  },
+  mounted() {
+    const theme = localStorage.getItem('darkTheme');
+    if (theme) {
+      if (theme === 'true') {
+        this.$vuetify.theme.dark = true;
+      } else {
+        this.$vuetify.theme.dark = false;
+      }
+    }
   },
 };
 </script>
