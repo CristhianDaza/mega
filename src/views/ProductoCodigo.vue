@@ -1,6 +1,7 @@
 <template>
-<!-- eslint-disable max-len -->
   <div>
+<!-- eslint-disable max-len -->
+  <div v-if="this.productoCodigo.length > 0">
     <v-container>
       <v-breadcrumbs :items="items">
         <template v-slot:item="{ item }">
@@ -42,7 +43,7 @@
                 </template>
               </v-img>
 
-              <div v-if="productoCodigo[0].caracteristicas.length > 0" class="mt-8">
+              <div v-if="productoCodigo[0].caracteristicas.length > 0" class="mt-8 mr-5 ml-2">
                 <v-row>
                   <template v-for="caracteristica in productoCodigo[0].caracteristicas">
                     <v-tooltip top :key="caracteristica.id">
@@ -351,6 +352,21 @@
       <v-progress-circular indeterminate size="64"></v-progress-circular>
     </v-overlay>
 
+  </div>
+  <div v-else class="mx-auto">
+    <v-container class="fill-height mt-16 mx-auto">
+      <v-row align="center" justify="center">
+        <v-progress-circular
+          :size="100"
+          :width="7"
+          color="primary"
+          indeterminate
+        >
+          Cargando
+        </v-progress-circular>
+      </v-row>
+    </v-container>
+  </div>
   </div>
 </template>
 
