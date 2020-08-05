@@ -1,8 +1,7 @@
 <template>
   <div>
     <v-img
-      src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/megapromocionales.jpg?alt=media&token=d2d1c64b-1692-4129-84aa-21201d68cca1"
-      lazy-src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/megapromocionales_opt.jpg?alt=media&token=8a702977-cc5d-405a-a88f-0e0f4cd09d57"
+      src="/assets/megapromocionales.jpg"
       alt="Imagen Principal Megapromocionales"
       class="imagenPrincipal"
       height="400px"
