@@ -20,6 +20,7 @@
           cols="12"
           sm="6"
           md="4"
+          lg="3"
           v-for="(producto) in productoNuevo"
           :key="producto.familia"
         >
@@ -31,7 +32,7 @@
         <v-card
           outlined
           class="d-inline-block"
-          to="/productos/categoria/descuento/"
+          :to="'/productos?etiqueta=' + 1"
           :elevation="hover ? 5 : 2"
           :class="{ 'on-hover': hover }"
         >
