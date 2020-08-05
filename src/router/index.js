@@ -23,6 +23,12 @@ const routes = [
     component: () => import('../views/Catalogos.vue'),
   },
   {
+    path: '/productos',
+    name: 'Productos',
+    exact: true,
+    component: () => import('../views/Productos.vue'),
+  },
+  {
     path: '/contacto',
     name: 'Contacto',
     exact: true,
@@ -52,6 +58,10 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes,
+  // eslint-disable-next-line no-unused-vars
+  scrollBehavior(to, from, savedPosition) {
+    return { x: 0, y: 0 };
+  },
 });
 
 export default router;
