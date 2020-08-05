@@ -23,18 +23,41 @@
         <div class="text">Ver Producto</div>
       </router-link>
     </v-card-text>
-    <v-card-subtitle
-      class="text-center font-weight-medium"
+    <v-card-title
+      class="text-center text-subtitle-2"
     >
-      {{ producto.familia }} - {{ producto.descripcion_comercial }}
+      {{ producto.descripcion_comercial }}
+    </v-card-title>
+    <v-card-subtitle>
+      {{ producto.familia }}
     </v-card-subtitle>
-      <v-card-subtitle v-if="existeUsuario" class="precio">
-          <div
-          class="text-center font-weight-medium"
-        >
-          ${{ Math.round(producto.materiales[0].precio) }} + iva
+    <v-card-subtitle class="d-flex pt-0">
+      <template v-for="color in colores">
+        <div class="contenedor_color" :key="color.codigo">
+          <v-tooltip bottom dense>
+            <template v-slot:activator="{on, attrs}">
+              <div
+                v-bind="attrs"
+                v-on="on"
+                :style="'background:' + color.color_hex_1"
+                class="colorProducto"
+                ></div>
+            </template>
+            <span>
+              {{color.color_nombre}} ({{color.inventario}})
+              <span v-if="color.variedad !== null"> - {{color.variedad}}</span>
+            </span>
+          </v-tooltip>
         </div>
-      </v-card-subtitle>
+      </template>
+    </v-card-subtitle>
+    <v-card-subtitle v-if="existeUsuario" class="precio">
+        <div
+        class="text-center font-weight-medium"
+      >
+        ${{ Math.round(producto.materiales[0].precio) }} + iva
+      </div>
+    </v-card-subtitle>
     <v-card-text class="text-center">
       <img v-if="producto.materiales[0].estado == '2'" src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/nuevo.png?alt=media&token=7dbffaa3-1580-435a-9739-86c155c5194b" alt="Novedad" class="text-center" width="80">
       <img v-if="producto.materiales[0].estado == '3'" src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/saldo.png?alt=media&token=b1d4cf45-0dcc-4285-87e9-c32f63c808d8" alt="Saldo" class="text-center" width="80">
@@ -60,7 +83,7 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  props: ['producto'],
+  props: ['producto', 'colores'],
   computed: {
     ...mapGetters(['existeUsuario']),
   },
@@ -115,5 +138,28 @@ export default {
 .div-img:hover .text {
   transform: translate(0px, -20px);
   opacity: 1;
+}
+
+.contenedor_color {
+  position: relative;
+  height: 15px;
+  max-height: 15px;
+  width: 15px;
+  margin: 2px 4px;
+  border-radius: 100%;
+  user-select: none;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid gray;
+}
+.contenedor_color div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.colorProducto {
+  cursor: auto;
 }
 </style>

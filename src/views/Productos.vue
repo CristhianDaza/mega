@@ -65,7 +65,7 @@
               v-for="(producto) in productos[0]"
               :key="producto.id"
             >
-              <Productos :producto='producto' />
+              <Productos :producto='producto' :colores='producto.materiales' />
             </v-col>
           </v-row>
           <v-row v-if="this.productos.length > 0" justify="center">
@@ -158,6 +158,8 @@ export default {
         this.productos.push(res.data.results);
         this.infoProductos.push(res.data);
         this.totalPaginas = Math.ceil((this.infoProductos[0].count / this.porPagina));
+        // eslint-disable-next-line prefer-destructuring
+        this.colores = this.productos[0];
       });
     },
     cambiarPagina(pagina) {
