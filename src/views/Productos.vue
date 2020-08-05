@@ -29,24 +29,54 @@
             @change="cambiarPorPagina(porPagina)"
           ></v-select>
           <v-divider></v-divider>
-          <v-list dense>
-            <v-subheader>Categorías</v-subheader>
-            <v-list-item-group color="primary">
-              <v-list-item
-                v-for="(item, index) in listaCategorias"
-                :key="index"
-                @click="buscarCategoria(item.value)"
+          <v-card class="my-3">
+            <v-card-title>Colores:</v-card-title>
+            <v-card-text>
+              <v-row>
+                <div v-for="color in this.colores[0]" :key="color.id" class="contenedor_color">
+                  <v-tooltip bottom dense>
+                    <template v-slot:activator="{on, attrs}">
+                      <div
+                        v-bind="attrs"
+                        v-on="on"
+                        :style="'background:' + color.hex_1"
+                        @click="buscarColor(color.id)"
+                        ></div>
+                    </template>
+                    <span>{{color.nombre}}</span>
+                  </v-tooltip>
+                </div>
+              </v-row>
+            </v-card-text>
+          </v-card>
+          <v-card>
+            <v-list v-if="this.categorias.length > 0" dense>
+              <v-subheader>Categorías</v-subheader>
+              <v-list-group
+                v-for="categoria in this.categorias[0]"
+                :key="categoria.id_pagina"
+                no-action
               >
-                <v-list-item-content>
-                  <v-list-item-title>
-                    {{item.nombre}}
-                  </v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list-item-group>
-          </v-list>
+                <template v-slot:activator>
+                  <v-list-item-content>
+                    <v-list-item-title v-text="categoria.nombre"></v-list-item-title>
+                  </v-list-item-content>
+                </template>
+                <v-list-item
+                  v-for="subCategoria in categoria.subcategorias"
+                  :key="subCategoria.id_pagina"
+                  @click="buscarSubCategoria(subCategoria.jerarquia)"
+                >
+                  <v-list-item-content>
+                    <v-list-item-title v-text="subCategoria.nombre"></v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list-group>
+            </v-list>
+          </v-card>
         </v-col>
         <v-col cols="12" sm="8" md="9">
+        <h2 v-if="this.infoProductos.length > 0" class="text-subtitle-1">Resultados: {{this.infoProductos[0].count}}</h2>
           <v-row v-if="this.productos.length > 0">
             <v-col
               cols="12"
@@ -99,23 +129,10 @@ import Hero from '@/components/Global/Hero.vue';
 export default {
   data() {
     return {
+      listaCategorias: true,
       productos: [],
-      listaCategorias: [
-        { nombre: 'Antiestrés', value: 30001 },
-        { nombre: 'Bar', value: 30002 },
-        { nombre: 'Bebidas', value: 30003 },
-        { nombre: 'Bolsos', value: 30004 },
-        { nombre: 'Escritura', value: 30005 },
-        { nombre: 'Gorras y Viseras', value: 30006 },
-        { nombre: 'Herramientas, Linternas y Llaveros', value: 30007 },
-        { nombre: 'Hogar y Estilos de vida', value: 30008 },
-        { nombre: 'Oficina', value: 30009 },
-        { nombre: 'Paraguas e Impermeables', value: 30010 },
-        { nombre: 'Salud y Belleza', value: 30011 },
-        { nombre: 'Tecnología', value: 30012 },
-        { nombre: 'USB', value: 30013 },
-        { nombre: 'Viajes, Recreación y Deportes', value: 30014 },
-      ],
+      categorias: [],
+      colores: [],
       pagina: Number(this.$route.query.pagina) || 1,
       categoria: Number(this.$route.query.categoria) || '',
       subCategoria: Number(this.$route.query.subCategoria) || '',
@@ -180,7 +197,7 @@ export default {
       this.$router.push({
         path: this.$route.path,
         query: {
-          pagina: this.$route.query.pagina,
+          pagina: 1,
           porPagina,
           categoria: this.$route.query.categoria,
           subCategoria: this.$route.query.subCategoria,
@@ -189,16 +206,44 @@ export default {
       });
       this.getProductos(this.pagina, porPagina, this.categoria, this.subCategoria, this.etiqueta);
     },
-    buscarCategoria(categoria) {
+    buscarSubCategoria(subCategoria) {
       this.$router.push({
         path: this.$route.path,
         query: {
           pagina: 1,
           porPagina: 12,
-          categoria,
+          subCategoria,
         },
       });
-      this.getProductos(this.pagina, this.porPagina, categoria, this.subCategoria, this.etiqueta);
+      this.getProductos(this.pagina, this.porPagina, this.categoria, subCategoria, this.etiqueta);
+    },
+    async getCategorias() {
+      const url = 'https://marpicoprod.azurewebsites.net/api/categorias/';
+      const config = {
+        method: 'get',
+        url,
+        headers: {
+          Authorization: 'Bearer Api-Key fBc8kc9ejmpvIqSLeKh9bIL955E0LOdNfFKfNZhGy3xRlGTxtDl7ADOdSzrLfgLj',
+        },
+      };
+
+      await axios(config).then((res) => {
+        this.categorias.push(res.data);
+      });
+    },
+    async getColores() {
+      const url = 'https://marpicoprod.azurewebsites.net/api/productos/colores';
+      const config = {
+        method: 'get',
+        url,
+        headers: {
+          Authorization: 'Bearer Api-Key fBc8kc9ejmpvIqSLeKh9bIL955E0LOdNfFKfNZhGy3xRlGTxtDl7ADOdSzrLfgLj',
+        },
+      };
+
+      await axios(config).then((res) => {
+        this.colores.push(res.data);
+      });
     },
   },
   mounted() {
@@ -209,6 +254,30 @@ export default {
       this.subCategoria,
       this.etiqueta,
     );
+    this.getCategorias();
+    this.getColores();
   },
 };
 </script>
+
+<style>
+  .contenedor_color {
+    position: relative;
+    height: 20px;
+    max-height: 20px;
+    width: 20px;
+    margin: 2px 4px;
+    border-radius: 100%;
+    user-select: none;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid black;
+  }
+  .contenedor_color div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+</style>
