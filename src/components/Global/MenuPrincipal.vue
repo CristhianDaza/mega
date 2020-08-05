@@ -18,7 +18,7 @@
             </v-btn>
             <v-btn class="text-oscuro ml-1" text large to="/categorias">
               <v-icon left>{{mdiCart}}</v-icon>
-              <span>Categorias</span>
+              <span>Categorías</span>
             </v-btn>
             <v-btn class="text-oscuro ml-1" text large to="/catalogos">
               <v-icon left>{{mdiLibrary}}</v-icon>
@@ -121,7 +121,7 @@
           <v-list-item to="/categorias">
             <v-list-item-title>
               <v-icon left>{{mdiCart}}</v-icon>
-              <span>Categorias</span>
+              <span>Categorías</span>
             </v-list-item-title>
           </v-list-item>
 

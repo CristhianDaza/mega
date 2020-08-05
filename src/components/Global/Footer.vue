@@ -40,7 +40,7 @@
               <v-icon>{{mdiCart}}</v-icon>
             </v-btn>
           </template>
-          <span>Categorias</span>
+          <span>Categorías</span>
         </v-tooltip>
 
         <v-tooltip bottom>
