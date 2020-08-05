@@ -28,27 +28,7 @@
             v-model="porPagina"
             @change="cambiarPorPagina(porPagina)"
           ></v-select>
-          <v-divider></v-divider>
-          <v-card class="my-3">
-            <v-card-title>Colores:</v-card-title>
-            <v-card-text>
-              <v-row>
-                <div v-for="color in this.colores[0]" :key="color.id" class="contenedor_color">
-                  <v-tooltip bottom dense>
-                    <template v-slot:activator="{on, attrs}">
-                      <div
-                        v-bind="attrs"
-                        v-on="on"
-                        :style="'background:' + color.hex_1"
-                        @click="buscarColor(color.id)"
-                        ></div>
-                    </template>
-                    <span>{{color.nombre}}</span>
-                  </v-tooltip>
-                </div>
-              </v-row>
-            </v-card-text>
-          </v-card>
+          <v-divider class="mb-3"></v-divider>
           <v-card>
             <v-list v-if="this.categorias.length > 0" dense>
               <v-subheader>Categorías</v-subheader>
@@ -231,20 +211,6 @@ export default {
         this.categorias.push(res.data);
       });
     },
-    async getColores() {
-      const url = 'https://marpicoprod.azurewebsites.net/api/productos/colores';
-      const config = {
-        method: 'get',
-        url,
-        headers: {
-          Authorization: 'Bearer Api-Key fBc8kc9ejmpvIqSLeKh9bIL955E0LOdNfFKfNZhGy3xRlGTxtDl7ADOdSzrLfgLj',
-        },
-      };
-
-      await axios(config).then((res) => {
-        this.colores.push(res.data);
-      });
-    },
   },
   mounted() {
     this.getProductos(
@@ -255,29 +221,6 @@ export default {
       this.etiqueta,
     );
     this.getCategorias();
-    this.getColores();
   },
 };
 </script>
-
-<style>
-  .contenedor_color {
-    position: relative;
-    height: 20px;
-    max-height: 20px;
-    width: 20px;
-    margin: 2px 4px;
-    border-radius: 100%;
-    user-select: none;
-    overflow: hidden;
-    cursor: pointer;
-    border: 1px solid black;
-  }
-  .contenedor_color div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-  }
-</style>

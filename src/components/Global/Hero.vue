@@ -2,8 +2,7 @@
   <div>
     <v-img
       alt="Productos Megapromocionales"
-      src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/hero.jpg?alt=media&token=c2526e4e-2b16-474c-9cbc-327d77a06afc"
-      lazy-src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/hero_opt.jpg?alt=media&token=81cac8a5-4d86-4d67-8c1b-b9b54d23c50b"
+      :src="Imagen"
       height="220px"
     >
       <template v-slot:placeholder>
@@ -26,8 +25,15 @@
 </template>
 
 <script>
+import Imagen from '@/assets/megapromocionales.jpg';
+
 export default {
   props: ['titulo'],
+  data() {
+    return {
+      Imagen,
+    };
+  },
 };
 </script>
 
