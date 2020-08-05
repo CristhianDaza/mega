@@ -40,7 +40,7 @@
                 v-bind="attrs"
                 v-on="on"
                 :style="'background:' + color.color_hex_1"
-                class="colorProducto"
+                class="circuloProducto"
                 ></div>
             </template>
             <span>
@@ -51,13 +51,6 @@
         </div>
       </template>
     </v-card-subtitle>
-    <v-card-subtitle v-if="existeUsuario" class="precio">
-        <div
-        class="text-center font-weight-medium"
-      >
-        ${{ Math.round(producto.materiales[0].precio) }} + iva
-      </div>
-    </v-card-subtitle>
     <v-card-text class="text-center">
       <img v-if="producto.materiales[0].estado == '2'" src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/nuevo.png?alt=media&token=7dbffaa3-1580-435a-9739-86c155c5194b" alt="Novedad" class="text-center" width="80">
       <img v-if="producto.materiales[0].estado == '3'" src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/saldo.png?alt=media&token=b1d4cf45-0dcc-4285-87e9-c32f63c808d8" alt="Saldo" class="text-center" width="80">
@@ -65,6 +58,9 @@
         <img v-if="producto.etiquetas[0].id == 4" src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/Neto.png?alt=media&token=f718bea7-0e92-480d-82e4-56a2d3a2dcbe" alt="Neto" class="text-center" width="80">
       </div>
     </v-card-text>
+    <v-card-title v-if="existeUsuario" class="precio">
+      ${{ Math.round(producto.materiales[0].precio) }} + iva
+    </v-card-title>
     <v-divider class="mx-5"></v-divider>
     <v-card-actions>
     <v-btn
@@ -159,7 +155,7 @@ export default {
   width: 100%;
   height: 100%;
 }
-.colorProducto {
+.circuloProducto {
   cursor: auto;
 }
 </style>
