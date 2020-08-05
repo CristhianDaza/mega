@@ -3,18 +3,29 @@
 <!-- eslint-disable max-len -->
   <div v-if="this.productoCodigo.length > 0">
     <v-container>
-      <v-breadcrumbs :items="items">
-        <template v-slot:item="{ item }">
-          <v-breadcrumbs-item
-            :to="{ path: item.href}"
-            :disabled="item.disabled"
-            class="primary--text"
-            exact
-          >
-            {{ item.titulo.toUpperCase() }}
-          </v-breadcrumbs-item>
-        </template>
-      </v-breadcrumbs>
+      <div class="links">
+        <ul>
+          <li>
+            <router-link exact to="/" class="links__item">INICIO</router-link>
+          </li>
+          <li class="links__divider">/</li>
+          <li>
+            <router-link exact to="/productos" class="links__item">PRODUCTOS</router-link>
+          </li>
+          <li class="links__divider">/</li>
+          <li>
+            <router-link exact :to="'/productos?categoria=' + productoCodigo[0].subcategoria_1.categoria.jerarquia" class="links__item">{{this.categoriaPrincipal.toUpperCase()}}</router-link>
+          </li>
+          <li class="links__divider">/</li>
+          <li>
+            <router-link exact :to="'/productos?subCategoria=' + productoCodigo[0].subcategoria_1.jerarquia" class="links__item">{{this.categoriaSecundaria.toUpperCase()}}</router-link>
+          </li>
+          <li class="links__divider">/</li>
+          <li>
+            {{this.codigo}}
+          </li>
+        </ul>
+      </div>
       <v-card class="mx-auto mt-10">
         <v-row>
           <v-col cols="12" md="6" >
@@ -61,10 +72,14 @@
                   </template>
                 </v-row>
               </div>
-              <div v-if="this.textoInfo !== ''" class="mt-5">
-                <p>{{textoInfo}}</p>
-                <v-btn color="primary" small @click="cerrarTextoInfo">Cerrar</v-btn>
-              </div>
+              <v-card v-if="this.textoInfo !== ''" class="mt-5 elevation-10">
+                <v-card-text>
+                  <p>{{textoInfo}}</p>
+                </v-card-text>
+                <v-card-actions>
+                  <v-btn color="primary" small @click="cerrarTextoInfo">Cerrar</v-btn>
+                </v-card-actions>
+              </v-card>
             </v-container>
           </v-col>
           <v-col cols="12" md="6" :class="this.$vuetify.breakpoint.xs ? 'pt-0' : ''">
@@ -102,7 +117,7 @@
               </v-card-text>
               <v-card-text>
                 <p class="ma-0">
-                  <strong class="font-weight-black primary--text">Categorias:</strong> <router-link to="/">{{ productoCodigo[0].subcategoria_1.nombre }}</router-link> | <router-link to="/">{{productoCodigo[0].subcategoria_1.categoria.nombre}}</router-link>
+                  <strong class="font-weight-black primary--text">Categorias:</strong> <router-link :to="'/productos?subCategoria=' + productoCodigo[0].subcategoria_1.jerarquia">{{ productoCodigo[0].subcategoria_1.nombre }}</router-link> | <router-link :to="'/productos?categoria=' + productoCodigo[0].subcategoria_1.categoria.jerarquia">{{productoCodigo[0].subcategoria_1.categoria.nombre}}</router-link>
                 </p>
               </v-card-text>
               <v-card-actions class="pl-4 d-block">
@@ -402,24 +417,8 @@ export default {
       model: null,
       overlay: false,
       mostrarTooltip: false,
-      items: [
-        {
-          titulo: 'Inicio',
-          disabled: false,
-          href: '/',
-        },
-        {
-          titulo: 'productos',
-          disabled: false,
-          href: '/productos/',
-        },
-        {
-          titulo: String(this.$route.params.codigo),
-          disabled: true,
-          href: '',
-        },
-
-      ],
+      categoriaPrincipal: '',
+      categoriaSecundaria: '',
     };
   },
   watch: {
@@ -463,6 +462,8 @@ export default {
         this.productoCodigo.push(res.data);
         this.getProductoExistencias(this.codigo);
         this.getProductosSugerencia(this.productoCodigo[0].materiales[0].codigo);
+        this.categoriaPrincipal = this.productoCodigo[0].subcategoria_1.categoria.nombre;
+        this.categoriaSecundaria = this.productoCodigo[0].subcategoria_1.nombre;
       });
     },
     async getProductoExistencias(codigo) {
@@ -596,5 +597,43 @@ export default {
 .div-img:hover .text {
   transform: translate(0px, -20px);
   opacity: 1;
+}
+
+  a {
+    color: inherit !important;
+    transition: color .3s;
+  }
+  a:hover {
+    color: #1976d2 !important;
+  }
+
+.links {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex: 0 1 auto;
+  list-style: none;
+  margin: 0;
+  padding: 18px 12px;
+}
+
+.links li {
+  align-items: center;
+  display: inline-flex;
+  font-size: 14px;
+}
+.links__item {
+  align-items: center;
+  display: inline-flex;
+  text-decoration: none;
+  transition: all .3s cubic-bezier(0.25, 0.8, 0.5, 1);
+  color: #1976d2 !important;
+}
+.links li:nth-child(2n){
+  padding: 0 12px;
+}
+
+.links ul {
+  padding: 0;
 }
 </style>

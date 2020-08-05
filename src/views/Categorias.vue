@@ -1,6 +1,7 @@
 <template>
+<!-- eslint-disable max-len -->
   <div>
-    <Hero titulo="Categorias"/>
+    <Hero titulo="Categorías"/>
     <v-container>
       <v-breadcrumbs :items="items">
         <template v-slot:item="{ item }">
@@ -37,7 +38,7 @@
                       "
                     >
                       <v-card-title class="font-weight-bold">
-                        <router-link to='/producto/'>
+                        <router-link :to="'/productos?categoria=' + categoria.jerarquia">
                           {{categoria.nombre}}
                         </router-link>
                       </v-card-title>
@@ -48,7 +49,7 @@
                             :key="subCategoria.id_pagina"
                             class="font-weight-medium"
                           >
-                            <router-link to='/producto/'>
+                            <router-link :to="'/productos?subCategoria=' + subCategoria.jerarquia">
                               {{subCategoria.nombre}}
                             </router-link>
                           </li>
@@ -96,8 +97,13 @@ export default {
         },
         {
           titulo: 'productos',
-          disabled: true,
+          disabled: false,
           href: '/productos/',
+        },
+        {
+          titulo: 'categorias',
+          disabled: true,
+          href: '/categorias/',
         },
       ],
     };

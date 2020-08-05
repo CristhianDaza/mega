@@ -161,7 +161,6 @@ export default {
         this.productos.push(res.data.results);
         this.infoProductos.push(res.data);
         this.totalPaginas = Math.ceil((this.infoProductos[0].count / this.porPagina));
-        console.log(url);
       });
     },
     cambiarPagina(pagina) {
