@@ -222,34 +222,56 @@
           <v-simple-table class="mt-5">
             <thead>
               <tr>
+                <th class="text-left">SUGERIDOS</th>
                 <th class="text-left">COLOR</th>
+                <th class="text-left">VARIEDAD</th>
                 <th class="text-left">CANTIDADES DISPONIBLES</th>
                 <th class="text-left">REFERENCIA</th>
               </tr>
             </thead>
-            <tbody>
-              <tr v-for="existencias in productoExistencias[0].materiales" :key="existencias.codigo">
-                <td>
-                <v-tooltip bottom>
-                  <template v-slot:activator="{on, attrs}">
-                    <v-btn
-                      v-on="on"
-                      v-bind="attrs"
-                      icon
-                      small=""
-                      @click.stop="actualizar(existencias.codigo)"
-                      color="primary"
-                    >
-                      <v-icon>{{mdiMagnify}}</v-icon>
-                    </v-btn>
-                  </template>
-                  <span>Ver Sugerencia en {{existencias.color_nombre}}</span>
-                </v-tooltip>
-                  {{existencias.color_nombre}}
-                </td>
-                <td class="red--text" v-if="existencias.inventario_almacen[0].cantidad < 10">Agotado</td>
-                <td v-else>{{existencias.inventario}}</td>
-                <td>{{existencias.codigo}}</td>
+            <tbody v-for="existencias in productoCodigo" :key="existencias.codigo">
+              <tr v-for="(existencia, index) in existencias.materiales" :key="index">
+                <template>
+                  <td>
+                    <v-tooltip bottom>
+                      <template v-slot:activator="{on, attrs}">
+                        <v-btn
+                          v-on="on"
+                          v-bind="attrs"
+                          icon
+                          small=""
+                          @click.stop="actualizar(existencia.codigo)"
+                          color="primary"
+                        >
+                          <v-icon>{{mdiMagnify}}</v-icon>
+                        </v-btn>
+                      </template>
+                      <span>Ver Sugerencia en {{existencia.color_nombre}}</span>
+                    </v-tooltip>
+                  </td>
+                  <td>
+                    <div class="contenedor_color">
+                      <v-tooltip bottom dense>
+                        <template v-slot:activator="{on, attrs}">
+                          <div
+                            v-bind="attrs"
+                            v-on="on"
+                            :style="'background:' + existencia.color_hex_1"
+                            class="colorProducto"
+                            @click.stop="actualizar(existencia.codigo)"
+                            ></div>
+                        </template>
+                        <span>{{existencia.color_nombre}}</span>
+                      </v-tooltip>
+                    </div>
+                  </td>
+                  <td>
+                    {{existencia.color_nombre}} <span v-if="existencia.variedad !== null">{{existencia.variedad}}</span>
+                  </td>
+                  <td class="red--text" v-if="existencia.inventario < 10">Agotado</td>
+                  <td v-else>{{existencia.inventario}}</td>
+                  <td>{{existencia.codigo}}</td>
+                </template>
               </tr>
             </tbody>
           </v-simple-table>
@@ -344,19 +366,13 @@
           <tr>
             <th class="text-left">COLOR</th>
             <th class="text-left">CANTIDADES EN TRÁNSITO</th>
-            <th class="text-left">ESTADO DEL PRODUCTO</th>
-            <th class="text-left">INGRESO AL SISTEMA</th>
-            <th class="text-left">ÚLTIMA ACTUALIZACIÓN</th>
           </tr>
         </thead>
         <tbody>
-          <template v-for="existencias in productoExistencias[0].materiales">
-            <tr v-for="traking in existencias.trackings_importacion" :key="traking.codigo">
-              <td>{{existencias.color_nombre}}</td>
-              <td>{{traking.cantidad}}</td>
-              <td>{{traking.estado}}</td>
-              <td>{{traking.fecha}}</td>
-              <td>{{traking.ultima_actualizacion.substr(0,10)}}</td>
+          <template v-for="existencias in productoCodigo">
+            <tr v-for="(existencia, index) in existencias.materiales" :key="index">
+              <td>{{existencia.color_nombre}} <span v-if="existencia.variedad !== null">{{existencia.variedad}}</span></td>
+              <td>{{existencia.en_transito}}</td>
             </tr>
           </template>
         </tbody>
@@ -402,7 +418,6 @@ export default {
     return {
       textoInfo: '',
       productoCodigo: [],
-      productoExistencias: [],
       productoSugerencia: [],
       imagenPrincipalMediana: '',
       imagenPrincipalGrande: '',
@@ -460,24 +475,9 @@ export default {
 
       await axios(config).then((res) => {
         this.productoCodigo.push(res.data);
-        this.getProductoExistencias(this.codigo);
         this.getProductosSugerencia(this.productoCodigo[0].materiales[0].codigo);
         this.categoriaPrincipal = this.productoCodigo[0].subcategoria_1.categoria.nombre;
         this.categoriaSecundaria = this.productoCodigo[0].subcategoria_1.nombre;
-      });
-    },
-    async getProductoExistencias(codigo) {
-      const url = `https://marpicoprod.azurewebsites.net/api/inventarios/materialesAPIByProducto?producto=${codigo}`;
-      const config = {
-        method: 'get',
-        url,
-        headers: {
-          Authorization: 'Bearer Api-Key fBc8kc9ejmpvIqSLeKh9bIL955E0LOdNfFKfNZhGy3xRlGTxtDl7ADOdSzrLfgLj',
-        },
-      };
-
-      await axios(config).then((res) => {
-        this.productoExistencias.push(res.data[0]);
       });
     },
     async getProductosSugerencia(codigo) {
@@ -503,7 +503,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
   .router-link-active {
     color: inherit !important;
   }
@@ -635,5 +635,24 @@ export default {
 
 .links ul {
   padding: 0;
+}
+.contenedor_color {
+  position: relative;
+  height: 20px;
+  max-height: 20px;
+  width: 20px;
+  margin: 2px 4px;
+  border-radius: 100%;
+  user-select: none;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid black;
+}
+.contenedor_color div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 </style>
