@@ -266,7 +266,6 @@
                             v-bind="attrs"
                             v-on="on"
                             :style="`background: linear-gradient(rgb(${hextToRgb(existencia.color_hex_1)[0]}, ${hextToRgb(existencia.color_hex_1)[1]}, ${hextToRgb(existencia.color_hex_1)[2]}) 0%, rgb(${hextToRgb(existencia.color_hex_2)[0]}, ${hextToRgb(existencia.color_hex_2)[1]}, ${hextToRgb(existencia.color_hex_2)[2]}) 48%, rgb(${hextToRgb(existencia.color_hex_2)[0]}, ${hextToRgb(existencia.color_hex_2)[1]}, ${hextToRgb(existencia.color_hex_2)[2]}) 62%, rgb(${hextToRgb(existencia.color_hex_3)[0]}, ${hextToRgb(existencia.color_hex_3)[1]}, ${hextToRgb(existencia.color_hex_3)[2]}) 66%, rgb(${hextToRgb(existencia.color_hex_3)[0]}, ${hextToRgb(existencia.color_hex_3)[1]}, ${hextToRgb(existencia.color_hex_3)[2]}) 100%)`"
-                            class="circuloProducto"
                           ></div>
                           <div
                             v-else-if="existencia.color_hex_2 !== null && existencia.color_hex_3 === null"
@@ -274,7 +273,6 @@
                             v-bind="attrs"
                             v-on="on"
                             :style="`background: linear-gradient(rgb(${hextToRgb(existencia.color_hex_1)[0]}, ${hextToRgb(existencia.color_hex_1)[1]}, ${hextToRgb(existencia.color_hex_1)[2]}) 40%, rgb(${hextToRgb(existencia.color_hex_2)[0]}, ${hextToRgb(existencia.color_hex_2)[1]}, ${hextToRgb(existencia.color_hex_2)[2]}) 50%)`"
-                            class="circuloProducto"
                           >
                           </div>
                           <div
@@ -283,7 +281,6 @@
                             v-bind="attrs"
                             v-on="on"
                             :style="'background:' + existencia.color_hex_1"
-                            class="circuloProducto"
                           ></div>
                         </template>
                         <span>{{existencia.color_nombre}}</span>
@@ -345,21 +342,25 @@
                   </router-link>
                 </v-card-text>
                 <v-card-subtitle
-                  class="text-center font-weight-medium"
+                  class="text-center font-weight-medium pt-0"
                 >
                   {{ producto.producto.familia }} - {{ producto.producto.descripcion_comercial }}
                 </v-card-subtitle>
-                  <v-card-subtitle v-if="existeUsuario" class="precio">
-                      <div
-                      class="text-center font-weight-medium"
-                    >
-                      ${{ Math.round(producto.precio) }} + iva
-                    </div>
-                  </v-card-subtitle>
                 <v-card-text class="text-center">
+                  <div class="red--text" v-if="producto.inventario < 10">Agotado en {{producto.color_nombre}}</div>
+                  <div v-else>Inventario: {{producto.inventario}} unidades.</div>
+                </v-card-text>
+                <v-card-subtitle v-if="existeUsuario" class="precio">
+                    <div
+                    class="text-center font-weight-medium"
+                  >
+                    ${{ Math.round(producto.precio) }} + iva
+                  </div>
+                </v-card-subtitle>
+                <div class="text-center">
                   <img v-if="producto.estado == '2'" src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/nuevo.png?alt=media&token=7dbffaa3-1580-435a-9739-86c155c5194b" alt="Novedad" class="text-center" width="80">
                   <img v-if="producto.estado == '3'" src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/saldo.png?alt=media&token=b1d4cf45-0dcc-4285-87e9-c32f63c808d8" alt="Saldo" class="text-center" width="80">
-                </v-card-text>
+                </div>
                 <v-divider class="mx-5"></v-divider>
                 <v-card-actions>
                 <v-btn
@@ -369,7 +370,7 @@
                   text
                   append
                 >
-                    Ver inventario
+                    Ver Producto
                 </v-btn>
                 </v-card-actions>
               </v-card>
