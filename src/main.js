@@ -3,8 +3,10 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import VueMeta from 'vue-meta';
-import App from './App.vue';
 import router from './router';
+// eslint-disable-next-line import/order
+import VueAnalytics from 'vue-analytics';
+import App from './App.vue';
 // eslint-disable-next-line import/no-cycle
 import store from './store';
 import vuetify from './plugins/vuetify';
@@ -13,6 +15,11 @@ import '@babel/polyfill';
 Vue.config.productionTip = false;
 
 Vue.use(VueMeta);
+
+Vue.use(VueAnalytics, {
+  id: 'UA-126390971-1',
+  router,
+});
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCmc3cVSy9G3g8-kRbGROgD2_0Eu0YmG2o',

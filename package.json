@@ -16,6 +16,7 @@
     "firebase": "^7.17.1",
     "sweetalert2": "^9.17.1",
     "vue": "^2.6.11",
+    "vue-analytics": "^5.22.1",
     "vue-meta": "^2.4.0",
     "vue-router": "^3.2.0",
     "vuetify": "^2.2.11",
