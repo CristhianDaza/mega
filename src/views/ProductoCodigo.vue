@@ -261,12 +261,30 @@
                       <v-tooltip bottom dense>
                         <template v-slot:activator="{on, attrs}">
                           <div
+                            v-if="existencia.color_hex_2 !== null && existencia.color_hex_3 !== null"
+                            @click.stop="actualizar(existencia.codigo)"
+                            v-bind="attrs"
+                            v-on="on"
+                            :style="`background: linear-gradient(rgb(${hextToRgb(existencia.color_hex_1)[0]}, ${hextToRgb(existencia.color_hex_1)[1]}, ${hextToRgb(existencia.color_hex_1)[2]}) 0%, rgb(${hextToRgb(existencia.color_hex_2)[0]}, ${hextToRgb(existencia.color_hex_2)[1]}, ${hextToRgb(existencia.color_hex_2)[2]}) 48%, rgb(${hextToRgb(existencia.color_hex_2)[0]}, ${hextToRgb(existencia.color_hex_2)[1]}, ${hextToRgb(existencia.color_hex_2)[2]}) 62%, rgb(${hextToRgb(existencia.color_hex_3)[0]}, ${hextToRgb(existencia.color_hex_3)[1]}, ${hextToRgb(existencia.color_hex_3)[2]}) 66%, rgb(${hextToRgb(existencia.color_hex_3)[0]}, ${hextToRgb(existencia.color_hex_3)[1]}, ${hextToRgb(existencia.color_hex_3)[2]}) 100%)`"
+                            class="circuloProducto"
+                          ></div>
+                          <div
+                            v-else-if="existencia.color_hex_2 !== null && existencia.color_hex_3 === null"
+                            @click.stop="actualizar(existencia.codigo)"
+                            v-bind="attrs"
+                            v-on="on"
+                            :style="`background: linear-gradient(rgb(${hextToRgb(existencia.color_hex_1)[0]}, ${hextToRgb(existencia.color_hex_1)[1]}, ${hextToRgb(existencia.color_hex_1)[2]}) 40%, rgb(${hextToRgb(existencia.color_hex_2)[0]}, ${hextToRgb(existencia.color_hex_2)[1]}, ${hextToRgb(existencia.color_hex_2)[2]}) 50%)`"
+                            class="circuloProducto"
+                          >
+                          </div>
+                          <div
+                            v-else
+                            @click.stop="actualizar(existencia.codigo)"
                             v-bind="attrs"
                             v-on="on"
                             :style="'background:' + existencia.color_hex_1"
-                            class="colorProducto"
-                            @click.stop="actualizar(existencia.codigo)"
-                            ></div>
+                            class="circuloProducto"
+                          ></div>
                         </template>
                         <span>{{existencia.color_nombre}}</span>
                       </v-tooltip>
@@ -494,6 +512,13 @@ export default {
     },
   },
   methods: {
+    hextToRgb(hex) {
+      return hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i,
+        // eslint-disable-next-line prefer-template
+        (m, r, g, b) => '#' + r + r + g + g + b + b)
+        .substring(1).match(/.{2}/g)
+        .map((x) => parseInt(x, 16));
+    },
     mostrarTextoInfo(texto) {
       this.textoInfo = texto;
     },

@@ -1,4 +1,5 @@
 <template>
+<!-- eslint-disable max-len -->
   <v-card outlined class="mx-auto">
     <v-card-text class="pa-0 div-img">
       <router-link
@@ -24,24 +25,40 @@
       </router-link>
     </v-card-text>
     <v-card-title
-      class="text-center text-subtitle-2"
+      class="text-center text-subtitle-2 pt-0"
     >
       {{ producto.descripcion_comercial }}
     </v-card-title>
     <v-card-subtitle>
       {{ producto.familia }}
     </v-card-subtitle>
-    <v-card-subtitle class="d-flex pt-0">
+    <v-card-subtitle class="d-flex flex-wrap pt-0">
       <template v-for="color in colores">
         <div class="contenedor_color" :key="color.codigo">
           <v-tooltip bottom dense>
             <template v-slot:activator="{on, attrs}">
               <div
+                v-if="color.color_hex_2 !== null && color.color_hex_3 !== null"
+                v-bind="attrs"
+                v-on="on"
+                :style="`background: linear-gradient(rgb(${hextToRgb(color.color_hex_1)[0]}, ${hextToRgb(color.color_hex_1)[1]}, ${hextToRgb(color.color_hex_1)[2]}) 0%, rgb(${hextToRgb(color.color_hex_2)[0]}, ${hextToRgb(color.color_hex_2)[1]}, ${hextToRgb(color.color_hex_2)[2]}) 48%, rgb(${hextToRgb(color.color_hex_2)[0]}, ${hextToRgb(color.color_hex_2)[1]}, ${hextToRgb(color.color_hex_2)[2]}) 62%, rgb(${hextToRgb(color.color_hex_3)[0]}, ${hextToRgb(color.color_hex_3)[1]}, ${hextToRgb(color.color_hex_3)[2]}) 66%, rgb(${hextToRgb(color.color_hex_3)[0]}, ${hextToRgb(color.color_hex_3)[1]}, ${hextToRgb(color.color_hex_3)[2]}) 100%)`"
+                class="circuloProducto"
+              ></div>
+              <div
+                v-else-if="color.color_hex_2 !== null && color.color_hex_3 === null"
+                v-bind="attrs"
+                v-on="on"
+                :style="`background: linear-gradient(rgb(${hextToRgb(color.color_hex_1)[0]}, ${hextToRgb(color.color_hex_1)[1]}, ${hextToRgb(color.color_hex_1)[2]}) 40%, rgb(${hextToRgb(color.color_hex_2)[0]}, ${hextToRgb(color.color_hex_2)[1]}, ${hextToRgb(color.color_hex_2)[2]}) 50%)`"
+                class="circuloProducto"
+              >
+              </div>
+              <div
+                v-else
                 v-bind="attrs"
                 v-on="on"
                 :style="'background:' + color.color_hex_1"
                 class="circuloProducto"
-                ></div>
+              ></div>
             </template>
             <span>
               {{color.color_nombre}} ({{color.inventario}})
@@ -51,13 +68,13 @@
         </div>
       </template>
     </v-card-subtitle>
-    <v-card-text class="text-center">
+    <div class="text-center">
       <img v-if="producto.materiales[0].estado == '2'" src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/nuevo.png?alt=media&token=7dbffaa3-1580-435a-9739-86c155c5194b" alt="Novedad" class="text-center" width="80">
       <img v-if="producto.materiales[0].estado == '3'" src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/saldo.png?alt=media&token=b1d4cf45-0dcc-4285-87e9-c32f63c808d8" alt="Saldo" class="text-center" width="80">
       <div v-if="producto.etiquetas.length > 0">
         <img v-if="producto.etiquetas[0].id == 4" src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/Neto.png?alt=media&token=f718bea7-0e92-480d-82e4-56a2d3a2dcbe" alt="Neto" class="text-center" width="80">
       </div>
-    </v-card-text>
+    </div>
     <v-card-title v-if="existeUsuario" class="precio">
       ${{ Math.round(producto.materiales[0].precio) }} + iva
     </v-card-title>
@@ -82,6 +99,15 @@ export default {
   props: ['producto', 'colores'],
   computed: {
     ...mapGetters(['existeUsuario']),
+  },
+  methods: {
+    hextToRgb(hex) {
+      return hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i,
+        // eslint-disable-next-line prefer-template
+        (m, r, g, b) => '#' + r + r + g + g + b + b)
+        .substring(1).match(/.{2}/g)
+        .map((x) => parseInt(x, 16));
+    },
   },
 };
 </script>
@@ -138,15 +164,15 @@ export default {
 
 .contenedor_color {
   position: relative;
-  height: 15px;
-  max-height: 15px;
-  width: 15px;
+  height: 18px;
+  max-height: 18px;
+  width: 18px;
   margin: 2px 4px;
   border-radius: 100%;
   user-select: none;
   overflow: hidden;
   cursor: pointer;
-  border: 1px solid gray;
+  border: .2px solid gray;
 }
 .contenedor_color div {
   display: flex;

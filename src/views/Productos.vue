@@ -28,6 +28,14 @@
             v-model="porPagina"
             @change="cambiarPorPagina(porPagina)"
           ></v-select>
+          <v-text-field
+            label="Inventario"
+            placeholder="Inventario mayor a:"
+            filled
+            v-model="inputInventario"
+            type="number"
+            @keyup.enter="buscarInventario(inputInventario)"
+          ></v-text-field>
           <v-divider class="mb-3"></v-divider>
           <v-card>
             <v-list v-if="this.categorias.length > 0" dense>
@@ -58,6 +66,7 @@
         <v-col cols="12" sm="8" md="9">
         <h2 v-if="this.infoProductos.length > 0" class="text-subtitle-1">Resultados: {{this.infoProductos[0].count}}</h2>
           <v-row v-if="this.productos.length > 0">
+            <h2 v-if="Number(this.infoProductos[0].count) === 0" class="text-center error mt-2 ml-2 sinResultados">Sin resultados</h2>
             <v-col
               cols="12"
               sm="6"
@@ -114,10 +123,12 @@ export default {
       productos: [],
       categorias: [],
       colores: [],
+      inputInventario: Number(this.$route.query.inventario) || 0,
       pagina: Number(this.$route.query.pagina) || 1,
       categoria: Number(this.$route.query.categoria) || '',
       subCategoria: Number(this.$route.query.subCategoria) || '',
       etiqueta: Number(this.$route.query.etiqueta) || '',
+      inventario: Number(this.$route.query.inventario) || '',
       infoProductos: [],
       totalPaginas: 0,
       porPagina: Number(this.$route.query.porPagina) || 12,
@@ -145,8 +156,8 @@ export default {
     Hero,
   },
   methods: {
-    async getProductos(pagina, porPagina, categoria, subCategoria, etiqueta) {
-      const url = `https://marpicoprod.azurewebsites.net/api/productos/?page_size=${porPagina}&page=${pagina}&categoria=${categoria}&subcategoria=${subCategoria}&order=paginacion_web&etiqueta=${etiqueta}`;
+    async getProductos(pagina, porPagina, categoria, subCategoria, etiqueta, inventario) {
+      const url = `https://marpicoprod.azurewebsites.net/api/productos/?page_size=${porPagina}&page=${pagina}&categoria=${categoria}&subcategoria=${subCategoria}&order=paginacion_web&etiqueta=${etiqueta}&inventario=${inventario}`;
       const config = {
         method: 'get',
         url,
@@ -172,9 +183,17 @@ export default {
           categoria: this.$route.query.categoria,
           subCategoria: this.$route.query.subCategoria,
           etiqueta: this.$route.query.etiqueta,
+          inventario: this.$route.query.inventario,
         },
       });
-      this.getProductos(pagina, this.porPagina, this.categoria, this.subCategoria, this.etiqueta);
+      this.getProductos(
+        pagina,
+        this.porPagina,
+        this.categoria,
+        this.subCategoria,
+        this.etiqueta,
+        this.inventario,
+      );
     },
     cambiarPorPagina(porPagina) {
       this.$router.push({
@@ -185,9 +204,17 @@ export default {
           categoria: this.$route.query.categoria,
           subCategoria: this.$route.query.subCategoria,
           etiqueta: this.$route.query.etiqueta,
+          inventario: this.$route.query.inventario,
         },
       });
-      this.getProductos(this.pagina, porPagina, this.categoria, this.subCategoria, this.etiqueta);
+      this.getProductos(
+        this.pagina,
+        porPagina,
+        this.categoria,
+        this.subCategoria,
+        this.etiqueta,
+        this.inventario,
+      );
     },
     buscarSubCategoria(subCategoria) {
       this.$router.push({
@@ -198,7 +225,35 @@ export default {
           subCategoria,
         },
       });
-      this.getProductos(this.pagina, this.porPagina, this.categoria, subCategoria, this.etiqueta);
+      this.getProductos(
+        this.pagina,
+        this.porPagina,
+        this.categoria,
+        subCategoria,
+        this.etiqueta,
+        this.inventario,
+      );
+    },
+    buscarInventario(inventario) {
+      this.$router.push({
+        path: this.$route.path,
+        query: {
+          pagina: 1,
+          porPagina: 12,
+          categoria: this.$route.query.categoria,
+          subCategoria: this.$route.query.subCategoria,
+          etiqueta: this.$route.query.etiqueta,
+          inventario,
+        },
+      });
+      this.getProductos(
+        this.pagina,
+        this.porPagina,
+        this.categoria,
+        this.subCategoria,
+        this.etiqueta,
+        inventario,
+      );
     },
     async getCategorias() {
       const url = 'https://marpicoprod.azurewebsites.net/api/categorias/';
@@ -222,6 +277,7 @@ export default {
       this.categoria,
       this.subCategoria,
       this.etiqueta,
+      this.inventario,
     );
     this.getCategorias();
   },
@@ -242,3 +298,9 @@ export default {
   },
 };
 </script>
+
+<style>
+  .sinResultados {
+    width: 100%;
+  }
+</style>
