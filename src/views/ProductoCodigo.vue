@@ -55,6 +55,7 @@
               </v-img>
 
               <div v-if="productoCodigo[0].caracteristicas.length > 0" class="mt-8 mr-5 ml-2">
+                <h1 class="text-subtitle-2">Características:</h1>
                 <v-row>
                   <template v-for="caracteristica in productoCodigo[0].caracteristicas">
                     <v-tooltip top :key="caracteristica.id">
@@ -89,7 +90,7 @@
               </v-card-title>
               <v-divider class="mx-8"></v-divider>
               <v-card-text>
-                  <p class="ma-0">{{ productoCodigo[0].descripcion_larga }}</p>
+                  <p class="ma-0 text-justify">{{ productoCodigo[0].descripcion_larga }}</p>
                   <p class="ma-0" v-if="productoCodigo[0].material !== null">
                     <strong class="font-weight-black primary--text">MATERIAL:</strong> {{ productoCodigo[0].material }}
                   </p>
@@ -105,6 +106,9 @@
                   <p class="ma-0">
                     <strong class="font-weight-black primary--text">EMPAQUE:</strong> {{ productoCodigo[0].empaque }}
                   </p>
+                  <p class="ma-0">
+                    <strong class="font-weight-black primary--text">Categorias:</strong> <router-link :to="'/productos?subCategoria=' + productoCodigo[0].subcategoria_1.jerarquia">{{ productoCodigo[0].subcategoria_1.nombre }}</router-link> | <router-link :to="'/productos?categoria=' + productoCodigo[0].subcategoria_1.categoria.jerarquia">{{productoCodigo[0].subcategoria_1.categoria.nombre}}</router-link>
+                  </p>
                   <div v-if="existeUsuario">
                     <p class="ma-0" v-if="Math.round(productoCodigo[0].materiales[0].precio_descuento) === Math.round(productoCodigo[0].materiales[0].precio)">
                       <strong class="font-weight-black primary--text">PRECIO:</strong> ${{Math.round(productoCodigo[0].materiales[0].precio)}} + iva
@@ -114,11 +118,6 @@
                     </p>
                   </div>
                   <p class="ma-0 mt-4 primary--text">El color de los artículos pueden variar según la calibración y resolución de la pantalla.</p>
-              </v-card-text>
-              <v-card-text>
-                <p class="ma-0">
-                  <strong class="font-weight-black primary--text">Categorias:</strong> <router-link :to="'/productos?subCategoria=' + productoCodigo[0].subcategoria_1.jerarquia">{{ productoCodigo[0].subcategoria_1.nombre }}</router-link> | <router-link :to="'/productos?categoria=' + productoCodigo[0].subcategoria_1.categoria.jerarquia">{{productoCodigo[0].subcategoria_1.categoria.nombre}}</router-link>
-                </p>
               </v-card-text>
               <v-card-actions class="pl-4 d-block">
                 <div class="display-1 primary--text d-block my-2" v-if="Math.round(productoCodigo[0].materiales[0].precio_descuento) !== Math.round(productoCodigo[0].materiales[0].precio)">{{Math.round(productoCodigo[0].materiales[0].descuento)}}% de descuento</div>
@@ -149,12 +148,20 @@
                       v-bind="attrs"
                       icon
                       @click.stop="dialogTransito = true"
-                      class="d-block my-2"
+                      class="my-2"
                     >
                       <v-icon>{{mdiFerry}}</v-icon>
                     </v-btn>
                   </template>
                   <span>Ver Importaciones</span>
+                </v-tooltip>
+                <v-tooltip v-if="productoCodigo[0].videos.length > 0" bottom>
+                  <template v-slot:activator="{on, attrs}">
+                    <v-btn icon v-on="on" v-bind="attrs" @click="$vuetify.goTo(target, options)">
+                      <v-icon>{{ mdiVideoVintage }}</v-icon>
+                    </v-btn>
+                  </template>
+                  <span class="mt-10">Ver Vídeo del Producto</span>
                 </v-tooltip>
               </v-card-actions>
             </v-container>
@@ -196,7 +203,7 @@
             <v-row class="grupoImagenes">
               <v-card class="mx-1" outlined>
                 <v-img
-                  @click="imagenReferencia(imagen.imagen.file_md, imagen.imagen.file)"
+                  @click="imagenReferencia(imagen.imagen.file_md, imagen.imagen.file), $vuetify.goTo(target2, options2)"
                   width="150"
                   :src="imagen.imagen.file_sm"
                   :alt="productoCodigo[0].descripcion_comercial"
@@ -283,13 +290,16 @@
             </v-responsive>
           </div>
         </v-col>
-        <v-col cols="12" sm="6" v-if="productoSugerencia.length > 0">
+        <v-col cols="12" sm="6">
           <h1 class="primary--text text-center">
             Productos Sugeridos
           </h1>
 
           <v-divider class="mx-10"></v-divider>
-          <v-row>
+          <h3 v-if="this.textoSugerido !== ''" class="text-center">
+            {{this.textoSugerido}}
+          </h3>
+          <v-row v-if="productoSugerencia.length > 0">
             <v-col cols="12" sm="6" v-for="producto in productoSugerencia" :key="producto.familia">
               <v-card outlined class="mx-auto">
                 <v-card-text class="pa-0 div-img">
@@ -347,14 +357,14 @@
               </v-card>
             </v-col>
           </v-row>
-        </v-col>
-        <v-col v-else>
-          <div class="text-center pt-10">
-            <v-progress-circular
-              indeterminate
-              color="primary"
-            ></v-progress-circular>
-          </div>
+          <v-col v-else>
+            <div class="text-center pt-10">
+              <v-progress-circular
+                indeterminate
+                color="primary"
+              ></v-progress-circular>
+            </div>
+          </v-col>
         </v-col>
       </v-row>
 
@@ -410,12 +420,14 @@ import {
   mdiChevronLeft,
   mdiFerry,
   mdiMagnify,
+  mdiVideoVintage,
 } from '@mdi/js';
 
 export default {
   name: 'codigo',
   data() {
     return {
+      textoSugerido: '',
       textoInfo: '',
       productoCodigo: [],
       productoSugerencia: [],
@@ -429,11 +441,19 @@ export default {
       mdiChevronLeft,
       mdiFerry,
       mdiMagnify,
+      mdiVideoVintage,
       model: null,
       overlay: false,
       mostrarTooltip: false,
       categoriaPrincipal: '',
       categoriaSecundaria: '',
+      duration: 1000,
+      number: 1650,
+      number2: 250,
+      offset: 0,
+      easing: 'easeInQuart',
+      type: 'number',
+      type2: 'number2',
     };
   },
   watch: {
@@ -446,6 +466,32 @@ export default {
   },
   computed: {
     ...mapGetters(['existeUsuario']),
+    target() {
+      const value = this[this.type];
+      // eslint-disable-next-line no-restricted-globals
+      if (!isNaN(value)) return Number(value);
+      return value;
+    },
+    options() {
+      return {
+        duration: this.duration,
+        offset: this.offset,
+        easing: this.easing,
+      };
+    },
+    target2() {
+      const value = this[this.type2];
+      // eslint-disable-next-line no-restricted-globals
+      if (!isNaN(value)) return Number(value);
+      return value;
+    },
+    options2() {
+      return {
+        duration: this.duration,
+        offset: this.offset,
+        easing: this.easing,
+      };
+    },
   },
   methods: {
     mostrarTextoInfo(texto) {
@@ -493,6 +539,12 @@ export default {
       await axios(config).then((res) => {
         res.data.forEach((producto) => {
           this.productoSugerencia.push(producto);
+          console.log(this.productoSugerencia);
+          if (this.productoSugerencia === []) {
+            this.textoSugerido = 'No se encontraron productos';
+          } else {
+            this.textoSugerido = '';
+          }
         });
       });
     },

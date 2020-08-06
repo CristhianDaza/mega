@@ -14,14 +14,14 @@
           fab
           dark
           bottom
-          right
+          left
           :color="
             $vuetify.theme.dark
               ? 'blue-grey darken-4'
               : 'primary'
             "
           fixed
-          class="elevation-15 mr-5"
+          class="elevation-15 ml-5 mb-6"
           @click="$vuetify.goTo(target, options)"
         >
           <v-icon>{{mdiArrowUpDropCircle}}</v-icon>

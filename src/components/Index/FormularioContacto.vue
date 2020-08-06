@@ -6,8 +6,8 @@
           MANTENTE EN CONTACTO CON NOSOTROS
         </h1>
         <p>
-          Visitanos en nuestro almacen, tambien nos puedes escribir por WhatsApp,
-          por correo electrónico o envianos un mensaje por medio del formulario de contacto. 🤝🏼
+          Visitanos en nuestro almacén, también nos puedes escribir por WhatsApp,
+          correo electrónico o envíanos un mensaje por medio del formulario de contacto. 🤝🏼
         </p>
         <v-container>
 
@@ -19,7 +19,7 @@
             </v-col>
             <v-col cols="10">
               <p class="mb-0" :class="this.$vuetify.breakpoint.xs ? 'body-2' : ''">
-                Nacional de Artes Gráficas
+                Centro Nacional de Artes Gráficas
               </p>
               <p class="mb-0" :class="this.$vuetify.breakpoint.xs ? 'body-2' : ''"><a href="https://www.google.com/maps/place/Megapromocionales/@4.609466,-74.0949077,17z/data=!3m1!4b1!4m5!3m4!1s0x8e3f998d474cd877:0x65ee5ebb4dd5eb1d!8m2!3d4.609466!4d-74.092719" target="_blankn">Carrera 28 # 10 - 60</a></p>
               <p class="mb-0" :class="this.$vuetify.breakpoint.xs ? 'body-2' : ''">Local 137</p>
