@@ -55,5 +55,20 @@ export default {
   components: {
     Hero,
   },
+  metaInfo: {
+    title: 'Nosotros 💼',
+    titleTemplate: '%s | Megapromocionales LTDA',
+    meta: [
+      { charset: 'utf8' },
+      { name: 'description', content: 'Compañía dedicada a la importación, distribución y comercialización de artículos promocionales y material publicitario, ofrecemos a nuestros clientes atención personalizada y asesoría en la elaboración de trabajos, garantizando resultados óptimos en menor tiempo de producción utilizando tecnología de punta y personal calificado con un alto grado de responsabilidad y relaciones humanas, fomentando el trabajo en equipo y comprometidos con el medío ambiente y la sociedad en beneficio de nuestros clientes y colaboradores.' },
+      { name: 'robots', content: 'Index' },
+      { name: 'og:title', content: 'Nosotros Megapromocionales LTDA' },
+      { name: 'og:type', content: 'website' },
+      { name: 'og:url', content: 'https://megapromocionales.com.co/nosotros' },
+      { name: 'og:image', content: 'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/logo.png?alt=media&token=08967fdf-f5b0-4782-8571-e3391abd3c5b' },
+      { name: 'og:description', content: 'Compañía dedicada a la importación, distribución y comercialización de artículos promocionales y material publicitario, ofrecemos a nuestros clientes atención personalizada y asesoría en la elaboración de trabajos, garantizando resultados óptimos en menor tiempo de producción utilizando tecnología de punta y personal calificado con un alto grado de responsabilidad y relaciones humanas, fomentando el trabajo en equipo y comprometidos con el medío ambiente y la sociedad en beneficio de nuestros clientes y colaboradores.' },
+      { name: 'og:site_name', content: 'Megapromocionales LTDA' },
+    ],
+  },
 };
 </script>

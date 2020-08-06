@@ -57,7 +57,7 @@ import { mapState, mapActions } from 'vuex';
 import { mdiFilePdfBox, mdiOpenInNew } from '@mdi/js';
 
 export default {
-  name: 'Catalogo',
+  name: 'Catalogos',
   data() {
     return {
       mdiFilePdfBox,
@@ -92,6 +92,21 @@ export default {
   },
   mounted() {
     this.traerCatalogo();
+  },
+  metaInfo: {
+    title: 'Catálogos 📖',
+    titleTemplate: '%s | Megapromocionales LTDA',
+    meta: [
+      { charset: 'utf8' },
+      { name: 'description', content: 'Descarga o mira nuestros catálogos virtuales. Catálogo Escritura, Catálogo de Bolsos, Catálogo de Antiestrés, Catálogo de USB, Catálogo de Bebidas, Catálogo de Hogar, Catálogo de Tecnología, Catálogo de Oficina, Catálogo de Herramientas, Catálogo de Gorras, Catálogo Viejes, Recreación y Deportes, Catálogo de Paraguas, Catálogo de Salud.' },
+      { name: 'robots', content: 'Index' },
+      { name: 'og:title', content: 'Catálogos Megapromocionales LTDA' },
+      { name: 'og:type', content: 'website' },
+      { name: 'og:url', content: 'https://megapromocionales.com.co/catalogos/' },
+      { name: 'og:image', content: 'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/logo.png?alt=media&token=08967fdf-f5b0-4782-8571-e3391abd3c5b' },
+      { name: 'og:description', content: 'Descarga o mira nuestros catálogos virtuales. Catálogo Escritura, Catálogo de Bolsos, Catálogo de Antiestrés, Catálogo de USB, Catálogo de Bebidas, Catálogo de Hogar, Catálogo de Tecnología, Catálogo de Oficina, Catálogo de Herramientas, Catálogo de Gorras, Catálogo Viejes, Recreación y Deportes, Catálogo de Paraguas, Catálogo de Salud.' },
+      { name: 'og:site_name', content: 'Megapromocionales LTDA' },
+    ],
   },
 };
 </script>

@@ -86,6 +86,10 @@ export default {
       }
     }
   },
+  metaInfo: {
+    title: 'Megapromocionales LTDA',
+    titleTemplate: '%s | Megapromocionales LTDA',
+  },
 };
 </script>
 

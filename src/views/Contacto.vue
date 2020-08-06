@@ -46,5 +46,20 @@ export default {
     Hero,
     FormularioContacto,
   },
+  metaInfo: {
+    title: 'Contacto 💬',
+    titleTemplate: '%s | Megapromocionales LTDA',
+    meta: [
+      { charset: 'utf8' },
+      { name: 'description', content: 'Visitanos en nuestro almacen, tambien nos puedes escribir por WhatsApp, por correo electrónico 💬 o envianos un mensaje por medio del formulario de contacto. 🤝🏼. Centro Nacional de Artes Gráficas Carrera 28 # 10 - 60 Local 137. WhatsApp 315 927 51 44. WhatsApp 315 927 41 44. WhatsApp 320 585 55 31. Correo Electrónico megapromocional@gmail.com' },
+      { name: 'robots', content: 'Index' },
+      { name: 'og:title', content: 'Contacto Megapromocionales LTDA' },
+      { name: 'og:type', content: 'website' },
+      { name: 'og:url', content: 'https://megapromocionales.com.co/contacto/' },
+      { name: 'og:image', content: 'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/logo.png?alt=media&token=08967fdf-f5b0-4782-8571-e3391abd3c5b' },
+      { name: 'og:description', content: 'Visitanos en nuestro almacen, tambien nos puedes escribir por WhatsApp, por correo electrónico 💬 o envianos un mensaje por medio del formulario de contacto. 🤝🏼. Centro Nacional de Artes Gráficas Carrera 28 # 10 - 60 Local 137. WhatsApp 315 927 51 44. WhatsApp 315 927 41 44. WhatsApp 320 585 55 31. Correo Electrónico megapromocional@gmail.com' },
+      { name: 'og:site_name', content: 'Megapromocionales LTDA' },
+    ],
+  },
 };
 </script>

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import VueMeta from 'vue-meta';
 import App from './App.vue';
 import router from './router';
 // eslint-disable-next-line import/no-cycle
@@ -10,6 +11,8 @@ import vuetify from './plugins/vuetify';
 import '@babel/polyfill';
 
 Vue.config.productionTip = false;
+
+Vue.use(VueMeta);
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCmc3cVSy9G3g8-kRbGROgD2_0Eu0YmG2o',

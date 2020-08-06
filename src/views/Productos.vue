@@ -107,6 +107,7 @@ import axios from 'axios';
 import Hero from '@/components/Global/Hero.vue';
 
 export default {
+  name: 'productosmega',
   data() {
     return {
       listaCategorias: true,
@@ -223,6 +224,21 @@ export default {
       this.etiqueta,
     );
     this.getCategorias();
+  },
+  metaInfo: {
+    title: 'Productos 🛒',
+    titleTemplate: '%s | Megapromocionales LTDA',
+    meta: [
+      { charset: 'utf8' },
+      { name: 'description', content: 'Productos promocionales, boligrafos viajes recreacion y deportes, usb, tecnologia, bolsos, paja de trigo, bar, salud y belleza, oficina, hogar y estilos de vida, antiestrés, gorras, escritura y más.' },
+      { name: 'robots', content: 'Index' },
+      { name: 'og:title', content: 'Productos Megapromocionales LTDA' },
+      { name: 'og:type', content: 'website' },
+      { name: 'og:url', content: 'https://megapromocionales.com.co/productos/' },
+      { name: 'og:image', content: 'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/logo.png?alt=media&token=08967fdf-f5b0-4782-8571-e3391abd3c5b' },
+      { name: 'og:description', content: 'Productos promocionales, boligrafos viajes recreacion y deportes, usb, tecnologia, bolsos, paja de trigo, bar, salud y belleza, oficina, hogar y estilos de vida, antiestrés, gorras, escritura y más.' },
+      { name: 'og:site_name', content: 'Megapromocionales LTDA' },
+    ],
   },
 };
 </script>
