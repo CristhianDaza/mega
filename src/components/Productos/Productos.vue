@@ -109,6 +109,9 @@ export default {
         .map((x) => parseInt(x, 16));
     },
   },
+  mounted() {
+    console.log(this.producto);
+  },
 };
 </script>
 

@@ -107,7 +107,7 @@
                     <strong class="font-weight-black primary--text">EMPAQUE:</strong> {{ productoCodigo[0].empaque }}
                   </p>
                   <p class="ma-0">
-                    <strong class="font-weight-black primary--text">Categorias:</strong> <router-link :to="'/productos?subCategoria=' + productoCodigo[0].subcategoria_1.jerarquia">{{ productoCodigo[0].subcategoria_1.nombre }}</router-link> | <router-link :to="'/productos?categoria=' + productoCodigo[0].subcategoria_1.categoria.jerarquia">{{productoCodigo[0].subcategoria_1.categoria.nombre}}</router-link>
+                    <strong class="font-weight-black primary--text">Categorias:</strong> <router-link class="linksCategorias" :to="'/productos?subCategoria=' + productoCodigo[0].subcategoria_1.jerarquia">{{ productoCodigo[0].subcategoria_1.nombre }}</router-link> | <router-link class="linksCategorias" :to="'/productos?categoria=' + productoCodigo[0].subcategoria_1.categoria.jerarquia">{{productoCodigo[0].subcategoria_1.categoria.nombre}}</router-link>
                   </p>
                   <div v-if="existeUsuario">
                     <p class="ma-0" v-if="Math.round(productoCodigo[0].materiales[0].precio_descuento) === Math.round(productoCodigo[0].materiales[0].precio)">
@@ -162,6 +162,15 @@
                     </v-btn>
                   </template>
                   <span class="mt-10">Ver Vídeo del Producto</span>
+                </v-tooltip>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{on, attrs}">
+                    <!-- eslint-disable-next-line vue/no-parsing-error -->
+                    <v-btn icon v-on="on" v-bind="attrs" :href="'https://marpicoprod.azurewebsites.net/api/productos/imagenes/14347?producto=' + productoCodigo[0].familia">
+                      <v-icon>{{ mdiDownload }}</v-icon>
+                    </v-btn>
+                  </template>
+                  <span class="mt-10">Descargar Imagenes</span>
                 </v-tooltip>
               </v-card-actions>
             </v-container>
@@ -440,6 +449,7 @@ import {
   mdiFerry,
   mdiMagnify,
   mdiVideoVintage,
+  mdiDownload,
 } from '@mdi/js';
 
 export default {
@@ -461,6 +471,7 @@ export default {
       mdiFerry,
       mdiMagnify,
       mdiVideoVintage,
+      mdiDownload,
       model: null,
       overlay: false,
       mostrarTooltip: false,
@@ -572,6 +583,20 @@ export default {
             this.textoSugerido = '';
           }
         });
+      });
+    },
+    async descargarImagenes(codigo) {
+      const url = `https://marpicoprod.azurewebsites.net/api/productos/imagenes/14347?producto=${codigo}`;
+      const config = {
+        method: 'get',
+        url,
+        headers: {
+          Authorization: 'Bearer Api-Key fBc8kc9ejmpvIqSLeKh9bIL955E0LOdNfFKfNZhGy3xRlGTxtDl7ADOdSzrLfgLj',
+        },
+      };
+
+      await axios(config).then(() => {
+        console.log('Descargando');
       });
     },
   },
@@ -692,11 +717,11 @@ export default {
   opacity: 1;
 }
 
-  a {
+  .linksCategorias {
     color: inherit !important;
     transition: color .3s;
   }
-  a:hover {
+  .linksCategorias:hover {
     color: #1976d2 !important;
   }
 

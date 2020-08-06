@@ -17,27 +17,43 @@
       </v-breadcrumbs>
       <v-row>
         <v-col cols="12" sm="4" md="3">
-          <v-select
-            :items="listaPorPaginas"
-            item-text="text"
-            item-value="value"
-            label="Ítems por Página"
-            class="mt-2"
-            dense
-            filled
-            v-model="porPagina"
-            @change="cambiarPorPagina(porPagina)"
-          ></v-select>
-          <v-text-field
-            label="Inventario"
-            placeholder="Inventario mayor a:"
-            filled
-            v-model="inputInventario"
-            type="number"
-            @keyup.enter="buscarInventario(inputInventario)"
-          ></v-text-field>
-          <v-divider class="mb-3"></v-divider>
           <v-card>
+            <v-card-text class="pb-0">
+              <v-text-field
+                :append-icon="mdiMagnify"
+                v-model="busqueda"
+                label="Buscar..."
+                v-on:keyup.enter="productosPorBusqueda(busqueda)"
+                @click:append="productosPorBusqueda(busqueda)"
+                outlined
+                class="m-0"
+              ></v-text-field>
+            </v-card-text>
+            <v-card-text class="pb-0 pt-0">
+              <v-select
+                :items="listaPorPaginas"
+                item-text="text"
+                item-value="value"
+                label="Ítems por Página"
+                class="mt-2"
+                dense
+                filled
+                v-model="porPagina"
+                @change="cambiarPorPagina(porPagina)"
+              ></v-select>
+            </v-card-text>
+            <v-card-text class="pb-0">
+              <v-text-field
+                label="Inventario"
+                placeholder="Inventario mayor a:"
+                filled
+                v-model="inputInventario"
+                type="number"
+                @keyup.enter="buscarInventario(inputInventario)"
+              ></v-text-field>
+            </v-card-text>
+          </v-card>
+          <v-card class="mt-3">
             <v-list v-if="this.categorias.length > 0" dense>
               <v-subheader>Categorías</v-subheader>
               <v-list-group
@@ -114,6 +130,7 @@
 import Productos from '@/components/Productos/Productos.vue';
 import axios from 'axios';
 import Hero from '@/components/Global/Hero.vue';
+import { mdiMagnify } from '@mdi/js';
 
 export default {
   name: 'productosmega',
@@ -123,12 +140,14 @@ export default {
       productos: [],
       categorias: [],
       colores: [],
+      mdiMagnify,
       inputInventario: Number(this.$route.query.inventario) || 0,
       pagina: Number(this.$route.query.pagina) || 1,
       categoria: Number(this.$route.query.categoria) || '',
       subCategoria: Number(this.$route.query.subCategoria) || '',
       etiqueta: Number(this.$route.query.etiqueta) || '',
       inventario: Number(this.$route.query.inventario) || '',
+      busqueda: this.$route.query.busqueda || '',
       infoProductos: [],
       totalPaginas: 0,
       porPagina: Number(this.$route.query.porPagina) || 12,
@@ -156,8 +175,8 @@ export default {
     Hero,
   },
   methods: {
-    async getProductos(pagina, porPagina, categoria, subCategoria, etiqueta, inventario) {
-      const url = `https://marpicoprod.azurewebsites.net/api/productos/?page_size=${porPagina}&page=${pagina}&categoria=${categoria}&subcategoria=${subCategoria}&order=paginacion_web&etiqueta=${etiqueta}&inventario=${inventario}`;
+    async getProductos(pagina, porPagina, categoria, subCategoria, etiqueta, inventario, busqueda) {
+      const url = `https://marpicoprod.azurewebsites.net/api/productos/?page_size=${porPagina}&page=${pagina}&categoria=${categoria}&subcategoria=${subCategoria}&order=paginacion_web&etiqueta=${etiqueta}&inventario=${inventario}&search=${busqueda}`;
       const config = {
         method: 'get',
         url,
@@ -184,6 +203,7 @@ export default {
           subCategoria: this.$route.query.subCategoria,
           etiqueta: this.$route.query.etiqueta,
           inventario: this.$route.query.inventario,
+          busqueda: this.$route.query.busqueda,
         },
       });
       this.getProductos(
@@ -193,6 +213,7 @@ export default {
         this.subCategoria,
         this.etiqueta,
         this.inventario,
+        this.busqueda,
       );
     },
     cambiarPorPagina(porPagina) {
@@ -205,6 +226,7 @@ export default {
           subCategoria: this.$route.query.subCategoria,
           etiqueta: this.$route.query.etiqueta,
           inventario: this.$route.query.inventario,
+          busqueda: this.$route.query.busqueda,
         },
       });
       this.getProductos(
@@ -214,6 +236,7 @@ export default {
         this.subCategoria,
         this.etiqueta,
         this.inventario,
+        this.busqueda,
       );
     },
     buscarSubCategoria(subCategoria) {
@@ -232,6 +255,7 @@ export default {
         subCategoria,
         this.etiqueta,
         this.inventario,
+        this.busqueda,
       );
     },
     buscarInventario(inventario) {
@@ -243,6 +267,7 @@ export default {
           categoria: this.$route.query.categoria,
           subCategoria: this.$route.query.subCategoria,
           etiqueta: this.$route.query.etiqueta,
+          busqueda: this.$route.query.busqueda,
           inventario,
         },
       });
@@ -253,6 +278,26 @@ export default {
         this.subCategoria,
         this.etiqueta,
         inventario,
+        this.busqueda,
+      );
+    },
+    productosPorBusqueda(busqueda) {
+      this.$router.push({
+        path: this.$route.path,
+        query: {
+          pagina: 1,
+          porPagina: 12,
+          busqueda,
+        },
+      });
+      this.getProductos(
+        this.pagina,
+        this.porPagina,
+        this.categoria,
+        this.subCategoria,
+        this.etiqueta,
+        this.inventario,
+        busqueda,
       );
     },
     async getCategorias() {
@@ -278,6 +323,7 @@ export default {
       this.subCategoria,
       this.etiqueta,
       this.inventario,
+      this.busqueda,
     );
     this.getCategorias();
   },

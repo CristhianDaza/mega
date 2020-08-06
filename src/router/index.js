@@ -44,7 +44,7 @@ const routes = [
     path: '/buscar',
     name: 'Buscar',
     exact: true,
-    component: () => import('../views/Buscar.vue'),
+    component: () => import('../views/Productos.vue'),
   },
   {
     path: '/producto/:codigo',
