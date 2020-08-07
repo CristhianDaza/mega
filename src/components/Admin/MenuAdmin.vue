@@ -42,7 +42,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link to="/admin/info">
+        <v-list-item link to="/admin/imagen-info">
           <v-list-item-action>
             <v-icon>{{ mdiInformation }}</v-icon>
           </v-list-item-action>

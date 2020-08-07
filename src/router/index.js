@@ -106,6 +106,18 @@ const routes = [
     exact: true,
     component: () => import('../views/admin/catalogos/AgregarCatalogo.vue'),
   },
+  {
+    path: '/admin/imagen-info',
+    name: 'Imagen Informartiva',
+    exact: true,
+    component: () => import('../views/admin/imagenInfo/Index.vue'),
+  },
+  {
+    path: '/admin/imagen-info/agregar-imagen-info',
+    name: 'Agregar Imagen Informativa',
+    exact: true,
+    component: () => import('../views/admin/imagenInfo/AgregarImagenInfo.vue'),
+  },
 ];
 
 const router = new VueRouter({

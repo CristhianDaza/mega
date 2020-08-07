@@ -50,6 +50,9 @@ export default new Vuex.Store({
     setImagenInfo(state, valor) {
       state.imagenInfo = valor;
     },
+    eliminarImagenInfo(state, id) {
+      state.imagenInfo = state.imagenInfo.filter((doc) => doc.id !== id);
+    },
     setTrabajosCalendario(state, valor) {
       state.trabajosCalendario = valor;
     },
@@ -166,6 +169,12 @@ export default new Vuex.Store({
             trabajos.push(trabajo);
           });
           commit('setTrabajosCalendario', trabajos);
+        });
+    },
+    async eliminarImagenInfo({ commit }, id) {
+      await db.collection('info').doc(id).delete()
+        .then(() => {
+          commit('eliminarImagenInfo', id);
         });
     },
     async eliminarTrabajoCalendario({ commit }, id) {
