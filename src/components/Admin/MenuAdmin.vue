@@ -67,7 +67,7 @@
 
         <v-app-bar-nav-icon class="white--text mx-2" @click.stop="drawer = !drawer">
         </v-app-bar-nav-icon>
-        <v-toolbar-title>Admin</v-toolbar-title>
+        <v-toolbar-title v-if="usuario !== null">Admin - {{usuario.email}}</v-toolbar-title>
       </template>
 
       <v-spacer></v-spacer>
@@ -105,7 +105,7 @@ import {
   mdiHome,
   mdiLogout,
 } from '@mdi/js';
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   data: () => ({
@@ -118,10 +118,12 @@ export default {
     mdiAccountMultiple,
     mdiFormatListBulletedSquare,
     mdiInformation,
-    usuarioActivo: '',
   }),
   methods: {
     ...mapActions(['cerrarSesion']),
+  },
+  computed: {
+    ...mapState(['usuario']),
   },
 };
 </script>

@@ -159,6 +159,12 @@ export default new Vuex.Store({
           commit('setImagenInfo', imagenes);
         });
     },
+    async eliminarImagenInfo({ commit }, id) {
+      await db.collection('info').doc(id).delete()
+        .then(() => {
+          commit('eliminarImagenInfo', id);
+        });
+    },
     async traerTrabajosCalendario({ commit }) {
       await db.collection('trabajos').get()
         .then((snapshot) => {
@@ -169,12 +175,6 @@ export default new Vuex.Store({
             trabajos.push(trabajo);
           });
           commit('setTrabajosCalendario', trabajos);
-        });
-    },
-    async eliminarImagenInfo({ commit }, id) {
-      await db.collection('info').doc(id).delete()
-        .then(() => {
-          commit('eliminarImagenInfo', id);
         });
     },
     async eliminarTrabajoCalendario({ commit }, id) {
