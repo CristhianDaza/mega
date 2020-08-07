@@ -94,6 +94,18 @@ const routes = [
     exact: true,
     component: () => import('../views/admin/carousel/AgregarCarousel.vue'),
   },
+  {
+    path: '/admin/catalogos',
+    name: 'Catalogos',
+    exact: true,
+    component: () => import('../views/admin/catalogos/Index.vue'),
+  },
+  {
+    path: '/admin/catalogos/agregar-catalogo',
+    name: 'Agregar Catalogo',
+    exact: true,
+    component: () => import('../views/admin/catalogos/AgregarCatalogo.vue'),
+  },
 ];
 
 const router = new VueRouter({

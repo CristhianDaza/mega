@@ -41,11 +41,14 @@ export default new Vuex.Store({
     eliminarImagenSlider(state, id) {
       state.imagenSlider = state.imagenSlider.filter((doc) => doc.id !== id);
     },
-    setImagenInfo(state, valor) {
-      state.imagenInfo = valor;
-    },
     setCatalogos(state, valor) {
       state.catalogos = valor;
+    },
+    eliminarCatalogo(state, id) {
+      state.catalogos = state.catalogos.filter((doc) => doc.id !== id);
+    },
+    setImagenInfo(state, valor) {
+      state.imagenInfo = valor;
     },
     setTrabajosCalendario(state, valor) {
       state.trabajosCalendario = valor;
@@ -123,18 +126,6 @@ export default new Vuex.Store({
           commit('eliminarImagenSlider', id);
         });
     },
-    async traerImagenInfo({ commit }) {
-      await db.collection('info').get()
-        .then((snapshot) => {
-          const imagenes = [];
-          snapshot.forEach((doc) => {
-            const imagen = doc.data();
-            imagen.id = doc.id;
-            imagenes.push(imagen);
-          });
-          commit('setImagenInfo', imagenes);
-        });
-    },
     async traerCatalogo({ commit }) {
       await db.collection('catalogo').get()
         .then((snapshot) => {
@@ -145,6 +136,24 @@ export default new Vuex.Store({
             catalogos.push(catalogo);
           });
           commit('setCatalogos', catalogos);
+        });
+    },
+    async eliminarCatalogo({ commit }, id) {
+      await db.collection('catalogo').doc(id).delete()
+        .then(() => {
+          commit('eliminarCatalogo', id);
+        });
+    },
+    async traerImagenInfo({ commit }) {
+      await db.collection('info').get()
+        .then((snapshot) => {
+          const imagenes = [];
+          snapshot.forEach((doc) => {
+            const imagen = doc.data();
+            imagen.id = doc.id;
+            imagenes.push(imagen);
+          });
+          commit('setImagenInfo', imagenes);
         });
     },
     async traerTrabajosCalendario({ commit }) {
