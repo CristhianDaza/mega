@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import firebase from 'firebase/app';
-// eslint-disable-next-line import/no-cycle
-import db from '@/main';
+import {
+  auth,
+  db,
+} from '@/firebase.js';
 import router from '@/router';
 
 Vue.use(Vuex);
@@ -37,6 +38,9 @@ export default new Vuex.Store({
     setImagenSlider(state, valor) {
       state.imagenSlider = valor;
     },
+    eliminarImagenSlider(state, id) {
+      state.imagenSlider = state.imagenSlider.filter((doc) => doc.id !== id);
+    },
     setImagenInfo(state, valor) {
       state.imagenInfo = valor;
     },
@@ -52,7 +56,7 @@ export default new Vuex.Store({
   },
   actions: {
     ingresarUsaurio({ commit }, valor) {
-      firebase.auth().signInWithEmailAndPassword(valor.email, valor.password)
+      auth.signInWithEmailAndPassword(valor.email, valor.password)
         .then((res) => {
           commit('setUsuario', {
             email: res.user.email,
@@ -67,7 +71,7 @@ export default new Vuex.Store({
         });
     },
     cerrarSesion({ commit }) {
-      firebase.auth().signOut();
+      auth.signOut();
       commit('setUsuario', null);
       router.push({
         path: '/admin/login',
@@ -111,6 +115,12 @@ export default new Vuex.Store({
             imagenes.push(imagen);
           });
           commit('setImagenSlider', imagenes);
+        });
+    },
+    async eliminarImagenSlider({ commit }, id) {
+      await db.collection('imagenSlider').doc(id).delete()
+        .then(() => {
+          commit('eliminarImagenSlider', id);
         });
     },
     async traerImagenInfo({ commit }) {

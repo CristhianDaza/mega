@@ -156,7 +156,7 @@ import {
   mdiCheckCircleOutline,
 } from '@mdi/js';
 import Swal from 'sweetalert2';
-import db from '@/main';
+import { db } from '@/firebase';
 
 export default {
   middleware: 'autenticado',

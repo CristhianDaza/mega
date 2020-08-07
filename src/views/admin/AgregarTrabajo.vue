@@ -137,7 +137,7 @@ import {
 import { mapActions, mapState } from 'vuex';
 import Swal from 'sweetalert2';
 import router from '@/router';
-import db from '@/main';
+import { db } from '@/firebase.js';
 
 export default {
   name: 'usuarios',

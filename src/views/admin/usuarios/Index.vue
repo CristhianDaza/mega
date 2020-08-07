@@ -54,14 +54,14 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 import Swal from 'sweetalert2';
-import firebase from 'firebase/app';
+import { auth } from '@/firebase.js';
 
 export default {
   name: 'usuarios',
   methods: {
     ...mapActions(['traerUsuarios', 'eliminarUsuario']),
     cambiarPass(email) {
-      firebase.auth().sendPasswordResetEmail(email)
+      auth.sendPasswordResetEmail(email)
         .then(() => {
           Swal.fire(
             '¡Enviado!',

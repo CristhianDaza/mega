@@ -1,0 +1,152 @@
+<template>
+  <div>
+    <v-container class="fill-height" fluid>
+      <v-row align="center" justify="center">
+        <v-col cols="12" sm="8" md="5" xl="6">
+          <v-card class="elevation-12">
+            <v-progress-linear
+              color="light-blue"
+              height="10"
+              value="100"
+              striped
+              :indeterminate="loading"
+            ></v-progress-linear>
+            <v-card-title>Agregar Imagen</v-card-title>
+            <v-card-subtitle>Imagen Carousel</v-card-subtitle>
+            <v-card-text>
+              <v-file-input
+                accept="image/*"
+                @change="buscarImagen($event)"
+                label="Seleccionar Imagen">
+              </v-file-input>
+              <v-text-field
+                label="Nombre"
+                v-model="nombreProducto"
+                :prepend-icon="mdiLinkVariant">
+              </v-text-field>
+              <v-text-field
+                label="URL Producto"
+                v-model="urlProducto"
+                :prepend-icon="mdiCartArrowRight">
+              </v-text-field>
+              <span class="caption">/producto/</span>
+            </v-card-text>
+            <v-card-text v-if="error != null">{{error}}</v-card-text>
+            <v-divider class="mx-5"></v-divider>
+            <v-card-actions>
+              <v-btn
+                outlined
+                color="success"
+                @click.prevent="subirImagen"
+                :disabled="file === null"
+                :loading="loading">
+                  Agregar
+                </v-btn>
+              <v-btn outlined @click="$router.back()" color="info">Atras</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+
+    <v-container class="fill-height" fluid v-if="prev != ''">
+      <v-row align="center" justify="center">
+        <v-col cols="12" sm="8" md="5" xl="6">
+          <v-card class="elevation-12">
+            <v-card-text>
+              <v-img :src="prev"></v-img>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
+</template>
+
+<script>
+import { mdiLinkVariant, mdiCartArrowRight } from '@mdi/js';
+import { storage, db } from '@/firebase';
+import Swal from 'sweetalert2';
+import router from '@/router';
+
+export default {
+  middleware: 'autenticado',
+  name: 'Agregar',
+  layout: 'admin',
+  data() {
+    return {
+      mdiLinkVariant,
+      mdiCartArrowRight,
+      error: null,
+      file: null,
+      urlProducto: '',
+      nombreProducto: '',
+      prev: '',
+      loading: false,
+      uploading: 0,
+    };
+  },
+  methods: {
+    buscarImagen(event) {
+      if (event) {
+        if (event.type === 'image/jpeg' || event.type === 'image/png') {
+          this.file = event;
+          this.error = null;
+        } else {
+          this.error = 'Archivo no valido';
+          this.file = null;
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.readAsDataURL(this.file);
+        reader.onload = (e) => {
+          this.prev = e.target.result;
+        };
+      } else {
+        this.file = null;
+        this.prev = '';
+      }
+    },
+    async subirImagen() {
+      try {
+        this.loading = true;
+
+        const refImagen = storage.ref().child('slider').child(this.nombreProducto.toUpperCase());
+
+        // eslint-disable-next-line no-unused-vars
+        const res = await refImagen.put(this.file);
+
+        const urlDescarga = await refImagen.getDownloadURL();
+
+        await db.collection('imagenSlider')
+          .add({
+            linkImagen: urlDescarga,
+            urlProducto: this.urlProducto,
+            nombreProducto: this.nombreProducto.toUpperCase(),
+          })
+          .then(() => {
+            Swal.fire(
+              '¡Creada!',
+              'La imagen slider ha sido creada.',
+              'success',
+            );
+            router.push({
+              path: '/admin/carousel',
+            });
+          });
+
+        this.error = 'Imagen subida con éxito';
+        this.file = null;
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.loading = false;
+      }
+    },
+  },
+  created() {
+    this.$store.commit('setLayout', 'adminLayout');
+  },
+};
+</script>
