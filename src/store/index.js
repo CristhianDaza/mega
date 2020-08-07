@@ -11,6 +11,7 @@ export default new Vuex.Store({
   state: {
     layout: 'defaultLayout',
     usuario: '',
+    usuarios: '',
     error: '',
     imagenSlider: [],
     imagenInfo: [],
@@ -23,6 +24,12 @@ export default new Vuex.Store({
     },
     setUsuario(state, valor) {
       state.usuario = valor;
+    },
+    setUsuarios(state, valor) {
+      state.usuarios = valor;
+    },
+    eliminarUsuario(state, id) {
+      state.usuarios = state.usuarios.filter((doc) => doc.id !== id);
     },
     setError(state, valor) {
       state.error = valor;
@@ -65,6 +72,24 @@ export default new Vuex.Store({
       router.push({
         path: '/admin/login',
       });
+    },
+    async traerUsuarios({ commit }) {
+      await db.collection('usuarios').get()
+        .then((snapshot) => {
+          const usuarios = [];
+          snapshot.forEach((doc) => {
+            const usuario = doc.data();
+            usuario.id = doc.id;
+            usuarios.push(usuario);
+          });
+          commit('setUsuarios', usuarios);
+        });
+    },
+    async eliminarUsuario({ commit }, id) {
+      await db.collection('usuarios').doc(id).delete()
+        .then(() => {
+          commit('eliminarUsuario', id);
+        });
     },
     detectarUsuario({ commit }, valor) {
       if (valor != null) {

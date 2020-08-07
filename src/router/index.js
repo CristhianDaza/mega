@@ -70,6 +70,18 @@ const routes = [
     exact: true,
     component: () => import('../views/admin/AgregarTrabajo.vue'),
   },
+  {
+    path: '/admin/usuarios',
+    name: 'Usuarios',
+    exact: true,
+    component: () => import('../views/admin/usuarios/Index.vue'),
+  },
+  {
+    path: '/admin/usuarios/agregar-usuario',
+    name: 'Agregar Usuarios',
+    exact: true,
+    component: () => import('../views/admin/usuarios/AgregarUsuario.vue'),
+  },
 ];
 
 const router = new VueRouter({
