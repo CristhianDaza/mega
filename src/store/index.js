@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-// import firebase from 'firebase/app';
+import firebase from 'firebase/app';
 // eslint-disable-next-line import/no-cycle
 import db from '@/main';
 
@@ -8,12 +8,16 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    layout: 'defaultLayout',
     usuario: '',
     imagenSlider: [],
     imagenInfo: [],
     catalogos: [],
   },
   mutations: {
+    setLayout(state, layout) {
+      state.layout = layout;
+    },
     setUsuario(state, valor) {
       state.usuario = valor;
     },
@@ -28,6 +32,13 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    cerrarSesion({ commit }) {
+      firebase.auth().signOut();
+      commit('setUsuario', null);
+      this.$router.push({
+        path: '/admin/login',
+      });
+    },
     detectarUsuario({ commit }, valor) {
       if (valor != null) {
         commit('setUsuario', {

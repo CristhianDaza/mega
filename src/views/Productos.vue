@@ -378,6 +378,9 @@ export default {
       { name: 'og:site_name', content: 'Megapromocionales LTDA' },
     ],
   },
+  created() {
+    this.$store.commit('setLayout', 'defaultLayout');
+  },
 };
 </script>
 
