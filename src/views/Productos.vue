@@ -54,6 +54,19 @@
             </v-card-text>
           </v-card>
           <v-card class="mt-3">
+            <v-list dense>
+              <v-subheader>Etiqueta</v-subheader>
+              <v-list-item-group>
+                <v-list-item @click="buscarEtiqueta(1)">
+                  <v-list-item-title>Productos Nuevos</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="buscarEtiqueta(4)">
+                  <v-list-item-title>Productos Netos</v-list-item-title>
+                </v-list-item>
+              </v-list-item-group>
+            </v-list>
+          </v-card>
+          <v-card class="mt-3">
             <v-list v-if="this.categorias.length > 0" dense>
               <v-subheader>Categorías</v-subheader>
               <v-list-group
@@ -80,7 +93,7 @@
           </v-card>
         </v-col>
         <v-col cols="12" sm="8" md="9">
-        <h2 v-if="this.infoProductos.length > 0" class="text-subtitle-1">Resultados: {{this.infoProductos[0].count}}</h2>
+          <h2 v-if="this.infoProductos.length > 0" class="text-subtitle-1">Resultados: {{this.infoProductos[0].count}}</h2>
           <v-row v-if="this.productos.length > 0">
             <h2 v-if="Number(this.infoProductos[0].count) === 0" class="text-center error mt-2 ml-2 sinResultados">Sin resultados</h2>
             <v-col
@@ -300,6 +313,28 @@ export default {
         busqueda,
       );
     },
+    buscarEtiqueta(etiqueta) {
+      this.$router.push({
+        path: this.$route.path,
+        query: {
+          pagina: 1,
+          porPagina: 12,
+          categoria: this.$route.query.categoria,
+          subCategoria: this.$route.query.subCategoria,
+          etiqueta,
+        },
+      });
+      this.getProductos(
+        this.pagina,
+        this.porPagina,
+        this.categoria,
+        this.subCategoria,
+        this.etiqueta,
+        this.inventario,
+        this.busqueda,
+        etiqueta,
+      );
+    },
     async getCategorias() {
       const url = 'https://marpicoprod.azurewebsites.net/api/categorias/';
       const config = {
@@ -324,6 +359,7 @@ export default {
       this.etiqueta,
       this.inventario,
       this.busqueda,
+      this.etiqueta,
     );
     this.getCategorias();
   },
