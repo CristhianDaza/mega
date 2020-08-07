@@ -58,6 +58,14 @@ import { auth } from '@/firebase.js';
 
 export default {
   name: 'usuarios',
+  metaInfo: {
+    title: 'Usuarios',
+    titleTemplate: '%s | Megapromocionales LTDA',
+    meta: [
+      { charset: 'utf8' },
+      { name: 'robots', content: 'noindex' },
+    ],
+  },
   methods: {
     ...mapActions(['traerUsuarios', 'eliminarUsuario']),
     cambiarPass(email) {
@@ -79,8 +87,8 @@ export default {
     },
     confirmarEliminarUsuario(id) {
       Swal.fire({
-        title: '¿Estas seguro?',
-        text: '¡No podrás revertir esto!',
+        title: '¿Estas segur@?',
+        text: '¡No se podrá revertir!',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -92,7 +100,7 @@ export default {
           this.eliminarUsuario(id);
           Swal.fire(
             '¡Eliminada!',
-            'La lista ha sido eliminada.',
+            'El usuario ha sido eliminado. Ingresar a la base de datos para eliminar el inisio de sesión.',
             'success',
           );
         }

@@ -57,7 +57,7 @@ import Swal from 'sweetalert2';
 import { storage } from '@/firebase';
 
 export default {
-  name: 'info',
+  name: 'imagen-informativa',
   data() {
     return {
       mdiFilePdfBox,
@@ -65,18 +65,26 @@ export default {
       mdiDelete,
     };
   },
+  metaInfo: {
+    title: 'Imagen Informativa',
+    titleTemplate: '%s | Megapromocionales LTDA',
+    meta: [
+      { charset: 'utf8' },
+      { name: 'robots', content: 'noindex' },
+    ],
+  },
   methods: {
     ...mapActions(['traerImagenInfo', 'eliminarImagenInfo']),
     confirmarEliminarImagenInfo(id, nombre) {
       Swal.fire({
-        title: '¿Estas seguro?',
-        text: '¡No podrás revertir esto!',
+        title: '¿Estas segur@?',
+        text: '¡No se podrá revertir!',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         cancelButtonText: 'Cancelar',
-        confirmButtonText: 'Si, ¡eliminarlo!',
+        confirmButtonText: 'Si. ¡Eliminar!',
       }).then((result) => {
         if (result.value) {
           const archivoEliminar = storage.ref().child('info').child(nombre);
@@ -84,7 +92,7 @@ export default {
           archivoEliminar.delete().then(() => {}).catch((err) => console.log(err));
           Swal.fire(
             '¡Eliminada!',
-            'La imagen ha sido eliminada.',
+            'La imagen informativa ha sido eliminada.',
             'success',
           );
         }

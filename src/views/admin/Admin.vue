@@ -8,7 +8,7 @@
           outlined
           class="ma-5"
           to="/admin/agregar-trabajo">
-          Agregar Trabajo
+          Agregar Trabajo al Calendario
         </v-btn>
       </v-card-actions>
       <v-divider class="mx-5"></v-divider>
@@ -159,9 +159,7 @@ import Swal from 'sweetalert2';
 import { db } from '@/firebase';
 
 export default {
-  middleware: 'autenticado',
   name: 'Admin',
-  layout: 'admin',
   data() {
     return {
       mdiDelete,
@@ -188,6 +186,14 @@ export default {
       currentlyEditing: null,
     };
   },
+  metaInfo: {
+    title: 'Admin',
+    titleTemplate: '%s | Megapromocionales LTDA',
+    meta: [
+      { charset: 'utf8' },
+      { name: 'robots', content: 'noindex' },
+    ],
+  },
   computed: {
     ...mapState(['trabajosCalendario']),
     title() {
@@ -195,18 +201,14 @@ export default {
       if (!start || !end) {
         return '';
       }
-
       const startMonth = this.monthFormatter(start);
       const endMonth = this.monthFormatter(end);
       const suffixMonth = startMonth === endMonth ? '' : endMonth;
-
       const startYear = start.year;
       const endYear = end.year;
       const suffixYear = startYear === endYear ? '' : endYear;
-
       const startDay = start.day + this.nth(start.day);
       const endDay = end.day + this.nth(end.day);
-
       // eslint-disable-next-line default-case
       switch (this.type) {
         case 'month':
@@ -275,14 +277,14 @@ export default {
     },
     confirmarEliminarTrabajo(trabajo) {
       Swal.fire({
-        title: '¿Estas seguro?',
-        text: '¡No podrás revertir esto!',
+        title: '¿Estas segur@?',
+        text: '¡No se podrá revertir!',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         cancelButtonText: 'Cancelar',
-        confirmButtonText: 'Si, ¡eliminarlo!',
+        confirmButtonText: 'Si. ¡Eliminar!',
       }).then((result) => {
         if (result.value) {
           this.eliminarTrabajoCalendario(trabajo.id);
@@ -300,26 +302,22 @@ export default {
         await db.collection('trabajos').doc(trabajo.id).update({
           terminado: false,
         });
-        await this.traerTrabajosCalendario();
         Swal.fire(
           '¡Sin terminar!',
           'El trabajo aún no está terminado.',
           'error',
         );
         this.selectedOpen = false;
-        this.traerTrabajosCalendario();
       } else {
         await db.collection('trabajos').doc(trabajo.id).update({
           terminado: true,
         });
-        await this.traerTrabajosCalendario();
         Swal.fire(
           '¡Terminado!',
           'El trabajo ha sido terminado.',
           'success',
         );
         this.selectedOpen = false;
-        this.traerTrabajosCalendario();
       }
     },
   },

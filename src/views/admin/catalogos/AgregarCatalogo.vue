@@ -11,7 +11,7 @@
               striped
               :indeterminate="loading"
             ></v-progress-linear>
-            <v-card-title>Agregar Catálogos</v-card-title>
+            <v-card-title>Agregar Catálogo</v-card-title>
             <v-card-text>
               <v-file-input
                 accept="image/*"
@@ -24,12 +24,12 @@
                 :prepend-icon="mdiBookOpenPageVariant">
               </v-text-field>
               <v-text-field
-                required label="Link PDF"
+                required label="Link del PDF"
                 v-model="linkPDF"
                 :prepend-icon="mdiFilePdfBox">
               </v-text-field>
               <v-text-field
-                required label="Link Virtual"
+                required label="Link del Virtual"
                 v-model="linkVirtual"
                 :prepend-icon="mdiOpenInNew">
               </v-text-field>
@@ -73,9 +73,7 @@ import Swal from 'sweetalert2';
 import router from '@/router';
 
 export default {
-  middleware: 'autenticado',
-  name: 'Agregar',
-  layout: 'admin',
+  name: 'agregar-catalogo',
   data() {
     return {
       mdiFilePdfBox,
@@ -90,6 +88,14 @@ export default {
       loading: false,
       uploading: 0,
     };
+  },
+  metaInfo: {
+    title: 'Agregar Catálogo',
+    titleTemplate: '%s | Megapromocionales LTDA',
+    meta: [
+      { charset: 'utf8' },
+      { name: 'robots', content: 'noindex' },
+    ],
   },
   methods: {
     buscarImagen(event) {
@@ -129,8 +135,8 @@ export default {
           })
           .then(() => {
             Swal.fire(
-              '¡Creada!',
-              'La imagen del catálogo ha sido creada.',
+              '¡Creado!',
+              'El catálogo ha sido creado.',
               'success',
             );
             router.push({

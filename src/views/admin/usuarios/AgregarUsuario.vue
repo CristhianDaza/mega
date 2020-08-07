@@ -92,9 +92,7 @@ import {
 import { mapActions, mapState } from 'vuex';
 
 export default {
-  middleware: 'autenticado',
-  name: 'usuarios',
-  layout: 'admin',
+  name: 'agregar-usaurio',
   data() {
     return {
       mostrar: false,
@@ -127,6 +125,14 @@ export default {
         (v) => /.+@.+\..+/.test(v) || 'El correo debe ser válido',
       ],
     };
+  },
+  metaInfo: {
+    title: 'Agregar Usuario',
+    titleTemplate: '%s | Megapromocionales LTDA',
+    meta: [
+      { charset: 'utf8' },
+      { name: 'robots', content: 'noindex' },
+    ],
   },
   methods: {
     ...mapActions(['crearUsuario']),

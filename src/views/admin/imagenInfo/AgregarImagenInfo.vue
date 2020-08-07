@@ -11,7 +11,7 @@
               striped
               :indeterminate="loading"
             ></v-progress-linear>
-            <v-card-title>Agregar Imagen</v-card-title>
+            <v-card-title>Agregar Imagen Informativa</v-card-title>
             <v-card-text>
               <v-file-input
                 accept="image/*"
@@ -33,7 +33,7 @@
                 @click.prevent="subirCatalogo"
                 :disabled="file === null"
                 :loading="loading">
-                  Agregar Imagen
+                  Agregar Imagen Informativa
                 </v-btn>
               <v-btn outlined @click="$router.back()" color="info">Atras</v-btn>
             </v-card-actions>
@@ -74,6 +74,14 @@ export default {
       loading: false,
       uploading: 0,
     };
+  },
+  metaInfo: {
+    title: 'Agregar Imagen Informativa',
+    titleTemplate: '%s | Megapromocionales LTDA',
+    meta: [
+      { charset: 'utf8' },
+      { name: 'robots', content: 'noindex' },
+    ],
   },
   methods: {
     buscarImagen(event) {

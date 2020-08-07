@@ -77,18 +77,26 @@ export default {
       mdiDelete,
     };
   },
+  metaInfo: {
+    title: 'Catálogos',
+    titleTemplate: '%s | Megapromocionales LTDA',
+    meta: [
+      { charset: 'utf8' },
+      { name: 'robots', content: 'noindex' },
+    ],
+  },
   methods: {
     ...mapActions(['traerCatalogo', 'eliminarCatalogo']),
     confirmarEliminarCatalogo(id, nombre) {
       Swal.fire({
-        title: '¿Estas seguro?',
-        text: '¡No podrás revertir esto!',
+        title: '¿Estas segur@?',
+        text: '¡No se podrá revertir!',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         cancelButtonText: 'Cancelar',
-        confirmButtonText: 'Si, ¡eliminarlo!',
+        confirmButtonText: 'Si. ¡Eliminar!',
       }).then((result) => {
         if (result.value) {
           const archivoEliminar = storage.ref().child('catalogo').child(nombre);

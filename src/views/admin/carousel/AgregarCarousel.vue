@@ -12,7 +12,7 @@
               :indeterminate="loading"
             ></v-progress-linear>
             <v-card-title>Agregar Imagen</v-card-title>
-            <v-card-subtitle>Imagen Carousel</v-card-subtitle>
+            <v-card-subtitle>Imagen Carrusel</v-card-subtitle>
             <v-card-text>
               <v-file-input
                 accept="image/*"
@@ -40,7 +40,7 @@
                 @click.prevent="subirImagen"
                 :disabled="file === null"
                 :loading="loading">
-                  Agregar
+                  Agregar Imagen Carrusel
                 </v-btn>
               <v-btn outlined @click="$router.back()" color="info">Atras</v-btn>
             </v-card-actions>
@@ -70,9 +70,7 @@ import Swal from 'sweetalert2';
 import router from '@/router';
 
 export default {
-  middleware: 'autenticado',
-  name: 'Agregar',
-  layout: 'admin',
+  name: 'agregar-slider',
   data() {
     return {
       mdiLinkVariant,
@@ -85,6 +83,14 @@ export default {
       loading: false,
       uploading: 0,
     };
+  },
+  metaInfo: {
+    title: 'Imagen Carrusel',
+    titleTemplate: '%s | Megapromocionales LTDA',
+    meta: [
+      { charset: 'utf8' },
+      { name: 'robots', content: 'noindex' },
+    ],
   },
   methods: {
     buscarImagen(event) {
@@ -128,7 +134,7 @@ export default {
           .then(() => {
             Swal.fire(
               '¡Creada!',
-              'La imagen slider ha sido creada.',
+              'La imagen del carrusel ha sido creada.',
               'success',
             );
             router.push({

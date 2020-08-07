@@ -6,7 +6,7 @@
         large outlined
         class="ma-5"
         to="/admin/carousel/agregar-carousel">
-          Agregar Imagen
+          Agregar Imagen al Carrusel
         </v-btn>
     </v-card-actions>
     <v-divider class="mx-5"></v-divider>
@@ -47,21 +47,27 @@ import Swal from 'sweetalert2';
 import { storage } from '@/firebase';
 
 export default {
-  middleware: 'autenticado',
-  layout: 'admin',
   name: 'Carousel',
+  metaInfo: {
+    title: 'Imagen Carrusel',
+    titleTemplate: '%s | Megapromocionales LTDA',
+    meta: [
+      { charset: 'utf8' },
+      { name: 'robots', content: 'noindex' },
+    ],
+  },
   methods: {
     ...mapActions(['traerImagenSlider', 'eliminarImagenSlider']),
     confirmarEliminarImagen(id, nombre) {
       Swal.fire({
-        title: '¿Estas seguro?',
-        text: '¡No podrás revertir esto!',
+        title: '¿Estas segur@?',
+        text: '¡No se podrá revertir!',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         cancelButtonText: 'Cancelar',
-        confirmButtonText: 'Si, ¡eliminarlo!',
+        confirmButtonText: 'Si. ¡Eliminarlo!',
       }).then((result) => {
         if (result.value) {
           const archivoEliminar = storage.ref().child('slider').child(nombre);
@@ -69,7 +75,7 @@ export default {
           archivoEliminar.delete().then(() => {}).catch((err) => console.log(err));
           Swal.fire(
             '¡Eliminada!',
-            'La imagen ha sido eliminada.',
+            'La imagen del carrusel ha sido eliminada.',
             'success',
           );
         }

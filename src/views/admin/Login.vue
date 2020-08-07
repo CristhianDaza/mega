@@ -59,7 +59,7 @@
                   color="success"
                   type="submit"
                 >
-                  Ingresar
+                  Iniciar Sesión
                 </v-btn>
 
                 <v-btn
@@ -67,7 +67,7 @@
                   to="/"
                   color="info"
                 >
-                  Volver
+                  Volver al Inicio
                 </v-btn>
               </v-card-actions>
 
@@ -90,9 +90,7 @@ import {
 import { mapActions, mapState } from 'vuex';
 
 export default {
-  middleware: 'noautenticado',
   name: 'Login',
-  layout: 'admin',
   data: () => ({
     mostrar: false,
     mdiAt,
@@ -110,6 +108,14 @@ export default {
       (v) => /.+@.+\..+/.test(v) || 'El correo debe ser válido',
     ],
   }),
+  metaInfo: {
+    title: 'Inicio de Sesión',
+    titleTemplate: '%s | Megapromocionales LTDA',
+    meta: [
+      { charset: 'utf8' },
+      { name: 'robots', content: 'noindex' },
+    ],
+  },
   components: {
     Logo,
   },

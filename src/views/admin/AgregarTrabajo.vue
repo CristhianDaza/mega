@@ -28,7 +28,7 @@
               :prepend-icon="mdiCalendarText"
               v-model="details"
               :rules="detailRules"
-              label="Detalle del trabajo"
+              label="Detalle del Trabajo"
               type="text"
               required
             ></v-text-field>
@@ -43,7 +43,7 @@
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
                   v-model="start"
-                  label="Inicio del trabajo"
+                  label="Inicio del Trabajo"
                   :prepend-icon="mdiCalendarClock"
                   readonly
                   v-bind="attrs"
@@ -67,7 +67,7 @@
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
                   v-model="end"
-                  label="Fin del trabajo"
+                  label="Entrega del Trabajo"
                   :prepend-icon="mdiCalendarClock"
                   readonly
                   v-bind="attrs"
@@ -91,7 +91,7 @@
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
                   v-model="color"
-                  label="Color del trabajo"
+                  label="Agregar un Color"
                   :prepend-icon="mdiFormatColorFill"
                   readonly
                   v-bind="attrs"
@@ -112,7 +112,7 @@
           <v-divider class="mx-4"> </v-divider>
           <v-card-actions>
             <v-btn color="success" type="submit" outlined :loading="loading">
-              Crear Trabajo
+              Crear Trabajo al Calendario
             </v-btn>
 
             <v-btn text @click="$router.back()" outlined color="info" >
@@ -140,7 +140,7 @@ import router from '@/router';
 import { db } from '@/firebase.js';
 
 export default {
-  name: 'usuarios',
+  name: 'agregar-trabajo',
   data() {
     return {
       start: new Date().toISOString().substr(0, 10),
@@ -166,12 +166,20 @@ export default {
         (v) => !!v || 'El inicio del trabajo es requerido',
       ],
       endRules: [
-        (v) => !!v || 'El fin del trabajo es requerido',
+        (v) => !!v || 'La entrega del trabajo es requerido',
       ],
       colorRules: [
-        (v) => !!v || 'El color del trabajo es requerido',
+        (v) => !!v || 'El color es requerido',
       ],
     };
+  },
+  metaInfo: {
+    title: 'Agregar Trabajo al Calendario',
+    titleTemplate: '%s | Megapromocionales LTDA',
+    meta: [
+      { charset: 'utf8' },
+      { name: 'robots', content: 'noindex' },
+    ],
   },
   methods: {
     ...mapActions(['crearUsuario']),
