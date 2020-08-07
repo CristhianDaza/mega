@@ -48,9 +48,27 @@ const routes = [
   },
   {
     path: '/producto/:codigo',
-    name: 'productoCodugo',
+    name: 'productoCodigo',
     exact: true,
     component: () => import('../views/ProductoCodigo.vue'),
+  },
+  {
+    path: '/admin/login',
+    name: 'Login',
+    exact: true,
+    component: () => import('../views/admin/Login.vue'),
+  },
+  {
+    path: '/admin/',
+    name: 'Admin',
+    exact: true,
+    component: () => import('../views/admin/Admin.vue'),
+  },
+  {
+    path: '/admin/agregar-trabajo',
+    name: 'Agregar Trabajo',
+    exact: true,
+    component: () => import('../views/admin/AgregarTrabajo.vue'),
   },
 ];
 

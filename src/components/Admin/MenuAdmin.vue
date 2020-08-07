@@ -67,7 +67,7 @@
 
         <v-app-bar-nav-icon class="white--text mx-2" @click.stop="drawer = !drawer">
         </v-app-bar-nav-icon>
-        <v-toolbar-title>Admin - {{usuarioActivo}}</v-toolbar-title>
+        <v-toolbar-title>Admin</v-toolbar-title>
       </template>
 
       <v-spacer></v-spacer>
@@ -122,15 +122,6 @@ export default {
   }),
   methods: {
     ...mapActions(['cerrarSesion']),
-    mostrarUsuarioActivo() {
-      if (this.$fireAuth.currentUser) {
-        this.usuarioActivo = this.$fireAuth.currentUser.email;
-      }
-    },
-  },
-  created() {
-    this.$vuetify.theme.dark = true;
-    this.mostrarUsuarioActivo();
   },
 };
 </script>

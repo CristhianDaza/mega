@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import firebase from 'firebase/app';
 // eslint-disable-next-line import/no-cycle
 import db from '@/main';
+import router from '@/router';
 
 Vue.use(Vuex);
 
@@ -10,9 +11,11 @@ export default new Vuex.Store({
   state: {
     layout: 'defaultLayout',
     usuario: '',
+    error: '',
     imagenSlider: [],
     imagenInfo: [],
     catalogos: [],
+    trabajosCalendario: [],
   },
   mutations: {
     setLayout(state, layout) {
@@ -20,6 +23,9 @@ export default new Vuex.Store({
     },
     setUsuario(state, valor) {
       state.usuario = valor;
+    },
+    setError(state, valor) {
+      state.error = valor;
     },
     setImagenSlider(state, valor) {
       state.imagenSlider = valor;
@@ -30,12 +36,33 @@ export default new Vuex.Store({
     setCatalogos(state, valor) {
       state.catalogos = valor;
     },
+    setTrabajosCalendario(state, valor) {
+      state.trabajosCalendario = valor;
+    },
+    eliminarTrabajoCalendario(state, id) {
+      state.trabajosCalendario = state.trabajosCalendario.filter((doc) => doc.id !== id);
+    },
   },
   actions: {
+    ingresarUsaurio({ commit }, valor) {
+      firebase.auth().signInWithEmailAndPassword(valor.email, valor.password)
+        .then((res) => {
+          commit('setUsuario', {
+            email: res.user.email,
+            uid: res.user.uid,
+          });
+          router.push({
+            path: '/admin',
+          });
+        })
+        .catch((err) => {
+          commit('setError', err.message);
+        });
+    },
     cerrarSesion({ commit }) {
       firebase.auth().signOut();
       commit('setUsuario', null);
-      this.$router.push({
+      router.push({
         path: '/admin/login',
       });
     },
@@ -83,6 +110,24 @@ export default new Vuex.Store({
             catalogos.push(catalogo);
           });
           commit('setCatalogos', catalogos);
+        });
+    },
+    async traerTrabajosCalendario({ commit }) {
+      await db.collection('trabajos').get()
+        .then((snapshot) => {
+          const trabajos = [];
+          snapshot.forEach((doc) => {
+            const trabajo = doc.data();
+            trabajo.id = doc.id;
+            trabajos.push(trabajo);
+          });
+          commit('setTrabajosCalendario', trabajos);
+        });
+    },
+    async eliminarTrabajoCalendario({ commit }, id) {
+      await db.collection('trabajos').doc(id).delete()
+        .then(() => {
+          commit('eliminarTrabajoCalendario', id);
         });
     },
   },

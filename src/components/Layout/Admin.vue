@@ -5,10 +5,10 @@
     </div>
     <v-main>
       <v-container>
-        <nuxt/>
+        <router-view />
       </v-container>
     </v-main>
-    <v-footer app>
+    <v-footer v-if="existeUsuario" app>
       <span>
         &copy; {{ new Date().getFullYear() }} - Design by
         <strong>Cristhian Daza</strong> With 💙</span>
@@ -27,6 +27,9 @@ export default {
   },
   components: {
     MenuAdmin,
+  },
+  created() {
+    this.$vuetify.theme.dark = true;
   },
 };
 </script>
