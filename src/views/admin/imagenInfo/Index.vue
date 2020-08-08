@@ -1,20 +1,18 @@
 <template>
-  <v-card class="mx-10">
-    <v-card-actions>
-      <v-btn
-        color="success"
-        large outlined
-        class="ma-5"
-        to="/admin/imagen-info/agregar-imagen-info">
-          Agregar Imagen Informativa
-        </v-btn>
-    </v-card-actions>
-    <v-divider class="mx-5"></v-divider>
+  <div :class="this.$vuetify.breakpoint.xs ? '' : 'container'">
+    <v-btn
+      color="success"
+      large outlined
+      class="mb-5"
+      to="/admin/imagen-info/agregar-imagen-info">
+        Agregar Imagen
+      </v-btn>
+      <v-divider></v-divider>
 
-    <v-container>
-        <v-row>
-        <v-col cols="12" md="6" lg="4" v-for="imagen in imagenInfo" :key="imagen.id">
-          <v-card class="mx-auto">
+      <v-row>
+      <v-col cols="12" md="6" lg="4" v-for="imagen in imagenInfo" :key="imagen.id">
+        <v-card class="mx-auto">
+          <v-card-text class="pb-0">
             <v-img :src="imagen.linkImagen" :alt="imagen.nombre">
               <template v-slot:placeholder>
                 <v-row
@@ -26,28 +24,29 @@
                 </v-row>
               </template>
             </v-img>
-            <v-card-actions>
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    icon
-                    color="red"
-                    v-bind="attrs"
-                    v-on="on"
-                    class="ml-2"
-                    @click="confirmarEliminarImagenInfo(imagen.id, imagen.nombre)"
-                  >
-                    <v-icon>{{mdiDelete}}</v-icon>
-                  </v-btn>
-                </template>
-                <span>Eliminar</span>
-              </v-tooltip>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-card>
+          </v-card-text>
+          <v-divider class="mt-3"></v-divider>
+          <v-card-actions>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  icon
+                  color="red"
+                  v-bind="attrs"
+                  v-on="on"
+                  class="ml-2"
+                  @click="confirmarEliminarImagenInfo(imagen.id, imagen.nombre)"
+                >
+                  <v-icon>{{mdiDelete}}</v-icon>
+                </v-btn>
+              </template>
+              <span>Eliminar</span>
+            </v-tooltip>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>

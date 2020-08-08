@@ -112,7 +112,7 @@
           <v-divider class="mx-4"> </v-divider>
           <v-card-actions>
             <v-btn color="success" type="submit" outlined :loading="loading">
-              Crear Trabajo al Calendario
+              Crear Trabajo
             </v-btn>
 
             <v-btn text @click="$router.back()" outlined color="info" >

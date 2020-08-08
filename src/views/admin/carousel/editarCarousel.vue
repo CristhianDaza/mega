@@ -11,7 +11,7 @@
               striped
               :indeterminate="loading"
             ></v-progress-linear>
-            <v-card-title>Agregar Imagen</v-card-title>
+            <v-card-title>Editar Imagen</v-card-title>
             <v-card-subtitle>Imagen Carrusel</v-card-subtitle>
             <v-card-text>
               <v-file-input
@@ -21,12 +21,12 @@
               </v-file-input>
               <v-text-field
                 label="Nombre"
-                v-model="nombreProducto"
+                v-model="imagenSliderId.nombreProducto"
                 :prepend-icon="mdiLinkVariant">
               </v-text-field>
               <v-text-field
                 label="URL Producto"
-                v-model="urlProducto"
+                 v-model="imagenSliderId.urlProducto"
                 :prepend-icon="mdiCartArrowRight">
               </v-text-field>
               <span class="caption">/producto/</span>
@@ -40,7 +40,7 @@
                 @click.prevent="subirImagen"
                 :disabled="file === null"
                 :loading="loading">
-                  Agregar Imagen
+                  Editar Imagen Carrusel
                 </v-btn>
               <v-btn outlined @click="$router.back()" color="info">Atras</v-btn>
             </v-card-actions>
@@ -49,12 +49,13 @@
       </v-row>
     </v-container>
 
-    <v-container class="fill-height" fluid v-if="prev != ''">
+    <v-container class="fill-height" fluid>
       <v-row align="center" justify="center">
         <v-col cols="12" sm="8" md="5" xl="6">
           <v-card class="elevation-12">
             <v-card-text>
-              <v-img :src="prev"></v-img>
+              <v-img :src="prev" v-if="prev !== ''"></v-img>
+              <v-img :src="imagenSliderId.linkImagen" v-else></v-img>
             </v-card-text>
           </v-card>
         </v-col>
@@ -65,14 +66,16 @@
 
 <script>
 import { mdiLinkVariant, mdiCartArrowRight } from '@mdi/js';
+import { mapActions, mapState } from 'vuex';
 import { storage, db } from '@/firebase';
 import Swal from 'sweetalert2';
 import router from '@/router';
 
 export default {
-  name: 'agregar-slider',
+  name: 'editar-slider',
   data() {
     return {
+      id: this.$route.params.id,
       mdiLinkVariant,
       mdiCartArrowRight,
       error: null,
@@ -92,7 +95,11 @@ export default {
       { name: 'robots', content: 'noindex' },
     ],
   },
+  computed: {
+    ...mapState(['imagenSliderId']),
+  },
   methods: {
+    ...mapActions(['traerImagenSliderId']),
     buscarImagen(event) {
       if (event) {
         if (event.type === 'image/jpeg' || event.type === 'image/png') {
@@ -150,6 +157,9 @@ export default {
         this.loading = false;
       }
     },
+  },
+  mounted() {
+    this.traerImagenSliderId(this.id);
   },
   created() {
     this.$store.commit('setLayout', 'adminLayout');

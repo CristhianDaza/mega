@@ -1,53 +1,86 @@
 <template>
-  <v-card class="mx-10">
-    <v-card-actions>
-      <v-btn
-        color="success"
-        large outlined
-        class="ma-5"
-        to="/admin/carousel/agregar-carousel">
-          Agregar Imagen al Carrusel
-        </v-btn>
-    </v-card-actions>
-    <v-divider class="mx-5"></v-divider>
-
-    <v-container>
-      <v-row>
-        <v-col cols="12" sm="6" md="4" v-for="imagen in imagenSlider" :key="imagen.uid">
-          <h2>{{imagen.nombreProducto.toUpperCase()}}</h2>
-          <v-img :src="imagen.linkImagen" :alt="imagen.nombreProducto">
-            <template v-slot:placeholder>
-              <v-row
-                class="fill-height ma-0"
-                align="center"
-                justify="center"
-              >
-                <v-progress-circular indeterminate color="blue-grey"></v-progress-circular>
-              </v-row>
-            </template>
-          </v-img>
-          <v-btn
-            color="error"
-            class="mt-3"
-            outlined
-            @click="confirmarEliminarImagen(imagen.id, imagen.nombreProducto)"
-          >
-            Eliminar
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-container>
-
-  </v-card>
+  <div :class="this.$vuetify.breakpoint.xs ? '' : 'container'">
+    <v-btn
+      color="success"
+      large
+      outlined
+      class="mb-3"
+      to="/admin/carousel/agregar-carousel">
+        Agregar Imagen
+    </v-btn>
+    <v-divider></v-divider>
+    <v-row>
+      <v-col cols="12" sm="6" md="4" v-for="imagen in imagenSlider" :key="imagen.uid">
+        <v-card>
+          <v-card-subtitle>
+            <h2>{{imagen.nombreProducto.toUpperCase()}}</h2>
+          </v-card-subtitle>
+          <v-card-text class="pb-0">
+            <v-img :src="imagen.linkImagen" :alt="imagen.nombreProducto">
+              <template v-slot:placeholder>
+                <v-row
+                  class="fill-height ma-0"
+                  align="center"
+                  justify="center"
+                >
+                  <v-progress-circular indeterminate color="blue-grey"></v-progress-circular>
+                </v-row>
+              </template>
+            </v-img>
+          </v-card-text>
+          <v-divider class="mt-3"></v-divider>
+          <v-card-actions class="pt-0">
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  icon
+                  color="red"
+                  v-bind="attrs"
+                  v-on="on"
+                  class="mt-3"
+                  @click="confirmarEliminarImagen(imagen.id, imagen.nombreProducto)"
+                >
+                  <v-icon>{{ mdiDelete }}</v-icon>
+                </v-btn>
+              </template>
+              <span>Eliminar Imagen</span>
+            </v-tooltip>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  icon
+                  color="success"
+                  v-bind="attrs"
+                  v-on="on"
+                  class="mt-3"
+                  :to="{name: 'editar-slider', params: {id: imagen.id}}"
+                >
+                  <v-icon>{{ mdiPencil }}</v-icon>
+                </v-btn>
+              </template>
+              <span>Editar Imagen</span>
+            </v-tooltip>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import { mdiDelete, mdiPencil } from '@mdi/js';
 import Swal from 'sweetalert2';
 import { storage } from '@/firebase';
 
 export default {
   name: 'Carousel',
+  data() {
+    return {
+      mdiDelete,
+      mdiPencil,
+    };
+  },
   metaInfo: {
     title: 'Imagen Carrusel',
     titleTemplate: '%s | Megapromocionales LTDA',

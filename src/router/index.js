@@ -102,8 +102,15 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
+    path: '/admin/carousel/editar-carousel/:id',
+    name: 'editar-slider',
+    exact: true,
+    component: () => import('../views/admin/carousel/editarCarousel.vue'),
+    meta: { requiresAuth: true },
+  },
+  {
     path: '/admin/catalogos',
-    name: 'Catalogos',
+    name: 'Catalogos Admin',
     exact: true,
     component: () => import('../views/admin/catalogos/Index.vue'),
     meta: { requiresAuth: true },

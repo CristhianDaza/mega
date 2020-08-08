@@ -1,54 +1,48 @@
 <template>
-  <v-card class="mx-10">
-    <v-card-actions>
-      <v-btn
-        color="success"
-        large outlined
-        class="ma-5"
-        to="/admin/usuarios/agregar-usuario">
-        Agregar Usuario
-      </v-btn>
-    </v-card-actions>
-    <v-divider class="mx-5"></v-divider>
-
-    <v-container>
-      <v-simple-table>
-        <template v-slot:default>
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Correo</th>
-              <th>Rol</th>
-              <th class="text-right">Acción</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="usuario in usuarios" :key="usuario.uid">
-              <th>{{usuario.nombre}}</th>
-              <th>{{usuario.email}}</th>
-              <th>{{usuario.rol}}</th>
-              <th class="text-right">
-                <v-btn
-                  color="info"
-                  outlined
-                  @click.prevent="cambiarPass(usuario.email)"
-                  class="mr-3"
-                >
-                    Cambiar Contraseña
-                  </v-btn>
-                <v-btn
-                  color="error"
-                  outlined
-                  @click="confirmarEliminarUsuario(usuario.id)">
-                    Eliminar
-                  </v-btn>
-              </th>
-            </tr>
-          </tbody>
-        </template>
-      </v-simple-table>
-    </v-container>
-  </v-card>
+  <div :class="this.$vuetify.breakpoint.xs ? '' : 'container'">
+    <v-btn
+      color="success"
+      large outlined
+      to="/admin/usuarios/agregar-usuario">
+      Agregar Usuario
+    </v-btn>
+    <v-divider class="my-3"></v-divider>
+    <v-simple-table>
+      <template v-slot:default>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Rol</th>
+            <th class="text-right">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="usuario in usuarios" :key="usuario.uid">
+            <th>{{usuario.nombre}}</th>
+            <th>{{usuario.email}}</th>
+            <th>{{usuario.rol}}</th>
+            <th class="text-right">
+              <v-btn
+                color="info"
+                outlined
+                @click.prevent="cambiarPass(usuario.email)"
+                class="mr-3"
+              >
+                  Cambiar Contraseña
+                </v-btn>
+              <v-btn
+                color="error"
+                outlined
+                @click="confirmarEliminarUsuario(usuario.id)">
+                  Eliminar
+                </v-btn>
+            </th>
+          </tr>
+        </tbody>
+      </template>
+    </v-simple-table>
+  </div>
 </template>
 
 <script>

@@ -1,151 +1,145 @@
 <template>
-  <div class="mx-auto">
-    <v-card class="mx-10">
-      <v-card-actions>
-        <v-btn
-          color="success"
-          large
-          outlined
-          class="ma-5"
-          to="/admin/agregar-trabajo">
-          Agregar Trabajo al Calendario
-        </v-btn>
-      </v-card-actions>
-      <v-divider class="mx-5"></v-divider>
+  <div :class="this.$vuetify.breakpoint.xs ? '' : 'container'">
+    <v-btn
+      color="success"
+      large
+      outlined
+      class="mb-3"
+      to="/admin/agregar-trabajo">
+      Agregar Trabajo
+    </v-btn>
+    <v-divider></v-divider>
 
-      <v-container>
-        <v-row class="fill-height">
-          <v-col cols="12">
-            <v-sheet height="64">
-              <v-toolbar flat color="blue-grey darken-4">
+    <v-row class="fill-height">
+      <v-col cols="12">
+        <v-sheet height="64">
+          <v-toolbar flat color="blue-grey darken-4">
 
-                <v-btn outlined class="mr-4" @click="setToday">
-                  Hoy
+            <v-btn outlined class="mr-4" @click="setToday">
+              Hoy
+            </v-btn>
+            <v-btn fab text small @click="prev">
+              <v-icon small>mdi-chevron-left</v-icon>
+            </v-btn>
+            <v-btn fab text small @click="next">
+              <v-icon small>mdi-chevron-right</v-icon>
+            </v-btn>
+            <v-toolbar-title>{{ title }}</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-menu bottom right>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  outlined
+                  v-on="on"
+                >
+                  <span>{{ typeToLabel[type] }}</span>
+                  <v-icon right>mdi-menu-down</v-icon>
                 </v-btn>
-                <v-btn fab text small @click="prev">
-                  <v-icon small>mdi-chevron-left</v-icon>
+              </template>
+              <v-list>
+                <v-list-item @click="type = 'day'">
+                  <v-list-item-title>Día</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="type = 'week'">
+                  <v-list-item-title>Semana</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="type = 'month'">
+                  <v-list-item-title>Mes</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="type = '4day'">
+                  <v-list-item-title>4 Días</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </v-toolbar>
+        </v-sheet>
+        <v-sheet height="600">
+          <v-calendar
+            locale="es-co"
+            :short-weekdays="false"
+            :short-months="false"
+            :weekdays="[1, 2, 3, 4, 5, 6, 0]"
+            ref="calendar"
+            v-model="focus"
+            color="primary"
+            :events="trabajosCalendario"
+            :event-color="getEventColor"
+            :event-margin-bottom="3"
+            :now="today"
+            :type="type"
+            @click:event="showEvent"
+            @click:more="viewDay"
+            @click:date="viewDay"
+            @change="updateRange"
+          ></v-calendar>
+
+          <v-menu
+            v-model="selectedOpen"
+            :close-on-content-click="false"
+            :activator="selectedElement"
+            offset-x
+          >
+            <v-card
+              color="grey lighten-4"
+              min-width="350px"
+              flat
+            >
+              <v-toolbar
+                :color="trabajoSeleccionado.color"
+                dark
+              >
+                <v-btn icon @click="confirmarEliminarTrabajo(trabajoSeleccionado)">
+                  <v-icon>{{mdiDelete}}</v-icon>
                 </v-btn>
-                <v-btn fab text small @click="next">
-                  <v-icon small>mdi-chevron-right</v-icon>
-                </v-btn>
-                <v-toolbar-title>{{ title }}</v-toolbar-title>
+                <v-toolbar-title v-html="trabajoSeleccionado.name"></v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-menu bottom right>
-                  <template v-slot:activator="{ on }">
+
+                <p class="my-0 mx-2 text-decoration-underline">{{
+                    trabajoSeleccionado.terminado
+                        ? 'Trabajo Listo'
+                        : 'Trabajo no terminado'}}</p>
+
+                <v-tooltip v-model="mostrarTooltip" bottom>
+                  <template v-slot:activator="{on, attrs}">
                     <v-btn
-                      outlined
                       v-on="on"
+                      v-bind="attrs"
+                      icon
+                      color="white"
+                      @click.prevent="terminado(trabajoSeleccionado)"
                     >
-                      <span>{{ typeToLabel[type] }}</span>
-                      <v-icon right>mdi-menu-down</v-icon>
+                      <v-icon class="white--text">{{
+                        trabajoSeleccionado.terminado
+                            ? mdiCheckCircleOutline
+                            : mdiCloseCircleOutline}}
+                      </v-icon>
                     </v-btn>
                   </template>
-                  <v-list>
-                    <v-list-item @click="type = 'day'">
-                      <v-list-item-title>Día</v-list-item-title>
-                    </v-list-item>
-                    <v-list-item @click="type = 'week'">
-                      <v-list-item-title>Semana</v-list-item-title>
-                    </v-list-item>
-                    <v-list-item @click="type = 'month'">
-                      <v-list-item-title>Mes</v-list-item-title>
-                    </v-list-item>
-                    <v-list-item @click="type = '4day'">
-                      <v-list-item-title>4 Días</v-list-item-title>
-                    </v-list-item>
-                  </v-list>
-                </v-menu>
+                  <span>{{
+                    trabajoSeleccionado.terminado
+                        ? 'Trabajo no termiando'
+                        : 'Trabajo termiando'}}
+                  </span>
+                </v-tooltip>
               </v-toolbar>
-            </v-sheet>
-            <v-sheet height="600">
-              <v-calendar
-                locale="es-co"
-                :short-weekdays="false"
-                :short-months="false"
-                :weekdays="[1, 2, 3, 4, 5, 6, 0]"
-                ref="calendar"
-                v-model="focus"
-                color="primary"
-                :events="trabajosCalendario"
-                :event-color="getEventColor"
-                :event-margin-bottom="3"
-                :now="today"
-                :type="type"
-                @click:event="showEvent"
-                @click:more="viewDay"
-                @click:date="viewDay"
-                @change="updateRange"
-              ></v-calendar>
-
-              <v-menu
-                v-model="selectedOpen"
-                :close-on-content-click="false"
-                :activator="selectedElement"
-                offset-x
-              >
-                <v-card
-                  color="grey lighten-4"
-                  min-width="350px"
-                  flat
+              <v-card-text>
+                <span class="black--text" v-html="trabajoSeleccionado.details"></span>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn
+                  outlined
+                  color="primary"
+                  @click="selectedOpen = false"
                 >
-                  <v-toolbar
-                    :color="trabajoSeleccionado.color"
-                    dark
-                  >
-                    <v-btn icon @click="confirmarEliminarTrabajo(trabajoSeleccionado)">
-                      <v-icon>{{mdiDelete}}</v-icon>
-                    </v-btn>
-                    <v-toolbar-title v-html="trabajoSeleccionado.name"></v-toolbar-title>
-                    <v-spacer></v-spacer>
-
-                    <p class="my-0 mx-2 text-decoration-underline">{{
-                        trabajoSeleccionado.terminado
-                            ? 'Trabajo Listo'
-                            : 'Trabajo no terminado'}}</p>
-
-                    <v-tooltip v-model="mostrarTooltip" bottom>
-                      <template v-slot:activator="{on, attrs}">
-                        <v-btn
-                          v-on="on"
-                          v-bind="attrs"
-                          icon
-                          color="white"
-                          @click.prevent="terminado(trabajoSeleccionado)"
-                        >
-                          <v-icon class="white--text">{{
-                            trabajoSeleccionado.terminado
-                                ? mdiCheckCircleOutline
-                                : mdiCloseCircleOutline}}
-                          </v-icon>
-                        </v-btn>
-                      </template>
-                      <span>{{
-                        trabajoSeleccionado.terminado
-                            ? 'Trabajo no termiando'
-                            : 'Trabajo termiando'}}
-                      </span>
-                    </v-tooltip>
-                  </v-toolbar>
-                  <v-card-text>
-                    <span class="black--text" v-html="trabajoSeleccionado.details"></span>
-                  </v-card-text>
-                  <v-card-actions>
-                    <v-btn
-                      outlined
-                      color="primary"
-                      @click="selectedOpen = false"
-                    >
-                      Cancelar
-                    </v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-menu>
-            </v-sheet>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-card>
-    </div>
+                  Cancelar
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-menu>
+        </v-sheet>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>

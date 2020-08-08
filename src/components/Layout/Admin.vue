@@ -1,14 +1,12 @@
 <template>
   <v-app>
     <div v-if="existeUsuario">
-      <MenuAdmin class="mb-5" />
+      <MenuAdmin class="mb-3" />
     </div>
     <v-main>
-      <v-container>
-        <router-view />
-      </v-container>
+      <router-view />
     </v-main>
-    <v-footer v-if="existeUsuario" app>
+    <v-footer app>
       <span>
         &copy; {{ new Date().getFullYear() }} - Design by
         <strong>Cristhian Daza</strong> With 💙</span>
