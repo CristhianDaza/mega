@@ -12,38 +12,46 @@
           </div>
 
           <div class="d-none d-md-flex">
-            <v-btn class="text-oscuro ml-1" text large to="/">
+            <v-btn class="text-oscuro" text large to="/">
               <v-icon left>{{mdiHome}}</v-icon>
               <span>Inicio</span>
             </v-btn>
-            <v-btn class="text-oscuro ml-1" text large to="/categorias">
+            <v-btn class="text-oscuro" text large to="/categorias">
               <v-icon left>{{mdiCart}}</v-icon>
               <span>Categorías</span>
             </v-btn>
-            <v-btn class="text-oscuro ml-1" text large to="/catalogos">
+            <v-btn class="text-oscuro" text large to="/catalogos">
               <v-icon left>{{mdiLibrary}}</v-icon>
               <span>Catálogos</span>
             </v-btn>
-            <v-btn class="text-oscuro ml-1" text large to="/contacto">
+            <v-btn class="text-oscuro" text large to="/contacto">
               <v-icon left>{{mdiCardAccountPhone}}</v-icon>
               <span>Contacto</span>
             </v-btn>
-            <v-btn class="text-oscuro ml-1" text large to="/nosotros">
+            <v-btn class="text-oscuro" text large to="/nosotros">
               <v-icon left>{{mdiAccountGroup}}</v-icon>
               <span>Nosotros</span>
             </v-btn>
-            <v-btn class="text-oscuro ml-1" text large to="/buscar">
-              <v-icon left>{{mdiMagnify}}</v-icon>
-              <span>Buscar</span>
-            </v-btn>
-            <v-btn  v-if="existeUsuario" class="text-oscuro ml-1" text large to="/admin">
+            <v-btn v-if="existeUsuario" class="text-oscuro" text large to="/admin">
               <v-icon left>{{mdiCoffee}}</v-icon>
               <span>Admin</span>
             </v-btn>
-            <v-btn  v-if="!existeUsuario" class="text-oscuro ml-1" text large to="/admin/login">
+            <v-btn v-if="!existeUsuario" class="text-oscuro" text large to="/admin/login">
               <v-icon left>{{mdiCoffee}}</v-icon>
               <span>Login</span>
             </v-btn>
+            <v-text-field
+              v-model="busqueda"
+              v-on:keyup.enter="buscarProducto(busqueda)"
+              @click:append="buscarProducto(busqueda)"
+              class="text-oscuro mt-1"
+              placeholder="Buscar"
+              :prepend-inner-icon="mdiMagnify"
+              outlined
+              rounded
+              dense
+              hide-details="auto"
+            ></v-text-field>
           </div>
           <v-spacer></v-spacer>
           <v-tooltip v-model="mostrarTooltip" bottom>
@@ -146,12 +154,18 @@
             </v-list-item-title>
           </v-list-item>
 
-          <v-list-item to="/buscar">
-            <v-list-item-title>
-              <v-icon left>{{mdiMagnify}}</v-icon>
-              <span>Buscar</span>
-            </v-list-item-title>
-          </v-list-item>
+            <v-text-field
+              v-model="busqueda"
+              v-on:keyup.enter="buscarProducto(busqueda)"
+              @click:append="buscarProducto(busqueda)"
+              class="text-oscuro mt-1"
+              placeholder="Buscar"
+              :prepend-inner-icon="mdiMagnify"
+              outlined
+              rounded
+              dense
+              hide-details="auto"
+            ></v-text-field>
 
           <v-list-item v-if="existeUsuario" to="/admin">
             <v-list-item-title>
@@ -186,6 +200,7 @@ import {
   mdiMenu,
 } from '@mdi/js';
 import { mapGetters } from 'vuex';
+import router from '@/router';
 
 export default {
   data() {
@@ -206,6 +221,7 @@ export default {
       mostrarTooltip: false,
       drawer: false,
       group: null,
+      busqueda: '',
     };
   },
   watch: {
@@ -214,6 +230,17 @@ export default {
     },
   },
   methods: {
+    buscarProducto(busqueda) {
+      router.push({
+        path: '/buscar',
+        query: {
+          pagina: 1,
+          porPagina: 12,
+          busqueda,
+        },
+      });
+      this.busqueda = '';
+    },
     cambiarTema() {
       if (this.$vuetify.theme.dark) {
         this.textSnackbar = 'Modo Claro Activado';

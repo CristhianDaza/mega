@@ -19,17 +19,6 @@
         <v-col cols="12" sm="4" md="3">
           <v-card>
             <v-card-text class="pb-0">
-              <v-text-field
-                :append-icon="mdiMagnify"
-                v-model="busqueda"
-                label="Buscar..."
-                v-on:keyup.enter="productosPorBusqueda(busqueda)"
-                @click:append="productosPorBusqueda(busqueda)"
-                outlined
-                class="m-0"
-              ></v-text-field>
-            </v-card-text>
-            <v-card-text class="pb-0 pt-0">
               <v-select
                 :items="listaPorPaginas"
                 item-text="text"
@@ -292,25 +281,6 @@ export default {
         this.etiqueta,
         inventario,
         this.busqueda,
-      );
-    },
-    productosPorBusqueda(busqueda) {
-      this.$router.push({
-        path: this.$route.path,
-        query: {
-          pagina: 1,
-          porPagina: 12,
-          busqueda,
-        },
-      });
-      this.getProductos(
-        this.pagina,
-        this.porPagina,
-        this.categoria,
-        this.subCategoria,
-        this.etiqueta,
-        this.inventario,
-        busqueda,
       );
     },
     buscarEtiqueta(etiqueta) {
