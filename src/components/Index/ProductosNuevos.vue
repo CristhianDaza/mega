@@ -24,7 +24,7 @@
           v-for="(producto) in productoNuevo"
           :key="producto.familia"
         >
-          <Productos :producto='producto' />
+          <Productos :producto='producto' :colores="producto.materiales"/>
         </v-col>
       </v-row>
 

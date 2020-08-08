@@ -94,7 +94,7 @@
                   <p class="ma-0" v-if="productoCodigo[0].material !== null">
                     <strong class="font-weight-black primary--text">MATERIAL:</strong> {{ productoCodigo[0].material }}
                   </p>
-                  <p class="ma-0">
+                  <p class="ma-0" v-if="productoCodigo[0].medidas !== null">
                     <strong class="font-weight-black primary--text">MEDIDAS:</strong> {{ productoCodigo[0].medidas }}
                   </p>
                   <p class="ma-0" v-if="productoCodigo[0].area_impresion !== null">
@@ -103,44 +103,90 @@
                   <p class="ma-0" v-if="productoCodigo[0].tecnica_marca_descripcion !== null">
                     <strong class="font-weight-black primary--text">MARCA:</strong> {{ productoCodigo[0].tecnica_marca_descripcion }}
                   </p>
-                  <p class="ma-0">
+                  <p class="ma-0" v-if="productoCodigo[0].empaque !== null">
                     <strong class="font-weight-black primary--text">EMPAQUE:</strong> {{ productoCodigo[0].empaque }}
                   </p>
                   <p class="ma-0">
                     <strong class="font-weight-black primary--text">Categorias:</strong> <router-link class="linksCategorias" :to="'/productos?subCategoria=' + productoCodigo[0].subcategoria_1.jerarquia">{{ productoCodigo[0].subcategoria_1.nombre }}</router-link> | <router-link class="linksCategorias" :to="'/productos?categoria=' + productoCodigo[0].subcategoria_1.categoria.jerarquia">{{productoCodigo[0].subcategoria_1.categoria.nombre}}</router-link>
                   </p>
-                  <div v-if="existeUsuario">
-                    <p class="ma-0" v-if="Math.round(productoCodigo[0].materiales[0].precio_descuento) === Math.round(productoCodigo[0].materiales[0].precio)">
-                      <strong class="font-weight-black primary--text">PRECIO:</strong> ${{Math.round(productoCodigo[0].materiales[0].precio)}} + iva
-                    </p>
-                    <p class="ma-0" v-else>
-                      <strong class="font-weight-black primary--text">PRECIO:</strong> ${{Math.round(productoCodigo[0].materiales[0].precio_descuento)}} + iva
-                    </p>
-                  </div>
-                  <p class="ma-0 mt-4 primary--text">El color de los artículos pueden variar según la calibración y resolución de la pantalla.</p>
+                  <template v-if="existeUsuario">
+                    <div>
+                      <v-card-subtitle class="font-weight-black primary--text px-0 pb-0">
+                        PRECIO:
+                      </v-card-subtitle>
+                      <v-card-title class="pa-0" v-for="(valor, index) in productoCodigo[0].materiales" :key="valor.codigo">
+                        <template v-if="valor.variedad !== null">
+                          $ {{addCommas(Math.round(valor.precio))}} + iva
+                        <div class="contenedor_color">
+                          <v-tooltip bottom dense>
+                            <template v-slot:activator="{on, attrs}">
+                              <div
+                                v-if="valor.color_hex_2 !== null && valor.color_hex_3 !== null"
+                                v-bind="attrs"
+                                v-on="on"
+                                :style="`background: linear-gradient(rgb(${hextToRgb(valor.color_hex_1)[0]}, ${hextToRgb(valor.color_hex_1)[1]}, ${hextToRgb(valor.color_hex_1)[2]}) 0%, rgb(${hextToRgb(valor.color_hex_2)[0]}, ${hextToRgb(valor.color_hex_2)[1]}, ${hextToRgb(valor.color_hex_2)[2]}) 48%, rgb(${hextToRgb(valor.color_hex_2)[0]}, ${hextToRgb(valor.color_hex_2)[1]}, ${hextToRgb(valor.color_hex_2)[2]}) 62%, rgb(${hextToRgb(valor.color_hex_3)[0]}, ${hextToRgb(valor.color_hex_3)[1]}, ${hextToRgb(valor.color_hex_3)[2]}) 66%, rgb(${hextToRgb(valor.color_hex_3)[0]}, ${hextToRgb(valor.color_hex_3)[1]}, ${hextToRgb(valor.color_hex_3)[2]}) 100%)`"
+                                class="circuloProducto"
+                              ></div>
+                              <div
+                                v-else-if="valor.color_hex_2 !== null && valor.color_hex_3 === null"
+                                v-bind="attrs"
+                                v-on="on"
+                                :style="`background: linear-gradient(rgb(${hextToRgb(valor.color_hex_1)[0]}, ${hextToRgb(valor.color_hex_1)[1]}, ${hextToRgb(valor.color_hex_1)[2]}) 40%, rgb(${hextToRgb(valor.color_hex_2)[0]}, ${hextToRgb(valor.color_hex_2)[1]}, ${hextToRgb(valor.color_hex_2)[2]}) 50%)`"
+                                class="circuloProducto"
+                              >
+                              </div>
+                              <div
+                                v-else
+                                v-bind="attrs"
+                                v-on="on"
+                                :style="'background:' + valor.color_hex_1"
+                                class="circuloProducto"
+                              ></div>
+                            </template>
+                            <span>{{valor.color_nombre}}</span>
+                          </v-tooltip>
+                        </div>
+                          {{valor.variedad}}
+                        </template>
+                        <template v-else>
+                          <template v-if="index === 1">
+                            $ {{addCommas(Math.round(valor.precio))}} + iva
+                          </template>
+                        </template>
+                      </v-card-title>
+                      <v-card-subtitle class="px-0 pt-5">
+                        <span class="font-weight-black primary--text">Última Actualización de Precio:</span> {{productoCodigo[0].materiales[0].ultima_actualizacion_precio.substr(0,10)}}
+                      </v-card-subtitle>
+                    </div>
+                  </template>
+                  <p v-if="productoCodigo[0].texto_informacion !== null" class="ma-0" :style="'color: ' + productoCodigo[0].color_texto_informacion">{{productoCodigo[0].texto_informacion}}</p>
+                  <p class="ma-0 primary--text">El color de los artículos pueden variar según la calibración y resolución de la pantalla.</p>
               </v-card-text>
-              <v-card-actions class="pl-4 d-block">
-                <div class="display-1 primary--text d-block my-2" v-if="Math.round(productoCodigo[0].materiales[0].precio_descuento) !== Math.round(productoCodigo[0].materiales[0].precio)">{{Math.round(productoCodigo[0].materiales[0].descuento)}}% de descuento</div>
-                <div v-if="productoCodigo[0].etiquetas.length > 0">
+              <v-card-actions>
+                <div class="display-1 primary--text my-2" v-if="Math.round(productoCodigo[0].materiales[0].precio_descuento) !== Math.round(productoCodigo[0].materiales[0].precio)">{{Math.round(productoCodigo[0].materiales[0].descuento)}}% de descuento</div>
+                <v-row>
+                  <div v-if="productoCodigo[0].etiquetas.length > 0">
+                    <img
+                      class="pr-2"
+                      v-if="productoCodigo[0].etiquetas[0].id === 1"
+                      src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/nuevo.png?alt=media&token=7dbffaa3-1580-435a-9739-86c155c5194b"
+                      alt="Novedad"
+                    >
+                  </div>
                   <img
-                    class="d-block my-2"
-                    v-if="productoCodigo[0].etiquetas[0].id === 1"
-                    src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/nuevo.png?alt=media&token=7dbffaa3-1580-435a-9739-86c155c5194b"
-                    alt="Novedad"
+                    class="pr-2"
+                    v-if="productoCodigo[0].materiales[0].estado == '3'"
+                    src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/saldo.png?alt=media&token=b1d4cf45-0dcc-4285-87e9-c32f63c808d8"
+                    alt="Saldo"
                   >
-                </div>
-                <img
-                  class="d-block my-2"
-                  v-if="productoCodigo[0].materiales[0].estado == '3'" src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/saldo.png?alt=media&token=b1d4cf45-0dcc-4285-87e9-c32f63c808d8"
-                  alt="Saldo"
-                >
-                <div v-if="productoCodigo[0].etiquetas.length > 0">
-                  <img
-                    v-if="productoCodigo[0].etiquetas[0].id === 4"
-                    src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/Neto.png?alt=media&token=f718bea7-0e92-480d-82e4-56a2d3a2dcbe"
-                    alt="Neto"
-                    class="d-block my-2">
-                </div>
+                  <div v-if="productoCodigo[0].etiquetas.length > 0">
+                    <img
+                      v-if="productoCodigo[0].etiquetas[0].id === 4"
+                      src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/Neto.png?alt=media&token=f718bea7-0e92-480d-82e4-56a2d3a2dcbe"
+                      alt="Neto"
+                      >
+                  </div>
+                </v-row>
                 <v-tooltip v-model="mostrarTooltip" bottom>
                   <template v-slot:activator="{on, attrs}">
                     <v-btn
@@ -205,7 +251,7 @@
         </template>
       </v-img>
     </v-dialog>
-    <v-container>
+    <v-container class="pt-0">
       <v-sheet class="mx-auto" elevation="8">
         <v-slide-group v-model="model" class="px-4 py-5" :prev-icon="mdiChevronLeft" :next-icon="mdiChevronRight">
           <v-slide-item v-for="imagen in productoCodigo[0].imagenes" :key="imagen.id">
@@ -235,7 +281,7 @@
       </v-sheet>
       <v-row>
         <v-col cols="12" sm="6">
-          <v-simple-table class="mt-5">
+          <v-simple-table>
             <thead>
               <tr>
                 <th class="text-left">SUGERIDOS</th>
@@ -359,17 +405,13 @@
                   <div class="red--text" v-if="producto.inventario < 10">Agotado en {{producto.color_nombre}}</div>
                   <div v-else>Inventario: {{producto.inventario}} unidades.</div>
                 </v-card-text>
-                <v-card-subtitle v-if="existeUsuario" class="precio">
-                    <div
-                    class="text-center font-weight-medium"
-                  >
-                    ${{ Math.round(producto.precio) }} + iva
-                  </div>
-                </v-card-subtitle>
                 <div class="text-center">
                   <img v-if="producto.estado == '2'" src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/nuevo.png?alt=media&token=7dbffaa3-1580-435a-9739-86c155c5194b" alt="Novedad" class="text-center" width="80">
                   <img v-if="producto.estado == '3'" src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/saldo.png?alt=media&token=b1d4cf45-0dcc-4285-87e9-c32f63c808d8" alt="Saldo" class="text-center" width="80">
                 </div>
+                <v-card-title v-if="existeUsuario">
+                  ${{ addCommas(Math.round(producto.precio)) }} + iva
+                </v-card-title>
                 <v-divider class="mx-5"></v-divider>
                 <v-card-actions>
                 <v-btn
@@ -524,6 +566,18 @@ export default {
     },
   },
   methods: {
+    addCommas(nStr) {
+      // eslint-disable-next-line no-param-reassign
+      nStr += '';
+      const x = nStr.split('.');
+      let x1 = x[0];
+      const x2 = x.length > 1 ? `.${x[1]}` : '';
+      const rgx = /(\d+)(\d{3})/;
+      while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1.$2');
+      }
+      return x1 + x2;
+    },
     hextToRgb(hex) {
       return hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i,
         // eslint-disable-next-line prefer-template
@@ -576,27 +630,12 @@ export default {
       await axios(config).then((res) => {
         res.data.forEach((producto) => {
           this.productoSugerencia.push(producto);
-          console.log(this.productoSugerencia);
           if (this.productoSugerencia === []) {
             this.textoSugerido = 'No se encontraron productos';
           } else {
             this.textoSugerido = '';
           }
         });
-      });
-    },
-    async descargarImagenes(codigo) {
-      const url = `https://marpicoprod.azurewebsites.net/api/productos/imagenes/14347?producto=${codigo}`;
-      const config = {
-        method: 'get',
-        url,
-        headers: {
-          Authorization: 'Bearer Api-Key fBc8kc9ejmpvIqSLeKh9bIL955E0LOdNfFKfNZhGy3xRlGTxtDl7ADOdSzrLfgLj',
-        },
-      };
-
-      await axios(config).then(() => {
-        console.log('Descargando');
       });
     },
   },

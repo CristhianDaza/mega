@@ -76,7 +76,7 @@
       </div>
     </div>
     <v-card-title v-if="existeUsuario" class="precio">
-      ${{ Math.round(producto.materiales[0].precio) }} + iva
+      ${{ addCommas(Math.round(producto.materiales[0].precio)) }} + iva
     </v-card-title>
     <v-divider class="mx-5"></v-divider>
     <v-card-actions>
@@ -101,6 +101,18 @@ export default {
     ...mapGetters(['existeUsuario']),
   },
   methods: {
+    addCommas(nStr) {
+      // eslint-disable-next-line no-param-reassign
+      nStr += '';
+      const x = nStr.split('.');
+      let x1 = x[0];
+      const x2 = x.length > 1 ? `.${x[1]}` : '';
+      const rgx = /(\d+)(\d{3})/;
+      while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1.$2');
+      }
+      return x1 + x2;
+    },
     hextToRgb(hex) {
       return hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i,
         // eslint-disable-next-line prefer-template
