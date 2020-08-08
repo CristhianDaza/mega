@@ -86,7 +86,7 @@
       color="primary"
       text
     >
-        Ver inventario
+        Ver Producto
     </v-btn>
     </v-card-actions>
   </v-card>
