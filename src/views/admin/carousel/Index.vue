@@ -105,7 +105,13 @@ export default {
         if (result.value) {
           const archivoEliminar = storage.ref().child('slider').child(nombre);
           this.eliminarImagenSlider(id);
-          archivoEliminar.delete().then(() => {}).catch((err) => console.log(err));
+          archivoEliminar.delete().then(() => {}).catch(() => {
+            Swal.fire(
+              'Error!',
+              'Hubo un error, intente de nuevo.',
+              'error',
+            );
+          });
           Swal.fire(
             '¡Eliminada!',
             'La imagen del carrusel ha sido eliminada.',

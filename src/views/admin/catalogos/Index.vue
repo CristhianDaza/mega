@@ -100,7 +100,13 @@ export default {
         if (result.value) {
           const archivoEliminar = storage.ref().child('catalogo').child(nombre);
           this.eliminarCatalogo(id);
-          archivoEliminar.delete().then(() => {}).catch((err) => console.log(err));
+          archivoEliminar.delete().then(() => {}).catch(() => {
+            Swal.fire(
+              'Error!',
+              'Hubo un error, intente de nuevo.',
+              'error',
+            );
+          });
           Swal.fire(
             '¡Eliminado!',
             'El catálogo ha sido eliminado.',

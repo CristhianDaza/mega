@@ -145,7 +145,11 @@ export default {
         this.error = 'Imagen subida con éxito';
         this.file = null;
       } catch (error) {
-        console.log(error);
+        Swal.fire(
+          'Error!',
+          'Hubo un error, intente de nuevo.',
+          'error',
+        );
       } finally {
         this.loading = false;
       }
