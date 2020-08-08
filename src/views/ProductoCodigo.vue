@@ -149,7 +149,7 @@
                           {{valor.variedad}}
                         </template>
                         <template v-else>
-                          <template v-if="index === 1">
+                          <template v-if="index === 0">
                             $ {{addCommas(Math.round(valor.precio))}} + iva
                           </template>
                         </template>
