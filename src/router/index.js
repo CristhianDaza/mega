@@ -67,6 +67,20 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
+    path: '/admin/ver/:id',
+    name: 'ver-trabajo',
+    exact: true,
+    component: () => import('../views/admin/trabajos/VerTrabajo.vue'),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/admin/editar/:id',
+    name: 'editar-trabajo',
+    exact: true,
+    component: () => import('../views/admin/trabajos/EditarTrabajo.vue'),
+    meta: { requiresAuth: true },
+  },
+  {
     path: '/admin/agregar-trabajo',
     name: 'Agregar Trabajo',
     exact: true,
@@ -99,13 +113,6 @@ const routes = [
     name: 'Agregar Carousel',
     exact: true,
     component: () => import('../views/admin/carousel/AgregarCarousel.vue'),
-    meta: { requiresAuth: true },
-  },
-  {
-    path: '/admin/carousel/editar-carousel/:id',
-    name: 'editar-slider',
-    exact: true,
-    component: () => import('../views/admin/carousel/editarCarousel.vue'),
     meta: { requiresAuth: true },
   },
   {

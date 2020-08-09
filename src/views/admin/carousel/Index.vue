@@ -9,7 +9,7 @@
         Agregar Imagen
     </v-btn>
     <v-divider></v-divider>
-    <v-row>
+    <v-row class="mx-0">
       <v-col cols="12" sm="6" md="4" v-for="imagen in imagenSlider" :key="imagen.uid">
         <v-card>
           <v-card-subtitle>
@@ -45,21 +45,6 @@
               </template>
               <span>Eliminar Imagen</span>
             </v-tooltip>
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                  icon
-                  color="success"
-                  v-bind="attrs"
-                  v-on="on"
-                  class="mt-3"
-                  :to="{name: 'editar-slider', params: {id: imagen.id}}"
-                >
-                  <v-icon>{{ mdiPencil }}</v-icon>
-                </v-btn>
-              </template>
-              <span>Editar Imagen</span>
-            </v-tooltip>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -69,7 +54,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import { mdiDelete, mdiPencil } from '@mdi/js';
+import { mdiDelete } from '@mdi/js';
 import Swal from 'sweetalert2';
 import { storage } from '@/firebase';
 
@@ -78,7 +63,6 @@ export default {
   data() {
     return {
       mdiDelete,
-      mdiPencil,
     };
   },
   metaInfo: {

@@ -1,7 +1,7 @@
 <template>
 <!-- eslint-disable max-len -->
   <v-main>
-    <v-container class="fill-height mt-16">
+    <v-container class="fill-height">
       <v-row align="center" justify="center">
         <v-col cols="12" sm="8" md="6">
           <v-card class="elevation-19">

@@ -10,14 +10,14 @@
             value="100"
             :indeterminate="loading"
           ></v-progress-linear>
-          <v-card-title>Agregar Trabajo al Calendario</v-card-title>
+          <v-card-title>Editar Trabajo</v-card-title>
           <v-form
-            @submit.prevent="crearTrabajo({ name, details, start, end, color })"
+            @submit.prevent="crearTrabajo(trabajoCalendario)"
           >
           <v-card-text>
             <v-text-field
               :prepend-icon="mdiCalendar"
-              v-model="name"
+              v-model="trabajoCalendario.name"
               :rules="nameRules"
               type="text"
               label="Nombre Cliente"
@@ -26,7 +26,7 @@
 
             <v-text-field
               :prepend-icon="mdiCalendarText"
-              v-model="details"
+              v-model="trabajoCalendario.details"
               :rules="detailRules"
               label="Detalle del Trabajo"
               type="text"
@@ -42,7 +42,7 @@
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
-                  v-model="start"
+                  v-model="trabajoCalendario.start"
                   label="Inicio del Trabajo"
                   :prepend-icon="mdiCalendarClock"
                   readonly
@@ -50,7 +50,7 @@
                   v-on="on"
                 ></v-text-field>
               </template>
-              <v-date-picker v-model="start" scrollable locale="es-co" :weekdays="[1, 2, 3, 4, 5, 6, 0]" color="primary">
+              <v-date-picker v-model="trabajoCalendario.start" scrollable locale="es-co" :weekdays="[1, 2, 3, 4, 5, 6, 0]" color="primary">
                 <v-spacer></v-spacer>
                 <v-btn text color="primary" @click="modalInicio = false">Cancelar</v-btn>
                 <v-btn text color="primary" @click="$refs.dialogInicio.save(start)">OK</v-btn>
@@ -66,7 +66,7 @@
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
-                  v-model="end"
+                  v-model="trabajoCalendario.end"
                   label="Entrega del Trabajo"
                   :prepend-icon="mdiCalendarClock"
                   readonly
@@ -74,7 +74,7 @@
                   v-on="on"
                 ></v-text-field>
               </template>
-              <v-date-picker v-model="end" scrollable locale="es-co" :weekdays="[1, 2, 3, 4, 5, 6, 0]" color="primary">
+              <v-date-picker v-model="trabajoCalendario.end" scrollable locale="es-co" :weekdays="[1, 2, 3, 4, 5, 6, 0]" color="primary">
                 <v-spacer></v-spacer>
                 <v-btn text color="primary" @click="modalFin = false">Cancelar</v-btn>
                 <v-btn text color="primary" @click="$refs.dialogFin.save(end)">OK</v-btn>
@@ -90,7 +90,7 @@
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
-                  v-model="color"
+                  v-model="trabajoCalendario.color"
                   label="Agregar un Color"
                   :prepend-icon="mdiFormatColorFill"
                   readonly
@@ -99,7 +99,7 @@
                 ></v-text-field>
               </template>
               <v-card>
-                <v-color-picker v-model="color" class="ma-2" hide-inputs>
+                <v-color-picker v-model="trabajoCalendario.color" class="ma-2" hide-inputs>
                 </v-color-picker>
                 <v-spacer></v-spacer>
                 <v-btn outlined color="primary" @click="modalColor = false">Cancelar</v-btn>
@@ -107,23 +107,12 @@
               </v-card>
             </v-dialog>
 
-            <v-select
-              :items="listaUsuarios.nombre"
-              :rules="asesorRules"
-              label="Asesor"
-              :prepend-icon="mdiAccountSupervisor"
-              v-model="asesor"
-              item-text="asesor"
-              item-value="valor"
-              required
-            ></v-select>
-
             <p v-if="error" class="ma-2 error--text">Error, inténtelo de nuevo.</p>
           </v-card-text>
           <v-divider class="mx-4"> </v-divider>
           <v-card-actions>
             <v-btn color="success" type="submit" outlined :loading="loading">
-              Crear Trabajo
+              Editar Trabajo
             </v-btn>
 
             <v-btn text @click="$router.back()" outlined color="info" >
@@ -144,9 +133,8 @@ import {
   mdiCalendarText,
   mdiCalendarClock,
   mdiFormatColorFill,
-  mdiAccountSupervisor,
 } from '@mdi/js';
-import { mapState, mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import Swal from 'sweetalert2';
 import router from '@/router';
 import { db } from '@/firebase.js';
@@ -155,6 +143,7 @@ export default {
   name: 'agregar-trabajo',
   data() {
     return {
+      id: this.$route.params.id,
       start: new Date().toISOString().substr(0, 10),
       modalInicio: false,
       end: new Date().toISOString().substr(0, 10),
@@ -165,11 +154,9 @@ export default {
       mdiCalendarText,
       mdiCalendarClock,
       mdiFormatColorFill,
-      mdiAccountSupervisor,
       name: '',
       details: '',
       color: '',
-      asesor: '',
       nameRules: [
         (v) => !!v || 'El nombre del cliente es requerido',
       ],
@@ -185,10 +172,6 @@ export default {
       colorRules: [
         (v) => !!v || 'El color es requerido',
       ],
-      asesorRules: [
-        (v) => !!v || 'El rol es requerido',
-      ],
-      listaUsuarios: [],
     };
   },
   metaInfo: {
@@ -200,23 +183,7 @@ export default {
     ],
   },
   methods: {
-    ...mapActions(['traerUsuarios']),
-    listarUsuarios() {
-      if (this.usaurios) {
-        const inicialUsuarios = [];
-
-        inicialUsuarios[0].push(this.usuarios);
-        console.log(inicialUsuarios);
-
-        inicialUsuarios.forEach((usuario) => {
-          if (usuario.rol === 'Asesor') {
-            this.listaUsuarios.push(usuario);
-          }
-        });
-      } else {
-        this.traerUsuarios();
-      }
-    },
+    ...mapActions(['traerTrabajoCalendario']),
     async crearTrabajo(trabajo) {
       this.loading = true;
       const {
@@ -226,18 +193,17 @@ export default {
         end,
         color,
       } = trabajo;
-      await db.collection('trabajos').add({
+      await db.collection('trabajos').doc(this.id).update({
         name,
         details,
         start,
         end,
         color,
-        terminado: false,
       })
         .then(() => {
           Swal.fire(
-            '¡Creado!',
-            'El trabajo ha sido creado.',
+            '¡Modificado!',
+            'El trabajo ha sido modificado.',
             'success',
           );
           router.push({
@@ -255,14 +221,13 @@ export default {
     },
   },
   computed: {
-    ...mapState(['error', 'usuarios']),
+    ...mapState(['error', 'trabajoCalendario']),
+  },
+  mounted() {
+    this.traerTrabajoCalendario(this.id);
   },
   created() {
     this.$store.commit('setLayout', 'adminLayout');
-  },
-  mounted() {
-    this.traerUsuarios();
-    this.listarUsuarios();
   },
 };
 </script>

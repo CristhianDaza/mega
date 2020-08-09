@@ -1,6 +1,6 @@
 <template>
   <div :class="this.$vuetify.breakpoint.xs ? '' : 'container'">
-    <v-row>
+    <v-row class="mx-0">
       <v-col cols="12" v-for="imagen in imagenInfo" :key="imagen.id">
         <v-img :src="imagen.linkImagen" :alt="imagen.nombre">
           <template v-slot:placeholder>

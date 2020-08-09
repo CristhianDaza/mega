@@ -15,12 +15,12 @@ export default new Vuex.Store({
     usuarios: '',
     error: '',
     imagenSlider: [],
-    imagenSliderId: {
-      nombreProducto: '', id: '', urlProducto: '', linkImagen: '',
-    },
     imagenInfo: [],
     catalogos: [],
     trabajosCalendario: [],
+    trabajoCalendario: {
+      color: '', id: '', detial: '', end: '', name: '', start: '', terminado: '',
+    },
   },
   mutations: {
     setLayout(state, layout) {
@@ -41,9 +41,6 @@ export default new Vuex.Store({
     setImagenSlider(state, valor) {
       state.imagenSlider = valor;
     },
-    setImagenSliderId(state, valor) {
-      state.imagenSliderId = valor;
-    },
     eliminarImagenSlider(state, id) {
       state.imagenSlider = state.imagenSlider.filter((doc) => doc.id !== id);
     },
@@ -61,6 +58,9 @@ export default new Vuex.Store({
     },
     setTrabajosCalendario(state, valor) {
       state.trabajosCalendario = valor;
+    },
+    setTrabajoCalendario(state, valor) {
+      state.trabajoCalendario = valor;
     },
     eliminarTrabajoCalendario(state, id) {
       state.trabajosCalendario = state.trabajosCalendario.filter((doc) => doc.id !== id);
@@ -129,28 +129,6 @@ export default new Vuex.Store({
           commit('setImagenSlider', imagenes);
         });
     },
-    async traerImagenSliderId({ commit }, id) {
-      await db.collection('imagenSlider').doc(id).get()
-        .then((doc) => {
-          console.log(doc);
-          const imagen = doc.data();
-          imagen.id = doc.id;
-          commit('setImagenSliderId', imagen);
-        });
-    },
-    // eslint-disable-next-line no-unused-vars
-    async editarImagenSliderId({ commit }, imagen) {
-      await db.collection('imagenSlider').doc(imagen.id).update({
-        nombreProducto: imagen.nombreProducto,
-        urlProducto: imagen.urlProducto,
-        linkImagen: imagen.linkImagen,
-      })
-        .then(() => {
-          router.push({
-            path: '/admin/carousel',
-          });
-        });
-    },
     async eliminarImagenSlider({ commit }, id) {
       await db.collection('imagenSlider').doc(id).delete()
         .then(() => {
@@ -203,6 +181,14 @@ export default new Vuex.Store({
             trabajos.push(trabajo);
           });
           commit('setTrabajosCalendario', trabajos);
+        });
+    },
+    async traerTrabajoCalendario({ commit }, id) {
+      await db.collection('trabajos').doc(id).get()
+        .then((doc) => {
+          const trabajo = doc.data();
+          trabajo.id = doc.id;
+          commit('setTrabajoCalendario', trabajo);
         });
     },
     async eliminarTrabajoCalendario({ commit }, id) {

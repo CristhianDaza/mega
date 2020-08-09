@@ -9,7 +9,7 @@
       </v-btn>
       <v-divider></v-divider>
 
-      <v-row>
+      <v-row class="mx-0">
       <v-col cols="12" md="6" lg="4" v-for="imagen in imagenInfo" :key="imagen.id">
         <v-card class="mx-auto">
           <v-card-text class="pb-0">

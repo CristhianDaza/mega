@@ -10,7 +10,7 @@
     </v-btn>
     <v-divider></v-divider>
 
-    <v-row class="fill-height">
+    <v-row class="fill-height mx-0">
       <v-col cols="12">
         <v-sheet height="64">
           <v-toolbar flat color="blue-grey darken-4">
@@ -88,18 +88,28 @@
                 :color="trabajoSeleccionado.color"
                 dark
               >
-                <v-btn icon @click="confirmarEliminarTrabajo(trabajoSeleccionado)">
-                  <v-icon>{{mdiDelete}}</v-icon>
-                </v-btn>
                 <v-toolbar-title v-html="trabajoSeleccionado.name"></v-toolbar-title>
                 <v-spacer></v-spacer>
-
-                <p class="my-0 mx-2 text-decoration-underline">{{
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      icon
+                      color="white"
+                      v-bind="attrs"
+                      v-on="on"
+                      @click="selectedOpen = false"
+                    >
+                      <v-icon>{{ mdiCloseCircleOutline }}</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Cerrar</span>
+                </v-tooltip>
+                <!-- <p class="my-0 mx-2 text-decoration-underline">{{
                     trabajoSeleccionado.terminado
                         ? 'Trabajo Listo'
-                        : 'Trabajo no terminado'}}</p>
+                        : 'Trabajo no terminado'}}</p> -->
 
-                <v-tooltip v-model="mostrarTooltip" bottom>
+                <!-- <v-tooltip v-model="mostrarTooltip" bottom>
                   <template v-slot:activator="{on, attrs}">
                     <v-btn
                       v-on="on"
@@ -120,19 +130,55 @@
                         ? 'Trabajo no termiando'
                         : 'Trabajo termiando'}}
                   </span>
-                </v-tooltip>
+                </v-tooltip> -->
               </v-toolbar>
               <v-card-text>
                 <span class="black--text" v-html="trabajoSeleccionado.details"></span>
               </v-card-text>
+              <v-divider color="black"></v-divider>
               <v-card-actions>
-                <v-btn
-                  outlined
-                  color="primary"
-                  @click="selectedOpen = false"
-                >
-                  Cancelar
-                </v-btn>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      icon
+                      color="primary"
+                      v-bind="attrs"
+                      v-on="on"
+                      :to="{name: 'ver-trabajo', params: { id: trabajoSeleccionado.id } }"
+                    >
+                      <v-icon>{{ mdiEye }}</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Ver Trabajo</span>
+                </v-tooltip>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      :to="{name: 'editar-trabajo', params: { id: trabajoSeleccionado.id } }"
+                      icon
+                      color="success"
+                      v-bind="attrs"
+                      v-on="on"
+                    >
+                      <v-icon>{{ mdiPencil }}</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Editar Trabajo</span>
+                </v-tooltip>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      icon
+                      color="error"
+                      v-bind="attrs"
+                      v-on="on"
+                      @click="confirmarEliminarTrabajo(trabajoSeleccionado)"
+                    >
+                      <v-icon>{{ mdiDelete }}</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Eliminar Trabajo</span>
+                </v-tooltip>
               </v-card-actions>
             </v-card>
           </v-menu>
@@ -148,6 +194,9 @@ import {
   mdiDelete,
   mdiCloseCircleOutline,
   mdiCheckCircleOutline,
+  mdiPencil,
+  mdiEye,
+  mdiCancel,
 } from '@mdi/js';
 import Swal from 'sweetalert2';
 import { db } from '@/firebase';
@@ -157,6 +206,9 @@ export default {
   data() {
     return {
       mdiDelete,
+      mdiPencil,
+      mdiEye,
+      mdiCancel,
       mdiCloseCircleOutline,
       mdiCheckCircleOutline,
       mostrarTooltip: false,
