@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-5 servicios">
+  <div class="servicios">
     <v-container>
       <v-row>
         <v-col cols="12" class="white--text text-center mb-5 mt-0">

@@ -143,6 +143,20 @@ const routes = [
     component: () => import('../views/admin/imagenInfo/AgregarImagenInfo.vue'),
     meta: { requiresAuth: true },
   },
+  {
+    path: '/admin/videos',
+    name: 'Video',
+    exact: true,
+    component: () => import('../views/admin/video/Index.vue'),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/admin/videos/agregar-video',
+    name: 'Agregar Video',
+    exact: true,
+    component: () => import('../views/admin/video/AgregarVideo.vue'),
+    meta: { requiresAuth: true },
+  },
 ];
 
 const router = new VueRouter({

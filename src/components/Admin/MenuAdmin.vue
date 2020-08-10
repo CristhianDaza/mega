@@ -51,6 +51,15 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item link to="/admin/videos">
+          <v-list-item-action>
+            <v-icon>{{ mdiYoutube }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Videos</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
       </v-list>
     </v-navigation-drawer>
 
@@ -104,6 +113,7 @@ import {
   mdiInformation,
   mdiHome,
   mdiLogout,
+  mdiYoutube,
 } from '@mdi/js';
 import { mapActions, mapState } from 'vuex';
 
@@ -118,6 +128,7 @@ export default {
     mdiAccountMultiple,
     mdiFormatListBulletedSquare,
     mdiInformation,
+    mdiYoutube,
   }),
   methods: {
     ...mapActions(['cerrarSesion']),

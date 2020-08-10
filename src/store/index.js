@@ -21,6 +21,7 @@ export default new Vuex.Store({
     trabajoCalendario: {
       color: '', id: '', detial: '', end: '', name: '', start: '', terminado: '',
     },
+    videos: [],
   },
   mutations: {
     setLayout(state, layout) {
@@ -64,6 +65,12 @@ export default new Vuex.Store({
     },
     eliminarTrabajoCalendario(state, id) {
       state.trabajosCalendario = state.trabajosCalendario.filter((doc) => doc.id !== id);
+    },
+    setVideos(state, valor) {
+      state.videos = valor;
+    },
+    eliminarVideo(state, id) {
+      state.videos = state.videos.filter((doc) => doc.id !== id);
     },
   },
   actions: {
@@ -195,6 +202,24 @@ export default new Vuex.Store({
       await db.collection('trabajos').doc(id).delete()
         .then(() => {
           commit('eliminarTrabajoCalendario', id);
+        });
+    },
+    async traerVideos({ commit }) {
+      await db.collection('video').get()
+        .then((snapshot) => {
+          const videos = [];
+          snapshot.forEach((doc) => {
+            const video = doc.data();
+            video.id = doc.id;
+            videos.push(video);
+          });
+          commit('setVideos', videos);
+        });
+    },
+    async eliminarVideo({ commit }, id) {
+      await db.collection('video').doc(id).delete()
+        .then(() => {
+          commit('eliminarVideo', id);
         });
     },
   },

@@ -1,9 +1,10 @@
 <template>
-  <div :class="this.$vuetify.breakpoint.xs ? '' : 'container'" class="mt-5">
+  <div>
     <v-carousel
       cycle
       height="100%"
-      class="elevation-15"
+      hide-delimiter-background
+      show-arrows-on-hover
     >
       <v-carousel-item
         v-for="(slide, i) in imagenSlider"
@@ -12,7 +13,6 @@
       >
         <v-img
           :src="slide.linkImagen"
-          lazy-src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/loading.jpg?alt=media&token=dcce3238-e449-43fb-9a53-7403c3f74821"
           :alt="slide.nombreProducto"
         >
           <template v-slot:placeholder>
