@@ -138,7 +138,7 @@ export default {
               'success',
             );
             router.push({
-              path: '/admin/carousel',
+              path: '/admin/carrusel',
             });
           });
 

@@ -5,7 +5,7 @@
       large
       outlined
       class="mb-3"
-      to="/admin/carousel/agregar-carousel">
+      to="/admin/carrusel/agregar-carousel">
         Agregar Imagen
     </v-btn>
     <v-divider></v-divider>

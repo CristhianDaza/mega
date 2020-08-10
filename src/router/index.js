@@ -102,14 +102,14 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: '/admin/carousel',
+    path: '/admin/carrusel',
     name: 'Carousel',
     exact: true,
     component: () => import('../views/admin/carousel/Index.vue'),
     meta: { requiresAuth: true },
   },
   {
-    path: '/admin/carousel/agregar-carousel',
+    path: '/admin/carrusel/agregar-carousel',
     name: 'Agregar Carousel',
     exact: true,
     component: () => import('../views/admin/carousel/AgregarCarousel.vue'),

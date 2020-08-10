@@ -24,12 +24,12 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link to="/admin/carousel">
+        <v-list-item link to="/admin/carrusel">
           <v-list-item-action>
             <v-icon>{{ mdiFileImage }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Imágenes Carousel</v-list-item-title>
+            <v-list-item-title>Imágenes Carrusel</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
