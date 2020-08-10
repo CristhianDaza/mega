@@ -86,7 +86,7 @@
           <v-col cols="12" md="6" :class="this.$vuetify.breakpoint.xs ? 'pt-0' : ''">
             <v-container :class="$vuetify.breakpoint.xs ? 'pt-0' : ''">
               <v-card-title class="font-weight-black">
-                <h1 class="titulo">{{ productoCodigo[0].descripcion_comercial }} - {{ productoCodigo[0].familia }}</h1>
+                <h1 class="titulo">{{ productoCodigo[0].familia }} {{ productoCodigo[0].descripcion_comercial }}</h1>
               </v-card-title>
               <v-divider class="mx-8"></v-divider>
               <v-card-text>

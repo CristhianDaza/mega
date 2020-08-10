@@ -147,7 +147,6 @@ export default {
 }
 .div-img .text {
   font-family: "Open Sans";
-  padding-top: 5px;
   display: block;
   text-align: center;
   width: 100%;

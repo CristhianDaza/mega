@@ -33,12 +33,12 @@
               </div>
               <v-card-actions>
                 <v-btn outlined>
-                  <a :href="catalogo.linkPDF" target="_blank">
+                  <a class="linksCatalogos" :href="catalogo.linkPDF" target="_blank">
                     <v-icon class="mr-1">{{mdiFilePdfBox}}</v-icon> PDF
                   </a>
                 </v-btn>
                 <v-btn outlined>
-                  <a :href="catalogo.linkVirtual" target="_blank">
+                  <a class="linksCatalogos" :href="catalogo.linkVirtual" target="_blank">
                     <v-icon class="mr-1">{{mdiOpenInNew}}</v-icon> Virtual
                   </a>
                 </v-btn>
@@ -144,5 +144,8 @@ export default {
   -moz-transform: scale(1.2);
   -webkit-transform: scale(1.2);
   -o-transform: scale(1.2);
+}
+.linksCatalogos {
+  color: inherit !important;
 }
 </style>
