@@ -354,7 +354,7 @@
           </v-simple-table>
           <div v-if="productoCodigo[0].videos.length > 0" class="mt-3">
             <v-responsive :aspect-ratio="16/9">
-              <video loop controls tabindex="0" width="100%">
+              <video loop autoplay muted controls tabindex="0" width="100%">
                 <source :src="productoCodigo[0].videos[0].video" type="video/mp4" />
               </video>
             </v-responsive>
