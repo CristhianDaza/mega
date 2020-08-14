@@ -5,6 +5,7 @@ import {
   db,
 } from '@/firebase.js';
 import router from '@/router';
+import Swal from 'sweetalert2';
 
 Vue.use(Vuex);
 
@@ -74,6 +75,48 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    crearUsuario({ commit }, valor) {
+      const {
+        email,
+        password,
+        nombre,
+        rol,
+      } = valor;
+      const usuario = auth.currentUser;
+      if (usuario.email === 'megapromocional@gmail.com') {
+        db.collection('usuarios').add({
+          nombre,
+          email,
+          rol,
+        }).then(() => {
+          auth.createUserWithEmailAndPassword(email, password)
+            .then((res) => {
+              commit('setUsuario', {
+                email: res.user.email,
+                uid: res.user.uid,
+              });
+            }).catch((err) => {
+              commit('setError', err.message);
+            });
+          Swal.fire(
+            '¡Creado!',
+            'El usuario ha sido creado  .',
+            'success',
+          );
+          router.push({
+            path: '/admin/usuarios',
+          });
+        }).catch((err) => {
+          commit('setError', err.message);
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: '¡Error!',
+          text: 'Solo el administrador puede crear usuarios',
+        });
+      }
+    },
     ingresarUsaurio({ commit }, valor) {
       auth.signInWithEmailAndPassword(valor.email, valor.password)
         .then((res) => {
