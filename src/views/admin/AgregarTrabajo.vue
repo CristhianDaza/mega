@@ -12,7 +12,7 @@
           ></v-progress-linear>
           <v-card-title>Agregar Trabajo al Calendario</v-card-title>
           <v-form
-            @submit.prevent="crearTrabajo({ name, details, start, end, color })"
+            @submit.prevent="crearTrabajo({ name, details, start, end, color, asesor })"
           >
           <v-card-text>
             <v-text-field
@@ -108,14 +108,15 @@
             </v-dialog>
 
             <v-select
-              :items="listaUsuarios.nombre"
+              :items="listaUsuarios"
+              item-text="name"
+              item-value="value"
               :rules="asesorRules"
               label="Asesor"
               :prepend-icon="mdiAccountSupervisor"
               v-model="asesor"
-              item-text="asesor"
-              item-value="valor"
               required
+              return-object
             ></v-select>
 
             <p v-if="error" class="ma-2 error--text">Error, inténtelo de nuevo.</p>
@@ -169,7 +170,7 @@ export default {
       name: '',
       details: '',
       color: '',
-      asesor: '',
+      asesor: { name: '', value: '' },
       nameRules: [
         (v) => !!v || 'El nombre del cliente es requerido',
       ],
@@ -201,23 +202,8 @@ export default {
   },
   methods: {
     ...mapActions(['traerUsuarios']),
-    listarUsuarios() {
-      if (this.usaurios) {
-        const inicialUsuarios = [];
-
-        inicialUsuarios[0].push(this.usuarios);
-        console.log(inicialUsuarios);
-
-        inicialUsuarios.forEach((usuario) => {
-          if (usuario.rol === 'Asesor') {
-            this.listaUsuarios.push(usuario);
-          }
-        });
-      } else {
-        this.traerUsuarios();
-      }
-    },
     async crearTrabajo(trabajo) {
+      console.log(trabajo);
       this.loading = true;
       const {
         name,
@@ -225,6 +211,7 @@ export default {
         start,
         end,
         color,
+        asesor,
       } = trabajo;
       await db.collection('trabajos').add({
         name,
@@ -232,6 +219,7 @@ export default {
         start,
         end,
         color,
+        asesor,
         terminado: false,
       })
         .then(() => {
@@ -259,10 +247,15 @@ export default {
   },
   created() {
     this.$store.commit('setLayout', 'adminLayout');
+    this.usuarios.forEach((usuario) => {
+      this.listaUsuarios.push({ name: usuario.nombre, value: usuario.nombre });
+    });
   },
   mounted() {
     this.traerUsuarios();
-    this.listarUsuarios();
+    this.usuarios.forEach((usuario) => {
+      this.listaUsuarios.push({ name: usuario.nombre, value: usuario.nombre });
+    });
   },
 };
 </script>

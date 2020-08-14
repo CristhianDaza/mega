@@ -12,7 +12,7 @@
             {{trabajoCalendario.name}}
           </v-card-title>
           <v-card-subtitle>
-            Asesor
+            {{trabajoCalendario.asesor.name}}
           </v-card-subtitle>
           <v-card-text>
             {{trabajoCalendario.details}}
@@ -95,7 +95,6 @@ export default {
   },
   mounted() {
     this.traerTrabajoCalendario(this.id);
-    console.log(this.trabajoCalendario);
   },
   created() {
     this.$store.commit('setLayout', 'adminLayout');

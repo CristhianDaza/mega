@@ -107,6 +107,18 @@
               </v-card>
             </v-dialog>
 
+            <v-select
+              :items="listaUsuarios"
+              item-text="name"
+              item-value="value"
+              :rules="asesorRules"
+              label="Asesor"
+              :prepend-icon="mdiAccountSupervisor"
+              v-model="trabajoCalendario.asesor"
+              required
+              return-object
+            ></v-select>
+
             <p v-if="error" class="ma-2 error--text">Error, inténtelo de nuevo.</p>
           </v-card-text>
           <v-divider class="mx-4"> </v-divider>
@@ -133,6 +145,7 @@ import {
   mdiCalendarText,
   mdiCalendarClock,
   mdiFormatColorFill,
+  mdiAccountSupervisor,
 } from '@mdi/js';
 import { mapActions, mapState } from 'vuex';
 import Swal from 'sweetalert2';
@@ -154,6 +167,7 @@ export default {
       mdiCalendarText,
       mdiCalendarClock,
       mdiFormatColorFill,
+      mdiAccountSupervisor,
       name: '',
       details: '',
       color: '',
@@ -172,6 +186,10 @@ export default {
       colorRules: [
         (v) => !!v || 'El color es requerido',
       ],
+      asesorRules: [
+        (v) => !!v || 'El rol es requerido',
+      ],
+      listaUsuarios: [],
     };
   },
   metaInfo: {
@@ -183,7 +201,7 @@ export default {
     ],
   },
   methods: {
-    ...mapActions(['traerTrabajoCalendario']),
+    ...mapActions(['traerTrabajoCalendario', 'traerUsuarios']),
     async crearTrabajo(trabajo) {
       this.loading = true;
       const {
@@ -192,6 +210,7 @@ export default {
         start,
         end,
         color,
+        asesor,
       } = trabajo;
       await db.collection('trabajos').doc(this.id).update({
         name,
@@ -199,6 +218,7 @@ export default {
         start,
         end,
         color,
+        asesor,
       })
         .then(() => {
           Swal.fire(
@@ -221,13 +241,20 @@ export default {
     },
   },
   computed: {
-    ...mapState(['error', 'trabajoCalendario']),
+    ...mapState(['error', 'trabajoCalendario', 'usuarios']),
   },
   mounted() {
+    this.traerUsuarios();
     this.traerTrabajoCalendario(this.id);
+    this.usuarios.forEach((usuario) => {
+      this.listaUsuarios.push({ name: usuario.nombre, value: usuario.nombre });
+    });
   },
   created() {
     this.$store.commit('setLayout', 'adminLayout');
+    this.usuarios.forEach((usuario) => {
+      this.listaUsuarios.push({ name: usuario.nombre, value: usuario.nombre });
+    });
   },
 };
 </script>

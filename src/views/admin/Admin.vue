@@ -241,7 +241,7 @@ export default {
       currentlyEditing: null,
       headers: [
         { text: 'Ciente', sortable: false, value: 'name' },
-        { text: 'Asesor', value: 'asesor' },
+        { text: 'Asesor', value: 'asesor.name' },
         { text: 'Detalles', sortable: false, value: 'details' },
         { text: 'Fecha Inicio', value: 'start' },
         { text: 'Fecha de Entrega', value: 'end' },
