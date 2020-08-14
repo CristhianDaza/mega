@@ -84,6 +84,8 @@ export default {
       } else {
         this.$vuetify.theme.dark = false;
       }
+    } else {
+      this.$vuetify.theme.dark = false;
     }
   },
   metaInfo: {
