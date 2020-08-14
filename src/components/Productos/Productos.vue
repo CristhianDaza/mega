@@ -1,6 +1,6 @@
 <template>
 <!-- eslint-disable max-len -->
-  <v-card outlined class="mx-auto">
+  <v-card outlined class="mx-auto pa-0 tarjetaProducto">
     <v-card-text class="pa-0 div-img">
       <router-link
         :to="{path: `/producto/${producto.familia}`}"
@@ -194,5 +194,11 @@ export default {
 }
 .circuloProducto {
   cursor: auto;
+}
+.tarjetaProducto {
+  transition: all .4s;
+}
+.tarjetaProducto:hover {
+  transform: translateY(-15px);
 }
 </style>

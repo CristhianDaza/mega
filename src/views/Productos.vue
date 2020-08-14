@@ -91,6 +91,7 @@
               md="4"
               v-for="(producto) in productos[0]"
               :key="producto.id"
+              class="pa-1"
             >
               <Productos :producto='producto' :colores='producto.materiales' />
             </v-col>
