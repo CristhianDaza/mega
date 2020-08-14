@@ -46,11 +46,16 @@
             <v-list dense>
               <v-subheader>Etiqueta</v-subheader>
               <v-list-item-group>
-                <v-list-item @click="buscarEtiqueta(1)">
+                <!-- <v-list-item @click="buscarEtiqueta(1)">
                   <v-list-item-title>Productos Nuevos</v-list-item-title>
                 </v-list-item>
                 <v-list-item @click="buscarEtiqueta(4)">
                   <v-list-item-title>Productos Netos</v-list-item-title>
+                </v-list-item> -->
+                <v-list-item v-for="etiqueta in this.listaEtiquetas[0]" :key="etiqueta.id">
+                  <v-list-item-title @click="buscarEtiqueta(etiqueta.id)">
+                    {{ etiqueta.nombre }} ({{etiqueta.count}})
+                  </v-list-item-title>
                 </v-list-item>
               </v-list-item-group>
             </v-list>
@@ -171,6 +176,7 @@ export default {
           href: '/productos/',
         },
       ],
+      listaEtiquetas: [],
     };
   },
   components: {
@@ -192,8 +198,10 @@ export default {
         this.productos.push(res.data.results);
         this.infoProductos.push(res.data);
         this.totalPaginas = Math.ceil((this.infoProductos[0].count / this.porPagina));
+        this.listaEtiquetas.push(res.data.filtros.etiquetas);
         // eslint-disable-next-line prefer-destructuring
         this.colores = this.productos[0];
+        console.log(this.listaEtiquetas);
       });
     },
     cambiarPagina(pagina) {
