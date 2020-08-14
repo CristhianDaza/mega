@@ -3,8 +3,6 @@
     <v-carousel
       cycle
       height="100%"
-      hide-delimiter-background
-      show-arrows-on-hover
     >
       <v-carousel-item
         v-for="(slide, i) in imagenSlider"
