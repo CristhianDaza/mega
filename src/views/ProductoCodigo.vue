@@ -371,8 +371,8 @@
           </h3>
           <v-row v-if="productoSugerencia.length > 0">
             <v-col cols="12" sm="6" v-for="producto in productoSugerencia" :key="producto.familia">
-              <v-card outlined class="mx-auto">
-                <v-card-text class="pa-0 div-img">
+              <v-card outlined class="mx-auto tarjetaProducto">
+                <v-card-text class="pa-0">
                   <router-link
                     append
                     :to="{path: `/producto/${producto.producto.familia}`}"
@@ -393,13 +393,15 @@
                         </v-row>
                       </template>
                     </v-img>
-                    <div class="text">Ver Producto</div>
                   </router-link>
                 </v-card-text>
-                <v-card-subtitle
-                  class="text-center font-weight-medium pt-0"
+                    <v-card-title
+                  class="text-center text-subtitle-2"
                 >
-                  {{ producto.producto.familia }} - {{ producto.producto.descripcion_comercial }}
+                  {{ producto.producto.descripcion_comercial }}
+                </v-card-title>
+                <v-card-subtitle>
+                  {{ producto.producto.familia }}
                 </v-card-subtitle>
                 <v-card-text class="text-center">
                   <div class="red--text" v-if="producto.inventario < 10">Agotado en {{producto.color_nombre}}</div>
@@ -710,55 +712,6 @@ export default {
     padding: 0 !important;
   }
 
-  .div-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-.div-img .imagenProducto {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  transform: scale(1);
-  -ms-transform: scale(1);
-  -moz-transform: scale(1);
-  -webkit-transform: scale(1);
-  -o-transform: scale(1);
-  -webkit-transition: all 500ms ease-in-out;
-  -moz-transition: all 500ms ease-in-out;
-  -ms-transition: all 500ms ease-in-out;
-  -o-transition: all 500ms ease-in-out;
-}
-.div-img .text {
-  font-family: "Open Sans";
-  padding-top: 5px;
-  display: block;
-  text-align: center;
-  width: 100%;
-  transform: translate(0px);
-  -webkit-transition: all 500ms ease-in-out;
-  -moz-transition: all 500ms ease-in-out;
-  -ms-transition: all 500ms ease-in-out;
-  -o-transition: all 500ms ease-in-out;
-  opacity: 0;
-  transition: transfom opacity 1.5s;
-}
-.div-img:hover .imagenProducto {
-  transform: scale(0.8);
-  -ms-transform: scale(0.8);
-  -moz-transform: scale(0.8);
-  -webkit-transform: scale(0.8);
-  -o-transform: scale(0.8);
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
-}
-.div-img:hover .text {
-  transform: translate(0px, -20px);
-  opacity: 1;
-}
-
   .linksCategorias {
     color: inherit !important;
     transition: color .3s;
@@ -814,5 +767,11 @@ export default {
   justify-content: center;
   width: 100%;
   height: 100%;
+}
+.tarjetaProducto {
+  transition: all .4s;
+}
+.tarjetaProducto:hover {
+  transform: translateY(-15px);
 }
 </style>

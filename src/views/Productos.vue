@@ -1,7 +1,7 @@
 <template>
 <!-- eslint-disable max-len -->
   <div>
-    <Hero titulo="Productos"/>
+    <Hero :titulo="titulo"/>
     <v-container>
       <v-breadcrumbs :items="items">
         <template v-slot:item="{ item }">
@@ -46,12 +46,6 @@
             <v-list dense>
               <v-subheader>Etiqueta</v-subheader>
               <v-list-item-group>
-                <!-- <v-list-item @click="buscarEtiqueta(1)">
-                  <v-list-item-title>Productos Nuevos</v-list-item-title>
-                </v-list-item>
-                <v-list-item @click="buscarEtiqueta(4)">
-                  <v-list-item-title>Productos Netos</v-list-item-title>
-                </v-list-item> -->
                 <v-list-item v-for="etiqueta in this.listaEtiquetas[0]" :key="etiqueta.id">
                   <v-list-item-title @click="buscarEtiqueta(etiqueta.id)">
                     {{ etiqueta.nombre }} ({{etiqueta.count}})
@@ -87,7 +81,7 @@
           </v-card>
         </v-col>
         <v-col cols="12" sm="8" md="9">
-          <h2 v-if="this.infoProductos.length > 0" class="text-subtitle-1">Resultados: {{this.infoProductos[0].count}}</h2>
+          <h2 v-if="this.infoProductos.length > 0" class="text-subtitle-1 mb-2">Resultados: {{this.infoProductos[0].count}}</h2>
           <v-row v-if="this.productos.length > 0">
             <h2 v-if="Number(this.infoProductos[0].count) === 0" class="text-center error mt-2 ml-2 sinResultados">Sin resultados</h2>
             <v-col
@@ -177,6 +171,7 @@ export default {
         },
       ],
       listaEtiquetas: [],
+      titulo: 'Productos',
     };
   },
   components: {
@@ -184,7 +179,15 @@ export default {
     Hero,
   },
   methods: {
-    async getProductos(pagina, porPagina, categoria, subCategoria, etiqueta, inventario, busqueda) {
+    async getProductos(
+      pagina,
+      porPagina,
+      categoria,
+      subCategoria,
+      etiqueta,
+      inventario,
+      busqueda,
+    ) {
       const url = `https://marpicoprod.azurewebsites.net/api/productos/?page_size=${porPagina}&page=${pagina}&categoria=${categoria}&subcategoria=${subCategoria}&order=paginacion_web&etiqueta=${etiqueta}&inventario=${inventario}&search=${busqueda}`;
       const config = {
         method: 'get',
@@ -199,10 +202,14 @@ export default {
         this.infoProductos.push(res.data);
         this.totalPaginas = Math.ceil((this.infoProductos[0].count / this.porPagina));
         this.listaEtiquetas.push(res.data.filtros.etiquetas);
-        // eslint-disable-next-line prefer-destructuring
-        this.colores = this.productos[0];
-        console.log(this.listaEtiquetas);
       });
+    },
+    hextToRgb(hex) {
+      return hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i,
+        // eslint-disable-next-line prefer-template
+        (m, r, g, b) => '#' + r + r + g + g + b + b)
+        .substring(1).match(/.{2}/g)
+        .map((x) => parseInt(x, 16));
     },
     cambiarPagina(pagina) {
       this.$router.push({
@@ -217,15 +224,6 @@ export default {
           busqueda: this.$route.query.busqueda,
         },
       });
-      this.getProductos(
-        pagina,
-        this.porPagina,
-        this.categoria,
-        this.subCategoria,
-        this.etiqueta,
-        this.inventario,
-        this.busqueda,
-      );
     },
     cambiarPorPagina(porPagina) {
       this.$router.push({
@@ -240,15 +238,6 @@ export default {
           busqueda: this.$route.query.busqueda,
         },
       });
-      this.getProductos(
-        this.pagina,
-        porPagina,
-        this.categoria,
-        this.subCategoria,
-        this.etiqueta,
-        this.inventario,
-        this.busqueda,
-      );
     },
     buscarSubCategoria(subCategoria) {
       this.$router.push({
@@ -259,15 +248,6 @@ export default {
           subCategoria,
         },
       });
-      this.getProductos(
-        this.pagina,
-        this.porPagina,
-        this.categoria,
-        subCategoria,
-        this.etiqueta,
-        this.inventario,
-        this.busqueda,
-      );
     },
     buscarInventario(inventario) {
       this.$router.push({
@@ -278,19 +258,10 @@ export default {
           categoria: this.$route.query.categoria,
           subCategoria: this.$route.query.subCategoria,
           etiqueta: this.$route.query.etiqueta,
-          busqueda: this.$route.query.busqueda,
           inventario,
+          busqueda: this.$route.query.busqueda,
         },
       });
-      this.getProductos(
-        this.pagina,
-        this.porPagina,
-        this.categoria,
-        this.subCategoria,
-        this.etiqueta,
-        inventario,
-        this.busqueda,
-      );
     },
     buscarEtiqueta(etiqueta) {
       this.$router.push({
@@ -303,16 +274,6 @@ export default {
           etiqueta,
         },
       });
-      this.getProductos(
-        this.pagina,
-        this.porPagina,
-        this.categoria,
-        this.subCategoria,
-        this.etiqueta,
-        this.inventario,
-        this.busqueda,
-        etiqueta,
-      );
     },
     async getCategorias() {
       const url = 'https://marpicoprod.azurewebsites.net/api/categorias/';
@@ -338,7 +299,6 @@ export default {
       this.etiqueta,
       this.inventario,
       this.busqueda,
-      this.etiqueta,
     );
     this.getCategorias();
   },

@@ -1,7 +1,7 @@
 <template>
 <!-- eslint-disable max-len -->
   <v-card outlined class="mx-auto pa-0 tarjetaProducto">
-    <v-card-text class="pa-0 div-img">
+    <v-card-text class="pa-0">
       <router-link
         :to="{path: `/producto/${producto.familia}`}"
       >
@@ -21,11 +21,11 @@
             </v-row>
           </template>
         </v-img>
-        <div class="text">Ver Producto</div>
       </router-link>
     </v-card-text>
+    <v-divider class="mx-8"></v-divider>
     <v-card-title
-      class="text-center text-subtitle-2 pt-0"
+      class="text-center text-subtitle-2"
     >
       {{ producto.descripcion_comercial }}
     </v-card-title>
@@ -125,54 +125,6 @@ export default {
 </script>
 
 <style>
-.div-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-.div-img .imagenProducto {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  transform: scale(1);
-  -ms-transform: scale(1);
-  -moz-transform: scale(1);
-  -webkit-transform: scale(1);
-  -o-transform: scale(1);
-  -webkit-transition: all 500ms ease-in-out;
-  -moz-transition: all 500ms ease-in-out;
-  -ms-transition: all 500ms ease-in-out;
-  -o-transition: all 500ms ease-in-out;
-}
-.div-img .text {
-  font-family: "Open Sans";
-  display: block;
-  text-align: center;
-  width: 100%;
-  transform: translate(0px);
-  -webkit-transition: all 500ms ease-in-out;
-  -moz-transition: all 500ms ease-in-out;
-  -ms-transition: all 500ms ease-in-out;
-  -o-transition: all 500ms ease-in-out;
-  opacity: 0;
-  transition: transfom opacity 1.5s;
-}
-.div-img:hover .imagenProducto {
-  transform: scale(0.8);
-  -ms-transform: scale(0.8);
-  -moz-transform: scale(0.8);
-  -webkit-transform: scale(0.8);
-  -o-transform: scale(0.8);
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
-}
-.div-img:hover .text {
-  transform: translate(0px, -20px);
-  opacity: 1;
-}
-
 .contenedor_color {
   position: relative;
   height: 18px;
