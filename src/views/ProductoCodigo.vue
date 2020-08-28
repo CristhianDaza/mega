@@ -192,7 +192,7 @@
                 <v-tooltip bottom>
                   <template v-slot:activator="{on, attrs}">
                     <!-- eslint-disable-next-line vue/no-parsing-error -->
-                    <v-btn icon v-on="on" v-bind="attrs" :href="'https://marpicoprod.azurewebsites.net/api/productos/imagenes/14347?producto=' + productoCodigo[0].familia">
+                    <v-btn icon v-on="on" v-bind="attrs" :href="`https://marpicoprod.azurewebsites.net/api/productos/imagenes/${productoCodigo[0].id}?producto=${productoCodigo[0].familia}`">
                       <v-icon>{{ mdiDownload }}</v-icon>
                     </v-btn>
                   </template>
