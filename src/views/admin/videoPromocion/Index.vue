@@ -4,7 +4,7 @@
       color="success"
       large outlined
       class="mb-5"
-      to="/admin/videos/agregar-video">
+      to="/admin/videoPromocion/agregar-video">
         Agregar Video
       </v-btn>
       <v-divider></v-divider>

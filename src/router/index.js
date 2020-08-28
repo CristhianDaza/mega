@@ -144,17 +144,17 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: '/admin/videos',
+    path: '/admin/videoPromocion',
     name: 'Video',
     exact: true,
-    component: () => import('../views/admin/video/Index.vue'),
+    component: () => import('../views/admin/videoPromocion/Index.vue'),
     meta: { requiresAuth: true },
   },
   {
-    path: '/admin/videos/agregar-video',
+    path: '/admin/videoPromocion/agregar-video',
     name: 'Agregar Video',
     exact: true,
-    component: () => import('../views/admin/video/AgregarVideo.vue'),
+    component: () => import('../views/admin/videoPromocion/AgregarVideo.vue'),
     meta: { requiresAuth: true },
   },
 ];

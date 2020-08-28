@@ -2,7 +2,7 @@
   <div>
     <Hero />
     <Carousel />
-    <Video />
+    <VideoPromocion />
     <Servicios />
     <InfoImagen />
     <ProductosNuevos />
@@ -19,7 +19,7 @@ import InfoImagen from '@/components/Index/InfoImagen.vue';
 import ProductosNuevos from '@/components/Index/ProductosNuevos.vue';
 import Instagram from '@/components/Index/Instagram.vue';
 import FormularioContacto from '@/components/Index/FormularioContacto.vue';
-import Video from '@/components/Index/Video.vue';
+import VideoPromocion from '@/components/Index/VideoPromocion.vue';
 
 export default {
   name: 'Inicio',
@@ -31,7 +31,7 @@ export default {
     Instagram,
     FormularioContacto,
     ProductosNuevos,
-    Video,
+    VideoPromocion,
   },
   metaInfo: {
     title: 'Inicio 🚀',
