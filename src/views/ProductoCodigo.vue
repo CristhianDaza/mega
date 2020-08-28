@@ -413,7 +413,7 @@
         <tbody>
           <template v-for="existencias in productoCodigo">
             <tr v-for="(existencia, index) in existencias.materiales" :key="index">
-              <td>{{existencia.color_nombre}} <span v-if="existencia.variedad !== null">{{existencia.variedad}}</span></td>
+              <td>{{existencia.color_nombre}}</td>
               <td>{{existencia.en_transito}}</td>
             </tr>
           </template>
@@ -575,8 +575,24 @@ export default {
       await axios(config).then((res) => {
         this.productoCodigo.push(res.data);
         this.getProductosSugerencia(this.productoCodigo[0].materiales[0].codigo);
+        // this.getProductoTraking(this.codigo);
         this.categoriaPrincipal = this.productoCodigo[0].subcategoria_1.categoria.nombre;
         this.categoriaSecundaria = this.productoCodigo[0].subcategoria_1.nombre;
+      });
+    },
+    async getProductoTraking(producto) {
+      const url = `https://marpicoprod.azurewebsites.net/api/inventarios/materialesAPIByProducto?producto=${producto}`;
+      const config = {
+        method: 'get',
+        url,
+        headers: {
+          Authorization: 'Bearer Api-Key fBc8kc9ejmpvIqSLeKh9bIL955E0LOdNfFKfNZhGy3xRlGTxtDl7ADOdSzrLfgLj',
+        },
+      };
+
+      await axios(config).then((res) => {
+        this.productoTraking.push(res.data[0].materiales);
+        console.log(this.productoTraking);
       });
     },
     async getProductosSugerencia(codigo) {
