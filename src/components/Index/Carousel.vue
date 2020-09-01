@@ -1,37 +1,36 @@
 <template>
-  <div>
-    <v-carousel
-      cycle
-      height="100%"
+  <vueper-slides
+    :slide-ratio="1 / 2"
+    fixed-height="600px"
+    autoplay
+    :pause-on-hover="pauseOnHover"
+    fractions
+    progress
+  >
+    <vueper-slide
+      v-for="(slide, i) in imagenSlider"
+      :key="i"
+      :image="slide.linkImagen"
+      :link="slide.urlProducto"
     >
-      <v-carousel-item
-        v-for="(slide, i) in imagenSlider"
-        :key="i"
-        :to="slide.urlProducto"
-      >
-        <v-img
-          :src="slide.linkImagen"
-          :alt="slide.nombreProducto"
-        >
-          <template v-slot:placeholder>
-            <v-row
-              class="fill-height ma-0"
-              align="center"
-              justify="center"
-            >
-              <v-progress-circular indeterminate color="white"></v-progress-circular>
-            </v-row>
-          </template>
-        </v-img>
-      </v-carousel-item>
-    </v-carousel>
-  </div>
+    </vueper-slide>
+  </vueper-slides>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import { mdiPauseCircle } from '@mdi/js';
+import { VueperSlides, VueperSlide } from 'vueperslides';
+import 'vueperslides/dist/vueperslides.css';
 
 export default {
+  data() {
+    return {
+      mdiPauseCircle,
+      pauseOnHover: true,
+      autoPlaying: true,
+    };
+  },
   methods: {
     ...mapActions(['traerImagenSlider']),
   },
@@ -41,5 +40,20 @@ export default {
   mounted() {
     this.traerImagenSlider();
   },
+  components: { VueperSlides, VueperSlide },
 };
 </script>
+
+<style>
+  .vueperslides__arrow {
+    color: black;
+    height: 100%;
+  }
+  .vueperslides__arrow:hover {
+    background: rgba(255, 255, 255, .6);
+  }
+  .vueperslides__progress {
+    background: rgba(0, 0, 0, 0.25);
+    color: #ff5252;
+  }
+</style>

@@ -8684,6 +8684,11 @@ vue@^2.6.11:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==
 
+vueperslides@^2.10.7:
+  version "2.10.7"
+  resolved "https://registry.yarnpkg.com/vueperslides/-/vueperslides-2.10.7.tgz#56f5f139cbf044afada541cf1bfbcb845db22c34"
+  integrity sha512-CS4W1s45qraNCM6vdIFbAe6SAPEIAXpk7YdcJWheRpD+bU6HLwfMieK9cRELJBxemHoZND0TbaRQWxp3t1MEZA==
+
 vuetify@^2.2.11:
   version "2.3.7"
   resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.3.7.tgz#3f5dc9c63ae2b670d74374020c36409da144aa2b"
