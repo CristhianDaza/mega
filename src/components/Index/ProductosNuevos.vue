@@ -2,7 +2,7 @@
   <div>
     <v-parallax
       v-if="this.productoNuevo.length > 0"
-        src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/offer.jpg?alt=media&token=f89a64ad-5af3-44f3-b382-8d126336ca13"
+        src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/opt_offer.webp?alt=media&token=e57afeca-ebe2-430d-a6e7-664b3a372763"
         :height="this.$vuetify.breakpoint.xs ? '100' : '200'"
       >
       <h1

@@ -116,7 +116,7 @@
       app
       clipped
       color="primary"
-      src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/FondoMenu.jpg?alt=media&token=3109d5d9-8101-46ee-9d42-b3350eacf50b"
+      src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/opt_FondoMenu.webp?alt=media&token=298c8002-37d6-457c-8cb1-dababcfca57c"
     >
       <v-list shaped menu>
         <v-subheader>Menú Principal</v-subheader>

@@ -2,8 +2,7 @@
   <div>
     <router-link to="/">
       <v-img
-        src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/logo.png?alt=media&token=08967fdf-f5b0-4782-8571-e3391abd3c5b"
-        lazy-src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/logo_opt.png?alt=media&token=b1b44e4c-cf39-4784-963f-82d49d981e93"
+        src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/opt_logo.webp?alt=media&token=2e13ac36-784c-463a-a094-fa665516fffe"
         alt="Logotipo Megapromocionales"
         class="logo text-left"
         :class="this.$vuetify.breakpoint.xs ? 'mx-auto' : ''"
