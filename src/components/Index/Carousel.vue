@@ -1,20 +1,22 @@
 <template>
-  <vueper-slides
-    :slide-ratio="1 / 2"
-    fixed-height="600px"
-    autoplay
-    :pause-on-hover="pauseOnHover"
-    fractions
-    progress
-  >
-    <vueper-slide
-      v-for="(slide, i) in imagenSlider"
-      :key="i"
-      :image="slide.linkImagen"
-      :link="slide.urlProducto"
+  <div>
+    <vueper-slides
+      :breakpoints="breakpoints"
+      slideRatio="1 / 4"
+      autoplay
+      :pause-on-hover="pauseOnHover"
+      fractions
+      progress
     >
-    </vueper-slide>
-  </vueper-slides>
+      <vueper-slide
+        v-for="(slide, i) in imagenSlider"
+        :key="i"
+        :image="slide.linkImagen"
+        :link="slide.urlProducto"
+      >
+      </vueper-slide>
+    </vueper-slides>
+  </div>
 </template>
 
 <script>
@@ -29,6 +31,13 @@ export default {
       mdiPauseCircle,
       pauseOnHover: true,
       autoPlaying: true,
+      breakpoints: {
+        600: {
+          slideRatio: 1 / 4,
+          arrows: false,
+          bulletsOutside: true,
+        },
+      },
     };
   },
   methods: {
