@@ -1,12 +1,14 @@
 <template>
   <div>
     <vueper-slides
-      :breakpoints="breakpoints"
-      slideRatio="1 / 4"
+      :slide-ratio="1 / 4"
       autoplay
       :pause-on-hover="pauseOnHover"
       fractions
       progress
+      transition-speed="550"
+      class="no-shadow"
+      :breakpoints="breakpoints"
     >
       <vueper-slide
         v-for="(slide, i) in imagenSlider"
@@ -33,7 +35,6 @@ export default {
       autoPlaying: true,
       breakpoints: {
         600: {
-          slideRatio: 1 / 4,
           arrows: false,
           bulletsOutside: true,
         },

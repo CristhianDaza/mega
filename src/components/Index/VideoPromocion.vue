@@ -1,14 +1,21 @@
 <template>
-  <v-row>
-    <v-col class="pa-0" cols="12" v-for="video in videos" :key="video.id">
+  <v-card>
+    <v-responsive
+      v-for="video in videos"
+      :key="video.id"
+      height="100%"
+      width="100%"
+    >
       <video
         loop
         autoplay
-        muted height="100%" max-height="100%" width="100%" max-width="100%">
+        muted
+        width="100%"
+      >
         <source :src="video.linkVideo" type="video/mp4" />
       </video>
-    </v-col>
-  </v-row>
+    </v-responsive>
+  </v-card>
 </template>
 
 <script>
