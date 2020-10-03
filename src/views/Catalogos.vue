@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Hero :titulo="'Catálogos ' + new Date().getFullYear()"/>
-    <v-container>
+    <Hero titulo="Catálogos"/>
+    <v-container v-if="this.catalogos.length > 0">
       <v-breadcrumbs :items="items">
         <template v-slot:item="{ item }">
           <v-breadcrumbs-item
@@ -48,6 +48,20 @@
         </v-col>
       </v-row>
     </v-container>
+    <div v-else class="mx-auto">
+      <v-container class="fill-height mt-16 mx-auto">
+        <v-row align="center" justify="center">
+          <v-progress-circular
+            :size="100"
+            :width="7"
+            color="primary"
+            indeterminate
+          >
+            Cargando
+          </v-progress-circular>
+        </v-row>
+      </v-container>
+    </div>
   </div>
 </template>
 
