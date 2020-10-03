@@ -69,11 +69,18 @@
       </template>
     </v-card-subtitle>
     <div class="text-center">
-      <img v-if="producto.materiales[0].estado == '2'" src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/nuevo.png?alt=media&token=7dbffaa3-1580-435a-9739-86c155c5194b" alt="Novedad" class="text-center" width="80">
-      <img v-if="producto.materiales[0].estado == '3'" src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/saldo.png?alt=media&token=b1d4cf45-0dcc-4285-87e9-c32f63c808d8" alt="Saldo" class="text-center" width="80">
-      <div v-if="producto.etiquetas.length > 0">
-        <img v-if="producto.etiquetas[0].id == 4" src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/Neto.png?alt=media&token=f718bea7-0e92-480d-82e4-56a2d3a2dcbe" alt="Neto" class="text-center" width="80">
-      </div>
+      <template v-if="producto.etiquetas.length > 0">
+        <div
+          v-for="etiqueta in producto.etiquetas"
+          :key="etiqueta.id"
+        >
+          <img
+            width="80px"
+            :src="etiqueta.imagen.file_sm"
+            :alt="etiqueta.nombre"
+            >
+        </div>
+      </template>
     </div>
     <v-card-title v-if="existeUsuario" class="precio">
       ${{ addCommas(Math.round(producto.materiales[0].precio)) }} + iva

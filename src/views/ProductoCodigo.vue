@@ -332,10 +332,20 @@
                   <div class="red--text" v-if="producto.inventario < 10">Agotado en {{producto.color_nombre}}</div>
                   <div v-else>Inventario: {{producto.inventario}} unidades.</div>
                 </v-card-text>
-                <div class="text-center">
-                  <img v-if="producto.estado == '2'" src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/nuevo.png?alt=media&token=7dbffaa3-1580-435a-9739-86c155c5194b" alt="Novedad" class="text-center" width="80">
-                  <img v-if="producto.estado == '3'" src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/saldo.png?alt=media&token=b1d4cf45-0dcc-4285-87e9-c32f63c808d8" alt="Saldo" class="text-center" width="80">
-                </div>
+                  <div class="text-center">
+                    <template v-if="productoCodigo[0].etiquetas.length > 0">
+                      <div
+                        v-for="etiqueta in productoCodigo[0].etiquetas"
+                        :key="etiqueta.id"
+                      >
+                        <img
+                          width="80px"
+                          :src="etiqueta.imagen.file_sm"
+                          :alt="etiqueta.nombre"
+                          >
+                      </div>
+                    </template>
+                  </div>
                 <v-card-title v-if="existeUsuario">
                   ${{ addCommas(Math.round(producto.precio)) }} + iva
                 </v-card-title>
