@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import Imagen from '@/assets/megapromocionales.webp';
+import Imagen from '@/assets/header.jpg';
 
 export default {
   props: ['titulo'],
