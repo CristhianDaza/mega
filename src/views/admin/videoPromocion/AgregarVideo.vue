@@ -119,7 +119,7 @@ export default {
               'success',
             );
             router.push({
-              path: '/admin/videos',
+              path: '/admin/videoPromocion',
             });
           });
         this.error = 'Video subido con éxito';
