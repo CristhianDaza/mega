@@ -1,24 +1,26 @@
 <template>
-  <div>
-    <vueper-slides
-      :slide-ratio="1 / 4"
-      autoplay
-      :pause-on-hover="pauseOnHover"
-      fractions
-      progress
-      transition-speed="550"
-      class="no-shadow"
-      :breakpoints="breakpoints"
-    >
-      <vueper-slide
-        v-for="(slide, i) in imagenSlider"
-        :key="i"
-        :image="slide.linkImagen"
-        :link="slide.urlProducto"
+  <v-card>
+    <v-responsive>
+      <vueper-slides
+        autoplay
+        :pause-on-hover="pauseOnHover"
+        fractions
+        progress
+        transition-speed="550"
+        class="no-shadow"
+        :breakpoints="breakpoints"
       >
-      </vueper-slide>
-    </vueper-slides>
-  </div>
+        <vueper-slide
+          v-for="(slide, i) in imagenSlider"
+          :key="i"
+          :image="slide.linkImagen"
+          :link="slide.urlProducto"
+          width="100%"
+        >
+        </vueper-slide>
+      </vueper-slides>
+    </v-responsive>
+  </v-card>
 </template>
 
 <script>
