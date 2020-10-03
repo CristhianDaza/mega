@@ -9,7 +9,7 @@
         :class="this.$vuetify.breakpoint.xs ? 'display-1 mt-2' : 'display-2'"
         class="mb-2 text-center font-weight-black"
       >
-        Productos <span class="primary--text">Nuevos</span>
+        Nuevos <span class="primary--text">Productos</span>
       </h1>
     </v-parallax>
 
