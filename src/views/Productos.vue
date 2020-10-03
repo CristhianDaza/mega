@@ -167,7 +167,7 @@ export default {
         {
           titulo: 'productos',
           disabled: false,
-          href: '/productos/',
+          href: '/productos',
         },
       ],
       listaEtiquetas: [],
@@ -243,8 +243,6 @@ export default {
       this.$router.push({
         path: this.$route.path,
         query: {
-          pagina: 1,
-          porPagina: 12,
           subCategoria,
         },
       });
@@ -253,8 +251,6 @@ export default {
       this.$router.push({
         path: this.$route.path,
         query: {
-          pagina: 1,
-          porPagina: 12,
           categoria: this.$route.query.categoria,
           subCategoria: this.$route.query.subCategoria,
           etiqueta: this.$route.query.etiqueta,
@@ -267,8 +263,6 @@ export default {
       this.$router.push({
         path: this.$route.path,
         query: {
-          pagina: 1,
-          porPagina: 12,
           categoria: this.$route.query.categoria,
           subCategoria: this.$route.query.subCategoria,
           etiqueta,
