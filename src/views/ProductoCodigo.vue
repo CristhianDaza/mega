@@ -96,37 +96,11 @@
                       </v-card-subtitle>
                       <v-card-title class="pa-0" v-for="(valor, index) in productoCodigo[0].materiales" :key="valor.codigo">
                         <template v-if="valor.variedad !== null">
-                          $ {{addCommas(Math.round(valor.precio))}} + iva
-                        <div class="contenedor_color">
-                          <v-tooltip bottom dense>
-                            <template v-slot:activator="{on, attrs}">
-                              <div
-                                v-if="valor.color_hex_2 !== null && valor.color_hex_3 !== null"
-                                v-bind="attrs"
-                                v-on="on"
-                                :style="`background: linear-gradient(rgb(${hextToRgb(valor.color_hex_1)[0]}, ${hextToRgb(valor.color_hex_1)[1]}, ${hextToRgb(valor.color_hex_1)[2]}) 0%, rgb(${hextToRgb(valor.color_hex_2)[0]}, ${hextToRgb(valor.color_hex_2)[1]}, ${hextToRgb(valor.color_hex_2)[2]}) 48%, rgb(${hextToRgb(valor.color_hex_2)[0]}, ${hextToRgb(valor.color_hex_2)[1]}, ${hextToRgb(valor.color_hex_2)[2]}) 62%, rgb(${hextToRgb(valor.color_hex_3)[0]}, ${hextToRgb(valor.color_hex_3)[1]}, ${hextToRgb(valor.color_hex_3)[2]}) 66%, rgb(${hextToRgb(valor.color_hex_3)[0]}, ${hextToRgb(valor.color_hex_3)[1]}, ${hextToRgb(valor.color_hex_3)[2]}) 100%)`"
-                                class="circuloProducto"
-                              ></div>
-                              <div
-                                v-else-if="valor.color_hex_2 !== null && valor.color_hex_3 === null"
-                                v-bind="attrs"
-                                v-on="on"
-                                :style="`background: linear-gradient(rgb(${hextToRgb(valor.color_hex_1)[0]}, ${hextToRgb(valor.color_hex_1)[1]}, ${hextToRgb(valor.color_hex_1)[2]}) 40%, rgb(${hextToRgb(valor.color_hex_2)[0]}, ${hextToRgb(valor.color_hex_2)[1]}, ${hextToRgb(valor.color_hex_2)[2]}) 50%)`"
-                                class="circuloProducto"
-                              >
-                              </div>
-                              <div
-                                v-else
-                                v-bind="attrs"
-                                v-on="on"
-                                :style="'background:' + valor.color_hex_1"
-                                class="circuloProducto"
-                              ></div>
-                            </template>
-                            <span>{{valor.color_nombre}}</span>
-                          </v-tooltip>
-                        </div>
+                          <!-- $ {{addCommas(Math.round(valor.precio))}} + iva -->
+                          $ {{addCommas(Math.round(valor.precio * 1.35))}} + iva
                           {{valor.variedad}}
+                          <template>
+                          </template>
                         </template>
                         <template v-else>
                           <template v-if="index === 0">
@@ -145,27 +119,18 @@
               <v-card-actions>
                 <div class="display-1 primary--text my-2" v-if="Math.round(productoCodigo[0].materiales[0].precio_descuento) !== Math.round(productoCodigo[0].materiales[0].precio)">{{Math.round(productoCodigo[0].materiales[0].descuento)}}% de descuento</div>
                 <v-row>
-                  <div v-if="productoCodigo[0].etiquetas.length > 0">
-                    <img
-                      class="pr-2"
-                      v-if="productoCodigo[0].etiquetas[0].id === 1"
-                      src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/nuevo.png?alt=media&token=7dbffaa3-1580-435a-9739-86c155c5194b"
-                      alt="Novedad"
+                  <template v-if="productoCodigo[0].etiquetas.length > 0">
+                    <div
+                      v-for="etiqueta in productoCodigo[0].etiquetas"
+                      :key="etiqueta.id"
                     >
-                  </div>
-                  <img
-                    class="pr-2"
-                    v-if="productoCodigo[0].materiales[0].estado == '3'"
-                    src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/saldo.png?alt=media&token=b1d4cf45-0dcc-4285-87e9-c32f63c808d8"
-                    alt="Saldo"
-                  >
-                  <div v-if="productoCodigo[0].etiquetas.length > 0">
-                    <img
-                      v-if="productoCodigo[0].etiquetas[0].id === 4"
-                      src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/Neto.png?alt=media&token=f718bea7-0e92-480d-82e4-56a2d3a2dcbe"
-                      alt="Neto"
-                      >
-                  </div>
+                      <img
+                        width="150px"
+                        :src="etiqueta.imagen.file_sm"
+                        :alt="etiqueta.nombre"
+                        >
+                    </div>
+                  </template>
                 </v-row>
                 <v-tooltip v-model="mostrarTooltip" bottom>
                   <template v-slot:activator="{on, attrs}">
