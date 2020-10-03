@@ -30,6 +30,8 @@
               :items-per-page="10"
               :search="search"
               class="elevation-1"
+              :sort-by="['end']"
+              :sort-desc="[true]"
             >
             <template v-slot:item.terminado="{ item }">
               <v-chip
