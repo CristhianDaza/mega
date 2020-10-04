@@ -1,32 +1,21 @@
 <template>
-  <v-card>
-    <v-responsive>
-      <vueper-slides
-        autoplay
-        :pause-on-hover="pauseOnHover"
-        fractions
-        progress
-        transition-speed="550"
-        class="no-shadow"
-        :breakpoints="breakpoints"
-      >
-        <vueper-slide
-          v-for="(slide, i) in imagenSlider"
-          :key="i"
-          :image="slide.linkImagen"
-          :link="slide.urlProducto"
-          width="100%"
-        >
-        </vueper-slide>
-      </vueper-slides>
-    </v-responsive>
-  </v-card>
+  <v-carousel
+    height="100%"
+    cycle
+    hide-delimiter-background
+    show-arrows-on-hover
+  >
+    <v-carousel-item
+      v-for="(slide, i) in imagenSlider"
+      :key="i"
+      :src="slide.linkImagen"
+    ></v-carousel-item>
+  </v-carousel>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex';
 import { mdiPauseCircle } from '@mdi/js';
-import { VueperSlides, VueperSlide } from 'vueperslides';
 import 'vueperslides/dist/vueperslides.css';
 
 export default {
@@ -52,20 +41,5 @@ export default {
   mounted() {
     this.traerImagenSlider();
   },
-  components: { VueperSlides, VueperSlide },
 };
 </script>
-
-<style>
-  .vueperslides__arrow {
-    color: black;
-    height: 100%;
-  }
-  .vueperslides__arrow:hover {
-    background: rgba(255, 255, 255, .6);
-  }
-  .vueperslides__progress {
-    background: rgba(0, 0, 0, 0.25);
-    color: #ff5252;
-  }
-</style>
