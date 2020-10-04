@@ -125,7 +125,7 @@
                       :key="etiqueta.id"
                     >
                       <img
-                        width="150px"
+                        width="120px"
                         :src="etiqueta.imagen.file_sm"
                         :alt="etiqueta.nombre"
                         >
