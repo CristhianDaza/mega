@@ -9,6 +9,7 @@
       v-for="(slide, i) in imagenSlider"
       :key="i"
       :src="slide.linkImagen"
+      :to="slide.urlProducto"
     ></v-carousel-item>
   </v-carousel>
 </template>
