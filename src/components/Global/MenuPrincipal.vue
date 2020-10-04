@@ -40,23 +40,23 @@
               <v-icon left>{{mdiCoffee}}</v-icon>
               <span>Login</span>
             </v-btn>
-            <v-text-field
-              v-model="busqueda"
-              v-on:keyup.enter="buscarProducto(busqueda)"
-              @click:prepend-inner="buscarProducto(busqueda)"
-              clearable
-              class="mt-1 mx-2"
-              placeholder="Buscar"
-              :prepend-inner-icon="mdiMagnify"
-              outlined
-              rounded
-              filled
-              dense
-              dark
-              hide-details="auto"
-            ></v-text-field>
           </div>
           <v-spacer></v-spacer>
+          <v-text-field
+            v-model="busqueda"
+            v-on:keyup.enter="buscarProducto(busqueda)"
+            @click:prepend-inner="buscarProducto(busqueda)"
+            clearable
+            class="mt-1 mx-2"
+            placeholder="Buscar"
+            :prepend-inner-icon="mdiMagnify"
+            outlined
+            rounded
+            filled
+            dense
+            dark
+            hide-details="auto"
+          ></v-text-field>
           <v-tooltip v-model="mostrarTooltip" bottom>
             <template v-slot:activator="{on, attrs}">
               <v-btn
@@ -156,22 +156,6 @@
               <span>Nosotros</span>
             </v-list-item-title>
           </v-list-item>
-
-            <v-text-field
-              v-model="busqueda"
-              v-on:keyup.enter="buscarProducto(busqueda)"
-              @click:prepend-inner="buscarProducto(busqueda)"
-              clearable
-              class="mt-1 mx-2"
-              placeholder="Buscar"
-              :prepend-inner-icon="mdiMagnify"
-              outlined
-              rounded
-              filled
-              dense
-              dark
-              hide-details="auto"
-            ></v-text-field>
 
           <v-list-item v-if="existeUsuario" to="/admin">
             <v-list-item-title>
