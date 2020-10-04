@@ -1,7 +1,7 @@
 <template>
 <!-- eslint-disable max-len -->
   <div>
-    <Hero :titulo="nombreCategoria"/>
+    <Hero titulo="Productos"/>
     <v-container>
       <v-breadcrumbs :items="items">
         <template v-slot:item="{ item }">
@@ -70,7 +70,7 @@
                 <v-list-item
                   v-for="subCategoria in categoria.subcategorias"
                   :key="subCategoria.id_pagina"
-                  @click="buscarSubCategoria(subCategoria.jerarquia, subCategoria.nombre)"
+                  @click="buscarSubCategoria(subCategoria.jerarquia)"
                 >
                   <v-list-item-content>
                     <v-list-item-title v-text="subCategoria.nombre"></v-list-item-title>
@@ -179,9 +179,6 @@ export default {
     Hero,
   },
   methods: {
-    cambiarTitulo(nombre) {
-      localStorage.setItem('tituloCategoria', nombre);
-    },
     async getProductos(
       pagina,
       porPagina,
@@ -242,14 +239,13 @@ export default {
         },
       });
     },
-    buscarSubCategoria(subCategoria, nombre) {
+    buscarSubCategoria(subCategoria) {
       this.$router.push({
         path: this.$route.path,
         query: {
           subCategoria,
         },
       });
-      this.cambiarTitulo(nombre);
     },
     buscarInventario(inventario) {
       this.$router.push({
@@ -299,12 +295,6 @@ export default {
       this.busqueda,
     );
     this.getCategorias();
-    const titulo = localStorage.getItem('tituloCategoria');
-    if (titulo) {
-      this.nombreCategoria = titulo;
-    } else {
-      this.nombreCategoria = 'Productos';
-    }
   },
   metaInfo: {
     title: 'Productos 🛒',
