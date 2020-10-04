@@ -96,11 +96,37 @@
                       </v-card-subtitle>
                       <v-card-title class="pa-0" v-for="(valor, index) in productoCodigo[0].materiales" :key="valor.codigo">
                         <template v-if="valor.variedad !== null">
-                          <!-- $ {{addCommas(Math.round(valor.precio))}} + iva -->
-                          $ {{addCommas(Math.round(valor.precio * 1.35))}} + iva
+                          $ {{addCommas(Math.round(valor.precio))}} + iva
+                        <div class="contenedor_color">
+                          <v-tooltip bottom dense>
+                            <template v-slot:activator="{on, attrs}">
+                              <div
+                                v-if="valor.color_hex_2 !== null && valor.color_hex_3 !== null"
+                                v-bind="attrs"
+                                v-on="on"
+                                :style="`background: linear-gradient(rgb(${hextToRgb(valor.color_hex_1)[0]}, ${hextToRgb(valor.color_hex_1)[1]}, ${hextToRgb(valor.color_hex_1)[2]}) 0%, rgb(${hextToRgb(valor.color_hex_2)[0]}, ${hextToRgb(valor.color_hex_2)[1]}, ${hextToRgb(valor.color_hex_2)[2]}) 48%, rgb(${hextToRgb(valor.color_hex_2)[0]}, ${hextToRgb(valor.color_hex_2)[1]}, ${hextToRgb(valor.color_hex_2)[2]}) 62%, rgb(${hextToRgb(valor.color_hex_3)[0]}, ${hextToRgb(valor.color_hex_3)[1]}, ${hextToRgb(valor.color_hex_3)[2]}) 66%, rgb(${hextToRgb(valor.color_hex_3)[0]}, ${hextToRgb(valor.color_hex_3)[1]}, ${hextToRgb(valor.color_hex_3)[2]}) 100%)`"
+                                class="circuloProducto"
+                              ></div>
+                              <div
+                                v-else-if="valor.color_hex_2 !== null && valor.color_hex_3 === null"
+                                v-bind="attrs"
+                                v-on="on"
+                                :style="`background: linear-gradient(rgb(${hextToRgb(valor.color_hex_1)[0]}, ${hextToRgb(valor.color_hex_1)[1]}, ${hextToRgb(valor.color_hex_1)[2]}) 40%, rgb(${hextToRgb(valor.color_hex_2)[0]}, ${hextToRgb(valor.color_hex_2)[1]}, ${hextToRgb(valor.color_hex_2)[2]}) 50%)`"
+                                class="circuloProducto"
+                              >
+                              </div>
+                              <div
+                                v-else
+                                v-bind="attrs"
+                                v-on="on"
+                                :style="'background:' + valor.color_hex_1"
+                                class="circuloProducto"
+                              ></div>
+                            </template>
+                            <span>{{valor.color_nombre}}</span>
+                          </v-tooltip>
+                        </div>
                           {{valor.variedad}}
-                          <template>
-                          </template>
                         </template>
                         <template v-else>
                           <template v-if="index === 0">
