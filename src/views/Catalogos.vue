@@ -16,34 +16,40 @@
       </v-breadcrumbs>
       <v-row>
         <v-col cols="12" sm="6" md="4" lg="3" v-for="catalogo in catalogos" :key="catalogo.id">
-          <v-hover v-slot:default="{ hover }" close-delay="200" open-delay="100">
-            <v-card class="mx-auto" :elevation="hover ? 18 : 2">
-              <div class="div-catalogo hidden">
-                <v-img :src="catalogo.linkImagen" :alt="catalogo.nombre" class="imagen-catalogo">
-                  <template v-slot:placeholder>
-                    <v-row
-                      class="fill-height ma-0"
-                      align="center"
-                      justify="center"
-                    >
-                      <v-progress-circular indeterminate color="blue-grey"></v-progress-circular>
-                    </v-row>
-                  </template>
-                </v-img>
-              </div>
-              <v-card-actions>
-                <v-btn outlined>
-                  <a class="linksCatalogos" :href="catalogo.linkPDF" target="_blank">
-                    <v-icon class="mr-1">{{mdiFilePdfBox}}</v-icon> PDF
-                  </a>
-                </v-btn>
-                <v-btn outlined>
-                  <a class="linksCatalogos" :href="catalogo.linkVirtual" target="_blank">
-                    <v-icon class="mr-1">{{mdiOpenInNew}}</v-icon> Virtual
-                  </a>
-                </v-btn>
-              </v-card-actions>
-            </v-card>
+          <v-hover>
+            <template v-slot:default="{ hover }">
+              <v-card
+                outlined
+                class="mx-auto transition-swing"
+                :class="`elevation-${hover ? 24 : 0}`"
+              >
+                <div class="div-catalogo hidden">
+                  <v-img :src="catalogo.linkImagen" :alt="catalogo.nombre" class="imagen-catalogo">
+                    <template v-slot:placeholder>
+                      <v-row
+                        class="fill-height ma-0"
+                        align="center"
+                        justify="center"
+                      >
+                        <v-progress-circular indeterminate color="blue-grey"></v-progress-circular>
+                      </v-row>
+                    </template>
+                  </v-img>
+                </div>
+                <v-card-actions>
+                  <v-btn outlined>
+                    <a class="linksCatalogos" :href="catalogo.linkPDF" target="_blank">
+                      <v-icon class="mr-1">{{mdiFilePdfBox}}</v-icon> PDF
+                    </a>
+                  </v-btn>
+                  <v-btn outlined>
+                    <a class="linksCatalogos" :href="catalogo.linkVirtual" target="_blank">
+                      <v-icon class="mr-1">{{mdiOpenInNew}}</v-icon> Virtual
+                    </a>
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </template>
           </v-hover>
         </v-col>
       </v-row>
