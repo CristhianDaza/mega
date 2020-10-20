@@ -1,102 +1,106 @@
 <template>
 <!-- eslint-disable max-len -->
-  <v-card outlined class="mx-auto pa-0 tarjetaProducto">
-    <v-card-text class="pa-0">
-      <router-link
-        :to="{path: `/producto/${producto.familia}`}"
-      >
-        <v-img
-          :src="producto.imagen.imagen.file_md"
-          width="100%"
-          :alt="producto.descripcion_comercial"
-          class="imagenProducto"
-        >
-          <template v-slot:placeholder>
-            <v-row
-              class="fill-height ma-0"
-              align="center"
-              justify="center"
+  <v-hover>
+    <template v-slot:default="{ hover }">
+      <v-card outlined :class="`elevation-${hover ? 8 : 0}`" class="mx-auto pa-0 transition-swing tarjetaProducto">
+        <v-card-text class="pa-0">
+          <router-link
+            :to="{path: `/producto/${producto.familia}`}"
+          >
+            <v-img
+              :src="producto.imagen.imagen.file_md"
+              width="100%"
+              max-width="100%"
+              :alt="producto.descripcion_comercial"
             >
-              <v-progress-circular indeterminate color="blue-grey"></v-progress-circular>
-            </v-row>
+              <template v-slot:placeholder>
+                <v-row
+                  class="fill-height ma-0"
+                  align="center"
+                  justify="center"
+                >
+                  <v-progress-circular indeterminate color="blue-grey"></v-progress-circular>
+                </v-row>
+              </template>
+            </v-img>
+          </router-link>
+        </v-card-text>
+        <v-divider class="mx-8"></v-divider>
+        <v-card-title
+          class="text-center text-subtitle-2"
+        >
+          {{ producto.descripcion_comercial }}
+        </v-card-title>
+        <v-card-subtitle>
+          {{ producto.familia }}
+        </v-card-subtitle>
+        <v-card-subtitle class="d-flex flex-wrap pt-0">
+          <template v-for="color in colores">
+            <div class="contenedor_color" :key="color.codigo">
+              <v-tooltip bottom dense>
+                <template v-slot:activator="{on, attrs}">
+                  <div
+                    v-if="color.color_hex_2 !== null && color.color_hex_3 !== null"
+                    v-bind="attrs"
+                    v-on="on"
+                    :style="`background: linear-gradient(rgb(${hextToRgb(color.color_hex_1)[0]}, ${hextToRgb(color.color_hex_1)[1]}, ${hextToRgb(color.color_hex_1)[2]}) 0%, rgb(${hextToRgb(color.color_hex_2)[0]}, ${hextToRgb(color.color_hex_2)[1]}, ${hextToRgb(color.color_hex_2)[2]}) 48%, rgb(${hextToRgb(color.color_hex_2)[0]}, ${hextToRgb(color.color_hex_2)[1]}, ${hextToRgb(color.color_hex_2)[2]}) 62%, rgb(${hextToRgb(color.color_hex_3)[0]}, ${hextToRgb(color.color_hex_3)[1]}, ${hextToRgb(color.color_hex_3)[2]}) 66%, rgb(${hextToRgb(color.color_hex_3)[0]}, ${hextToRgb(color.color_hex_3)[1]}, ${hextToRgb(color.color_hex_3)[2]}) 100%)`"
+                    class="circuloProducto"
+                  ></div>
+                  <div
+                    v-else-if="color.color_hex_2 !== null && color.color_hex_3 === null"
+                    v-bind="attrs"
+                    v-on="on"
+                    :style="`background: linear-gradient(rgb(${hextToRgb(color.color_hex_1)[0]}, ${hextToRgb(color.color_hex_1)[1]}, ${hextToRgb(color.color_hex_1)[2]}) 40%, rgb(${hextToRgb(color.color_hex_2)[0]}, ${hextToRgb(color.color_hex_2)[1]}, ${hextToRgb(color.color_hex_2)[2]}) 50%)`"
+                    class="circuloProducto"
+                  >
+                  </div>
+                  <div
+                    v-else
+                    v-bind="attrs"
+                    v-on="on"
+                    :style="'background:' + color.color_hex_1"
+                    class="circuloProducto"
+                  ></div>
+                </template>
+                <span>
+                  {{color.color_nombre}} ({{color.inventario}})
+                  <span v-if="color.variedad !== null"> - {{color.variedad}}</span>
+                </span>
+              </v-tooltip>
+            </div>
           </template>
-        </v-img>
-      </router-link>
-    </v-card-text>
-    <v-divider class="mx-8"></v-divider>
-    <v-card-title
-      class="text-center text-subtitle-2"
-    >
-      {{ producto.descripcion_comercial }}
-    </v-card-title>
-    <v-card-subtitle>
-      {{ producto.familia }}
-    </v-card-subtitle>
-    <v-card-subtitle class="d-flex flex-wrap pt-0">
-      <template v-for="color in colores">
-        <div class="contenedor_color" :key="color.codigo">
-          <v-tooltip bottom dense>
-            <template v-slot:activator="{on, attrs}">
-              <div
-                v-if="color.color_hex_2 !== null && color.color_hex_3 !== null"
-                v-bind="attrs"
-                v-on="on"
-                :style="`background: linear-gradient(rgb(${hextToRgb(color.color_hex_1)[0]}, ${hextToRgb(color.color_hex_1)[1]}, ${hextToRgb(color.color_hex_1)[2]}) 0%, rgb(${hextToRgb(color.color_hex_2)[0]}, ${hextToRgb(color.color_hex_2)[1]}, ${hextToRgb(color.color_hex_2)[2]}) 48%, rgb(${hextToRgb(color.color_hex_2)[0]}, ${hextToRgb(color.color_hex_2)[1]}, ${hextToRgb(color.color_hex_2)[2]}) 62%, rgb(${hextToRgb(color.color_hex_3)[0]}, ${hextToRgb(color.color_hex_3)[1]}, ${hextToRgb(color.color_hex_3)[2]}) 66%, rgb(${hextToRgb(color.color_hex_3)[0]}, ${hextToRgb(color.color_hex_3)[1]}, ${hextToRgb(color.color_hex_3)[2]}) 100%)`"
-                class="circuloProducto"
-              ></div>
-              <div
-                v-else-if="color.color_hex_2 !== null && color.color_hex_3 === null"
-                v-bind="attrs"
-                v-on="on"
-                :style="`background: linear-gradient(rgb(${hextToRgb(color.color_hex_1)[0]}, ${hextToRgb(color.color_hex_1)[1]}, ${hextToRgb(color.color_hex_1)[2]}) 40%, rgb(${hextToRgb(color.color_hex_2)[0]}, ${hextToRgb(color.color_hex_2)[1]}, ${hextToRgb(color.color_hex_2)[2]}) 50%)`"
-                class="circuloProducto"
-              >
-              </div>
-              <div
-                v-else
-                v-bind="attrs"
-                v-on="on"
-                :style="'background:' + color.color_hex_1"
-                class="circuloProducto"
-              ></div>
-            </template>
-            <span>
-              {{color.color_nombre}} ({{color.inventario}})
-              <span v-if="color.variedad !== null"> - {{color.variedad}}</span>
-            </span>
-          </v-tooltip>
-        </div>
-      </template>
-    </v-card-subtitle>
-    <div class="text-center">
-      <template v-if="producto.etiquetas.length > 0">
-        <div
-          v-for="etiqueta in producto.etiquetas"
-          :key="etiqueta.id"
-        >
-          <img
-            width="80px"
-            :src="etiqueta.imagen.file_sm"
-            :alt="etiqueta.nombre"
+        </v-card-subtitle>
+        <div class="text-center">
+          <template v-if="producto.etiquetas.length > 0">
+            <div
+              v-for="etiqueta in producto.etiquetas"
+              :key="etiqueta.id"
             >
+              <img
+                width="80px"
+                :src="etiqueta.imagen.file_sm"
+                :alt="etiqueta.nombre"
+                >
+            </div>
+          </template>
         </div>
-      </template>
-    </div>
-    <v-card-title v-if="existeUsuario" class="precio">
-      ${{ addCommas(Math.round(producto.materiales[0].precio)) }} + iva
-    </v-card-title>
-    <v-divider class="mx-5"></v-divider>
-    <v-card-actions>
-    <v-btn
-      :to="{path: `/producto/${producto.familia}`}"
-      outlined block
-      color="primary"
-      text
-    >
-        Ver Producto
-    </v-btn>
-    </v-card-actions>
-  </v-card>
+        <v-card-title v-if="existeUsuario" class="precio">
+          ${{ addCommas(Math.round(producto.materiales[0].precio)) }} + iva
+        </v-card-title>
+        <v-divider class="mx-5"></v-divider>
+        <v-card-actions>
+        <v-btn
+          :to="{path: `/producto/${producto.familia}`}"
+          outlined block
+          color="primary"
+          text
+        >
+            Ver Producto
+        </v-btn>
+        </v-card-actions>
+      </v-card>
+    </template>
+  </v-hover>
 </template>
 
 <script>
