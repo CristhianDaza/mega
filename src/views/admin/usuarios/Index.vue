@@ -48,7 +48,7 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 import Swal from 'sweetalert2';
-import { auth } from '@/firebase.js';
+import { auth } from '@/firebase';
 
 export default {
   name: 'usuarios',

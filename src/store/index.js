@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import {
   auth,
   db,
-} from '@/firebase.js';
+} from '@/firebase';
 import router from '@/router';
 import Swal from 'sweetalert2';
 

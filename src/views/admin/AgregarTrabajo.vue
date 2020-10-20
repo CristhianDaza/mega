@@ -150,7 +150,7 @@ import {
 import { mapState, mapActions } from 'vuex';
 import Swal from 'sweetalert2';
 import router from '@/router';
-import { db } from '@/firebase.js';
+import { db } from '@/firebase';
 
 export default {
   name: 'agregar-trabajo',
