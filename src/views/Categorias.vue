@@ -98,7 +98,7 @@ export default {
         {
           titulo: 'productos',
           disabled: false,
-          href: '/productos/',
+          href: '/productos',
         },
         {
           titulo: 'categorias',
