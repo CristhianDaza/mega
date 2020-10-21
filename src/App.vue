@@ -16,3 +16,35 @@ export default {
   },
 };
 </script>
+
+<style>
+body::-webkit-scrollbar {
+  width: 9px;
+}
+
+ /* Estilos barra (thumb) de scroll */
+body::-webkit-scrollbar-thumb {
+  background: #1976d2;
+  border-radius: 4px;
+}
+
+body::-webkit-scrollbar-thumb:active {
+  background-color: rgb(15, 14, 164);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+ /* Estilos track de scroll */
+body::-webkit-scrollbar-track {
+  background: #e1e1e1;
+  border-radius: 4px;
+}
+
+body::-webkit-scrollbar-track:hover,
+body::-webkit-scrollbar-track:active {
+  background: #d4d4d4;
+}
+
+</style>
