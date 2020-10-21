@@ -60,6 +60,15 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item link to="/admin/productos-inicio">
+          <v-list-item-action>
+            <v-icon>{{ mdiCart }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Productos Inicio</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
       </v-list>
     </v-navigation-drawer>
 
@@ -114,6 +123,7 @@ import {
   mdiHome,
   mdiLogout,
   mdiYoutube,
+  mdiCart,
 } from '@mdi/js';
 import { mapActions, mapState } from 'vuex';
 
@@ -129,12 +139,16 @@ export default {
     mdiFormatListBulletedSquare,
     mdiInformation,
     mdiYoutube,
+    mdiCart,
   }),
   methods: {
     ...mapActions(['cerrarSesion']),
   },
   computed: {
     ...mapState(['usuario']),
+  },
+  created() {
+    this.$store.commit('setLayout', 'adminLayout');
   },
 };
 </script>

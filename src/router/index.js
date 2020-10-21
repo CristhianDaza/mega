@@ -157,6 +157,13 @@ const routes = [
     component: () => import('../views/admin/videoPromocion/AgregarVideo.vue'),
     meta: { requiresAuth: true },
   },
+  {
+    path: '/admin/productos-inicio',
+    name: 'Productos Inicio',
+    exact: true,
+    component: () => import('../views/admin/productosInicio/Index.vue'),
+    meta: { requiresAuth: true },
+  },
 ];
 
 const router = new VueRouter({
