@@ -17,6 +17,7 @@
     "sweetalert2": "^10.6.1",
     "vue": "^2.6.12",
     "vue-analytics": "^5.22.1",
+    "vue-flux": "^6.3.0",
     "vue-meta": "^2.4.0",
     "vue-router": "^3.4.7",
     "vueperslides": "^2.10.8",
