@@ -8472,9 +8472,9 @@ svgo@^1.0.0:
     util.promisify "~1.0.0"
 
 sweetalert2@^10.6.1:
-  version "10.6.1"
-  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-10.6.1.tgz#343d980858494bd0073ac8de9be57bf2365df316"
-  integrity sha512-5cIPtYldmZ+EljMVRd5ml9xT72STU+N4kk57nO0oECQmjkCsJypAcEdL+h045otoAd3t9962FtewJYSKyJxOFQ==
+  version "10.7.0"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-10.7.0.tgz#73c82b7988175fede29358d3cc28bc83bbd8cda9"
+  integrity sha512-L/RwuY6JKs38nxnIjLnnNLnZ0+m2Bod+fXgNS2ewLI+9xzNJwUcPGv/Sh3wn2bmNNjcfuHTS7qZKwa7AIeDvNg==
 
 table@^5.2.3:
   version "5.4.6"
@@ -9070,9 +9070,9 @@ vueperslides@^2.10.8:
   integrity sha512-hMNO3zeG8AuK/yp+DKgeCbjqTLLePOm+PlCBjoVk0vtEWuxKRTcptEdNxF7J4qncefLpZHEGj1v7t/Or7TSPbw==
 
 vuetify@^2.3.14:
-  version "2.3.14"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.3.14.tgz#42a864b8f28b67775758a5e5e42fc50733f1bdbe"
-  integrity sha512-1Ys1MreJQOL/Ddp3YotBi1SlC2+1A0/RVkDXX3Azspt8incPdAnNB0JyChHiJ/TM+L+KSA7T4EXF9YDrCWENmg==
+  version "2.3.15"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.3.15.tgz#ea148acce8f5bc272f64f03a0d2ace09e58e092c"
+  integrity sha512-YVJN/ld60S2mmFCKxoVFkB8X2kmuLT0E28ql4kr8HQUeCYdK8axoca/N8ZIP1hFH4NIz392f0nVpZKS4ZFZBVA==
 
 vuex@^3.4.0:
   version "3.5.1"
