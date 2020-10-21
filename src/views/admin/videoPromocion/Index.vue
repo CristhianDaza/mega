@@ -18,6 +18,9 @@
                 <source :src="video.linkVideo" type="video/mp4" />
               </video>
             </v-responsive>
+            <h2>Link</h2>
+            <p>{{video.urlProducto}}</p>
+            <router-link :to="video.urlProducto">Ir al Link</router-link>
           </v-card-text>
           <v-divider class="mt-3"></v-divider>
           <v-card-actions>

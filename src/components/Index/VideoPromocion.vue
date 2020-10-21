@@ -6,14 +6,16 @@
       height="100%"
       width="100%"
     >
-      <video
-        loop
-        autoplay
-        muted
-        width="100%"
-      >
-        <source :src="video.linkVideo" type="video/mp4" />
-      </video>
+      <router-link :to="video.urlProducto">
+        <video
+          loop
+          autoplay
+          muted
+          width="100%"
+        >
+          <source :src="video.linkVideo" type="video/mp4" />
+        </video>
+      </router-link>
     </v-responsive>
   </v-card>
 </template>

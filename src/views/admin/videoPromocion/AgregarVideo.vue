@@ -22,6 +22,11 @@
                 v-model="nombre"
                 :prepend-icon="mdiBookOpenPageVariant">
               </v-text-field>
+              <v-text-field
+                required label="Url Producto"
+                v-model="urlProducto"
+                :prepend-icon="mdiLinkVariant">
+              </v-text-field>
             </v-card-text>
             <v-card-text v-if="error != null">{{error}}</v-card-text>
             <v-divider class="mx-5"></v-divider>
@@ -58,7 +63,7 @@
 </template>
 
 <script>
-import { mdiBookOpenPageVariant } from '@mdi/js';
+import { mdiBookOpenPageVariant, mdiLinkVariant } from '@mdi/js';
 import Swal from 'sweetalert2';
 import { storage, db } from '@/firebase';
 import router from '@/router';
@@ -68,9 +73,11 @@ export default {
   data() {
     return {
       mdiBookOpenPageVariant,
+      mdiLinkVariant,
       error: null,
       file: null,
       nombre: '',
+      urlProducto: '',
       prev: '',
       loading: false,
       uploading: 0,
@@ -111,6 +118,7 @@ export default {
           .add({
             nombre: this.nombre,
             linkVideo: urlDescarga,
+            urlProducto: this.urlProducto,
           })
           .then(() => {
             Swal.fire(
