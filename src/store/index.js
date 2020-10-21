@@ -82,6 +82,9 @@ export default new Vuex.Store({
     setTitulo(state, valor) {
       state.titulos = valor;
     },
+    eliminarProducto(state, id) {
+      state.productos = state.productos.filter((doc) => doc.id !== id);
+    },
   },
   actions: {
     crearUsuario({ commit }, valor) {
@@ -299,6 +302,13 @@ export default new Vuex.Store({
           });
           commit('setProducto', productosEtiqueta);
           commit('setTitulo', productos);
+        });
+    },
+
+    async eliminarProducto({ commit }, id) {
+      await db.collection('producto').doc(id).delete()
+        .then(() => {
+          commit('eliminarProducto', id);
         });
     },
   },

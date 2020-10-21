@@ -17,10 +17,26 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="producto in productos" :key="producto.uid">
+          <tr v-for="producto in titulos" :key="producto.uid">
             <td>{{producto.titulo}}</td>
             <td>{{producto.etiqueta}}</td>
-            <td class="text-right">Eliminar</td>
+            <td class="text-right">
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    icon
+                    color="red"
+                    v-bind="attrs"
+                    v-on="on"
+                    class="ml-2"
+                    @click="confirmarEliminarProduto(producto.id)"
+                  >
+                    <v-icon>{{mdiDelete}}</v-icon>
+                  </v-btn>
+                </template>
+                <span>Eliminar</span>
+              </v-tooltip>
+            </td>
           </tr>
         </tbody>
       </template>
@@ -30,9 +46,16 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
+import Swal from 'sweetalert2';
+import { mdiDelete } from '@mdi/js';
 
 export default {
   name: 'productos-inicio',
+  data() {
+    return {
+      mdiDelete,
+    };
+  },
   metaInfo: {
     title: 'Productos Inicio',
     titleTemplate: '%s | Megapromocionales LTDA',
@@ -42,10 +65,31 @@ export default {
     ],
   },
   methods: {
-    ...mapActions(['traerProducto']),
+    ...mapActions(['traerProducto', 'eliminarProducto']),
+    confirmarEliminarProduto(id) {
+      Swal.fire({
+        title: '¿Estas segur@?',
+        text: '¡No se podrá revertir!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Si, ¡eliminarlo!',
+      }).then((result) => {
+        if (result.value) {
+          this.eliminarProducto(id);
+          Swal.fire(
+            '¡Eliminada!',
+            'El producto ha sido eliminado.',
+            'success',
+          );
+        }
+      });
+    },
   },
   computed: {
-    ...mapState(['productos']),
+    ...mapState(['titulos']),
   },
   mounted() {
     this.traerProducto();
