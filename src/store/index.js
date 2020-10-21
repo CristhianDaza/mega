@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import axios from 'axios';
 import Vuex from 'vuex';
 import {
   auth,
@@ -24,6 +25,7 @@ export default new Vuex.Store({
     },
     videos: [],
     productos: [],
+    titulos: [],
   },
   mutations: {
     setLayout(state, layout) {
@@ -76,6 +78,9 @@ export default new Vuex.Store({
     },
     setProducto(state, valor) {
       state.productos = valor;
+    },
+    setTitulo(state, valor) {
+      state.titulos = valor;
     },
   },
   actions: {
@@ -278,7 +283,22 @@ export default new Vuex.Store({
             producto.id = doc.id;
             productos.push(producto);
           });
-          commit('setProducto', productos);
+          const url = `https://marpicoprod.azurewebsites.net/api/productos/?page_size=12&page=1&order=paginacion_web&etiqueta=${productos[0].etiqueta}`;
+          const config = {
+            method: 'get',
+            url,
+            headers: {
+              Authorization: 'Bearer Api-Key fBc8kc9ejmpvIqSLeKh9bIL955E0LOdNfFKfNZhGy3xRlGTxtDl7ADOdSzrLfgLj',
+            },
+          };
+          const productosEtiqueta = [];
+          axios(config).then((res) => {
+            res.data.results.forEach((producto) => {
+              productosEtiqueta.push(producto);
+            });
+          });
+          commit('setProducto', productosEtiqueta);
+          commit('setTitulo', productos);
         });
     },
   },
