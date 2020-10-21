@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-parallax
-      v-if="this.productoNuevo.length > 0"
+      v-if="this.productosEtiqueta.length > 0"
         src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/opt_offer.webp?alt=media&token=e57afeca-ebe2-430d-a6e7-664b3a372763"
         :height="this.$vuetify.breakpoint.xs ? '100' : '200'"
       >
@@ -9,30 +9,30 @@
         :class="this.$vuetify.breakpoint.xs ? 'display-1 mt-2' : 'display-2'"
         class="mb-2 text-center font-weight-black"
       >
-        Nuevos <span class="primary--text">Productos</span>
+        {{this.productos[0].titulo}}
       </h1>
     </v-parallax>
 
     <v-container>
       <v-divider class="mx-5 mb-5"></v-divider>
-      <v-row v-if="this.productoNuevo.length > 0">
+      <v-row v-if="this.productosEtiqueta.length > 0">
         <v-col
           cols="12"
           sm="6"
           md="4"
           lg="3"
-          v-for="(producto) in productoNuevo"
+          v-for="(producto) in productosEtiqueta"
           :key="producto.familia"
         >
           <Productos :producto='producto' :colores="producto.materiales"/>
         </v-col>
       </v-row>
 
-      <v-hover v-slot:default="{ hover }" v-if="this.productoNuevo.length > 0">
+      <v-hover v-slot:default="{ hover }" v-if="this.productosEtiqueta.length > 0">
         <v-card
           outlined
           class="d-inline-block"
-          :to="'/productos?etiqueta=' + 1"
+          :to="'/productos?etiqueta=' + this.productos[0].etiqueta"
           :elevation="hover ? 5 : 2"
           :class="{ 'on-hover': hover }"
         >
@@ -51,7 +51,9 @@
               <v-list-item two-line>
                 <v-list-item-content>
                   <v-list-item-title>Ver más</v-list-item-title>
-                  <v-list-item-subtitle>Ver todos los productos Nuevos</v-list-item-subtitle>
+                  <v-list-item-subtitle>
+                    Ver todos los {{this.productos[0].etiqueta}}
+                  </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
             </v-col>
@@ -71,6 +73,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
 import Productos from '@/components/Productos/Productos.vue';
 import { mdiSale, mdiArrowRight } from '@mdi/js';
 import axios from 'axios';
@@ -78,14 +81,16 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      productoNuevo: [],
+      productosEtiqueta: [],
       mdiSale,
       mdiArrowRight,
+      producto: [],
     };
   },
   methods: {
+    ...mapActions(['traerProducto']),
     async getProductosNuevos() {
-      const url = 'https://marpicoprod.azurewebsites.net/api/productos/?page_size=12&page=1&order=paginacion_web&etiqueta=1';
+      const url = `https://marpicoprod.azurewebsites.net/api/productos/?page_size=12&page=1&order=paginacion_web&etiqueta=${this.productos[0].etiqueta}`;
       const config = {
         method: 'get',
         url,
@@ -96,13 +101,24 @@ export default {
       await axios(config).then((res) => {
         // console.log(res.data.results[0].imagen.imagen.file_md);
         res.data.results.forEach((producto) => {
-          this.productoNuevo.push(producto);
+          this.productosEtiqueta.push(producto);
         });
       });
     },
+    llenarProductos() {
+      this.productos.forEach((producto) => {
+        this.producto = producto;
+      });
+      this.getProductosNuevos();
+      console.log(this.product);
+    },
+  },
+  computed: {
+    ...mapState(['productos']),
   },
   mounted() {
-    this.getProductosNuevos();
+    this.llenarProductos();
+    this.traerProducto();
   },
   components: {
     Productos,
