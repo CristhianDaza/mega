@@ -61,7 +61,6 @@ export default {
   },
   mounted() {
     this.traerProducto();
-    console.log(this.titulos);
   },
   components: {
     Productos,
