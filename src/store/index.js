@@ -23,6 +23,7 @@ export default new Vuex.Store({
       color: '', id: '', detial: '', end: '', name: '', start: '', terminado: '',
     },
     videos: [],
+    productos: [],
   },
   mutations: {
     setLayout(state, layout) {
@@ -72,6 +73,9 @@ export default new Vuex.Store({
     },
     eliminarVideo(state, id) {
       state.videos = state.videos.filter((doc) => doc.id !== id);
+    },
+    setProducto(state, valor) {
+      state.productos = valor;
     },
   },
   actions: {
@@ -263,6 +267,18 @@ export default new Vuex.Store({
       await db.collection('video').doc(id).delete()
         .then(() => {
           commit('eliminarVideo', id);
+        });
+    },
+    async traerProducto({ commit }) {
+      await db.collection('producto').get()
+        .then((snapshot) => {
+          const productos = [];
+          snapshot.forEach((doc) => {
+            const producto = doc.data();
+            producto.id = doc.id;
+            productos.push(producto);
+          });
+          commit('setProducto', productos);
         });
     },
   },

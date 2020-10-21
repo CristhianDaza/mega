@@ -147,8 +147,5 @@ export default {
   computed: {
     ...mapState(['usuario']),
   },
-  created() {
-    this.$store.commit('setLayout', 'adminLayout');
-  },
 };
 </script>

@@ -164,6 +164,13 @@ const routes = [
     component: () => import('../views/admin/productosInicio/Index.vue'),
     meta: { requiresAuth: true },
   },
+  {
+    path: '/admin/productos-inicio/agregar-productos',
+    name: 'Agregar Productos Inicio',
+    exact: true,
+    component: () => import('../views/admin/productosInicio/agregarProductos.vue'),
+    meta: { requiresAuth: true },
+  },
 ];
 
 const router = new VueRouter({
