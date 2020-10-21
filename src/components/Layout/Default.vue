@@ -3,7 +3,9 @@
     <Cabecera />
     <MenuPrincipal />
     <v-main>
-      <router-view :key="$route.fullPath" />
+      <transition name="fade" mode="out-in">
+        <router-view :key="$route.fullPath" />
+      </transition>
     </v-main>
     <Footer />
     <v-speed-dial>
@@ -96,6 +98,13 @@ export default {
 </script>
 
 <style>
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+    transform: translateX(-2em);
+  }
+  .fade-enter-active, .fade-leave-active {
+    transition: all.3s ease;
+  }
   @media (min-width: 1904px) {
     .container {
       max-width: 1185px !important;
