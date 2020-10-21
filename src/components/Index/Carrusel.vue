@@ -7,8 +7,6 @@
     :speed="1000"
     :autoplayTimeout="5000"
     :navigationEnabled="true"
-    navigationNextLabel=">"
-    navigationPrevLabel="<"
   >
     <slide
       v-for="(slide, i) in imagenSlider"
