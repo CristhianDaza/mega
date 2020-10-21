@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueMeta from 'vue-meta';
 import { auth } from '@/firebase';
+import VueCarousel from 'vue-carousel';
 import router from './router';
 // eslint-disable-next-line import/order
 import VueAnalytics from 'vue-analytics';
@@ -13,7 +14,7 @@ import '@babel/polyfill';
 Vue.config.productionTip = false;
 
 Vue.use(VueMeta);
-
+Vue.use(VueCarousel);
 Vue.use(VueAnalytics, {
   id: 'UA-126390971-1',
   router,

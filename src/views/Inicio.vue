@@ -1,7 +1,7 @@
 <template>
   <div>
     <Hero />
-    <Carousel />
+    <Carrusel />
     <VideoPromocion />
     <Servicios />
     <InfoImagen />
@@ -13,7 +13,7 @@
 
 <script>
 import Hero from '@/components/Index/Hero.vue';
-import Carousel from '@/components/Index/Carousel.vue';
+import Carrusel from '@/components/Index/Carrusel.vue';
 import Servicios from '@/components/Index/Servicios.vue';
 import InfoImagen from '@/components/Index/InfoImagen.vue';
 import ProductosNuevos from '@/components/Index/ProductosNuevos.vue';
@@ -25,7 +25,7 @@ export default {
   name: 'Inicio',
   components: {
     Hero,
-    Carousel,
+    Carrusel,
     Servicios,
     InfoImagen,
     Instagram,
