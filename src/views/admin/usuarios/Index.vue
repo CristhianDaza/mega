@@ -94,7 +94,7 @@ export default {
           this.eliminarUsuario(id);
           Swal.fire(
             '¡Eliminada!',
-            'El usuario ha sido eliminado. Ingresar a la base de datos para eliminar el inisio de sesión.',
+            'El usuario ha sido eliminado. Ingresar a la base de datos para eliminar el inicio de sesión.',
             'success',
           );
         }
