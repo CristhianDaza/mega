@@ -24,13 +24,8 @@
                 :prepend-icon="mdiBookOpenPageVariant">
               </v-text-field>
               <v-text-field
-                required label="Link del PDF"
-                v-model="linkPDF"
-                :prepend-icon="mdiFilePdfBox">
-              </v-text-field>
-              <v-text-field
-                required label="Link del Virtual"
-                v-model="linkVirtual"
+                required label="Link del Catálogo"
+                v-model="linkCatalogo"
                 :prepend-icon="mdiOpenInNew">
               </v-text-field>
             </v-card-text>
@@ -81,8 +76,7 @@ export default {
       mdiBookOpenPageVariant,
       error: null,
       file: null,
-      linkPDF: '',
-      linkVirtual: '',
+      linkCatalogo: '',
       nombre: '',
       prev: '',
       loading: false,
@@ -130,8 +124,7 @@ export default {
           .add({
             nombre: this.nombre,
             linkImagen: urlDescarga,
-            linkPDF: this.linkPDF,
-            linkVirtual: this.linkVirtual,
+            linkCatalogo: this.linkCatalogo,
           })
           .then(() => {
             Swal.fire(

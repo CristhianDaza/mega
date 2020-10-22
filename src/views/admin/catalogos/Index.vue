@@ -29,16 +29,16 @@
           </v-card-text>
           <v-divider class="mt-3"></v-divider>
           <v-card-actions>
-            <v-btn outlined>
-              <a :href="catalogo.linkPDF" target="_blank">
-                <v-icon class="mr-2">{{mdiFilePdfBox}}</v-icon> PDF
-              </a>
-            </v-btn>
-            <v-btn outlined>
-              <a :href="catalogo.linkVirtual" target="_blank">
-                <v-icon class="mr-2">{{mdiOpenInNew}}</v-icon> Virtual
-              </a>
-            </v-btn>
+            <a
+              :href="catalogo.linkVirtual"
+              target="_blank"
+            >
+              <v-btn color="primary" width="100%" text>
+                Ver Catálogo  {{catalogo.nombre}} <v-icon class="ml-1" small>
+                  {{mdiOpenInNew}}
+                </v-icon>
+              </v-btn>
+            </a>
             <v-tooltip bottom>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
