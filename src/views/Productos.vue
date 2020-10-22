@@ -155,6 +155,7 @@ export default {
         { text: '12', value: 12 },
         { text: '24', value: 24 },
         { text: '48', value: 48 },
+        { text: '60', value: 60 },
       ],
       items: [
         {

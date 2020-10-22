@@ -8,6 +8,17 @@
         class="text-subtitle-1 mb-2">
         Resultados: {{this.infoProductos[0].count}}
       </h2>
+      <v-select
+        :items="listaPorPaginas"
+        item-text="text"
+        item-value="value"
+        label="Ítems por Página"
+        class="mt-2"
+        dense
+        filled
+        v-model="porPagina"
+        @change="cambiarPorPagina(porPagina)"
+      ></v-select>
       <v-row v-if="this.productos.length > 0">
         <h2
           v-if="Number(this.infoProductos[0].count) === 0"
@@ -69,6 +80,12 @@ export default {
       busqueda: this.$route.query.busqueda || '',
       pagina: Number(this.$route.query.pagina) || 1,
       porPagina: Number(this.$route.query.porPagina) || 12,
+      listaPorPaginas: [
+        { text: '12', value: 12 },
+        { text: '24', value: 24 },
+        { text: '48', value: 48 },
+        { text: '60', value: 60 },
+      ],
     };
   },
   components: {
