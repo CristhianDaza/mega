@@ -593,7 +593,6 @@ export default {
 
       await axios(config).then((res) => {
         this.productoTraking.push(res.data[0].materiales);
-        console.log(this.productoTraking);
       });
     },
     async getProductosSugerencia(codigo) {

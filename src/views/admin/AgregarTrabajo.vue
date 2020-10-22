@@ -203,7 +203,6 @@ export default {
   methods: {
     ...mapActions(['traerUsuarios']),
     async crearTrabajo(trabajo) {
-      console.log(trabajo);
       this.loading = true;
       const {
         name,

@@ -139,7 +139,7 @@ export default {
         this.error = 'Imagen subida con éxito';
         this.file = null;
       } catch (error) {
-        console.log(error);
+        this.error = error;
       } finally {
         this.loading = false;
       }
