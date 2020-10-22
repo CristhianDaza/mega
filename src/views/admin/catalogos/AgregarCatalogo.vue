@@ -25,7 +25,7 @@
               </v-text-field>
               <v-text-field
                 required label="Link del Catálogo"
-                v-model="linkCatalogo"
+                v-model="linkVirtual"
                 :prepend-icon="mdiOpenInNew">
               </v-text-field>
             </v-card-text>
@@ -76,7 +76,7 @@ export default {
       mdiBookOpenPageVariant,
       error: null,
       file: null,
-      linkCatalogo: '',
+      linkVirtual: '',
       nombre: '',
       prev: '',
       loading: false,
@@ -124,7 +124,7 @@ export default {
           .add({
             nombre: this.nombre,
             linkImagen: urlDescarga,
-            linkCatalogo: this.linkCatalogo,
+            linkVirtual: this.linkVirtual,
           })
           .then(() => {
             Swal.fire(
