@@ -85,20 +85,6 @@
           <span>Nosotros</span>
         </v-tooltip>
 
-        <v-tooltip bottom>
-          <template v-slot:activator="{on, attrs}">
-            <v-btn
-              class="mx-4 white--text"
-              v-on="on"
-              v-bind="attrs"
-              icon to="/buscar"
-            >
-              <v-icon>{{mdiMagnify}}</v-icon>
-            </v-btn>
-          </template>
-          <span>Buscar</span>
-        </v-tooltip>
-
         <v-tooltip v-if="existeUsuario" bottom>
           <template v-slot:activator="{on, attrs}">
             <v-btn
@@ -197,7 +183,6 @@ import {
   mdiCart,
   mdiAccountGroup,
   mdiHome,
-  mdiMagnify,
   mdiFacebook,
   mdiInstagram,
   mdiGmail,
@@ -213,7 +198,6 @@ export default {
     mdiLibrary,
     mdiCardAccountPhone,
     mdiAccountGroup,
-    mdiMagnify,
     mdiFacebook,
     mdiInstagram,
     mdiGmail,
