@@ -191,6 +191,7 @@ import {
 } from '@mdi/js';
 import { mapGetters } from 'vuex';
 import router from '@/router';
+import Swal from 'sweetalert2';
 
 export default {
   data() {
@@ -221,6 +222,22 @@ export default {
   },
   methods: {
     buscarProducto(busqueda) {
+      if (busqueda === '') {
+        Swal.fire(
+          '¡Error!',
+          'La busqueda no puede ir vacía.',
+          'error',
+        );
+        return;
+      }
+      if (busqueda.length < 3) {
+        Swal.fire(
+          '¡Error!',
+          'La busqueda debe contener al menos 3 caracteres.',
+          'error',
+        );
+        return;
+      }
       router.push({
         path: '/buscar',
         query: {
