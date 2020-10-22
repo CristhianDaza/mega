@@ -37,16 +37,17 @@
                   </v-img>
                 </div>
                 <v-card-actions>
-                  <v-btn outlined>
-                    <a class="linksCatalogos" :href="catalogo.linkPDF" target="_blank">
-                      <v-icon class="mr-1">{{mdiFilePdfBox}}</v-icon> PDF
-                    </a>
-                  </v-btn>
-                  <v-btn outlined>
-                    <a class="linksCatalogos" :href="catalogo.linkVirtual" target="_blank">
-                      <v-icon class="mr-1">{{mdiOpenInNew}}</v-icon> Virtual
-                    </a>
-                  </v-btn>
+                  <a
+                    class="linksCatalogos"
+                    :href="catalogo.linkVirtual"
+                    target="_blank"
+                  >
+                    <v-btn color="primary" width="100%" text>
+                      Ver Catálogo  {{catalogo.nombre}} <v-icon class="ml-1" small>
+                        {{mdiOpenInNew}}
+                      </v-icon>
+                    </v-btn>
+                  </a>
                 </v-card-actions>
               </v-card>
             </template>
@@ -149,14 +150,7 @@ export default {
   margin-right: auto;
   width: 100%;
   transform: scale(1);
-  -ms-transform: scale(1);
-  -moz-transform: scale(1);
-  -webkit-transform: scale(1);
-  -o-transform: scale(1);
-  -webkit-transition: all 500ms ease-in-out;
-  -moz-transition: all 500ms ease-in-out;
-  -ms-transition: all 500ms ease-in-out;
-  -o-transition: all 500ms ease-in-out;
+  transition: all 1s ease;
 }
 .div-catalogo:hover .imagen-catalogo {
   transform: scale(1.2);
@@ -166,6 +160,6 @@ export default {
   -o-transform: scale(1.2);
 }
 .linksCatalogos {
-  color: inherit !important;
+  width: 100%;
 }
 </style>
