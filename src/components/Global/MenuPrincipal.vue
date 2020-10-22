@@ -224,8 +224,6 @@ export default {
       router.push({
         path: '/buscar',
         query: {
-          pagina: 1,
-          porPagina: 12,
           busqueda,
         },
       });

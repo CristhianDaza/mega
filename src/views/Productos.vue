@@ -132,7 +132,6 @@
 import Productos from '@/components/Productos/Productos.vue';
 import axios from 'axios';
 import Hero from '@/components/Global/Hero.vue';
-import { mdiMagnify } from '@mdi/js';
 
 export default {
   name: 'productosmega',
@@ -142,7 +141,6 @@ export default {
       productos: [],
       categorias: [],
       colores: [],
-      mdiMagnify,
       inputInventario: Number(this.$route.query.inventario) || 0,
       pagina: Number(this.$route.query.pagina) || 1,
       categoria: Number(this.$route.query.categoria) || '',
@@ -316,9 +314,3 @@ export default {
   },
 };
 </script>
-
-<style>
-  .sinResultados {
-    width: 100%;
-  }
-</style>
