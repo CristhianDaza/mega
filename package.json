@@ -20,7 +20,6 @@
     "vue-carousel": "^0.18.0",
     "vue-meta": "^2.4.0",
     "vue-router": "^3.4.7",
-    "vueperslides": "^2.10.8",
     "vuetify": "^2.3.14",
     "vuex": "^3.4.0"
   },
