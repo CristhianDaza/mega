@@ -4532,6 +4532,13 @@ flatted@^2.0.0:
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-2.0.2.tgz#4575b21e2bcee7434aa9be662f4b7b5f9c2b5138"
   integrity sha512-r5wGx7YeOwNWNlCA0wQ86zKyDLMQr+/RB8xy74M4hTphfmjlijTSSXGuH8rnvKZnfT9i+75zmd8jcKdMR4O6jA==
 
+flipbook-vue@^0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/flipbook-vue/-/flipbook-vue-0.10.1.tgz#a1a2f0b4e66b0e3287da661b7cf1263fa00eab74"
+  integrity sha512-n7vqBq5IY/HLOI6DQpQVvi+Vn/FRsIoHZmeS5FLGuan9V8M8JAl/oQgInMb8cPu6QwLz+0uXATF7f5HVnYYQqA==
+  dependencies:
+    rematrix "^0.4.1"
+
 flush-write-stream@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/flush-write-stream/-/flush-write-stream-1.1.1.tgz#8dd7d873a1babc207d94ead0c2e0e44276ebf2e8"
@@ -7638,6 +7645,11 @@ relateurl@0.2.x:
   version "0.2.7"
   resolved "https://registry.yarnpkg.com/relateurl/-/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
   integrity sha1-VNvzd+UUQKypCkzSdGANP/LYiKk=
+
+rematrix@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/rematrix/-/rematrix-0.4.1.tgz#496d40b48c79dd3820bc40352b8d7bec44b32887"
+  integrity sha512-nH4OjL09zw4yhdBClK4B93kRWbHu+std7ZV6ljS2Zsgy2YrPcayL67axKLfMxoFool8mPyVY614m8SFE7sJQLw==
 
 remove-trailing-separator@^1.0.1:
   version "1.1.0"

@@ -54,6 +54,12 @@ const routes = [
     component: () => import('../views/ProductoCodigo.vue'),
   },
   {
+    path: '/portafolio-mega',
+    name: 'portafolioMega',
+    exact: true,
+    component: () => import('../views/PortafolioMega.vue'),
+  },
+  {
     path: '/admin/login',
     name: 'Login',
     exact: true,
