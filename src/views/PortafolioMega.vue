@@ -2,48 +2,48 @@
   <div
     id="app"
     :class="{ 'has-mouse': hasMouse }"
-    class="mt-2"
     @touchstart="hasMouse = false"
   >
-    <Flipbook
-      class="flipbook container"
-      :pages="pages"
-      v-slot="flipbook"
-      ref="flipbook"
-    >
-      <div class="action-bar">
-        <v-icon
-          class="btn left"
-          :class="{ disabled: !flipbook.canFlipLeft }"
-          @click="flipbook.flipLeft">
-            {{mdiArrowLeftBoldCircle}}
+    <v-container>
+      <Flipbook
+        class="flipbook"
+        :pages="pages"
+        v-slot="flipbook"
+      >
+        <div class="action-bar mt-3 mb-3 pb-0">
+          <v-icon
+            class="btn left"
+            :class="{ disabled: !flipbook.canFlipLeft }"
+            @click="flipbook.flipLeft">
+              {{mdiArrowLeftBoldCircle}}
+            </v-icon>
+          <v-icon
+            class="btn plus"
+            :class="{ disabled: !flipbook.canZoomIn }"
+            @click="flipbook.zoomIn"
+          >
+            {{mdiMagnifyPlus}}
           </v-icon>
-        <v-icon
-          class="btn plus"
-          :class="{ disabled: !flipbook.canZoomIn }"
-          @click="flipbook.zoomIn"
-        >
-          {{mdiMagnifyPlus}}
-        </v-icon>
-        <span class="page-num">
-          Página {{ flipbook.page }} de {{ flipbook.numPages }}
-        </span>
-        <v-icon
-            class="btn minus"
-          :class="{ disabled: !flipbook.canZoomOut }"
-          @click="flipbook.zoomOut"
-        >
-          {{mdiMagnifyMinus}}
-        </v-icon>
-        <v-icon
-          class="btn right"
-          :class="{ disabled: !flipbook.canFlipRight }"
-          @click="flipbook.flipRight"
-        >
-          {{mdiArrowRightBoldCircle}}
-        </v-icon>
-      </div>
-    </Flipbook>
+          <span class="page-num">
+            Página {{ flipbook.page }} de {{ flipbook.numPages }}
+          </span>
+          <v-icon
+              class="btn minus"
+            :class="{ disabled: !flipbook.canZoomOut }"
+            @click="flipbook.zoomOut"
+          >
+            {{mdiMagnifyMinus}}
+          </v-icon>
+          <v-icon
+            class="btn right"
+            :class="{ disabled: !flipbook.canFlipRight }"
+            @click="flipbook.flipRight"
+          >
+            {{mdiArrowRightBoldCircle}}
+          </v-icon>
+        </div>
+      </Flipbook>
+    </v-container>
   </div>
 </template>
 
@@ -83,29 +83,52 @@ export default {
     // Simulate asynchronous pages initialization
     setTimeout((() => {
       this.pages = [
-        null,
-        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2FPagina%201.png?alt=media&token=d0fdde10-9aaa-4171-92c5-a26f3e87ad9f',
-        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2FPagina%203.png?alt=media&token=9d8b2006-0e79-4244-9d9a-4e3f7f9206c5',
-        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2FPagina%204.png?alt=media&token=4baa5b71-ce4a-43fc-b2b6-b7eb9888463f',
-        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2FPagina%205.png?alt=media&token=e198fbc8-eb0e-43dc-b2b8-5a3a26d18a8b',
-        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2FPagina%206.png?alt=media&token=d96512c8-f938-4d06-aabd-392fb3a26597',
-        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2FPagina%207.png?alt=media&token=64a5e196-fc18-40ba-8213-dc3896daa782',
-        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2FPagina%208.png?alt=media&token=7837fdbc-e30e-4cd7-ac02-036098907905',
-        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2FPagina%209.png?alt=media&token=db5c376c-a7ca-413b-80c7-6aa63140f783',
-        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2FPagina%2010.png?alt=media&token=1e579c4f-da4b-4ad9-9d57-ed329590b96d',
-        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2FPagina%2011.png?alt=media&token=ee33267b-968c-4ee3-8404-26b19f82300a',
-        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2FPagina%2012.png?alt=media&token=57b7796b-33e0-42b7-a905-0d0afd6ac1dc',
-        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2FPagina%2013.png?alt=media&token=66eabc52-1d6a-488b-ad0a-00f5af7f840b',
-        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2FPagina%2014.png?alt=media&token=d128f478-0dae-4db6-a86c-a97ee11a94bd',
-        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2FPagina%2015.png?alt=media&token=65fbbc06-ada9-4e36-aebf-1db2087eefba',
-        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2FPagina%2016.png?alt=media&token=53875d74-fdd2-484c-b084-c972c2584a91',
-        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2FPagina%2017.png?alt=media&token=ad43d752-1cb0-4721-b370-6b966b9a141b',
-        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2FPagina%2018.png?alt=media&token=449ad627-9e69-4cbb-b0a9-e2907800a8ab',
-        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2FPagina%2019.png?alt=media&token=7cd51a56-cd83-465e-8668-dfdd3d0c45c5',
-        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2FPagina%2020.png?alt=media&token=a88f31c7-eba7-403b-a28b-97ad7136c135',
-        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2FPagina%2021.png?alt=media&token=b7379fb0-0c16-442b-82b5-b7524fef5bbd',
-        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2FPagina%2022.png?alt=media&token=642aa614-002d-4f60-8746-6425337b6889',
-        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2FPagina%2023.png?alt=media&token=336a227a-57b4-491b-9b90-41cb866e87b8',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp1_1.jpg?alt=media&token=4309a4bb-a917-4c31-bbd9-2cc422d9e000',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp1_2.jpg?alt=media&token=dcb92a7f-13d3-4c5c-bc03-79ee6c921375',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp2_1.jpg?alt=media&token=95b9393b-104e-4b44-a3d4-f9dd79216812',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp2_2.jpg?alt=media&token=d5323e77-794e-4f30-a8dc-f666678d0f73',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp3_1.jpg?alt=media&token=126d44fc-80d2-4774-a642-e866be587682',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp3_2.jpg?alt=media&token=a32176a6-230d-49ad-ab57-0245dafd7d5d',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp4_1.jpg?alt=media&token=80143b9a-39a2-4ced-ae61-f7e8fca3ae70',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp4_2.jpg?alt=media&token=4422f775-e90c-4ae4-a606-63ebfda62566',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp5_1.jpg?alt=media&token=179c9978-06ab-4a5e-8b89-b38a88725425',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp5_2.jpg?alt=media&token=85ee4abb-e533-4a27-9522-292ee9d5ed29',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp6_1.jpg?alt=media&token=fe5eabd6-d738-4a61-b0eb-0a45ab8bd225',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp6_2.jpg?alt=media&token=d1966688-edae-4536-9c62-42cc29dd4f42',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp7_1.jpg?alt=media&token=77db2847-065b-470f-8c0d-25297f35ba29',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp7_2.jpg?alt=media&token=fd7a1182-72f1-4c28-821a-3d1256fb2083',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp8_1.jpg?alt=media&token=d64d3704-899b-42e8-9313-8189b4b5b6ab',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp8_2.jpg?alt=media&token=36778682-9f4a-469f-a9ec-d823e78570a6',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp9_1.jpg?alt=media&token=cc5a4aec-1964-4729-9ab1-451fd0f03528',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp9_2.jpg?alt=media&token=ddea74b8-0880-4c0d-ad07-a63cf747e367',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp10_1.jpg?alt=media&token=1554a040-632f-4649-bad2-5fc6328ed0c4',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp10_2.jpg?alt=media&token=3077f195-ffbf-4418-ae76-ef4f2cbc4188',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp11_1.jpg?alt=media&token=e821e306-f1e6-4105-9a0c-09e549d7f837',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp11_2.jpg?alt=media&token=94cf2223-34b9-45fd-a700-e33248990132',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp12_1.jpg?alt=media&token=9a3008ff-a057-41e4-a609-cfa999781859',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp12_2.jpg?alt=media&token=d0553a0d-0bfd-4635-bc1a-96a8c2374eab',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp13_1.jpg?alt=media&token=81713bbb-daed-451e-b95e-55c3472d6878',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp13_2.jpg?alt=media&token=f1acf92a-e793-47c4-b2c3-ceb4b91bab0e',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp14_1.jpg?alt=media&token=fddea7f5-d4cb-4f2d-8fb6-748bc94195be',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp14_2.jpg?alt=media&token=b2c05cc1-ae3a-40ab-a060-b59597c80bcd',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp15_1.jpg?alt=media&token=38d24ab1-0bca-43ad-956f-378f4a5774ac',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp15_2.jpg?alt=media&token=50be7d32-6422-4eb4-8fc8-995aba691813',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp16_1.jpg?alt=media&token=de705b4a-14c1-4863-96ae-088f948fb49c',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp16_2.jpg?alt=media&token=5224736f-50da-46ca-b922-9e4686644f34',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp17_1.jpg?alt=media&token=f06be029-d1f1-4cba-a6a6-a5afc503189f',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp17_2.jpg?alt=media&token=15272f19-ffdf-4446-a60c-e5fceb75a0a2',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp18_1.jpg?alt=media&token=809c5f70-4126-481e-99df-9e6e49643523',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp18_2.jpg?alt=media&token=a4244fdd-4ed2-46b1-9c3d-50d77923d744',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp19_1.jpg?alt=media&token=d7d42643-28f5-4983-9c1d-c5b22876593d',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp19_2.jpg?alt=media&token=70981008-6045-402f-97c6-a14fa8933401',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp20_1.jpg?alt=media&token=7e0762c0-0c4c-4ee7-8950-0a3c90e2f945',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp20_2.jpg?alt=media&token=b13e95cf-7759-4208-9c4d-c5a7ef6e5b1f',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp21_1.jpg?alt=media&token=130b7041-918b-4429-a98e-e8835f2f6b4a',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp21_2.jpg?alt=media&token=99ad3869-fb9f-4ac3-97a7-e58f6b09e5e1',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp22_1.jpg?alt=media&token=de2df558-36dc-4e16-9c54-ad76657acbe9',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp22_2.jpg?alt=media&token=f304157d-06ac-4429-b6dd-e4d0c3cff4ad',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp23_1.jpg?alt=media&token=66d6edfb-a318-48d0-b2c5-25b7bb444392',
+        'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/portafolio%2Fp23_2.jpg?alt=media&token=52d7a7b0-1534-4289-b80f-6de004581168',
       ];
     }), 1);
   },

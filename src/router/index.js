@@ -54,7 +54,7 @@ const routes = [
     component: () => import('../views/ProductoCodigo.vue'),
   },
   {
-    path: '/portafolio-mega',
+    path: '/portafolio',
     name: 'portafolioMega',
     exact: true,
     component: () => import('../views/PortafolioMega.vue'),
