@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Hero titulo="Portafolio Megapromocionales"/>
     <v-container>
       <v-breadcrumbs :items="items">
         <template v-slot:item="{ item }">
@@ -65,6 +66,7 @@
 
 <script>
 import Flipbook from 'flipbook-vue';
+import Hero from '@/components/Global/Hero.vue';
 import {
   mdiArrowLeftBoldCircle,
   mdiMagnifyPlus,
@@ -104,6 +106,7 @@ export default {
   },
   components: {
     Flipbook,
+    Hero,
   },
   metaInfo: {
     title: 'Portafolio Megapromocionales📙',
