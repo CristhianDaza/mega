@@ -2,17 +2,19 @@
   <div :class="this.$vuetify.breakpoint.xs ? '' : 'container'">
     <v-row class="mx-0">
       <v-col cols="12" v-for="imagen in imagenInfo" :key="imagen.id">
-        <v-img :src="imagen.linkImagen" :alt="imagen.nombre">
-          <template v-slot:placeholder>
-            <v-row
-              class="fill-height ma-0"
-              align="center"
-              justify="center"
-            >
-              <v-progress-circular indeterminate color="blue-grey"></v-progress-circular>
-            </v-row>
-          </template>
-        </v-img>
+        <router-link :to="imagen.url">
+          <v-img :src="imagen.linkImagen" :alt="imagen.nombre">
+            <template v-slot:placeholder>
+              <v-row
+                class="fill-height ma-0"
+                align="center"
+                justify="center"
+              >
+                <v-progress-circular indeterminate color="blue-grey"></v-progress-circular>
+              </v-row>
+            </template>
+          </v-img>
+        </router-link>
       </v-col>
     </v-row>
   </div>
