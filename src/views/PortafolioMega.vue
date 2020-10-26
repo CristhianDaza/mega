@@ -1,49 +1,65 @@
 <template>
-  <div
-    id="app"
-    :class="{ 'has-mouse': hasMouse }"
-    @touchstart="hasMouse = false"
-  >
+  <div>
     <v-container>
-      <Flipbook
-        class="flipbook"
-        :pages="pages"
-        v-slot="flipbook"
-      >
-        <div class="action-bar mt-3 mb-3 pb-0">
-          <v-icon
-            class="btn left"
-            :class="{ disabled: !flipbook.canFlipLeft }"
-            @click="flipbook.flipLeft">
-              {{mdiArrowLeftBoldCircle}}
-            </v-icon>
-          <v-icon
-            class="btn plus"
-            :class="{ disabled: !flipbook.canZoomIn }"
-            @click="flipbook.zoomIn"
+      <v-breadcrumbs :items="items">
+        <template v-slot:item="{ item }">
+          <v-breadcrumbs-item
+            :to="{ path: item.href}"
+            :disabled="item.disabled"
+            class="primary--text"
+            exact
           >
-            {{mdiMagnifyPlus}}
-          </v-icon>
-          <span class="page-num">
-            Página {{ flipbook.page }} de {{ flipbook.numPages }}
-          </span>
-          <v-icon
-              class="btn minus"
-            :class="{ disabled: !flipbook.canZoomOut }"
-            @click="flipbook.zoomOut"
-          >
-            {{mdiMagnifyMinus}}
-          </v-icon>
-          <v-icon
-            class="btn right"
-            :class="{ disabled: !flipbook.canFlipRight }"
-            @click="flipbook.flipRight"
-          >
-            {{mdiArrowRightBoldCircle}}
-          </v-icon>
-        </div>
-      </Flipbook>
+            {{ item.titulo.toUpperCase() }}
+          </v-breadcrumbs-item>
+        </template>
+      </v-breadcrumbs>
     </v-container>
+    <div
+      id="app"
+      :class="{ 'has-mouse': hasMouse }"
+      @touchstart="hasMouse = false"
+    >
+      <v-container>
+        <Flipbook
+          class="flipbook"
+          :pages="pages"
+          v-slot="flipbook"
+        >
+          <div class="action-bar mt-3 mb-3 pb-0">
+            <v-icon
+              class="btn left"
+              :class="{ disabled: !flipbook.canFlipLeft }"
+              @click="flipbook.flipLeft">
+                {{mdiArrowLeftBoldCircle}}
+              </v-icon>
+            <v-icon
+              class="btn plus"
+              :class="{ disabled: !flipbook.canZoomIn }"
+              @click="flipbook.zoomIn"
+            >
+              {{mdiMagnifyPlus}}
+            </v-icon>
+            <span class="page-num">
+              Página {{ flipbook.page }} de {{ flipbook.numPages }}
+            </span>
+            <v-icon
+                class="btn minus"
+              :class="{ disabled: !flipbook.canZoomOut }"
+              @click="flipbook.zoomOut"
+            >
+              {{mdiMagnifyMinus}}
+            </v-icon>
+            <v-icon
+              class="btn right"
+              :class="{ disabled: !flipbook.canFlipRight }"
+              @click="flipbook.flipRight"
+            >
+              {{mdiArrowRightBoldCircle}}
+            </v-icon>
+          </div>
+        </Flipbook>
+      </v-container>
+    </div>
   </div>
 </template>
 
@@ -67,10 +83,42 @@ export default {
       pagesHiRes: [],
       hasMouse: true,
       pageNum: null,
+      items: [
+        {
+          titulo: 'Inicio',
+          disabled: false,
+          href: '/',
+        },
+        {
+          titulo: 'catalogos',
+          disabled: false,
+          href: '/catalogos',
+        },
+        {
+          titulo: 'portafolio mega',
+          disabled: true,
+          href: '/portafolio',
+        },
+      ],
     };
   },
   components: {
     Flipbook,
+  },
+  metaInfo: {
+    title: 'Portafolio Megapromocionales📙',
+    titleTemplate: '%s | Megapromocionales LTDA',
+    meta: [
+      { charset: 'utf8' },
+      { name: 'description', content: 'Compañía dedicada a la importación, distribución y comercialización de artículos promocionales y material publicitario, ofrecemos a nuestros clientes atención personalizada y asesoría en la elaboración de trabajos, garantizando resultados óptimos en menor tiempo de producción utilizando tecnología de punta y personal calificado con un alto grado de responsabilidad y relaciones humanas, fomentando el trabajo en equipo y comprometidos con el medío ambiente y la sociedad en beneficio de nuestros clientes y colaboradores.' },
+      { name: 'robots', content: 'Index' },
+      { name: 'og:title', content: 'Nosotros Megapromocionales LTDA' },
+      { name: 'og:type', content: 'website' },
+      { name: 'og:url', content: 'https://megapromocionales.com.co/portafolio' },
+      { name: 'og:image', content: 'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/logo.png?alt=media&token=08967fdf-f5b0-4782-8571-e3391abd3c5b' },
+      { name: 'og:description', content: 'Compañía dedicada a la importación, distribución y comercialización de artículos promocionales y material publicitario, ofrecemos a nuestros clientes atención personalizada y asesoría en la elaboración de trabajos, garantizando resultados óptimos en menor tiempo de producción utilizando tecnología de punta y personal calificado con un alto grado de responsabilidad y relaciones humanas, fomentando el trabajo en equipo y comprometidos con el medío ambiente y la sociedad en beneficio de nuestros clientes y colaboradores.' },
+      { name: 'og:site_name', content: 'Megapromocionales LTDA' },
+    ],
   },
   mounted() {
     window.addEventListener('keydown', (ev) => {
@@ -137,7 +185,7 @@ export default {
 
 <style scoped>
 #app {
-  height: 80vh;
+  height: 100vh;
 }
 .flipbook {
   width: 100%;
