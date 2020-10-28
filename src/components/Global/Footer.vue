@@ -114,7 +114,6 @@
         </v-tooltip>
 
       </v-card-text>
-      <v-divider></v-divider>
       <v-card-title :class="
           $vuetify.theme.dark
               ? 'grey darken-4'
