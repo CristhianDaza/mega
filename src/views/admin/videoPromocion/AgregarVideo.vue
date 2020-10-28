@@ -31,7 +31,6 @@
                 :items="completo"
                 item-text="name"
                 item-value="value"
-                :rules="asesorRules"
                 label="Vídeo Completo"
                 :prepend-icon="mdiImageSizeSelectLarge"
                 v-model="videoCompleto"
