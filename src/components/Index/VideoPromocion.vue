@@ -5,6 +5,7 @@
       :key="video.id"
       height="100%"
       width="100%"
+      :class="video.completo.value ? '' : 'container'"
     >
       <router-link :to="video.urlProducto">
         <video
