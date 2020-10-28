@@ -27,6 +27,17 @@
                 v-model="urlProducto"
                 :prepend-icon="mdiLinkVariant">
               </v-text-field>
+              <v-select
+                :items="completo"
+                item-text="name"
+                item-value="value"
+                :rules="asesorRules"
+                label="Vídeo Completo"
+                :prepend-icon="mdiImageSizeSelectLarge"
+                v-model="videoCompleto"
+                required
+                return-object
+              ></v-select>
             </v-card-text>
             <v-card-text v-if="error != null">{{error}}</v-card-text>
             <v-divider class="mx-5"></v-divider>
@@ -63,7 +74,7 @@
 </template>
 
 <script>
-import { mdiBookOpenPageVariant, mdiLinkVariant } from '@mdi/js';
+import { mdiBookOpenPageVariant, mdiLinkVariant, mdiImageSizeSelectLarge } from '@mdi/js';
 import Swal from 'sweetalert2';
 import { storage, db } from '@/firebase';
 import router from '@/router';
@@ -74,13 +85,19 @@ export default {
     return {
       mdiBookOpenPageVariant,
       mdiLinkVariant,
+      mdiImageSizeSelectLarge,
       error: null,
       file: null,
       nombre: '',
       urlProducto: '',
       prev: '',
+      videoCompleto: false,
       loading: false,
       uploading: 0,
+      completo: [
+        { name: 'Si', value: true },
+        { name: 'No', value: false },
+      ],
     };
   },
   metaInfo: {
@@ -119,6 +136,7 @@ export default {
             nombre: this.nombre,
             linkVideo: urlDescarga,
             urlProducto: this.urlProducto,
+            completo: this.videoCompleto,
           })
           .then(() => {
             Swal.fire(
