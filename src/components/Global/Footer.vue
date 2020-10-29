@@ -166,7 +166,7 @@
               ? 'blue-grey darken-3t'
               : ''
         ">
-        <strong>Megapromocionales LTDA</strong> © {{ new Date().getFullYear() }}
+        <strong class="title">Megapromocionales LTDA © {{ new Date().getFullYear() }}</strong>
       </v-card-text>
       <v-card-text class="text-center black--text white">
         Design by <strong class="primary--text">Cristhian Daza</strong> With 💙
