@@ -119,46 +119,46 @@
               ? 'grey darken-4'
               : 'primary'
         ">
-        <strong class="subheading">¡Conéctate con nosotros en las redes sociales!</strong>
+        <v-container>
+          <strong class="subheading">¡Síguenos en las redes sociales!</strong>
+          <div class="float-right">
+            <v-btn
+              class="mx-4"
+              icon
+            >
+              <a href="https://www.facebook.com/Mega-Promocionales-242144370051788/" target="_blank" class="white--text">
+                <v-icon size="24px">{{mdiFacebook}}</v-icon>
+              </a>
+            </v-btn>
 
-        <v-spacer></v-spacer>
+            <v-btn
+              class="mx-4"
+              icon
+            >
+              <a href="https://www.instagram.com/megapromocional/" target="_blank" class="white--text">
+                <v-icon size="24px">{{mdiInstagram}}</v-icon>
+              </a>
+            </v-btn>
 
-        <v-btn
-          class="mx-4"
-          icon
-        >
-          <a href="https://www.facebook.com/Mega-Promocionales-242144370051788/" target="_blank" class="white--text">
-            <v-icon size="24px">{{mdiFacebook}}</v-icon>
-          </a>
-        </v-btn>
+            <v-btn
+              class="mx-4"
+              icon
+            >
+              <a href="mailto:megapromocional@gmail.com" target="_blank" class="white--text">
+                <v-icon size="24px">{{mdiGmail}}</v-icon>
+              </a>
+            </v-btn>
 
-        <v-btn
-          class="mx-4"
-          icon
-        >
-          <a href="https://www.instagram.com/megapromocional/" target="_blank" class="white--text">
-            <v-icon size="24px">{{mdiInstagram}}</v-icon>
-          </a>
-        </v-btn>
-
-        <v-btn
-          class="mx-4"
-          icon
-        >
-          <a href="mailto:megapromocional@gmail.com" target="_blank" class="white--text">
-            <v-icon size="24px">{{mdiGmail}}</v-icon>
-          </a>
-        </v-btn>
-
-        <v-btn
-          class="mx-4"
-          icon
-        >
-          <a href="https://api.whatsapp.com/send?phone=573159275144&text=Hola%20quisiera%20informaci%c3%b3n&source=&data=&app_absent=" target="_blank" class="white--text">
-            <v-icon size="24px">{{mdiWhatsapp}}</v-icon>
-          </a>
-        </v-btn>
-
+            <v-btn
+              class="mx-4"
+              icon
+            >
+              <a href="https://api.whatsapp.com/send?phone=573159275144&text=Hola%20quisiera%20informaci%c3%b3n&source=&data=&app_absent=" target="_blank" class="white--text">
+                <v-icon size="24px">{{mdiWhatsapp}}</v-icon>
+              </a>
+            </v-btn>
+          </div>
+        </v-container>
       </v-card-title>
 
       <v-card-text class="py-2 text-center white--text" :class="
@@ -168,8 +168,8 @@
         ">
         <strong>Megapromocionales LTDA</strong> © {{ new Date().getFullYear() }}
       </v-card-text>
-      <v-card-text class="float-right primary--text white">
-        Design by <strong>Cristhian Daza</strong> With 💙
+      <v-card-text class="text-center black--text white">
+        Design by <strong class="primary--text">Cristhian Daza</strong> With 💙
       </v-card-text>
     </v-card>
   </v-footer>
