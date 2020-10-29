@@ -13,6 +13,7 @@
           autoplay
           muted
           width="100%"
+          preload="auto"
         >
           <source :src="video.linkVideo" type="video/mp4" />
         </video>
