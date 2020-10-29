@@ -10,7 +10,7 @@
                 align="center"
                 justify="center"
               >
-                <v-progress-circular indeterminate color="blue-grey"></v-progress-circular>
+                <Loader />
               </v-row>
             </template>
           </v-img>
@@ -22,6 +22,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import Loader from '@/components/Global/Loader.vue';
 
 export default {
   methods: {
@@ -32,6 +33,9 @@ export default {
   },
   mounted() {
     this.traerImagenInfo();
+  },
+  components: {
+    Loader,
   },
 };
 </script>

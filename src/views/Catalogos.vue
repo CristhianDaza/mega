@@ -31,7 +31,7 @@
                         align="center"
                         justify="center"
                       >
-                        <v-progress-circular indeterminate color="blue-grey"></v-progress-circular>
+                        <Loader />
                       </v-row>
                     </template>
                   </v-img>
@@ -58,14 +58,7 @@
     <div v-else class="mx-auto">
       <v-container class="fill-height mt-16 mx-auto">
         <v-row align="center" justify="center">
-          <v-progress-circular
-            :size="100"
-            :width="7"
-            color="primary"
-            indeterminate
-          >
-            Cargando
-          </v-progress-circular>
+          <Loader />
         </v-row>
       </v-container>
     </div>
@@ -74,6 +67,7 @@
 
 <script>
 import Hero from '@/components/Global/Hero.vue';
+import Loader from '@/components/Global/Loader.vue';
 import { mapState, mapActions } from 'vuex';
 import { mdiFilePdfBox, mdiOpenInNew } from '@mdi/js';
 
@@ -104,6 +98,7 @@ export default {
   },
   components: {
     Hero,
+    Loader,
   },
   computed: {
     ...mapState(['catalogos']),

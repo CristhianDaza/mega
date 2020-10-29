@@ -221,7 +221,7 @@
                       align="center"
                       justify="center"
                     >
-                      <v-progress-circular indeterminate color="blue-grey"></v-progress-circular>
+                      <Loader />
                     </v-row>
                   </template>
                 </v-img>
@@ -348,7 +348,7 @@
                           align="center"
                           justify="center"
                         >
-                          <v-progress-circular indeterminate color="blue-grey"></v-progress-circular>
+                          <Loader />
                         </v-row>
                       </template>
                     </v-img>
@@ -400,10 +400,7 @@
           </v-row>
           <v-col v-else>
             <div class="text-center pt-10">
-              <v-progress-circular
-                indeterminate
-                color="primary"
-              ></v-progress-circular>
+              <Loader />
             </div>
           </v-col>
         </v-col>
@@ -431,7 +428,7 @@
     </v-dialog>
 
     <v-overlay :value="overlay">
-      <v-progress-circular indeterminate size="64"></v-progress-circular>
+      <Loader />
     </v-overlay>
 
   </div>

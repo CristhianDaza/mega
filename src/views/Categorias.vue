@@ -65,14 +65,7 @@
         <div v-else class="mx-auto">
           <v-container class="fill-height mt-16 mx-auto">
             <v-row align="center" justify="center">
-              <v-progress-circular
-                :size="100"
-                :width="7"
-                color="primary"
-                indeterminate
-              >
-                Cargando
-              </v-progress-circular>
+              <Loader />
             </v-row>
           </v-container>
         </div>
@@ -82,6 +75,7 @@
 
 <script>
 import Hero from '@/components/Global/Hero.vue';
+import Loader from '@/components/Global/Loader.vue';
 import axios from 'axios';
 
 export default {
@@ -110,6 +104,7 @@ export default {
   },
   components: {
     Hero,
+    Loader,
   },
   methods: {
     async getCategorias() {

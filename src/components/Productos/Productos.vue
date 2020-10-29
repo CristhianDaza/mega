@@ -19,7 +19,7 @@
                   align="center"
                   justify="center"
                 >
-                  <v-progress-circular indeterminate color="blue-grey"></v-progress-circular>
+                  <Loader />
                 </v-row>
               </template>
             </v-img>
@@ -105,9 +105,13 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import Loader from '@/components/Global/Loader.vue';
 
 export default {
   props: ['producto', 'colores'],
+  components: {
+    Loader,
+  },
   computed: {
     ...mapGetters(['existeUsuario']),
   },

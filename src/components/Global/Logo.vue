@@ -15,7 +15,7 @@
             align="center"
             justify="center"
           >
-            <v-progress-circular indeterminate color="blue-grey"></v-progress-circular>
+            <Loader />
           </v-row>
         </template>
       </v-img>
@@ -24,8 +24,13 @@
 </template>
 
 <script>
+import Loader from '@/components/Global/Loader.vue';
+
 export default {
   name: 'Logo',
   props: ['width'],
+  components: {
+    Loader,
+  },
 };
 </script>

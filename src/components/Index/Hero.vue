@@ -12,7 +12,7 @@
           align="center"
           justify="center"
         >
-          <v-progress-circular indeterminate color="blue-grey"></v-progress-circular>
+          <Loader />
         </v-row>
       </template>
       <v-row :class="this.$vuetify.breakpoint.xs ? 'fondoOscuro' : ''" align="center" class="pa-2">
@@ -51,6 +51,16 @@
     </v-img>
   </div>
 </template>
+
+<script>
+import Loader from '@/components/Global/Loader.vue';
+
+export default {
+  components: {
+    Loader,
+  },
+};
+</script>
 
 <style>
   .fondoOscuro {

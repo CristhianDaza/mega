@@ -11,7 +11,7 @@
           align="center"
           justify="center"
         >
-          <v-progress-circular indeterminate color="blue-grey"></v-progress-circular>
+          <Loader />
         </v-row>
       </template>
       <v-container
@@ -26,6 +26,7 @@
 
 <script>
 import Imagen from '@/assets/header.jpg';
+import Loader from '@/components/Global/Loader.vue';
 
 export default {
   props: ['titulo'],
@@ -33,6 +34,9 @@ export default {
     return {
       Imagen,
     };
+  },
+  components: {
+    Loader,
   },
 };
 </script>
