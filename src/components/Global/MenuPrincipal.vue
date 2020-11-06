@@ -6,12 +6,12 @@
     >
       <v-layout>
 
-        <div class="d-flex d-md-none">
+        <div class="d-flex d-lg-none">
           <v-app-bar-nav-icon class="white--text" @click.stop="drawer = !drawer">
           </v-app-bar-nav-icon>
         </div>
 
-        <div class="d-none d-md-flex" v-for="menu in menus" :key="menu.uid">
+        <div class="d-none d-lg-flex" v-for="menu in menus" :key="menu.uid">
           <v-btn class="text-oscuro" text large exact :to="menu.link">
             <span>{{menu.nombre}}</span>
           </v-btn>
