@@ -177,6 +177,20 @@ const routes = [
     component: () => import('../views/admin/productosInicio/agregarProductos.vue'),
     meta: { requiresAuth: true },
   },
+  {
+    path: '/admin/menu-principal',
+    name: 'Menu Principal',
+    exact: true,
+    component: () => import('../views/admin/menuPrincipal/Index.vue'),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/admin/menu-principal/agregar-menu',
+    name: 'Agregar Menu Principal',
+    exact: true,
+    component: () => import('../views/admin/menuPrincipal/agregarMenu.vue'),
+    meta: { requiresAuth: true },
+  },
 ];
 
 const router = new VueRouter({

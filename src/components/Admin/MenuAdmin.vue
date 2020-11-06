@@ -69,6 +69,15 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item link to="/admin/menu-principal">
+          <v-list-item-action>
+            <v-icon>{{ mdiMenu }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Menú Principal</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
       </v-list>
     </v-navigation-drawer>
 
@@ -124,6 +133,7 @@ import {
   mdiLogout,
   mdiYoutube,
   mdiCart,
+  mdiMenu,
 } from '@mdi/js';
 import { mapActions, mapState } from 'vuex';
 
@@ -140,6 +150,7 @@ export default {
     mdiInformation,
     mdiYoutube,
     mdiCart,
+    mdiMenu,
   }),
   methods: {
     ...mapActions(['cerrarSesion']),
