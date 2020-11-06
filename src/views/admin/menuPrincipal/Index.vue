@@ -31,7 +31,7 @@
                     v-bind="attrs"
                     v-on="on"
                     class="ml-2"
-                    @click="confirmarEliminarProduto(producto.id)"
+                    @click="confirmarEliminarMenu(menu.id)"
                   >
                     <v-icon>{{mdiDelete}}</v-icon>
                   </v-btn>
@@ -67,8 +67,8 @@ export default {
     ],
   },
   methods: {
-    ...mapActions(['traerMenus', 'eliminarProducto']),
-    confirmarEliminarProduto(id) {
+    ...mapActions(['traerMenus', 'eliminarMenu']),
+    confirmarEliminarMenu(id) {
       Swal.fire({
         title: '¿Estas segur@?',
         text: '¡No se podrá revertir!',
@@ -80,10 +80,10 @@ export default {
         confirmButtonText: 'Si, ¡eliminarlo!',
       }).then((result) => {
         if (result.value) {
-          this.eliminarProducto(id);
+          this.eliminarMenu(id);
           Swal.fire(
-            '¡Eliminada!',
-            'El producto ha sido eliminado.',
+            '¡Eliminado!',
+            'El menú ha sido eliminado.',
             'success',
           );
         }
@@ -97,6 +97,7 @@ export default {
     this.traerMenus();
   },
   created() {
+    this.traerMenus();
     this.$store.commit('setLayout', 'adminLayout');
   },
 };
