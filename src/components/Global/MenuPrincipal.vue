@@ -47,55 +47,19 @@
       <v-list shaped menu>
         <v-subheader>Menú Principal</v-subheader>
         <v-divider class="mx-5"></v-divider>
-        <v-list-item-group v-model="group" class="white--text">
-          <v-list-item to="/">
+        <v-list-item-group
+          v-model="group"
+          class="white--text"
+          v-for="menu in menus"
+          :key="menu.uid"
+        >
+
+          <v-list-item exact :to="menu.link">
             <v-list-item-title>
-              <v-icon left>{{mdiHome}}</v-icon>
-              <span>Inicio</span>
+              <span>{{menu.nombre}}</span>
             </v-list-item-title>
           </v-list-item>
 
-          <v-list-item to="/categorias">
-            <v-list-item-title>
-              <v-icon left>{{mdiCart}}</v-icon>
-              <span>Categorías</span>
-            </v-list-item-title>
-          </v-list-item>
-
-          <v-list-item to="/catalogos">
-            <v-list-item-title>
-              <v-icon left>{{mdiLibrary}}</v-icon>
-              <span>Catálogos</span>
-            </v-list-item-title>
-          </v-list-item>
-
-          <v-list-item to="/contacto">
-            <v-list-item-title>
-              <v-icon left>{{mdiCardAccountPhone}}</v-icon>
-              <span>Contacto</span>
-            </v-list-item-title>
-          </v-list-item>
-
-          <v-list-item to="/nosotros">
-            <v-list-item-title>
-              <v-icon left>{{mdiAccountGroup}}</v-icon>
-              <span>Nosotros</span>
-            </v-list-item-title>
-          </v-list-item>
-
-          <v-list-item v-if="existeUsuario" to="/admin">
-            <v-list-item-title>
-              <v-icon left>{{mdiCoffee}}</v-icon>
-              <span>Admin</span>
-            </v-list-item-title>
-          </v-list-item>
-
-          <v-list-item v-if="!existeUsuario" to="/admin/login">
-            <v-list-item-title>
-              <v-icon left>{{mdiCoffee}}</v-icon>
-              <span>Login</span>
-            </v-list-item-title>
-          </v-list-item>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
