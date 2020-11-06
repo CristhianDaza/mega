@@ -26,8 +26,8 @@
           Sin resultados
         </h2>
         <v-col
-          cols="12"
-          sm="6"
+          cols="6"
+          sm="4"
           md="3"
           v-for="(producto) in productos[0]"
           :key="producto.id"

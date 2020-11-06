@@ -17,10 +17,9 @@
       <v-divider class="mx-5 mb-5"></v-divider>
       <v-row v-if="this.productos.length > 0">
         <v-col
-          cols="12"
-          sm="6"
-          md="4"
-          lg="3"
+          cols="6"
+          sm="4"
+          md="3"
           v-for="(producto) in this.productos"
           :key="producto.familia"
         >

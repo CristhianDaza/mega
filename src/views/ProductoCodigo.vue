@@ -329,7 +329,7 @@
             {{this.textoSugerido}}
           </h3>
           <v-row v-if="productoSugerencia.length > 0">
-            <v-col cols="12" sm="6" v-for="producto in productoSugerencia" :key="producto.familia">
+            <v-col cols="6" v-for="producto in productoSugerencia" :key="producto.familia">
               <v-card outlined class="mx-auto tarjetaProducto">
                 <v-card-text class="pa-0">
                   <router-link
