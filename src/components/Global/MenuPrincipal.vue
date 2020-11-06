@@ -32,55 +32,7 @@
           dark
           hide-details="auto"
         ></v-text-field>
-        <v-tooltip v-model="mostrarTooltip" bottom>
-          <template v-slot:activator="{on, attrs}">
-            <v-btn
-              v-on="on"
-              v-bind="attrs"
-              icon
-              @click="cambiarTema"
-            >
-              <v-icon class="white--text">{{
-                $vuetify.theme.dark
-                    ? mdiBrightness4
-                    : mdiBrightness7}}
-              </v-icon>
-            </v-btn>
-          </template>
-          <span>{{
-            $vuetify.theme.dark
-                ? 'Activar modo Claro'
-                : 'Activar modo Oscuro'}}
-          </span>
-        </v-tooltip>
       </v-layout>
-      <v-snackbar
-        v-model="snackbar"
-        :timeout="timeout"
-        shaped
-        top
-        :color="
-          $vuetify.theme.dark
-              ? 'primary'
-              : 'grey darken-4'
-        "
-      >
-        {{ textSnackbar }}
-        <template v-slot:action="{ attrs }">
-          <v-btn
-            v-bind="attrs"
-            :color="
-            $vuetify.theme.dark
-                ? 'grey darken-4'
-                : 'primary'
-          "
-            text
-            @click="snackbar = false"
-          >
-            Cerrar
-          </v-btn>
-        </template>
-      </v-snackbar>
     </v-app-bar>
 
     <v-navigation-drawer
@@ -152,16 +104,7 @@
 
 <script>
 import {
-  mdiBrightness4,
-  mdiBrightness7,
-  mdiLibrary,
-  mdiCardAccountPhone,
-  mdiCart,
-  mdiAccountGroup,
-  mdiCoffee,
-  mdiHome,
   mdiMagnify,
-  mdiMenu,
 } from '@mdi/js';
 import { mapGetters, mapActions, mapState } from 'vuex';
 import router from '@/router';
@@ -170,20 +113,7 @@ import Swal from 'sweetalert2';
 export default {
   data() {
     return {
-      mdiBrightness4,
-      mdiBrightness7,
-      mdiLibrary,
-      mdiCardAccountPhone,
-      mdiCart,
-      mdiAccountGroup,
-      mdiCoffee,
-      mdiHome,
-      mdiMenu,
       mdiMagnify,
-      snackbar: false,
-      timeout: 3000,
-      textSnackbar: '',
-      mostrarTooltip: false,
       drawer: false,
       group: null,
       busqueda: '',
@@ -221,19 +151,6 @@ export default {
       });
       this.busqueda = '';
     },
-    cambiarTema() {
-      if (this.$vuetify.theme.dark) {
-        this.textSnackbar = 'Modo Claro Activado';
-        this.snackbar = true;
-        this.$vuetify.theme.dark = false;
-        localStorage.setItem('darkTheme', this.$vuetify.theme.dark.toString());
-      } else {
-        this.textSnackbar = 'Modo Oscuro Activado';
-        this.snackbar = true;
-        this.$vuetify.theme.dark = true;
-        localStorage.setItem('darkTheme', this.$vuetify.theme.dark.toString());
-      }
-    },
   },
   computed: {
     ...mapGetters(['existeUsuario']),
@@ -248,7 +165,6 @@ export default {
 <style>
 a {
   text-decoration: none;
-  /* margin-top: 15px; */
 }
 
 a:hover {
