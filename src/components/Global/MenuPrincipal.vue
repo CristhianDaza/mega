@@ -2,84 +2,76 @@
   <div>
     <v-app-bar
       :class="this.$vuetify.theme.dark ? '' : 'bg-claro'"
+      flat
     >
-      <div :class="this.$vuetify.breakpoint.md ? '' : 'container'">
-        <v-layout>
+      <v-layout>
 
-          <div class="d-flex d-md-none">
-            <v-app-bar-nav-icon class="white--text" @click.stop="drawer = !drawer">
-            </v-app-bar-nav-icon>
-          </div>
+        <div class="d-flex d-md-none">
+          <v-app-bar-nav-icon class="white--text" @click.stop="drawer = !drawer">
+          </v-app-bar-nav-icon>
+        </div>
 
-          <div class="d-none d-md-flex">
-            <v-btn class="text-oscuro" text large to="/">
-              <v-icon left>{{mdiHome}}</v-icon>
-              <span>Inicio</span>
+        <div class="d-none d-md-flex">
+          <v-btn class="text-oscuro" text large to="/">
+            <span>Inicio</span>
+          </v-btn>
+          <v-btn class="text-oscuro" text large to="/categorias">
+            <span>Categorías</span>
+          </v-btn>
+          <v-btn class="text-oscuro" text large to="/catalogos">
+            <span>Catálogos</span>
+          </v-btn>
+          <v-btn class="text-oscuro" text large to="/contacto">
+            <span>Contacto</span>
+          </v-btn>
+          <v-btn class="text-oscuro" text large to="/nosotros">
+            <span>Nosotros</span>
+          </v-btn>
+          <v-btn v-if="existeUsuario" class="text-oscuro" text large to="/admin">
+            <span>Admin</span>
+          </v-btn>
+          <v-btn v-if="!existeUsuario" class="text-oscuro" text large to="/admin/login">
+            <span>Login</span>
+          </v-btn>
+        </div>
+        <v-spacer></v-spacer>
+        <v-text-field
+          v-model="busqueda"
+          v-on:keyup.enter="buscarProducto(busqueda)"
+          @click:prepend-inner="buscarProducto(busqueda)"
+          clearable
+          class="mt-1 mx-2"
+          placeholder="Buscar"
+          :prepend-inner-icon="mdiMagnify"
+          outlined
+          rounded
+          filled
+          dense
+          dark
+          hide-details="auto"
+        ></v-text-field>
+        <v-tooltip v-model="mostrarTooltip" bottom>
+          <template v-slot:activator="{on, attrs}">
+            <v-btn
+              v-on="on"
+              v-bind="attrs"
+              icon
+              @click="cambiarTema"
+            >
+              <v-icon class="white--text">{{
+                $vuetify.theme.dark
+                    ? mdiBrightness4
+                    : mdiBrightness7}}
+              </v-icon>
             </v-btn>
-            <v-btn class="text-oscuro" text large to="/categorias">
-              <v-icon left>{{mdiCart}}</v-icon>
-              <span>Categorías</span>
-            </v-btn>
-            <v-btn class="text-oscuro" text large to="/catalogos">
-              <v-icon left>{{mdiLibrary}}</v-icon>
-              <span>Catálogos</span>
-            </v-btn>
-            <v-btn class="text-oscuro" text large to="/contacto">
-              <v-icon left>{{mdiCardAccountPhone}}</v-icon>
-              <span>Contacto</span>
-            </v-btn>
-            <v-btn class="text-oscuro" text large to="/nosotros">
-              <v-icon left>{{mdiAccountGroup}}</v-icon>
-              <span>Nosotros</span>
-            </v-btn>
-            <v-btn v-if="existeUsuario" class="text-oscuro" text large to="/admin">
-              <v-icon left>{{mdiCoffee}}</v-icon>
-              <span>Admin</span>
-            </v-btn>
-            <v-btn v-if="!existeUsuario" class="text-oscuro" text large to="/admin/login">
-              <v-icon left>{{mdiCoffee}}</v-icon>
-              <span>Login</span>
-            </v-btn>
-          </div>
-          <v-spacer></v-spacer>
-          <v-text-field
-            v-model="busqueda"
-            v-on:keyup.enter="buscarProducto(busqueda)"
-            @click:prepend-inner="buscarProducto(busqueda)"
-            clearable
-            class="mt-1 mx-2"
-            placeholder="Buscar"
-            :prepend-inner-icon="mdiMagnify"
-            outlined
-            rounded
-            filled
-            dense
-            dark
-            hide-details="auto"
-          ></v-text-field>
-          <v-tooltip v-model="mostrarTooltip" bottom>
-            <template v-slot:activator="{on, attrs}">
-              <v-btn
-                v-on="on"
-                v-bind="attrs"
-                icon
-                @click="cambiarTema"
-              >
-                <v-icon class="white--text">{{
-                  $vuetify.theme.dark
-                      ? mdiBrightness4
-                      : mdiBrightness7}}
-                </v-icon>
-              </v-btn>
-            </template>
-            <span>{{
-              $vuetify.theme.dark
-                  ? 'Activar modo Claro'
-                  : 'Activar modo Oscuro'}}
-            </span>
-          </v-tooltip>
-        </v-layout>
-      </div>
+          </template>
+          <span>{{
+            $vuetify.theme.dark
+                ? 'Activar modo Claro'
+                : 'Activar modo Oscuro'}}
+          </span>
+        </v-tooltip>
+      </v-layout>
       <v-snackbar
         v-model="snackbar"
         :timeout="timeout"
