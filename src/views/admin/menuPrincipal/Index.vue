@@ -11,15 +11,17 @@
       <template v-slot:default>
         <thead>
           <tr>
-            <th>Titulo</th>
-            <th>Etiqueta</th>
+            <th>Nombre</th>
+            <th>Orden</th>
+            <th>Link</th>
             <th class="text-right">Acción</th>
           </tr>
         </thead>
-        <tbody>
-          <!-- <tr v-for="producto in titulos" :key="producto.uid">
-            <td>{{producto.titulo}}</td>
-            <td>{{producto.etiqueta}}</td>
+        <tbody >
+          <tr v-for="menu in menus" :key="menu.uid" :class="`order-${menu.orden}`">
+            <td>{{menu.nombre}}</td>
+            <td>{{menu.orden}}</td>
+            <td>{{menu.link}}</td>
             <td class="text-right">
               <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
@@ -37,7 +39,7 @@
                 <span>Eliminar</span>
               </v-tooltip>
             </td>
-          </tr> -->
+          </tr>
         </tbody>
       </template>
     </v-simple-table>
@@ -45,7 +47,7 @@
 </template>
 
 <script>
-// import { mapActions, mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import Swal from 'sweetalert2';
 import { mdiDelete } from '@mdi/js';
 
@@ -65,7 +67,7 @@ export default {
     ],
   },
   methods: {
-    // ...mapActions(['traerProducto', 'eliminarProducto']),
+    ...mapActions(['traerMenus', 'eliminarProducto']),
     confirmarEliminarProduto(id) {
       Swal.fire({
         title: '¿Estas segur@?',
@@ -89,10 +91,10 @@ export default {
     },
   },
   computed: {
-    // ...mapState(['titulos']),
+    ...mapState(['menus']),
   },
   mounted() {
-    this.traerProducto();
+    this.traerMenus();
   },
   created() {
     this.$store.commit('setLayout', 'adminLayout');

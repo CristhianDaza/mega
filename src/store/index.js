@@ -26,6 +26,7 @@ export default new Vuex.Store({
     videos: [],
     productos: [],
     titulos: [],
+    menusl: [],
   },
   mutations: {
     setLayout(state, layout) {
@@ -84,6 +85,9 @@ export default new Vuex.Store({
     },
     eliminarProducto(state, id) {
       state.productos = state.productos.filter((doc) => doc.id !== id);
+    },
+    setMenus(state, valor) {
+      state.menus = valor;
     },
   },
   actions: {
@@ -309,6 +313,18 @@ export default new Vuex.Store({
       await db.collection('producto').doc(id).delete()
         .then(() => {
           commit('eliminarProducto', id);
+        });
+    },
+    async traerMenus({ commit }) {
+      await db.collection('menu').orderBy('orden').get()
+        .then((snapshot) => {
+          const menus = [];
+          snapshot.forEach((doc) => {
+            const menu = doc.data();
+            menu.id = doc.id;
+            menus.push(menu);
+          });
+          commit('setMenus', menus);
         });
     },
   },

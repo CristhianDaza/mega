@@ -11,17 +11,22 @@
               striped
               :indeterminate="loading"
             ></v-progress-linear>
-            <v-card-title>Agregar Productos</v-card-title>
+            <v-card-title>Agregar Menú</v-card-title>
             <v-card-text>
               <v-text-field
-                label="Titulo"
-                v-model="titulo"
+                label="Nombre"
+                v-model="nombre"
                 :prepend-icon="mdiFormatTitle">
               </v-text-field>
               <v-text-field
-                label="Etiqueta"
-                v-model="etiqueta"
-                :prepend-icon="mdiCartArrowRight">
+                label="Orden"
+                v-model="orden"
+                :prepend-icon="mdiNumeric">
+              </v-text-field>
+              <v-text-field
+                label="Link"
+                v-model="link"
+                :prepend-icon="mdiLinkVariant">
               </v-text-field>
             </v-card-text>
             <v-card-text v-if="error != null">{{error}}</v-card-text>
@@ -32,7 +37,7 @@
                 color="success"
                 @click.prevent="subirProducto"
                 :loading="loading">
-                  Agregar Producto
+                  Agregar Menú
                 </v-btn>
               <v-btn outlined @click="$router.back()" color="info">Atras</v-btn>
             </v-card-actions>
@@ -44,7 +49,7 @@
 </template>
 
 <script>
-import { mdiFormatTitle, mdiCartArrowRight } from '@mdi/js';
+import { mdiFormatTitle, mdiLinkVariant, mdiNumeric } from '@mdi/js';
 import { db } from '@/firebase';
 import Swal from 'sweetalert2';
 import router from '@/router';
@@ -54,10 +59,12 @@ export default {
   data() {
     return {
       mdiFormatTitle,
-      mdiCartArrowRight,
+      mdiLinkVariant,
+      mdiNumeric,
       error: null,
-      titulo: '',
-      etiqueta: '',
+      nombre: '',
+      link: '',
+      orden: '',
       loading: false,
       uploading: 0,
     };
@@ -74,23 +81,24 @@ export default {
     async subirProducto() {
       try {
         this.loading = true;
-        await db.collection('producto')
+        await db.collection('menu')
           .add({
-            titulo: this.titulo,
-            etiqueta: this.etiqueta,
+            nombre: this.nombre,
+            orden: this.orden,
+            link: this.link,
           })
           .then(() => {
             Swal.fire(
               '¡Creada!',
-              'El producto ha sido creado.',
+              'El menú ha sido creado.',
               'success',
             );
             router.push({
-              path: '/admin/productos-inicio',
+              path: '/admin/menu-principal',
             });
           });
 
-        this.error = 'Producto creado con éxito';
+        this.error = 'Menú creado con éxito';
       } catch (error) {
         Swal.fire(
           'Error!',
