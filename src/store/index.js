@@ -26,7 +26,7 @@ export default new Vuex.Store({
     videos: [],
     productos: [],
     titulos: [],
-    menusl: [],
+    menus: [],
   },
   mutations: {
     setLayout(state, layout) {
