@@ -11,28 +11,13 @@
           </v-app-bar-nav-icon>
         </div>
 
-        <div class="d-none d-md-flex">
-          <v-btn class="text-oscuro" text large to="/">
-            <span>Inicio</span>
+        <div class="d-none d-md-flex" v-for="menu in menus" :key="menu.uid">
+          <v-btn class="text-oscuro" text large exact :to="menu.link">
+            <span>{{menu.nombre}}</span>
           </v-btn>
-          <v-btn class="text-oscuro" text large to="/categorias">
-            <span>Categorías</span>
-          </v-btn>
-          <v-btn class="text-oscuro" text large to="/catalogos">
-            <span>Catálogos</span>
-          </v-btn>
-          <v-btn class="text-oscuro" text large to="/contacto">
-            <span>Contacto</span>
-          </v-btn>
-          <v-btn class="text-oscuro" text large to="/nosotros">
-            <span>Nosotros</span>
-          </v-btn>
-          <v-btn v-if="existeUsuario" class="text-oscuro" text large to="/admin">
-            <span>Admin</span>
-          </v-btn>
-          <v-btn v-if="!existeUsuario" class="text-oscuro" text large to="/admin/login">
+          <!-- <v-btn v-if="!existeUsuario" class="text-oscuro" text large to="/admin/login">
             <span>Login</span>
-          </v-btn>
+          </v-btn> -->
         </div>
         <v-spacer></v-spacer>
         <v-text-field
@@ -181,7 +166,7 @@ import {
   mdiMagnify,
   mdiMenu,
 } from '@mdi/js';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions, mapState } from 'vuex';
 import router from '@/router';
 import Swal from 'sweetalert2';
 
@@ -213,6 +198,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['traerMenus']),
     buscarProducto(busqueda) {
       if (busqueda === '') {
         Swal.fire(
@@ -254,6 +240,10 @@ export default {
   },
   computed: {
     ...mapGetters(['existeUsuario']),
+    ...mapState(['menus']),
+  },
+  mounted() {
+    this.traerMenus();
   },
 };
 </script>
