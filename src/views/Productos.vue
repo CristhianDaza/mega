@@ -144,12 +144,11 @@ export default {
       busqueda: this.$route.query.busqueda || '',
       infoProductos: [],
       totalPaginas: 0,
-      porPagina: Number(this.$route.query.porPagina) || 12,
+      porPagina: Number(this.$route.query.porPagina) || 16,
       listaPorPaginas: [
-        { text: '12', value: 12 },
-        { text: '24', value: 24 },
-        { text: '48', value: 48 },
-        { text: '60', value: 60 },
+        { text: '16', value: 16 },
+        { text: '32', value: 32 },
+        { text: '64', value: 64 },
       ],
       items: [
         {
