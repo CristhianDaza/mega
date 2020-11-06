@@ -15,9 +15,6 @@
           <v-btn class="text-oscuro" text large exact :to="menu.link">
             <span>{{menu.nombre}}</span>
           </v-btn>
-          <!-- <v-btn v-if="!existeUsuario" class="text-oscuro" text large to="/admin/login">
-            <span>Login</span>
-          </v-btn> -->
         </div>
         <v-spacer></v-spacer>
         <v-text-field
