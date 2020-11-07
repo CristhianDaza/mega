@@ -38,21 +38,25 @@
               : ''"
             >
               <p
+                :style="{color: $vuetify.theme.themes[theme].basetexto}"
                 :class="this.$vuetify.breakpoint.xs
                 ? 'ma-0 body-1'
                 : 'subtitle-1'"
                 class="font-weight-medium">Megapromocionales LTDA</p>
               <p
+                :style="{color: $vuetify.theme.themes[theme].basetexto}"
                 :class="this.$vuetify.breakpoint.xs
                 ? 'ma-0 body-1'
                 : 'subtitle-1'"
                 class="font-weight-medium">Carrera 28 # 10 - 60 Local 137</p>
               <p
+                :style="{color: $vuetify.theme.themes[theme].basetexto}"
                 :class="this.$vuetify.breakpoint.xs
                 ? 'ma-0 body-1'
                 : 'subtitle-1'"
                 class="font-weight-medium">megapromocional@gmail.com</p>
               <p
+                :style="{color: $vuetify.theme.themes[theme].basetexto}"
                 :class="this.$vuetify.breakpoint.xs
                 ? 'ma-0 body-1'
                 : 'subtitle-1'"
@@ -72,11 +76,7 @@
       shaped
       top
       text
-      :color="
-        $vuetify.theme.dark
-            ? 'primary'
-            : 'grey darken-4'
-      "
+      color="primary"
     >
       {{ textSnackbar }}
       <template v-slot:action="{ attrs }">
@@ -125,6 +125,11 @@ export default {
   },
   components: {
     Logo,
+  },
+  computed: {
+    theme() {
+      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
+    },
   },
 };
 </script>

@@ -1,9 +1,10 @@
 <template>
-  <div class="servicios">
+  <div :style="{background: $vuetify.theme.themes.dark.basebackground}">
     <v-container>
       <v-row>
-        <v-col cols="12" class="white--text text-center mb-5 mt-0">
-          <h1>Nuestros Servicios</h1>
+        <v-col cols="12" class="text-center mb-5 mt-0">
+          <h1 :style="{color: $vuetify.theme.themes.dark.basetexto}"
+          >Nuestros Servicios</h1>
         </v-col>
         <v-hover v-slot:default="{ hover }">
           <v-col class="text-center" cols="6" md="4" lg="3">
@@ -83,9 +84,6 @@ export default {
 </script>
 
 <style>
-  .servicios {
-    background: #050b1f;
-  }
   .titleService {
     color: rgba(255, 255, 255, 0);
   }

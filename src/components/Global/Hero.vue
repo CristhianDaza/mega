@@ -18,7 +18,10 @@
         class="fill-height white--text"
         :class="this.$vuetify.breakpoint.xs ? 'title fondoOscuro' : 'headline'"
         justify="center">
-        <h1 :class="this.$vuetify.breakpoint.xs ? '' : 'mitadAncho'">{{titulo}}</h1>
+        <h1
+          :class="this.$vuetify.breakpoint.xs ? '' : 'mitadAncho'"
+          :style="{color: $vuetify.theme.themes.dark.basetexto}"
+        >{{titulo}}</h1>
       </v-container>
     </v-img>
   </div>

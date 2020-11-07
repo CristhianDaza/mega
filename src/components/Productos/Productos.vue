@@ -2,7 +2,12 @@
 <!-- eslint-disable max-len -->
   <v-hover>
     <template v-slot:default="{ hover }">
-      <v-card outlined :class="`elevation-${hover ? 8 : 0}`" class="mx-auto pa-0 transition-swing tarjetaProducto">
+      <v-card
+        outlined
+        :class="`elevation-${hover ? 8 : 0}`"
+        class="mx-auto pa-0 transition-swing tarjetaProducto"
+        :style="{background: $vuetify.theme.themes[theme].basebackground}"
+      >
         <v-card-text class="pa-0">
           <router-link
             :to="{path: `/producto/${producto.familia}`}"
@@ -28,10 +33,13 @@
         <v-divider class="mx-8"></v-divider>
         <v-card-title
           class="text-center text-subtitle-2"
+          :style="{color: $vuetify.theme.themes[theme].basetext}"
         >
           {{ producto.descripcion_comercial }}
         </v-card-title>
-        <v-card-subtitle>
+        <v-card-subtitle
+          :style="{color: $vuetify.theme.themes[theme].basetext}"
+        >
           {{ producto.familia }}
         </v-card-subtitle>
         <v-card-subtitle class="d-flex flex-wrap pt-0">
@@ -84,7 +92,9 @@
             </div>
           </template>
         </div>
-        <v-card-title v-if="existeUsuario" class="precio">
+        <v-card-title
+          :style="{color: $vuetify.theme.themes[theme].basetext}"
+          v-if="existeUsuario" class="precio">
           ${{ addCommas(Math.round(producto.materiales[0].precio)) }} + iva
         </v-card-title>
         <v-divider class="mx-5"></v-divider>
@@ -114,6 +124,9 @@ export default {
   },
   computed: {
     ...mapGetters(['existeUsuario']),
+    theme() {
+      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
+    },
   },
   methods: {
     addCommas(nStr) {

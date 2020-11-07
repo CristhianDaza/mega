@@ -4,6 +4,10 @@
       app
       clipped
       v-model="drawer"
+      :style="[
+        {background: $vuetify.theme.themes.dark.basebackground},
+        {color: $vuetify.theme.themes.dark.basetext}
+      ]"
     >
       <v-list dense>
         <v-list-item exact link to="/admin">

@@ -168,7 +168,10 @@
         ">
         <strong class="title">Megapromocionales LTDA © {{ new Date().getFullYear() }}</strong>
       </v-card-text>
-      <v-card-text class="text-center black--text white">
+      <v-card-text
+        class="text-center white"
+        :style="{color: $vuetify.theme.themes.light.basetexto}"
+      >
         Design by <strong class="primary--text">Cristhian Daza</strong> With 💙
       </v-card-text>
     </v-card>

@@ -7,12 +7,20 @@
       <v-layout>
 
         <div class="d-flex d-lg-none">
-          <v-app-bar-nav-icon class="white--text" @click.stop="drawer = !drawer">
-          </v-app-bar-nav-icon>
+          <v-app-bar-nav-icon
+            :style="{color: $vuetify.theme.themes.dark.basetexto}"
+            @click.stop="drawer = !drawer"
+          ></v-app-bar-nav-icon>
         </div>
 
         <div class="d-none d-lg-flex" v-for="menu in menus" :key="menu.uid">
-          <v-btn class="text-oscuro" text large exact :to="menu.link">
+          <v-btn
+            :style="{color: $vuetify.theme.themes.dark.basetexto}"
+            text
+            large
+            exact
+            :to="menu.link"
+          >
             <span>{{menu.nombre}}</span>
           </v-btn>
         </div>
@@ -49,7 +57,7 @@
         <v-divider class="mx-5"></v-divider>
         <v-list-item-group
           v-model="group"
-          class="white--text"
+          :style="{color: $vuetify.theme.themes.dark.basetexto}"
           v-for="menu in menus"
           :key="menu.uid"
         >
@@ -133,10 +141,6 @@ a {
 
 a:hover {
   text-decoration: none;
-}
-
-.text-oscuro {
-  color: white !important;
 }
 
 .subtitle-1 {

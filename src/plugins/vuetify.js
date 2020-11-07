@@ -15,13 +15,13 @@ export default new Vuetify({
     themes: {
       light: {
         primary: '#0077bd',
-        texto: '#252525',
+        basetexto: '#252525',
         basebackground: '#ffffff',
         background: '#f2f5f8',
       },
       dark: {
         secondary: '#05090c',
-        texto: '#edf0f2',
+        basetexto: '#edf0f2',
         basebackground: '#05090c',
         background: '#111b27',
       },

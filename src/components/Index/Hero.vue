@@ -24,25 +24,22 @@
             >
               BIENVENID@ A</p>
             <p
-              class="white--text"
+              :style="{color: $vuetify.theme.themes.dark.basetexto}"
               :class="this.$vuetify.breakpoint.xs ? 'title' : 'display-1'"
             >
               MEGAPROMOCIONALES <span class="primary--text">LTDA</span></p>
             <p
-              class="body-1 white--text mt-1 font-weight-medium">
+              :style="{color: $vuetify.theme.themes.dark.basetexto}"
+              class="body-1 mt-1 font-weight-medium">
               Somos una empresa dedicada a la venta de artículos
               <br> promocionales, comprometidos con nuestro equipo
               <br> de trabajo a tener la mejor calidad de servicio y productos.
             </p>
             <v-btn
               to="/contacto"
-              :color="
-                $vuetify.theme.dark
-                  ? 'blue-grey'
-                  : 'primary'
-                "
-                elevation="9"
-                class="mt-2 white--text">
+              color="primary"
+              elevation="20"
+              class="mt-2 white--text">
               Contacto
             </v-btn>
           </v-container>

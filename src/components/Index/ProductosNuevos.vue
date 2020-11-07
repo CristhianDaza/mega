@@ -8,6 +8,7 @@
       <h1
         :class="this.$vuetify.breakpoint.xs ? 'display-1 mt-2' : 'display-2'"
         class="mb-2 text-center font-weight-black"
+        :style="{color: $vuetify.theme.themes.dark.basetexto}"
       >
         {{this.titulos[0].titulo}}
       </h1>
@@ -32,9 +33,10 @@
         block
         color="primary"
         x-large
-        elevation="5"
+        elevation="8"
+        outlined
       >
-          Ver todos los {{this.titulos[0].titulo}}
+          Ver más
       </v-btn>
     </v-container>
   </div>
