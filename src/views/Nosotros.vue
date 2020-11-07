@@ -19,12 +19,16 @@
         <v-col cols="12" md="6">
           <h1 class="primary--text text-center display-1">Misión</h1>
           <v-divider class="mx-10 my-2"></v-divider>
-          <p class="text-justify">Compañía dedicada a la importación, distribución y comercialización de artículos promocionales y material publicitario, ofrecemos a nuestros clientes atención personalizada y asesoría en la elaboración de trabajos, garantizando resultados óptimos en menor tiempo de producción utilizando tecnología de punta y personal calificado con un alto grado de responsabilidad y relaciones humanas, fomentando el trabajo en equipo y comprometidos con el medío ambiente y la sociedad en beneficio de nuestros clientes y colaboradores.</p>
+          <p
+          :style="{color: $vuetify.theme.themes[theme].basetexto}"
+          class="text-justify">Compañía dedicada a la importación, distribución y comercialización de artículos promocionales y material publicitario, ofrecemos a nuestros clientes atención personalizada y asesoría en la elaboración de trabajos, garantizando resultados óptimos en menor tiempo de producción utilizando tecnología de punta y personal calificado con un alto grado de responsabilidad y relaciones humanas, fomentando el trabajo en equipo y comprometidos con el medío ambiente y la sociedad en beneficio de nuestros clientes y colaboradores.</p>
         </v-col>
         <v-col cols="12" md="6">
           <h1 class="primary--text text-center display-1">Visión</h1>
           <v-divider class="mx-10 my-2"></v-divider>
-          <p class="text-justify">Consolidarnos como una empresa líder en el mercado de artículos promocionales, ampliar nuestros horizontes e introducir al mercado productos de marca propia atendiendo a las necesidades de nuestros clientes, utilizando tecnología e ideas nuevas que nos permitan ofrecer un excelente servicio, con precios competitivos, conservando la calidez y responsabilidad social como pilares de nuestro crecimiento personal y económico mejorando calidad de vida de nuestros colaboradores directos e indirectos.</p>
+          <p
+          :style="{color: $vuetify.theme.themes[theme].basetexto}"
+          class="text-justify">Consolidarnos como una empresa líder en el mercado de artículos promocionales, ampliar nuestros horizontes e introducir al mercado productos de marca propia atendiendo a las necesidades de nuestros clientes, utilizando tecnología e ideas nuevas que nos permitan ofrecer un excelente servicio, con precios competitivos, conservando la calidez y responsabilidad social como pilares de nuestro crecimiento personal y económico mejorando calidad de vida de nuestros colaboradores directos e indirectos.</p>
         </v-col>
       </v-row>
     </v-container>
@@ -72,6 +76,11 @@ export default {
   },
   created() {
     this.$store.commit('setLayout', 'defaultLayout');
+  },
+  computed: {
+    theme() {
+      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
+    },
   },
 };
 </script>

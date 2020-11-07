@@ -17,7 +17,8 @@
       </v-breadcrumbs>
       <v-row>
         <v-col cols="12" sm="4" md="3">
-          <v-card>
+          <v-card
+            :style="{background: $vuetify.theme.themes[theme].basebackground}">
             <v-card-text class="pb-0">
               <v-select
                 :items="listaPorPaginas"
@@ -42,21 +43,27 @@
               ></v-text-field>
             </v-card-text>
           </v-card>
-          <v-card class="mt-3">
-            <v-list dense>
-              <v-subheader>Etiqueta</v-subheader>
+          <v-card
+            :style="{background: $vuetify.theme.themes[theme].basebackground}"
+            class="mt-3">
+            <v-list dense :style="{background: $vuetify.theme.themes[theme].basebackground}">
+              <v-subheader :style="{color: $vuetify.theme.themes[theme].basetexto}">Etiqueta</v-subheader>
               <v-list-item-group>
                 <v-list-item v-for="etiqueta in this.listaEtiquetas[0]" :key="etiqueta.id">
-                  <v-list-item-title @click="buscarEtiqueta(etiqueta.id)">
+                  <v-list-item-title
+                    :style="{color: $vuetify.theme.themes[theme].basetexto}"
+                    @click="buscarEtiqueta(etiqueta.id)">
                     {{ etiqueta.nombre }} ({{etiqueta.count}})
                   </v-list-item-title>
                 </v-list-item>
               </v-list-item-group>
             </v-list>
           </v-card>
-          <v-card class="mt-3">
-            <v-list v-if="this.categorias.length > 0" dense>
-              <v-subheader>Categorías</v-subheader>
+          <v-card
+            :style="{background: $vuetify.theme.themes[theme].basebackground}"
+            class="mt-3">
+            <v-list v-if="this.categorias.length > 0" dense :style="{background: $vuetify.theme.themes[theme].basebackground}">
+              <v-subheader :style="{color: $vuetify.theme.themes[theme].basetexto}">Categorías</v-subheader>
               <v-list-group
                 v-for="categoria in this.categorias[0]"
                 :key="categoria.id_pagina"
@@ -64,7 +71,10 @@
               >
                 <template v-slot:activator>
                   <v-list-item-content>
-                    <v-list-item-title v-text="categoria.nombre"></v-list-item-title>
+                    <v-list-item-title
+                      :style="{color: $vuetify.theme.themes[theme].basetexto}"
+                      v-text="categoria.nombre"
+                    ></v-list-item-title>
                   </v-list-item-content>
                 </template>
                 <v-list-item
@@ -306,6 +316,11 @@ export default {
   },
   created() {
     this.$store.commit('setLayout', 'defaultLayout');
+  },
+  computed: {
+    theme() {
+      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
+    },
   },
 };
 </script>

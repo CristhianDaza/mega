@@ -37,8 +37,12 @@
                       : 'contenedorCategoriaClaro'
                       "
                     >
-                      <v-card-title class="font-weight-bold">
-                        <router-link :to="'/productos?categoria=' + categoria.jerarquia">
+                      <v-card-title
+                        :style="{color: $vuetify.theme.themes[theme].basetexto}"
+                        class="font-weight-bold">
+                        <router-link
+                          :to="'/productos?categoria=' + categoria.jerarquia"
+                        >
                           {{categoria.nombre}}
                         </router-link>
                       </v-card-title>
@@ -48,8 +52,11 @@
                             v-for="subCategoria in categoria.subcategorias"
                             :key="subCategoria.id_pagina"
                             class="font-weight-medium"
+                            :style="{color: $vuetify.theme.themes[theme].basetexto}"
                           >
-                            <router-link :to="'/productos?subCategoria=' + subCategoria.jerarquia">
+                            <router-link
+                              :to="'/productos?subCategoria=' + subCategoria.jerarquia"
+                            >
                               {{subCategoria.nombre}}
                             </router-link>
                           </li>
@@ -142,6 +149,11 @@ export default {
   },
   created() {
     this.$store.commit('setLayout', 'defaultLayout');
+  },
+  computed: {
+    theme() {
+      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
+    },
   },
 };
 </script>

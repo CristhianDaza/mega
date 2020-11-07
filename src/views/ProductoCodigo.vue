@@ -26,7 +26,9 @@
           </li>
         </ul>
       </div>
-      <v-card class="mx-auto mt-10">
+      <v-card
+        :style="{background: $vuetify.theme.themes[theme].basebackground}"
+        class="mx-auto mt-10">
         <v-row>
           <v-col cols="12" md="6" >
             <v-container>
@@ -35,7 +37,9 @@
               <img v-else :class="$vuetify.breakpoint.xs ? '' : 'fotoTarjetaGrande'" class="fotoTarjeta elevation-18" @click.stop="dialog = true" :src="imagenPrincipalMediana" :alt="productoCodigo[0].descripcion_comercial" />
 
               <div v-if="productoCodigo[0].caracteristicas.length > 0" class="mt-8 mr-5 ml-2">
-                <h1 class="text-subtitle-2">Características:</h1>
+                <h1
+                  :style="{color: $vuetify.theme.themes[theme].basetexto}"
+                  class="text-subtitle-2">Características:</h1>
                 <v-row>
                   <template v-for="caracteristica in productoCodigo[0].caracteristicas">
                     <v-tooltip top :key="caracteristica.id">
@@ -53,11 +57,15 @@
                   </template>
                 </v-row>
               </div>
-              <v-card v-if="this.textoInfo !== ''" class="mt-5 elevation-10">
-                <v-card-text>
-                  <p>{{textoInfo}}</p>
+              <v-card
+                :style="{background: $vuetify.theme.themes[theme].background}"
+                v-if="this.textoInfo !== ''" class="mt-5 elevation-10">
+                <v-card-text class="pb-0">
+                  <p
+                    :style="{color: $vuetify.theme.themes[theme].basetexto}"
+                  >{{textoInfo}}</p>
                 </v-card-text>
-                <v-card-actions>
+                <v-card-actions class="pt-0">
                   <v-btn color="primary" small @click="cerrarTextoInfo">Cerrar</v-btn>
                 </v-card-actions>
               </v-card>
@@ -66,27 +74,43 @@
           <v-col cols="12" md="6" :class="this.$vuetify.breakpoint.xs ? 'pt-0' : ''">
             <v-container :class="$vuetify.breakpoint.xs ? 'pt-0' : ''">
               <v-card-title class="font-weight-black">
-                <h1 class="titulo">{{ productoCodigo[0].familia }} {{ productoCodigo[0].descripcion_comercial }}</h1>
+                <h1
+                  :style="{color: $vuetify.theme.themes[theme].basetexto}"
+                  class="titulo">{{ productoCodigo[0].familia }} {{ productoCodigo[0].descripcion_comercial }}</h1>
               </v-card-title>
               <v-divider class="mx-8"></v-divider>
               <v-card-text>
-                  <p class="ma-0 text-justify">{{ productoCodigo[0].descripcion_larga }}</p>
-                  <p class="ma-0" v-if="productoCodigo[0].material !== null">
+                  <p
+                  :style="{color: $vuetify.theme.themes[theme].basetexto}"
+                  class="ma-0 text-justify">{{ productoCodigo[0].descripcion_larga }}</p>
+                  <p
+                  :style="{color: $vuetify.theme.themes[theme].basetexto}"
+                  class="ma-0" v-if="productoCodigo[0].material !== null">
                     <strong class="font-weight-black primary--text">MATERIAL:</strong> {{ productoCodigo[0].material }}
                   </p>
-                  <p class="ma-0" v-if="productoCodigo[0].medidas !== null">
+                  <p
+                  :style="{color: $vuetify.theme.themes[theme].basetexto}"
+                  class="ma-0" v-if="productoCodigo[0].medidas !== null">
                     <strong class="font-weight-black primary--text">MEDIDAS:</strong> {{ productoCodigo[0].medidas }}
                   </p>
-                  <p class="ma-0" v-if="productoCodigo[0].area_impresion !== null">
+                  <p
+                  :style="{color: $vuetify.theme.themes[theme].basetexto}"
+                  class="ma-0" v-if="productoCodigo[0].area_impresion !== null">
                     <strong class="font-weight-black primary--text">ÁREA DE IMPRESIÓN APROXIMADA:</strong> {{ productoCodigo[0].area_impresion }}
                   </p>
-                  <p class="ma-0" v-if="productoCodigo[0].tecnica_marca_descripcion !== null">
+                  <p
+                  :style="{color: $vuetify.theme.themes[theme].basetexto}"
+                  class="ma-0" v-if="productoCodigo[0].tecnica_marca_descripcion !== null">
                     <strong class="font-weight-black primary--text">MARCA:</strong> {{ productoCodigo[0].tecnica_marca_descripcion }}
                   </p>
-                  <p class="ma-0" v-if="productoCodigo[0].empaque !== null">
+                  <p
+                  :style="{color: $vuetify.theme.themes[theme].basetexto}"
+                  class="ma-0" v-if="productoCodigo[0].empaque !== null">
                     <strong class="font-weight-black primary--text">EMPAQUE:</strong> {{ productoCodigo[0].empaque }}
                   </p>
-                  <p class="ma-0">
+                  <p
+                  :style="{color: $vuetify.theme.themes[theme].basetexto}"
+                  class="ma-0">
                     <strong class="font-weight-black primary--text">Categorias:</strong> <router-link class="linksCategorias" :to="'/productos?subCategoria=' + productoCodigo[0].subcategoria_1.jerarquia">{{ productoCodigo[0].subcategoria_1.nombre }}</router-link> | <router-link class="linksCategorias" :to="'/productos?categoria=' + productoCodigo[0].subcategoria_1.categoria.jerarquia">{{productoCodigo[0].subcategoria_1.categoria.nombre}}</router-link>
                   </p>
                   <template v-if="existeUsuario">
@@ -94,7 +118,9 @@
                       <v-card-subtitle class="font-weight-black primary--text px-0 pb-0">
                         PRECIO:
                       </v-card-subtitle>
-                      <v-card-title class="pa-0" v-for="(valor, index) in productoCodigo[0].materiales" :key="valor.codigo">
+                      <v-card-title
+                        :style="{color: $vuetify.theme.themes[theme].basetexto}"
+                        class="pa-0" v-for="(valor, index) in productoCodigo[0].materiales" :key="valor.codigo">
                         <template v-if="valor.variedad !== null">
                           $ {{addCommas(Math.round(valor.precio))}} + iva
                         <div class="contenedor_color">
@@ -203,7 +229,10 @@
       <img v-else :src="imagenPrincipalGrande" max-height="100%" :alt="productoCodigo[0].descripcion_comercial" />
     </v-dialog>
     <v-container class="pt-0">
-      <v-sheet class="mx-auto" elevation="8">
+      <v-sheet
+        :style="{background: $vuetify.theme.themes[theme].basebackground}"
+        class="mx-auto"
+        elevation="2">
         <v-slide-group v-model="model" class="px-4 py-5" :prev-icon="mdiChevronLeft" :next-icon="mdiChevronRight">
           <v-slide-item v-for="imagen in productoCodigo[0].imagenes" :key="imagen.id">
             <v-row class="grupoImagenes">
@@ -232,7 +261,10 @@
       </v-sheet>
       <v-row>
         <v-col cols="12" sm="6">
-          <v-simple-table>
+          <v-card>
+          <v-simple-table
+            :style="{background: $vuetify.theme.themes[theme].basebackground}"
+          >
             <thead>
               <tr>
                 <th class="text-left">SUGERIDOS</th>
@@ -303,6 +335,7 @@
               </tr>
             </tbody>
           </v-simple-table>
+          </v-card>
           <div v-if="productoCodigo[0].videos.length > 0" class="mt-3">
             <v-responsive :aspect-ratio="16/9">
               <video
@@ -330,7 +363,10 @@
           </h3>
           <v-row v-if="productoSugerencia.length > 0">
             <v-col cols="6" v-for="producto in productoSugerencia" :key="producto.familia">
-              <v-card outlined class="mx-auto tarjetaProducto">
+              <v-card
+                :style="{background: $vuetify.theme.themes[theme].basebackground}"
+                outlined
+                class="mx-auto tarjetaProducto">
                 <v-card-text class="pa-0">
                   <router-link
                     append
@@ -356,15 +392,18 @@
                 </v-card-text>
                     <v-card-title
                   class="text-center text-subtitle-2"
+                  :style="{color: $vuetify.theme.themes[theme].basetexto}"
                 >
                   {{ producto.producto.descripcion_comercial }}
                 </v-card-title>
-                <v-card-subtitle>
+                <v-card-subtitle
+                  :style="{color: $vuetify.theme.themes[theme].basetexto}"
+                >
                   {{ producto.producto.familia }}
                 </v-card-subtitle>
                 <v-card-text class="text-center">
                   <div class="red--text" v-if="producto.inventario < 10">Agotado en {{producto.color_nombre}}</div>
-                  <div v-else>Inventario: {{producto.inventario}} unidades.</div>
+                  <div v-else :style="{color: $vuetify.theme.themes[theme].basetexto}">Inventario: {{producto.inventario}} color {{producto.color_nombre}}.</div>
                 </v-card-text>
                   <div class="text-center">
                     <template v-if="productoCodigo[0].etiquetas.length > 0">
@@ -380,7 +419,9 @@
                       </div>
                     </template>
                   </div>
-                <v-card-title v-if="existeUsuario">
+                <v-card-title
+                  :style="{color: $vuetify.theme.themes[theme].basetexto}"
+                  v-if="existeUsuario">
                   ${{ addCommas(Math.round(producto.precio)) }} + iva
                 </v-card-title>
                 <v-divider class="mx-5"></v-divider>
@@ -500,6 +541,9 @@ export default {
   },
   computed: {
     ...mapGetters(['existeUsuario']),
+    theme() {
+      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
+    },
     target() {
       const value = this[this.type];
       // eslint-disable-next-line no-restricted-globals

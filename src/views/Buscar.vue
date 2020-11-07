@@ -2,8 +2,11 @@
   <div>
     <Hero titulo="Buscar"/>
     <v-container>
-      <h1>Busqueda: {{this.$route.query.busqueda}}</h1>
+      <h1
+        :style="{color: $vuetify.theme.themes[theme].basetexto}"
+      >Busqueda: {{this.$route.query.busqueda}}</h1>
       <h2
+        :style="{color: $vuetify.theme.themes[theme].basetexto}"
         v-if="this.infoProductos.length > 0"
         class="text-subtitle-1 mb-2">
         Resultados: {{this.infoProductos[0].count}}
@@ -167,6 +170,11 @@ export default {
   },
   created() {
     this.$store.commit('setLayout', 'defaultLayout');
+  },
+  computed: {
+    theme() {
+      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
+    },
   },
 };
 </script>

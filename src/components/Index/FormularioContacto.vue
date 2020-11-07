@@ -89,7 +89,7 @@
         </v-container>
       </v-col>
       <v-col cols="12" sm="6">
-        <v-card>
+        <v-card :style="{background: $vuetify.theme.themes[theme].basebackground}">
           <v-card-title>
             <h1
               :class="this.$vuetify.breakpoint.xs ? 'title' : 'headline'"

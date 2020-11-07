@@ -22,6 +22,7 @@
                 outlined
                 class="mx-auto transition-swing"
                 :class="`elevation-${hover ? 24 : 0}`"
+                :style="{background: $vuetify.theme.themes[theme].basebackground}"
               >
                 <div class="div-catalogo hidden">
                   <v-img :src="catalogo.linkImagen" :alt="catalogo.nombre" class="imagen-catalogo">
@@ -43,7 +44,7 @@
                     target="_blank"
                   >
                     <v-btn color="primary" width="100%" text>
-                      Ver Catálogo  {{catalogo.nombre}} <v-icon class="ml-1" small>
+                      Catálogo  {{catalogo.nombre}} <v-icon class="ml-1" small>
                         {{mdiOpenInNew}}
                       </v-icon>
                     </v-btn>
@@ -102,6 +103,9 @@ export default {
   },
   computed: {
     ...mapState(['catalogos']),
+    theme() {
+      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
+    },
   },
   methods: {
     ...mapActions(['traerCatalogo']),

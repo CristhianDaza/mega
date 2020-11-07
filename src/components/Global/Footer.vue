@@ -11,7 +11,7 @@
     >
       <v-card-text class="text-center" :class="
           $vuetify.theme.dark
-              ? 'grey darken-4'
+              ? 'secondary'
               : 'primary'
         ">
 
@@ -116,7 +116,7 @@
       </v-card-text>
       <v-card-title :class="
           $vuetify.theme.dark
-              ? 'grey darken-4'
+              ? 'secondary'
               : 'primary'
         ">
         <v-container>
