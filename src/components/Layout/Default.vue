@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app :style="{background: $vuetify.theme.themes[theme].background}">
     <Cabecera />
     <MenuPrincipal />
     <v-main>
@@ -69,6 +69,9 @@ export default {
         offset: this.offset,
         easing: this.easing,
       };
+    },
+    theme() {
+      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
     },
   },
   methods: {

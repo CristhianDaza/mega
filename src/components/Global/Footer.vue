@@ -163,8 +163,8 @@
 
       <v-card-text class="py-2 text-center white--text" :class="
           $vuetify.theme.dark
-              ? 'blue-grey darken-3t'
-              : ''
+              ? 'secondary'
+              : 'secondary'
         ">
         <strong class="title">Megapromocionales LTDA © {{ new Date().getFullYear() }}</strong>
       </v-card-text>

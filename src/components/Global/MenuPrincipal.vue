@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app-bar
-      :class="this.$vuetify.theme.dark ? '' : 'bg-claro'"
+      :class="this.$vuetify.theme.dark ? 'secondary' : 'primary'"
       flat
     >
       <v-layout>
@@ -137,10 +137,6 @@ a:hover {
 
 .text-oscuro {
   color: white !important;
-}
-
-.bg-claro {
-  background: #0077bd !important;
 }
 
 .subtitle-1 {
