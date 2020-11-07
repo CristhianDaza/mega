@@ -1,5 +1,7 @@
 <template>
-  <v-card>
+  <v-card
+    :style="{background: $vuetify.theme.themes[theme].background}"
+  >
     <v-responsive
       v-for="video in videos"
       :key="video.id"
@@ -30,6 +32,9 @@ export default {
   },
   computed: {
     ...mapState(['videos']),
+    theme() {
+      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
+    },
   },
   mounted() {
     this.traerVideos();
