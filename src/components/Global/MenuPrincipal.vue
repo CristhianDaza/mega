@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app-bar
-      :class="this.$vuetify.theme.dark ? 'secondary' : 'primary'"
+      :style="{background: $vuetify.theme.themes[theme].basemenu}"
       flat
     >
       <v-layout>
@@ -127,6 +127,9 @@ export default {
   computed: {
     ...mapGetters(['existeUsuario']),
     ...mapState(['menus']),
+    theme() {
+      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
+    },
   },
   mounted() {
     this.traerMenus();

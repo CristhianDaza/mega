@@ -9,11 +9,9 @@
       flat
       tile
     >
-      <v-card-text class="text-center" :class="
-          $vuetify.theme.dark
-              ? 'secondary'
-              : 'primary'
-        ">
+      <v-card-text class="text-center"
+        :style="{background: $vuetify.theme.themes[theme].basemenu}"
+      >
 
         <v-tooltip bottom>
           <template v-slot:activator="{on, attrs}">
@@ -114,11 +112,9 @@
         </v-tooltip>
 
       </v-card-text>
-      <v-card-title :class="
-          $vuetify.theme.dark
-              ? 'secondary'
-              : 'primary'
-        ">
+      <v-card-title
+        :style="{background: $vuetify.theme.themes[theme].basemenu}"
+      >
         <v-container>
           <strong class="subheading">¡Síguenos en las redes sociales!</strong>
           <div class="float-right">
@@ -161,11 +157,7 @@
         </v-container>
       </v-card-title>
 
-      <v-card-text class="py-2 text-center white--text" :class="
-          $vuetify.theme.dark
-              ? 'secondary'
-              : 'secondary'
-        ">
+      <v-card-text class="py-2 text-center white--text secondary">
         <strong class="title">Megapromocionales LTDA © {{ new Date().getFullYear() }}</strong>
       </v-card-text>
       <v-card-text
@@ -208,6 +200,9 @@ export default {
   }),
   computed: {
     ...mapGetters(['existeUsuario']),
+    theme() {
+      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
+    },
   },
 };
 </script>
