@@ -88,6 +88,7 @@
     <v-app-bar
       app
       clipped-left
+      :style="{background: $vuetify.theme.themes.dark.basebackground}"
     >
       <template v-if="this.$vuetify.breakpoint.xs">
         <v-app-bar-nav-icon class="white--text mx-2" @click.stop="drawer = !drawer">
@@ -104,12 +105,12 @@
       <v-spacer></v-spacer>
 
       <template v-if="this.$vuetify.breakpoint.xs">
-        <v-btn  to="/" color="blue-grey darken-2" class="mr-2" icon>
+        <v-btn  to="/" color="primary" class="mr-2" icon>
           <v-icon>{{mdiHome}}</v-icon>
         </v-btn>
       </template>
       <template v-else>
-        <v-btn  to="/" color="blue-grey darken-2" class="mr-2">Ir a la página principal</v-btn>
+        <v-btn  to="/" color="primary" class="mr-2">Ir a la página principal</v-btn>
       </template>
 
       <template v-if="this.$vuetify.breakpoint.xs">

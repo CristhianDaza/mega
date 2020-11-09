@@ -6,7 +6,9 @@
     <v-main>
       <router-view />
     </v-main>
-    <v-footer app>
+    <v-footer
+      :style="{background: $vuetify.theme.themes.dark.basebackground}"
+      app>
       <span>
         &copy; {{ new Date().getFullYear() }} - Design by
         <strong>Cristhian Daza</strong> With 💙</span>
