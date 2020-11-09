@@ -57,7 +57,7 @@ import Swal from 'sweetalert2';
 import router from '@/router';
 
 export default {
-  name: 'agregar-slider',
+  name: 'agregar-menu',
   data() {
     return {
       mdiFormatTitle,
@@ -72,7 +72,7 @@ export default {
     };
   },
   metaInfo: {
-    title: 'Agregar Producto',
+    title: 'Agregar Menú',
     titleTemplate: '%s | Megapromocionales LTDA',
     meta: [
       { charset: 'utf8' },
