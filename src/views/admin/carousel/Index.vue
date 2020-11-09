@@ -1,7 +1,7 @@
 <template>
   <div :class="this.$vuetify.breakpoint.xs ? '' : 'container'">
     <v-btn
-      color="success"
+      color="primary"
       large
       outlined
       class="mb-3"
@@ -11,7 +11,9 @@
     <v-divider></v-divider>
     <v-row class="mx-0">
       <v-col cols="12" sm="6" md="4" v-for="imagen in imagenSlider" :key="imagen.uid">
-        <v-card>
+        <v-card
+          :style="{background: $vuetify.theme.themes.dark.basebackground}"
+        >
           <v-card-subtitle>
             <h2>{{imagen.nombreProducto.toUpperCase()}}</h2>
           </v-card-subtitle>

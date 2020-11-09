@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-btn
-      color="success"
+      color="primary"
       large
       outlined
       class="mb-3"
@@ -12,7 +12,7 @@
 
     <v-row>
         <v-col cols="12">
-          <v-card>
+          <v-card :style="{background: $vuetify.theme.themes.dark.basebackground}">
             <v-card-title>
               Trabajos
               <v-spacer></v-spacer>
@@ -25,6 +25,7 @@
               ></v-text-field>
             </v-card-title>
             <v-data-table
+              :style="{background: $vuetify.theme.themes.dark.basebackground}"
               :headers="headers"
               :items="trabajosCalendario"
               :items-per-page="10"
@@ -48,8 +49,9 @@
         </v-col>
         <v-col cols="12">
           <v-sheet height="64">
-            <v-toolbar flat color="blue-grey darken-4">
-
+            <v-toolbar
+              :style="{background: $vuetify.theme.themes.dark.basebackground}"
+              flat>
               <v-btn outlined class="mr-4" @click="setToday">
                 Hoy
               </v-btn>
@@ -90,6 +92,7 @@
           </v-sheet>
           <v-sheet height="600">
             <v-calendar
+              :style="{background: $vuetify.theme.themes.dark.basebackground}"
               locale="es-co"
               :short-weekdays="false"
               :short-months="false"

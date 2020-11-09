@@ -1,7 +1,7 @@
 <template>
   <div :class="this.$vuetify.breakpoint.xs ? '' : 'container'">
     <v-btn
-      color="success"
+      color="primary"
       large outlined
       class="mb-5"
       to="/admin/videoPromocion/agregar-video">
@@ -11,7 +11,9 @@
 
       <v-row class="mx-0">
       <v-col cols="12" md="6" lg="4" v-for="video in videos" :key="video.id">
-        <v-card class="mx-auto">
+        <v-card
+          :style="{background: $vuetify.theme.themes.dark.basebackground}"
+          class="mx-auto">
           <v-card-text class="pb-0">
             <v-responsive :aspect-ratio="16/9">
               <video loop controls tabindex="0" width="100%">

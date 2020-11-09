@@ -3,7 +3,9 @@
     <v-container class="fill-height" fluid>
       <v-row align="center" justify="center">
         <v-col cols="12" sm="8" md="5" xl="6">
-          <v-card class="elevation-12">
+          <v-card
+            :style="{background: $vuetify.theme.themes.dark.basebackground}"
+            class="elevation-12">
             <v-progress-linear
               color="light-blue"
               height="10"
@@ -43,13 +45,13 @@
             <v-card-actions>
               <v-btn
                 outlined
-                color="success"
+                color="primary"
                 @click.prevent="subirCatalogo"
                 :disabled="file === null"
                 :loading="loading">
                   Agregar Video
                 </v-btn>
-              <v-btn outlined @click="$router.back()" color="info">Atras</v-btn>
+              <v-btn outlined @click="$router.back()" color="error">Atras</v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -60,7 +62,9 @@
       <v-row align="center" justify="center">
         <v-col cols="12" sm="8" md="5" xl="6">
           <div class="elevation-12">
-            <v-responsive class="pa-0" :aspect-ratio="16/9">
+            <v-responsive
+              :style="{background: $vuetify.theme.themes.dark.basebackground}"
+              class="pa-0" :aspect-ratio="16/9">
               <video loop controls tabindex="0" width="100%">
                 <source :src="prev" type="video/mp4" />
               </video>

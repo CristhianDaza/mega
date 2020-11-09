@@ -3,7 +3,9 @@
   <v-container class="fill-height" fluid>
     <v-row align="center" justify="center">
       <v-col cols="12" sm="8" md="5" xl="6">
-        <v-card class="elevation-12">
+        <v-card
+          :style="{background: $vuetify.theme.themes.dark.basebackground}"
+          class="elevation-12">
           <v-progress-linear
             color="light-blue"
             height="10"
@@ -123,11 +125,11 @@
           </v-card-text>
           <v-divider class="mx-4"> </v-divider>
           <v-card-actions>
-            <v-btn color="success" type="submit" outlined :loading="loading">
+            <v-btn color="success" type="primary" outlined :loading="loading">
               Editar Trabajo
             </v-btn>
 
-            <v-btn text @click="$router.back()" outlined color="info" >
+            <v-btn text @click="$router.back()" outlined color="error" >
               Volver
             </v-btn>
           </v-card-actions>

@@ -3,8 +3,8 @@
   <v-main>
     <v-container class="fill-height">
       <v-row align="center" justify="center">
-        <v-col cols="12" sm="8" md="6">
-          <v-card class="elevation-19">
+        <v-col class="mt-10" cols="12" sm="8" md="6">
+          <v-card :style="{background: $vuetify.theme.themes.dark.basebackground}" class="elevation-19">
             <v-container class="fill-height" fluid>
               <v-row
                 class="mt-5"

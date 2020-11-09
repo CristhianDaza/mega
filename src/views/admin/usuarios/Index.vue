@@ -1,13 +1,15 @@
 <template>
   <div :class="this.$vuetify.breakpoint.xs ? '' : 'container'">
     <v-btn
-      color="success"
+      color="primary"
       large outlined
       to="/admin/usuarios/agregar-usuario">
       Agregar Usuario
     </v-btn>
     <v-divider class="my-3"></v-divider>
-    <v-simple-table>
+    <v-simple-table
+      :style="{background: $vuetify.theme.themes.dark.basebackground}"
+    >
       <template v-slot:default>
         <thead>
           <tr>

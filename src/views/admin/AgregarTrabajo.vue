@@ -3,7 +3,9 @@
   <v-container class="fill-height" fluid>
     <v-row align="center" justify="center">
       <v-col cols="12" sm="8" md="5" xl="6">
-        <v-card class="elevation-12">
+        <v-card
+          :style="{background: $vuetify.theme.themes.dark.basebackground}"
+          class="elevation-12">
           <v-progress-linear
             color="light-blue"
             height="10"
@@ -50,7 +52,9 @@
                   v-on="on"
                 ></v-text-field>
               </template>
-              <v-date-picker v-model="start" scrollable locale="es-co" :weekdays="[1, 2, 3, 4, 5, 6, 0]" color="primary">
+              <v-date-picker
+                :style="{background: $vuetify.theme.themes.dark.basebackground}"
+                v-model="start" scrollable locale="es-co" :weekdays="[1, 2, 3, 4, 5, 6, 0]" color="primary">
                 <v-spacer></v-spacer>
                 <v-btn text color="primary" @click="modalInicio = false">Cancelar</v-btn>
                 <v-btn text color="primary" @click="$refs.dialogInicio.save(start)">OK</v-btn>
@@ -74,7 +78,9 @@
                   v-on="on"
                 ></v-text-field>
               </template>
-              <v-date-picker v-model="end" scrollable locale="es-co" :weekdays="[1, 2, 3, 4, 5, 6, 0]" color="primary">
+              <v-date-picker
+                :style="{background: $vuetify.theme.themes.dark.basebackground}"
+                v-model="end" scrollable locale="es-co" :weekdays="[1, 2, 3, 4, 5, 6, 0]" color="primary">
                 <v-spacer></v-spacer>
                 <v-btn text color="primary" @click="modalFin = false">Cancelar</v-btn>
                 <v-btn text color="primary" @click="$refs.dialogFin.save(end)">OK</v-btn>
@@ -123,11 +129,11 @@
           </v-card-text>
           <v-divider class="mx-4"> </v-divider>
           <v-card-actions>
-            <v-btn color="success" type="submit" outlined :loading="loading">
+            <v-btn color="primary" type="submit" outlined :loading="loading">
               Crear Trabajo
             </v-btn>
 
-            <v-btn text @click="$router.back()" outlined color="info" >
+            <v-btn text @click="$router.back()" outlined color="error" >
               Volver
             </v-btn>
           </v-card-actions>

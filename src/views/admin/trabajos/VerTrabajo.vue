@@ -2,7 +2,9 @@
   <v-container class="fill-height" fluid>
     <v-row align="center" justify="center">
       <v-col cols="12" sm="8" md="5" xl="6">
-        <v-card>
+        <v-card
+          :style="{background: $vuetify.theme.themes.dark.basebackground}"
+        >
           <v-progress-linear
             :color="trabajoCalendario.color"
             height="10"
@@ -31,13 +33,13 @@
                         : 'Trabajo Terminado'}}</p>
           </v-card-text>
           <v-card-actions>
-            <v-btn color="success" outlined @click="confimarTerminado(trabajoCalendario)">
+            <v-btn color="primary" outlined @click="confimarTerminado(trabajoCalendario)">
               {{trabajoCalendario.terminado === false
                         ? 'Terminar Trabajo'
                         : 'Trabajo no Listo'}}
             </v-btn>
 
-            <v-btn text @click="$router.back()" outlined color="info" >
+            <v-btn text @click="$router.back()" outlined color="error" >
               Volver
             </v-btn>
           </v-card-actions>

@@ -3,7 +3,9 @@
     <v-container class="fill-height" fluid>
       <v-row align="center" justify="center">
         <v-col cols="12" sm="8" md="5" xl="6">
-          <v-card class="elevation-12">
+          <v-card
+            :style="{background: $vuetify.theme.themes.dark.basebackground}"
+            class="elevation-12">
             <v-progress-linear
               color="light-blue"
               height="10"
@@ -29,12 +31,12 @@
             <v-card-actions>
               <v-btn
                 outlined
-                color="success"
+                color="primary"
                 @click.prevent="subirProducto"
                 :loading="loading">
                   Agregar Producto
                 </v-btn>
-              <v-btn outlined @click="$router.back()" color="info">Atras</v-btn>
+              <v-btn outlined @click="$router.back()" color="error">Atras</v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
