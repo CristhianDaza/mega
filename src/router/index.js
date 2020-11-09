@@ -191,6 +191,13 @@ const routes = [
     component: () => import('../views/admin/menuPrincipal/agregarMenu.vue'),
     meta: { requiresAuth: true },
   },
+  {
+    path: '/admin/menu-principal/editar-menu/:id',
+    name: 'Editar Menu Principal',
+    exact: true,
+    component: () => import('../views/admin/menuPrincipal/editarMenu.vue'),
+    meta: { requiresAuth: true },
+  },
 ];
 
 const router = new VueRouter({

@@ -125,7 +125,7 @@
           </v-card-text>
           <v-divider class="mx-4"> </v-divider>
           <v-card-actions>
-            <v-btn color="success" type="primary" outlined :loading="loading">
+            <v-btn color="primary" type="submit" outlined :loading="loading">
               Editar Trabajo
             </v-btn>
 

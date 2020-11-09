@@ -27,6 +27,9 @@ export default new Vuex.Store({
     productos: [],
     titulos: [],
     menus: [],
+    menu: {
+      nombre: '', orden: '', Link: '',
+    },
   },
   mutations: {
     setLayout(state, layout) {
@@ -91,6 +94,9 @@ export default new Vuex.Store({
     },
     eliminarMenu(state, id) {
       state.menus = state.menus.filter((doc) => doc.id !== id);
+    },
+    setMenu(state, valor) {
+      state.menu = valor;
     },
   },
   actions: {
@@ -335,6 +341,14 @@ export default new Vuex.Store({
       await db.collection('menu').doc(id).delete()
         .then(() => {
           commit('eliminarMenu', id);
+        });
+    },
+    async traerMenu({ commit }, id) {
+      await db.collection('menu').doc(id).get()
+        .then((doc) => {
+          const menu = doc.data();
+          menu.id = doc.id;
+          commit('setMenu', menu);
         });
     },
   },
