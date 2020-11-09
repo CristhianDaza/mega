@@ -178,6 +178,13 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
+    path: '/admin/productos-inicio/editar-producto/:id',
+    name: 'Editar Productos Inicio',
+    exact: true,
+    component: () => import('../views/admin/productosInicio/editarProducto.vue'),
+    meta: { requiresAuth: true },
+  },
+  {
     path: '/admin/menu-principal',
     name: 'Menu Principal',
     exact: true,

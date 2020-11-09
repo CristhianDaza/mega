@@ -25,6 +25,9 @@ export default new Vuex.Store({
     },
     videos: [],
     productos: [],
+    producto: {
+      titulo: '', etiqueta: '',
+    },
     titulos: [],
     menus: [],
     menu: {
@@ -82,6 +85,9 @@ export default new Vuex.Store({
     },
     setProducto(state, valor) {
       state.productos = valor;
+    },
+    setProductoId(state, valor) {
+      state.producto = valor;
     },
     setTitulo(state, valor) {
       state.titulos = valor;
@@ -322,6 +328,15 @@ export default new Vuex.Store({
       await db.collection('producto').doc(id).delete()
         .then(() => {
           commit('eliminarProducto', id);
+        });
+    },
+
+    async traerProductoId({ commit }, id) {
+      await db.collection('producto').doc(id).get()
+        .then((doc) => {
+          const producto = doc.data();
+          producto.id = doc.id;
+          commit('setProductoId', producto);
         });
     },
 

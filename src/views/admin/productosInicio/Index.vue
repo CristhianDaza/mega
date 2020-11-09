@@ -27,6 +27,21 @@
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
                     icon
+                    color="success"
+                    v-bind="attrs"
+                    v-on="on"
+                    class="ml-2"
+                    :to="`productos-inicio/editar-producto/${producto.id}`"
+                  >
+                    <v-icon>{{mdiPencil}}</v-icon>
+                  </v-btn>
+                </template>
+                <span>Editar</span>
+              </v-tooltip>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    icon
                     color="red"
                     v-bind="attrs"
                     v-on="on"
@@ -49,13 +64,14 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 import Swal from 'sweetalert2';
-import { mdiDelete } from '@mdi/js';
+import { mdiDelete, mdiPencil } from '@mdi/js';
 
 export default {
   name: 'productos-inicio',
   data() {
     return {
       mdiDelete,
+      mdiPencil,
     };
   },
   metaInfo: {
