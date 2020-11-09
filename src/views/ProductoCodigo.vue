@@ -439,11 +439,13 @@
               </v-card>
             </v-col>
           </v-row>
-          <v-col v-else>
-            <div class="text-center pt-10">
-              <Loader />
-            </div>
-          </v-col>
+          <div v-else class="mx-auto">
+            <v-container class="fill-height mt-16 mx-auto">
+              <v-row align="center" justify="center">
+                <Loader />
+              </v-row>
+            </v-container>
+          </div>
         </v-col>
       </v-row>
 
