@@ -453,23 +453,36 @@
 
     </v-container>
 
-    <v-dialog v-model="dialogTransito" max-width="650" overlay-color="grey darken-4" overlay-opacity="0.9">
+    <v-dialog v-model="dialogTransito" max-width="750" overlay-color="grey darken-4" overlay-opacity="0.9">
+      <v-btn dark icon class="mr-5" color="white" @click.stop="dialogTransito = false">
+        <v-icon>{{mdiCloseCircleOutline}}</v-icon>
+      </v-btn>
       <v-simple-table
         :style="{background: $vuetify.theme.themes[theme].basebackground}"
       >
         <thead>
           <tr>
-            <th class="text-left">COLOR</th>
             <th class="text-left">CANTIDADES EN TRÁNSITO</th>
+            <th class="text-left">INGRESO AL SISTEMA</th>
+            <th class="text-left">ESTADO DE TRÁNSITO</th>
+            <th class="text-left">REFERENCIA</th>
           </tr>
         </thead>
         <tbody>
-          <template v-for="existencias in productoCodigo">
-            <tr v-for="(existencia, index) in existencias.materiales" :key="index">
-              <td>{{existencia.color_nombre}}</td>
-              <td>{{existencia.en_transito}}</td>
-            </tr>
-          </template>
+          <tr v-for="(existencia, index) in productoTraking[0]" :key="index">
+            <td v-if="existencia.trackings_importacion[0] !== undefined">
+              {{addCommas(existencia.trackings_importacion[0].cantidad)}}
+            </td>
+            <td v-if="existencia.trackings_importacion[0] !== undefined">
+              {{existencia.trackings_importacion[0].fecha}}
+            </td>
+            <td v-if="existencia.trackings_importacion[0] !== undefined">
+              {{existencia.trackings_importacion[0].estado}}
+            </td>
+            <td v-if="existencia.trackings_importacion[0] !== undefined">
+              {{existencia.trackings_importacion[0].material}}
+            </td>
+          </tr>
         </tbody>
       </v-simple-table>
     </v-dialog>
@@ -511,6 +524,7 @@ export default {
       textoInfo: '',
       productoCodigo: [],
       productoSugerencia: [],
+      productoTraking: [],
       imagenPrincipalMediana: '',
       imagenPrincipalGrande: '',
       codigo: this.$route.params.codigo,
@@ -625,7 +639,7 @@ export default {
       await axios(config).then((res) => {
         this.productoCodigo.push(res.data);
         this.getProductosSugerencia(this.productoCodigo[0].materiales[0].codigo);
-        // this.getProductoTraking(this.codigo);
+        this.getProductoTraking(this.codigo);
         this.categoriaPrincipal = this.productoCodigo[0].subcategoria_1.categoria.nombre;
         this.categoriaSecundaria = this.productoCodigo[0].subcategoria_1.nombre;
       });
