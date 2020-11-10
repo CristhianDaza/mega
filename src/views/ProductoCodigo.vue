@@ -454,7 +454,9 @@
     </v-container>
 
     <v-dialog v-model="dialogTransito" max-width="650" overlay-color="grey darken-4" overlay-opacity="0.9">
-      <v-simple-table>
+      <v-simple-table
+        :style="{background: $vuetify.theme.themes[theme].basebackground}"
+      >
         <thead>
           <tr>
             <th class="text-left">COLOR</th>
