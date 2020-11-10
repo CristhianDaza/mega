@@ -165,7 +165,9 @@
                       </v-card-subtitle>
                     </div>
                   </template>
-                  <p v-if="productoCodigo[0].texto_informacion !== null" class="ma-0" :style="'color: ' + productoCodigo[0].color_texto_informacion">{{productoCodigo[0].texto_informacion}}</p>
+                  <div v-if="existeUsuario">
+                    <p v-if="productoCodigo[0].texto_informacion !== null" class="ma-0" :style="'color: ' + productoCodigo[0].color_texto_informacion">{{productoCodigo[0].texto_informacion}}</p>
+                  </div>
                   <p class="ma-0 primary--text">El color de los artículos pueden variar según la calibración y resolución de la pantalla.</p>
               </v-card-text>
               <v-card-actions>
