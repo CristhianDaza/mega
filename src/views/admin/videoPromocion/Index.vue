@@ -20,7 +20,7 @@
                 <source :src="video.linkVideo" type="video/mp4" />
               </video>
             </v-responsive>
-            <h2>Link</h2>
+            <h2>{{video.nombre}}</h2>
             <p>{{video.urlProducto}}</p>
             <router-link :to="video.urlProducto">Ir al Link</router-link>
           </v-card-text>
