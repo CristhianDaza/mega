@@ -29,7 +29,9 @@
       </v-row>
       <v-btn
         v-if="this.productos.length > 0"
-        :to="{path: `/productos?etiqueta=${this.titulos[0].etiqueta}`}"
+        :to="{
+          path: `/productos?etiqueta=${this.titulos[0].etiqueta}&titulo=${this.titulos[0].titulo}`
+        }"
         block
         color="primary"
         x-large
