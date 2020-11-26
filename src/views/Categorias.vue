@@ -41,7 +41,7 @@
                         :style="{color: $vuetify.theme.themes[theme].basetexto}"
                         class="font-weight-bold">
                         <router-link
-                          :to="`/productos?categoria=${categoria.jerarquia}&titulo=${categoria.id_pagina}`"
+                          :to="`/productos?categoria=${categoria.jerarquia}&titulo=${categoria.nombre}`"
                         >
                           {{categoria.nombre}}
                         </router-link>
@@ -55,7 +55,7 @@
                             :style="{color: $vuetify.theme.themes[theme].basetexto}"
                           >
                             <router-link
-                            :to="`/productos?subCategoria=${subCategoria.jerarquia}&titulo=${subCategoria.id_pagina}`"
+                            :to="`/productos?subCategoria=${subCategoria.jerarquia}&titulo=${subCategoria.nombre}`"
                             >
                               {{subCategoria.nombre}}
                             </router-link>

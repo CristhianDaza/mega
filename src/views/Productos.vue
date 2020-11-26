@@ -1,7 +1,7 @@
 <template>
 <!-- eslint-disable max-len -->
   <div>
-    <Hero titulo="Productos"/>
+    <Hero :titulo="titulo"/>
     <v-container>
       <v-breadcrumbs :items="items">
         <template v-slot:item="{ item }">
@@ -80,7 +80,7 @@
                 <v-list-item
                   v-for="subCategoria in categoria.subcategorias"
                   :key="subCategoria.id_pagina"
-                  @click="buscarSubCategoria(subCategoria.jerarquia)"
+                  @click="buscarSubCategoria(subCategoria.jerarquia, subCategoria.nombre)"
                 >
                   <v-list-item-content>
                     <v-list-item-title v-text="subCategoria.nombre"></v-list-item-title>
@@ -152,6 +152,7 @@ export default {
       etiqueta: Number(this.$route.query.etiqueta) || '',
       inventario: Number(this.$route.query.inventario) || '',
       busqueda: this.$route.query.busqueda || '',
+      titulo: this.$route.query.titulo || 'Productos',
       infoProductos: [],
       totalPaginas: 0,
       porPagina: Number(this.$route.query.porPagina) || 16,
@@ -242,11 +243,12 @@ export default {
         },
       });
     },
-    buscarSubCategoria(subCategoria) {
+    buscarSubCategoria(subCategoria, titulo) {
       this.$router.push({
         path: this.$route.path,
         query: {
           subCategoria,
+          titulo,
         },
       });
     },
