@@ -94,7 +94,7 @@ export default {
   },
   head() {
     return {
-      title: 'Catálogos 📖',
+      title: 'Catálogos 👼',
     };
   },
   components: {
@@ -114,7 +114,7 @@ export default {
     this.traerCatalogo();
   },
   metaInfo: {
-    title: 'Catálogos 📖',
+    title: 'Catálogos 👼',
     titleTemplate: '%s | Megapromocionales LTDA',
     meta: [
       { charset: 'utf8' },
