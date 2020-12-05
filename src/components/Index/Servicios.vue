@@ -91,7 +91,7 @@ export default {
     color: rgba(255, 255, 255, 1) !important;
   }
   .color-ico {
-    color: #D04123 !important;
+    color: #0077bd !important;
   }
   .change-color {
     color: white !important;

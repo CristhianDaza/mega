@@ -14,11 +14,11 @@ export default new Vuetify({
     dark: false,
     themes: {
       light: {
-        primary: '#D04123',
+        primary: '#0077bd',
         basetexto: '#252525',
         basebackground: '#ffffff',
         background: '#f2f5f8',
-        basemenu: '#D04123',
+        basemenu: '#0077bd',
       },
       dark: {
         secondary: '#05090c',
