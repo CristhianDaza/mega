@@ -133,7 +133,7 @@ export default {
     this.getCategorias();
   },
   metaInfo: {
-    title: 'Categorías 🎁',
+    title: 'Categorías 🏷',
     titleTemplate: '%s | Megapromocionales LTDA',
     meta: [
       { charset: 'utf8' },

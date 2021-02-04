@@ -92,11 +92,6 @@ export default {
       ],
     };
   },
-  head() {
-    return {
-      title: 'Catálogos 👼',
-    };
-  },
   components: {
     Hero,
     Loader,
@@ -114,7 +109,7 @@ export default {
     this.traerCatalogo();
   },
   metaInfo: {
-    title: 'Catálogos 👼',
+    title: 'Catálogos 📚',
     titleTemplate: '%s | Megapromocionales LTDA',
     meta: [
       { charset: 'utf8' },

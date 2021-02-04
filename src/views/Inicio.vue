@@ -34,7 +34,7 @@ export default {
     VideoPromocion,
   },
   metaInfo: {
-    title: 'Inicio 🎄',
+    title: 'Inicio 🏠',
     titleTemplate: '%s | Megapromocionales LTDA',
     meta: [
       { charset: 'utf8' },

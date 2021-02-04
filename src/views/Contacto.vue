@@ -50,7 +50,7 @@ export default {
     Instagram,
   },
   metaInfo: {
-    title: 'Contacto 🎅',
+    title: 'Contacto ☎',
     titleTemplate: '%s | Megapromocionales LTDA',
     meta: [
       { charset: 'utf8' },

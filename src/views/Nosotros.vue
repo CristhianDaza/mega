@@ -60,7 +60,7 @@ export default {
     Hero,
   },
   metaInfo: {
-    title: 'Nosotros ⛄',
+    title: 'Nosotros 💙',
     titleTemplate: '%s | Megapromocionales LTDA',
     meta: [
       { charset: 'utf8' },

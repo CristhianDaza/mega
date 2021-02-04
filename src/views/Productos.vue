@@ -306,7 +306,7 @@ export default {
     this.getCategorias();
   },
   metaInfo: {
-    title: 'Productos 🎁',
+    title: 'Productos 🛒',
     titleTemplate: '%s | Megapromocionales LTDA',
     meta: [
       { charset: 'utf8' },

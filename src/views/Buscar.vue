@@ -154,7 +154,7 @@ export default {
     );
   },
   metaInfo: {
-    title: 'Buscar 🔍️',
+    title: 'Buscar 🔎',
     titleTemplate: '%s | Megapromocionales LTDA',
     meta: [
       { charset: 'utf8' },
