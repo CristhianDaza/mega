@@ -156,7 +156,15 @@
                         </template>
                         <template v-else>
                           <template v-if="index === 0">
-                            $ {{addCommas(Math.round(valor.precio))}} + iva
+                            <template v-if="valor.precio > valor.precio_descuento">
+                              <div class="text-decoration-line-through mr-3">
+                                $ {{addCommas(Math.round(valor.precio))}} + iva
+                              </div>
+                              $ {{addCommas(Math.round(valor.precio_descuento))}} + iva
+                            </template>
+                            <template v-else>
+                              $ {{addCommas(Math.round(valor.precio))}} + iva
+                            </template>
                           </template>
                         </template>
                       </v-card-title>
@@ -169,17 +177,17 @@
                     <p v-if="productoCodigo[0].texto_informacion !== null" class="ma-0" :style="'color: ' + productoCodigo[0].color_texto_informacion">{{productoCodigo[0].texto_informacion}}</p>
                   </div>
                   <p class="ma-0 primary--text">El color de los artículos pueden variar según la calibración y resolución de la pantalla.</p>
+                <div class="d-block title primary--text my-2" v-if="Math.round(productoCodigo[0].materiales[0].precio_descuento) !== Math.round(productoCodigo[0].materiales[0].precio)">Con el {{Math.round(productoCodigo[0].materiales[0].descuento)}}% de descuento.</div>
               </v-card-text>
               <v-card-actions>
-                <div class="display-1 primary--text my-2" v-if="Math.round(productoCodigo[0].materiales[0].precio_descuento) !== Math.round(productoCodigo[0].materiales[0].precio)">{{Math.round(productoCodigo[0].materiales[0].descuento)}}% de descuento</div>
-                <v-row>
+                <v-row class="ml-1">
                   <template v-if="productoCodigo[0].etiquetas.length > 0">
                     <div
                       v-for="etiqueta in productoCodigo[0].etiquetas"
                       :key="etiqueta.id"
                     >
                       <img
-                        width="120px"
+                        width="150px"
                         :src="etiqueta.imagen.file_sm"
                         :alt="etiqueta.nombre"
                         >
@@ -233,7 +241,7 @@
     <v-container class="pt-0">
       <v-sheet
         :style="{background: $vuetify.theme.themes[theme].basebackground}"
-        class="mx-auto"
+        class="mx-auto mt-3"
         elevation="2">
         <v-slide-group v-model="model" class="px-4 py-5" :prev-icon="mdiChevronLeft" :next-icon="mdiChevronRight">
           <v-slide-item v-for="imagen in productoCodigo[0].imagenes" :key="imagen.id">
@@ -263,7 +271,7 @@
       </v-sheet>
       <v-row>
         <v-col cols="12" sm="6">
-          <v-card>
+          <v-card class="mt-5">
           <v-simple-table
             :style="{background: $vuetify.theme.themes[theme].basebackground}"
           >
@@ -354,7 +362,7 @@
           </div>
         </v-col>
         <v-col cols="12" sm="6">
-          <h1 class="primary--text text-center">
+          <h1 class="primary--text text-center mt-2">
             Productos Sugeridos
           </h1>
 
@@ -362,7 +370,7 @@
           <h3 v-if="this.textoSugerido !== ''" class="text-center">
             {{this.textoSugerido}}
           </h3>
-          <v-row v-if="productoSugerencia.length > 0">
+          <v-row class="mt-3" v-if="productoSugerencia.length > 0">
             <v-col cols="6" v-for="producto in productoSugerencia" :key="producto.familia">
               <v-card
                 :style="{background: $vuetify.theme.themes[theme].basebackground}"
