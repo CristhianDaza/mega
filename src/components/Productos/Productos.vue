@@ -95,7 +95,17 @@
         <v-card-title
           :style="{color: $vuetify.theme.themes[theme].basetext}"
           v-if="existeUsuario" class="precio">
-          ${{ addCommas(Math.round(producto.materiales[0].precio)) }} + iva
+          <template v-if="producto.materiales[0].precio > producto.materiales[0].precio_descuento">
+            <div class="text-decoration-line-through mr-3 subtitle-1">
+              $ {{addCommas(Math.round(producto.materiales[0].precio))}} + iva
+            </div>
+            <div class="subtitle-1">
+              $ {{addCommas(Math.round(producto.materiales[0].precio_descuento))}} + iva
+            </div>
+          </template>
+          <template v-else>
+            $ {{addCommas(Math.round(producto.materiales[0].precio))}} + iva
+          </template>
         </v-card-title>
         <v-divider class="mx-5"></v-divider>
         <v-card-actions>
