@@ -353,7 +353,6 @@
               <div class="player-container">
                 <vue-core-video-player
                   :autoplay="false"
-                  muted
                   loop
                   preload="metadata"
                   :title="`${productoCodigo[0].familia} ${productoCodigo[0].descripcion_comercial}`"
