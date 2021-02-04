@@ -340,17 +340,16 @@
           </v-card>
           <div v-if="productoCodigo[0].videos.length > 0" class="mt-3">
             <v-responsive :aspect-ratio="16/9">
-              <video
-                loop
-                autoplay
-                muted
-                controls
-                tabindex="0"
-                width="100%"
-                preload="auto"
-              >
-                <source :src="productoCodigo[0].videos[0].video" type="video/mp4" />
-              </video>
+              <div class="player-container">
+                <vue-core-video-player
+                  muted
+                  loop
+                  preload="metadata"
+                  :title="`${productoCodigo[0].familia} ${productoCodigo[0].descripcion_comercial}`"
+                  logo="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/opt_logo.webp?alt=media&amp;token=2e13ac36-784c-463a-a094-fa665516fffe&quot"
+                  :src="productoCodigo[0].videos[0].video">
+                </vue-core-video-player>
+              </div>
             </v-responsive>
           </div>
         </v-col>
