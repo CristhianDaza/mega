@@ -194,20 +194,22 @@
                     </div>
                   </template>
                 </v-row>
-                <v-tooltip v-model="mostrarTooltip" bottom>
-                  <template v-slot:activator="{on, attrs}">
-                    <v-btn
-                      v-on="on"
-                      v-bind="attrs"
-                      icon
-                      @click.stop="dialogTransito = true"
-                      class="my-2"
-                    >
-                      <v-icon>{{mdiFerry}}</v-icon>
-                    </v-btn>
-                  </template>
-                  <span>Ver Importaciones</span>
-                </v-tooltip>
+                <template v-if="productoCodigo[0].materiales[0].en_transito > 0">
+                  <v-tooltip v-model="mostrarTooltip" bottom>
+                    <template v-slot:activator="{on, attrs}">
+                      <v-btn
+                        v-on="on"
+                        v-bind="attrs"
+                        icon
+                        @click.stop="dialogTransito = true"
+                        class="my-2"
+                      >
+                        <v-icon>{{mdiFerry}}</v-icon>
+                      </v-btn>
+                    </template>
+                    <span>Ver Importaciones</span>
+                  </v-tooltip>
+                </template>
                 <v-tooltip v-if="productoCodigo[0].videos.length > 0" bottom>
                   <template v-slot:activator="{on, attrs}">
                     <v-btn icon v-on="on" v-bind="attrs" @click="$vuetify.goTo(target, options)">
