@@ -13,6 +13,7 @@
     dense
     dark
     hide-details="auto"
+    id="buscador"
   ></v-text-field>
 </template>
 
@@ -32,6 +33,7 @@ export default {
   },
   methods: {
     buscarProducto(busqueda) {
+      const buscar = document.getElementById('buscador');
       if (busqueda === '') {
         Swal.fire(
           '¡Error!',
@@ -55,6 +57,7 @@ export default {
         },
       });
       this.busqueda = '';
+      buscar.blur();
     },
   },
 };
