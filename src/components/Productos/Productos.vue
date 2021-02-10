@@ -78,7 +78,7 @@
             </div>
           </template>
         </v-card-subtitle>
-        <div class="d-flex justify-center row text-center">
+        <div class="d-flex justify-center row text-center my-2">
           <template v-if="producto.etiquetas.length > 0">
             <div
               v-for="etiqueta in producto.etiquetas"
