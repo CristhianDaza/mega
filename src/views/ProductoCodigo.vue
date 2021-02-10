@@ -14,11 +14,11 @@
           </li>
           <li class="links__divider">/</li>
           <li>
-            <router-link exact :to="'/productos?categoria=' + productoCodigo[0].subcategoria_1.categoria.jerarquia" class="links__item">{{this.categoriaPrincipal.toUpperCase()}}</router-link>
+            <router-link exact :to="`/productos?categoria=${productoCodigo[0].subcategoria_1.categoria.jerarquia}&titulo=${productoCodigo[0].subcategoria_1.categoria.nombre}`" class="links__item">{{this.categoriaPrincipal.toUpperCase()}}</router-link>
           </li>
           <li class="links__divider">/</li>
           <li>
-            <router-link exact :to="'/productos?subCategoria=' + productoCodigo[0].subcategoria_1.jerarquia" class="links__item">{{this.categoriaSecundaria.toUpperCase()}}</router-link>
+            <router-link exact :to="`/productos?subCategoria=${productoCodigo[0].subcategoria_1.jerarquia}&titulo=${productoCodigo[0].subcategoria_1.nombre}`">{{this.categoriaSecundaria.toUpperCase()}}</router-link>
           </li>
           <li class="links__divider">/</li>
           <li>
