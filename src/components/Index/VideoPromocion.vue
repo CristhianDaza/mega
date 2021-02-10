@@ -8,15 +8,19 @@
       :class="video.completo.value ? '' : 'container'"
     >
       <router-link :to="video.urlProducto">
-        <video
-          loop
-          autoplay
-          muted
-          width="100%"
-          preload="auto"
-        >
-          <source :src="video.linkVideo" type="video/mp4" />
-        </video>
+        <div class="player-container">
+          <vue-core-video-player
+            loop
+            :muted="true"
+            :controls="false"
+            preload="metadata"
+            width="100%"
+            logo="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/opt_logo.webp?alt=media&amp;token=2e13ac36-784c-463a-a094-fa665516fffe&quot"
+            :src="video.linkVideo"
+            type="video/mp4"
+            >
+          </vue-core-video-player>
+        </div>
       </router-link>
     </v-responsive>
   </v-card>
