@@ -39,7 +39,7 @@
                     >
                       <v-card-title
                         :style="{color: $vuetify.theme.themes[theme].basetexto}"
-                        class="font-weight-bold">
+                      >
                         <router-link
                           :to="`/productos?categoria=${categoria.jerarquia}&titulo=${categoria.nombre}`"
                         >
