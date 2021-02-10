@@ -727,6 +727,8 @@ export default {
   }
   .imagenCaracteristica {
    width: 80px;
+   cursor: pointer;
+   margin-top: 15px;
   }
   .fotoTarjeta {
     margin-top: -45px;
