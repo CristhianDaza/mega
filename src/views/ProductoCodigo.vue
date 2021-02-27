@@ -218,15 +218,25 @@
                   </template>
                   <span class="mt-10">Ver Vídeo del Producto</span>
                 </v-tooltip>
-                <v-tooltip bottom>
-                  <template v-slot:activator="{on, attrs}">
-                    <!-- eslint-disable-next-line vue/no-parsing-error -->
-                    <v-btn icon v-on="on" v-bind="attrs" :href="`https://marpicoprod.azurewebsites.net/api/productos/imagenes/${productoCodigo[0].id}?producto=${productoCodigo[0].familia}`">
-                      <v-icon>{{ mdiDownload }}</v-icon>
-                    </v-btn>
-                  </template>
-                  <span class="mt-10">Descargar Imagenes</span>
-                </v-tooltip>
+              </v-card-actions>
+              <v-card-actions>
+                <v-btn
+                  outlined
+                  color="primary"
+                  class="ma-2 white--text"
+                  @click="loader = 'loading'"
+                  :loading="loading"
+                  :disabled="loading"
+                  :href="`https://marpicoprod.azurewebsites.net/api/productos/imagenes/${productoCodigo[0].id}?producto=${productoCodigo[0].familia}`"
+                >
+                  Descargar Imágenes
+                  <v-icon
+                    right
+                    dark
+                  >
+                    {{ mdiDownload }}
+                  </v-icon>
+                </v-btn>
               </v-card-actions>
             </v-container>
           </v-col>
@@ -531,6 +541,8 @@ export default {
   name: 'codigo',
   data() {
     return {
+      loader: null,
+      loading: false,
       textoSugerido: '',
       textoInfo: '',
       productoCodigo: [],
@@ -568,6 +580,15 @@ export default {
       valor && setTimeout(() => {
         this.overlay = false;
       }, 500);
+    },
+    loader() {
+      const l = this.loader;
+      this[l] = !this[l];
+
+      // eslint-disable-next-line no-return-assign
+      setTimeout(() => (this[l] = false), 3000);
+
+      this.loader = null;
     },
   },
   computed: {
@@ -828,5 +849,41 @@ export default {
 }
 .tarjetaProducto:hover {
   transform: translateY(-15px);
+}
+.custom-loader {
+  animation: loader 1s infinite;
+  display: flex;
+}
+@-moz-keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>
