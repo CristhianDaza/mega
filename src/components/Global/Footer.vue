@@ -157,7 +157,7 @@
         </v-container>
       </v-card-title>
 
-      <v-card-text class="py-2 text-center white--text secondary">
+      <v-card-text class="py-2 text-center white--text">
         <strong class="title">Megapromocionales LTDA © {{ new Date().getFullYear() }}</strong>
       </v-card-text>
       <v-card-text
