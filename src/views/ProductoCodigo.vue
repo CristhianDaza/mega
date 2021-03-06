@@ -291,8 +291,8 @@
               <tr>
                 <th class="text-left">SUGERIDOS</th>
                 <th class="text-left">COLOR</th>
-                <th class="text-left">VARIEDAD</th>
-                <th class="text-left">CANTIDADES DISPONIBLES</th>
+                <th class="text-left"></th>
+                <th class="text-left">DISPONIBLES</th>
                 <th class="text-left">REFERENCIA</th>
               </tr>
             </thead>
@@ -317,40 +317,12 @@
                     </v-tooltip>
                   </td>
                   <td>
-                    <div class="contenedor_color">
-                      <v-tooltip bottom dense>
-                        <template v-slot:activator="{on, attrs}">
-                          <div
-                            v-if="existencia.color_hex_2 !== null && existencia.color_hex_3 !== null"
-                            @click.stop="actualizar(existencia.codigo)"
-                            v-bind="attrs"
-                            v-on="on"
-                            :style="`background: linear-gradient(rgb(${hextToRgb(existencia.color_hex_1)[0]}, ${hextToRgb(existencia.color_hex_1)[1]}, ${hextToRgb(existencia.color_hex_1)[2]}) 0%, rgb(${hextToRgb(existencia.color_hex_2)[0]}, ${hextToRgb(existencia.color_hex_2)[1]}, ${hextToRgb(existencia.color_hex_2)[2]}) 48%, rgb(${hextToRgb(existencia.color_hex_2)[0]}, ${hextToRgb(existencia.color_hex_2)[1]}, ${hextToRgb(existencia.color_hex_2)[2]}) 62%, rgb(${hextToRgb(existencia.color_hex_3)[0]}, ${hextToRgb(existencia.color_hex_3)[1]}, ${hextToRgb(existencia.color_hex_3)[2]}) 66%, rgb(${hextToRgb(existencia.color_hex_3)[0]}, ${hextToRgb(existencia.color_hex_3)[1]}, ${hextToRgb(existencia.color_hex_3)[2]}) 100%)`"
-                          ></div>
-                          <div
-                            v-else-if="existencia.color_hex_2 !== null && existencia.color_hex_3 === null"
-                            @click.stop="actualizar(existencia.codigo)"
-                            v-bind="attrs"
-                            v-on="on"
-                            :style="`background: linear-gradient(rgb(${hextToRgb(existencia.color_hex_1)[0]}, ${hextToRgb(existencia.color_hex_1)[1]}, ${hextToRgb(existencia.color_hex_1)[2]}) 40%, rgb(${hextToRgb(existencia.color_hex_2)[0]}, ${hextToRgb(existencia.color_hex_2)[1]}, ${hextToRgb(existencia.color_hex_2)[2]}) 50%)`"
-                          >
-                          </div>
-                          <div
-                            v-else
-                            @click.stop="actualizar(existencia.codigo)"
-                            v-bind="attrs"
-                            v-on="on"
-                            :style="'background:' + existencia.color_hex_1"
-                          ></div>
-                        </template>
-                        <span>{{existencia.color_nombre}}</span>
-                      </v-tooltip>
-                    </div>
+                      {{existencia.color_nombre}}
                   </td>
                   <td>
-                    {{existencia.color_nombre}} <span v-if="existencia.variedad !== null">{{existencia.variedad}}</span>
+                    {{existencia.variedad}}
                   </td>
-                  <td class="red--text" v-if="existencia.inventario < 10">Agotado</td>
+                  <td class="error--text" v-if="existencia.inventario < 10">Agotado</td>
                   <td v-else>{{existencia.inventario}}</td>
                   <td>{{existencia.codigo}}</td>
                 </template>
