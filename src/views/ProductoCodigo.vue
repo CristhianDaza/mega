@@ -215,7 +215,7 @@
                 <v-btn
                   outlined
                   color="primary"
-                  class="ma-2 white--text"
+                  class="my-2 white--text"
                   @click="loader = 'loading'"
                   :loading="loading"
                   :disabled="loading"
