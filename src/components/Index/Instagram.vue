@@ -9,7 +9,7 @@
       <h1>Instagram</h1>
       <p class="mb-0">Síguenos en nuestro Instagram como</p>
       <h3 class="pa-0">@megapromocional</h3>
-      <v-btn rounded :style="{color: $vuetify.theme.themes.dark.basetexto}" large class="mt-5">
+      <v-btn outlined primary large class="mt-5">
         <a href="https://www.instagram.com/megapromocional/" target="_blank">
           Síguenos
           <v-icon class="ml-2">{{mdiOpenInNew}}</v-icon>
