@@ -19,8 +19,8 @@
           right
           :color="
             $vuetify.theme.dark
-              ? 'blue-grey darken-4'
-              : 'primary'
+              ? 'primary'
+              : '#111b27'
             "
           fixed
           class="elevation-15 mr-15 mb-6"
