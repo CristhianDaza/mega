@@ -3,9 +3,7 @@
     <Cabecera />
     <MenuPrincipal />
     <v-main>
-      <transition name="fade" mode="out-in">
-        <router-view :key="$route.fullPath" />
-      </transition>
+      <router-view :key="$route.fullPath" />
     </v-main>
     <Footer />
     <v-speed-dial>
