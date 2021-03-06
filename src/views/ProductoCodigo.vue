@@ -210,14 +210,6 @@
                     <span>Ver Importaciones</span>
                   </v-tooltip>
                 </template>
-                <v-tooltip v-if="productoCodigo[0].videos.length > 0" bottom>
-                  <template v-slot:activator="{on, attrs}">
-                    <v-btn icon v-on="on" v-bind="attrs" @click="$vuetify.goTo(target, options)">
-                      <v-icon>{{ mdiVideoVintage }}</v-icon>
-                    </v-btn>
-                  </template>
-                  <span class="mt-10">Ver Vídeo del Producto</span>
-                </v-tooltip>
               </v-card-actions>
               <v-card-actions>
                 <v-btn
@@ -505,7 +497,6 @@ import {
   mdiChevronLeft,
   mdiFerry,
   mdiMagnify,
-  mdiVideoVintage,
   mdiDownload,
 } from '@mdi/js';
 
@@ -530,7 +521,6 @@ export default {
       mdiChevronLeft,
       mdiFerry,
       mdiMagnify,
-      mdiVideoVintage,
       mdiDownload,
       model: null,
       overlay: false,
@@ -567,19 +557,6 @@ export default {
     ...mapGetters(['existeUsuario']),
     theme() {
       return (this.$vuetify.theme.dark) ? 'dark' : 'light';
-    },
-    target() {
-      const value = this[this.type];
-      // eslint-disable-next-line no-restricted-globals
-      if (!isNaN(value)) return Number(value);
-      return value;
-    },
-    options() {
-      return {
-        duration: this.duration,
-        offset: this.offset,
-        easing: this.easing,
-      };
     },
     target2() {
       const value = this[this.type2];
