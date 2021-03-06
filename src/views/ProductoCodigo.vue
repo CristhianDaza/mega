@@ -528,11 +528,9 @@ export default {
       categoriaPrincipal: '',
       categoriaSecundaria: '',
       duration: 1000,
-      number: 1650,
-      number2: 250,
+      number2: 200,
       offset: 0,
       easing: 'easeInQuart',
-      type: 'number',
       type2: 'number2',
     };
   },
