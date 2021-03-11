@@ -120,54 +120,56 @@
                       </v-card-subtitle>
                       <v-card-title
                         :style="{color: $vuetify.theme.themes[theme].basetexto}"
-                        class="pa-0" v-for="(valor, index) in productoCodigo[0].materiales" :key="valor.codigo">
-                        <template v-if="valor.variedad !== null">
-                          $ {{addCommas(Math.round(valor.precio))}} + iva
-                        <div class="contenedor_color">
-                          <v-tooltip bottom dense>
-                            <template v-slot:activator="{on, attrs}">
-                              <div
-                                v-if="valor.color_hex_2 !== null && valor.color_hex_3 !== null"
-                                v-bind="attrs"
-                                v-on="on"
-                                :style="`background: linear-gradient(rgb(${hextToRgb(valor.color_hex_1)[0]}, ${hextToRgb(valor.color_hex_1)[1]}, ${hextToRgb(valor.color_hex_1)[2]}) 0%, rgb(${hextToRgb(valor.color_hex_2)[0]}, ${hextToRgb(valor.color_hex_2)[1]}, ${hextToRgb(valor.color_hex_2)[2]}) 48%, rgb(${hextToRgb(valor.color_hex_2)[0]}, ${hextToRgb(valor.color_hex_2)[1]}, ${hextToRgb(valor.color_hex_2)[2]}) 62%, rgb(${hextToRgb(valor.color_hex_3)[0]}, ${hextToRgb(valor.color_hex_3)[1]}, ${hextToRgb(valor.color_hex_3)[2]}) 66%, rgb(${hextToRgb(valor.color_hex_3)[0]}, ${hextToRgb(valor.color_hex_3)[1]}, ${hextToRgb(valor.color_hex_3)[2]}) 100%)`"
-                                class="circuloProducto"
-                              ></div>
-                              <div
-                                v-else-if="valor.color_hex_2 !== null && valor.color_hex_3 === null"
-                                v-bind="attrs"
-                                v-on="on"
-                                :style="`background: linear-gradient(rgb(${hextToRgb(valor.color_hex_1)[0]}, ${hextToRgb(valor.color_hex_1)[1]}, ${hextToRgb(valor.color_hex_1)[2]}) 40%, rgb(${hextToRgb(valor.color_hex_2)[0]}, ${hextToRgb(valor.color_hex_2)[1]}, ${hextToRgb(valor.color_hex_2)[2]}) 50%)`"
-                                class="circuloProducto"
-                              >
-                              </div>
-                              <div
-                                v-else
-                                v-bind="attrs"
-                                v-on="on"
-                                :style="'background:' + valor.color_hex_1"
-                                class="circuloProducto"
-                              ></div>
+                        class="pa-0">
+
+                        <template v-if="valorVariedad.length > 1">
+                          <v-simple-table
+                          :style="{background: $vuetify.theme.themes[theme].basebackground}"
+                          >
+                            <template v-slot:default>
+                              <thead>
+                                <tr>
+                                  <th class="text-left">
+                                    Variedad
+                                  </th>
+                                  <th class="text-left">
+                                    Precio
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr v-for="(precio, index) in valorVariedad" :key="index">
+                                  <td>{{ precio.variedad }}</td>
+                                  <td>
+                                    <template v-if="precio.precio > precio.precio_descuento">
+                                      <span class="text-decoration-line-through mr-3" style="color: gray">
+                                        $ {{addCommas(Math.round(precio.precio))}} + iva
+                                      </span>
+                                      $ {{addCommas(Math.round(precio.precio_descuento))}} + iva
+                                    </template>
+                                    <template v-else>
+                                      $ {{addCommas(Math.round(precio.precio))}} + iva
+                                    </template>
+                                  </td>
+                                </tr>
+                              </tbody>
                             </template>
-                            <span>{{valor.color_nombre}}</span>
-                          </v-tooltip>
-                        </div>
-                          {{valor.variedad}}
+                          </v-simple-table>
                         </template>
+
                         <template v-else>
-                          <template v-if="index === 0">
-                            <template v-if="valor.precio > valor.precio_descuento">
-                              <div class="text-decoration-line-through mr-3">
-                                $ {{addCommas(Math.round(valor.precio))}} + iva
-                              </div>
-                              $ {{addCommas(Math.round(valor.precio_descuento))}} + iva
-                            </template>
-                            <template v-else>
-                              $ {{addCommas(Math.round(valor.precio))}} + iva
-                            </template>
+                          <template v-if="valorVariedad[0].precio > valorVariedad[0].precio_descuento">
+                            <span class="text-decoration-line-through mr-3" style="color: gray">
+                              $ {{addCommas(Math.round(valorVariedad[0].precio))}} + iva
+                            </span>
+                            $ {{addCommas(Math.round(valorVariedad[0].precio_descuento))}} + iva
+                          </template>
+                          <template v-else>
+                            <td>$ {{addCommas(Math.round(valorVariedad[0].precio))}} + iva</td>
                           </template>
                         </template>
                       </v-card-title>
+
                       <v-card-subtitle class="px-0 pt-5">
                         <span class="font-weight-black primary--text">Última Actualización de Precio:</span> {{productoCodigo[0].materiales[0].ultima_actualizacion_precio.substr(0,10)}}
                       </v-card-subtitle>
@@ -532,6 +534,7 @@ export default {
       offset: 0,
       easing: 'easeInQuart',
       type2: 'number2',
+      materiales: [],
     };
   },
   watch: {
@@ -553,6 +556,11 @@ export default {
   },
   computed: {
     ...mapGetters(['existeUsuario']),
+    valorVariedad() {
+      return Object.values(
+        // eslint-disable-next-line function-paren-newline
+        this.materiales.reduce((prev, next) => Object.assign(prev, { [next.variedad]: next }), {}));
+    },
     theme() {
       return (this.$vuetify.theme.dark) ? 'dark' : 'light';
     },
@@ -621,6 +629,7 @@ export default {
         this.getProductoTraking(this.codigo);
         this.categoriaPrincipal = this.productoCodigo[0].subcategoria_1.categoria.nombre;
         this.categoriaSecundaria = this.productoCodigo[0].subcategoria_1.nombre;
+        this.materiales = this.productoCodigo[0].materiales;
       });
     },
     async getProductoTraking(producto) {
