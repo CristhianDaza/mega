@@ -96,9 +96,9 @@
           :style="{color: $vuetify.theme.themes[theme].basetext}"
           v-if="existeUsuario" class="precio">
           <template v-if="producto.materiales[0].precio > producto.materiales[0].precio_descuento">
-            <div class="text-decoration-line-through mr-3 subtitle-1">
+            <span class="text-decoration-line-through mr-3 subtitle-1" style="color: gray">
               $ {{addCommas(Math.round(producto.materiales[0].precio))}} + iva
-            </div>
+            </span>
             <div class="subtitle-1">
               $ {{addCommas(Math.round(producto.materiales[0].precio_descuento))}} + iva
             </div>
