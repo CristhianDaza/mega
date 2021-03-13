@@ -122,50 +122,136 @@
                         :style="{color: $vuetify.theme.themes[theme].basetexto}"
                         class="pa-0">
 
-                        <template v-if="valorVariedad.length > 1">
-                          <v-simple-table
-                          :style="{background: $vuetify.theme.themes[theme].basebackground}"
-                          >
-                            <template v-slot:default>
-                              <thead>
-                                <tr>
-                                  <th class="text-left">
-                                    Variedad
-                                  </th>
-                                  <th class="text-left">
-                                    Precio
-                                  </th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr v-for="(precio, index) in valorVariedad" :key="index">
-                                  <td>{{ precio.variedad }}</td>
-                                  <td>
-                                    <template v-if="precio.precio > precio.precio_descuento">
-                                      <span class="text-decoration-line-through mr-3" style="color: gray">
-                                        $ {{addCommas(Math.round(precio.precio))}} + iva
-                                      </span>
-                                      $ {{addCommas(Math.round(precio.precio_descuento))}} + iva
-                                    </template>
-                                    <template v-else>
-                                      $ {{addCommas(Math.round(precio.precio))}} + iva
-                                    </template>
-                                  </td>
-                                </tr>
-                              </tbody>
+                        <template v-if="productoCodigo[0].etiquetas.length > 0">
+                          <template v-if="productoCodigo[0].etiquetas[0].id == 4 || productoCodigo[0].etiquetas[0].id == 10 || productoCodigo[0].etiquetas[0].id == 20">
+                            <template v-if="valorVariedad.length > 1">
+                              <v-simple-table
+                              :style="{background: $vuetify.theme.themes[theme].basebackground}"
+                              >
+                                <template v-slot:default>
+                                  <thead>
+                                    <tr>
+                                      <th class="text-left">
+                                        Variedad
+                                      </th>
+                                      <th class="text-left">
+                                        Precio
+                                      </th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr v-for="(precio, index) in valorVariedad" :key="index">
+                                      <td>{{ precio.variedad }}</td>
+                                      <td>
+                                        $ {{addCommas(Math.round(precio.precio * 1.35))}} + iva
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </template>
+                              </v-simple-table>
                             </template>
-                          </v-simple-table>
+
+                            <template v-else>
+                              <td>$ {{addCommas(Math.round(valorVariedad[0].precio * 1.35))}} + iva</td>
+                            </template>
+                          </template>
+
+                          <template v-else>
+                            <template v-if="valorVariedad.length > 1">
+                              <v-simple-table
+                              :style="{background: $vuetify.theme.themes[theme].basebackground}"
+                              >
+                                <template v-slot:default>
+                                  <thead>
+                                    <tr>
+                                      <th class="text-left">
+                                        Variedad
+                                      </th>
+                                      <th class="text-left">
+                                        Precio
+                                      </th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr v-for="(precio, index) in valorVariedad" :key="index">
+                                      <td>{{ precio.variedad }}</td>
+                                      <td>
+                                        <template v-if="precio.precio > precio.precio_descuento">
+                                          <span class="text-decoration-line-through mr-3" style="color: gray">
+                                            $ {{addCommas(Math.round(precio.precio))}} + iva
+                                          </span>
+                                          $ {{addCommas(Math.round(precio.precio_descuento))}} + iva
+                                        </template>
+                                        <template v-else>
+                                          $ {{addCommas(Math.round(precio.precio))}} + iva
+                                        </template>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </template>
+                              </v-simple-table>
+                            </template>
+
+                            <template v-else>
+                              <template v-if="valorVariedad[0].precio > valorVariedad[0].precio_descuento">
+                                <span class="text-decoration-line-through mr-3" style="color: gray">
+                                  $ {{addCommas(Math.round(valorVariedad[0].precio))}} + iva
+                                </span>
+                                $ {{addCommas(Math.round(valorVariedad[0].precio_descuento))}} + iva
+                              </template>
+                              <template v-else>
+                                <td>$ {{addCommas(Math.round(valorVariedad[0].precio))}} + iva</td>
+                              </template>
+                            </template>
+                          </template>
                         </template>
 
                         <template v-else>
-                          <template v-if="valorVariedad[0].precio > valorVariedad[0].precio_descuento">
-                            <span class="text-decoration-line-through mr-3" style="color: gray">
-                              $ {{addCommas(Math.round(valorVariedad[0].precio))}} + iva
-                            </span>
-                            $ {{addCommas(Math.round(valorVariedad[0].precio_descuento))}} + iva
+                          <template v-if="valorVariedad.length > 1">
+                            <v-simple-table
+                            :style="{background: $vuetify.theme.themes[theme].basebackground}"
+                            >
+                              <template v-slot:default>
+                                <thead>
+                                  <tr>
+                                    <th class="text-left">
+                                      Variedad
+                                    </th>
+                                    <th class="text-left">
+                                      Precio
+                                    </th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr v-for="(precio, index) in valorVariedad" :key="index">
+                                    <td>{{ precio.variedad }}</td>
+                                    <td>
+                                      <template v-if="precio.precio > precio.precio_descuento">
+                                        <span class="text-decoration-line-through mr-3" style="color: gray">
+                                          $ {{addCommas(Math.round(precio.precio))}} + iva
+                                        </span>
+                                        $ {{addCommas(Math.round(precio.precio_descuento))}} + iva
+                                      </template>
+                                      <template v-else>
+                                        $ {{addCommas(Math.round(precio.precio))}} + iva
+                                      </template>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </template>
+                            </v-simple-table>
                           </template>
+
                           <template v-else>
-                            <td>$ {{addCommas(Math.round(valorVariedad[0].precio))}} + iva</td>
+                            <template v-if="valorVariedad[0].precio > valorVariedad[0].precio_descuento">
+                              <span class="text-decoration-line-through mr-3" style="color: gray">
+                                $ {{addCommas(Math.round(valorVariedad[0].precio))}} + iva
+                              </span>
+                              $ {{addCommas(Math.round(valorVariedad[0].precio_descuento))}} + iva
+                            </template>
+                            <template v-else>
+                              <td>$ {{addCommas(Math.round(valorVariedad[0].precio))}} + iva</td>
+                            </template>
                           </template>
                         </template>
                       </v-card-title>
