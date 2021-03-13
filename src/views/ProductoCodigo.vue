@@ -494,11 +494,11 @@
                       </div>
                     </template>
                   </div>
-                <v-card-title
+                <!-- <v-card-title
                   :style="{color: $vuetify.theme.themes[theme].basetexto}"
                   v-if="existeUsuario">
                   ${{ addCommas(Math.round(producto.precio)) }} + iva
-                </v-card-title>
+                </v-card-title> -->
                 <v-divider class="mx-5"></v-divider>
                 <v-card-actions>
                 <v-btn
