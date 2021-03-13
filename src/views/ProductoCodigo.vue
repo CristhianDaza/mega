@@ -177,7 +177,7 @@
                                       <td>{{ precio.variedad }}</td>
                                       <td>
                                         <template v-if="precio.precio > precio.precio_descuento">
-                                          <span class="text-decoration-line-through mr-3" style="color: gray">
+                                          <span class="text-decoration-line-through mr-3 subtitle-1" style="color: gray">
                                             $ {{addCommas(Math.round(precio.precio))}} + iva
                                           </span>
                                           $ {{addCommas(Math.round(precio.precio_descuento))}} + iva
@@ -194,7 +194,7 @@
 
                             <template v-else>
                               <template v-if="valorVariedad[0].precio > valorVariedad[0].precio_descuento">
-                                <span class="text-decoration-line-through mr-3" style="color: gray">
+                                <span class="text-decoration-line-through mr-3 subtitle-1" style="color: gray">
                                   $ {{addCommas(Math.round(valorVariedad[0].precio))}} + iva
                                 </span>
                                 $ {{addCommas(Math.round(valorVariedad[0].precio_descuento))}} + iva
@@ -227,7 +227,7 @@
                                     <td>{{ precio.variedad }}</td>
                                     <td>
                                       <template v-if="precio.precio > precio.precio_descuento">
-                                        <span class="text-decoration-line-through mr-3" style="color: gray">
+                                        <span class="text-decoration-line-through mr-3 subtitle-1" style="color: gray">
                                           $ {{addCommas(Math.round(precio.precio))}} + iva
                                         </span>
                                         $ {{addCommas(Math.round(precio.precio_descuento))}} + iva
@@ -244,7 +244,7 @@
 
                           <template v-else>
                             <template v-if="valorVariedad[0].precio > valorVariedad[0].precio_descuento">
-                              <span class="text-decoration-line-through mr-3" style="color: gray">
+                              <span class="text-decoration-line-through mr-3 subtitle-1" style="color: gray">
                                 $ {{addCommas(Math.round(valorVariedad[0].precio))}} + iva
                               </span>
                               $ {{addCommas(Math.round(valorVariedad[0].precio_descuento))}} + iva
