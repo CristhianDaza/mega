@@ -4,6 +4,7 @@ import { auth } from '@/firebase';
 import VueCarousel from 'vue-carousel';
 import flipbook from 'flipbook-vue';
 import VueCoreVideoPlayer from 'vue-core-video-player';
+import moment from 'moment';
 import router from './router';
 // eslint-disable-next-line import/order
 import VueAnalytics from 'vue-analytics';
@@ -14,6 +15,7 @@ import vuetify from './plugins/vuetify';
 import '@babel/polyfill';
 
 Vue.config.productionTip = false;
+Vue.prototype.moment = moment;
 
 const es = {
   dashboard: {

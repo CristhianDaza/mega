@@ -257,7 +257,7 @@
                       </v-card-title>
 
                       <v-card-subtitle class="px-0 pt-5">
-                        <span class="font-weight-black primary--text">Última Actualización de Precio:</span> {{productoCodigo[0].materiales[0].ultima_actualizacion_precio.substr(0,10)}}
+                        <span class="font-weight-black primary--text">Última Actualización de Precio:</span> {{moment(productoCodigo[0].materiales[0].ultima_actualizacion_precio).locale('es-CO').format('LL')}}
                       </v-card-subtitle>
                     </div>
                   </template>
@@ -544,10 +544,11 @@
       >
         <thead>
           <tr>
-            <th class="text-left">CANTIDADES EN TRÁNSITO</th>
-            <th class="text-left">INGRESO AL SISTEMA</th>
-            <th class="text-left">ESTADO DE TRÁNSITO</th>
+            <th class="text-left">CANTIDADES<br>EN TRÁNSITO</th>
+            <th class="text-left">INGRESO<br>AL SISTEMA</th>
+            <th class="text-left">ESTADO DEL<br>TRÁNSITO</th>
             <th class="text-left">REFERENCIA</th>
+            <th class="text-left">ÚLTIMA<br>ACTUALIZACIÓN</th>
           </tr>
         </thead>
         <tbody>
@@ -556,13 +557,16 @@
               {{addCommas(existencia.trackings_importacion[0].cantidad)}}
             </td>
             <td v-if="existencia.trackings_importacion[0] !== undefined">
-              {{existencia.trackings_importacion[0].fecha}}
+              {{moment(existencia.trackings_importacion[0].fecha).locale('es-CO').format('LL')}}
             </td>
             <td v-if="existencia.trackings_importacion[0] !== undefined">
               {{existencia.trackings_importacion[0].estado}}
             </td>
             <td v-if="existencia.trackings_importacion[0] !== undefined">
               {{existencia.trackings_importacion[0].material}}
+            </td>
+            <td v-if="existencia.trackings_importacion[0] !== undefined">
+              {{moment(existencia.trackings_importacion[0].ultima_actualizacion).locale('es-CO').format('LL')}}
             </td>
           </tr>
         </tbody>
