@@ -546,15 +546,18 @@
       >
         <thead>
           <tr>
+            <th class="text-left">COLOR</th>
             <th class="text-left">CANTIDADES<br>EN TRÁNSITO</th>
             <th class="text-left">INGRESO<br>AL SISTEMA</th>
             <th class="text-left">ESTADO DEL<br>TRÁNSITO</th>
-            <th class="text-left">REFERENCIA</th>
             <th class="text-left">ÚLTIMA<br>ACTUALIZACIÓN</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(existencia, index) in productoTraking[0]" :key="index">
+            <td v-if="existencia.trackings_importacion[0] !== undefined">
+              {{ coloresTransito(inventarioDisponible, existencia.trackings_importacion[0].material) }}
+            </td>
             <td v-if="existencia.trackings_importacion[0] !== undefined">
               {{addCommas(existencia.trackings_importacion[0].cantidad)}}
             </td>
@@ -563,9 +566,6 @@
             </td>
             <td v-if="existencia.trackings_importacion[0] !== undefined">
               {{existencia.trackings_importacion[0].estado}}
-            </td>
-            <td v-if="existencia.trackings_importacion[0] !== undefined">
-              {{existencia.trackings_importacion[0].material}}
             </td>
             <td v-if="existencia.trackings_importacion[0] !== undefined">
               {{moment(existencia.trackings_importacion[0].ultima_actualizacion).locale('es-CO').format('LL')}}
@@ -684,6 +684,16 @@ export default {
     },
   },
   methods: {
+    coloresTransito(inventario, traking) {
+      let codigo;
+      inventario.forEach((data) => {
+        if (data.codigo === traking) {
+          codigo = data.color_nombre;
+        }
+      });
+
+      return codigo;
+    },
     addCommas(nStr) {
       // eslint-disable-next-line no-param-reassign
       nStr += '';
