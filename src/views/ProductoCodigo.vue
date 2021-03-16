@@ -257,8 +257,7 @@
                       </v-card-title>
 
                       <v-card-subtitle class="px-0 pt-5">
-                        <div v-if="productoCodigo[0].materiales[0].fin_descuento_promo != null"><span class="font-weight-black primary--text">Fin del descuento:</span> {{moment(productoCodigo[0].materiales[0].fin_descuento_promo).locale('es-CO').format('LL')}}</div>
-                        <div><span class="font-weight-black primary--text">Última Actualización de Precio:</span> {{moment(productoCodigo[0].materiales[0].ultima_actualizacion_precio).locale('es-CO').format('LL')}}</div>
+                        <span class="font-weight-black primary--text">Última actualización del precio:</span> {{moment(productoCodigo[0].materiales[0].ultima_actualizacion_precio).locale('es-CO').format('LL')}}
                       </v-card-subtitle>
                     </div>
                   </template>
@@ -282,21 +281,23 @@
                         >
                     </div>
                   </template>
-                  <v-btn
-                    outlined
-                    color="primary"
-                    @click="loader = 'loading'"
-                    :loading="loading"
-                    :disabled="loading"
-                    :href="`https://marpicoprod.azurewebsites.net/api/productos/imagenes/${productoCodigo[0].id}?producto=${productoCodigo[0].familia}`"
-                  >
-                    Descargar Imágenes
-                    <v-icon>
-                      {{ mdiDownload }}
-                    </v-icon>
-                  </v-btn>
                 </v-row>
               </v-card-actions>
+              <v-card-acttions class="ma-3">
+                <v-btn
+                  outlined
+                  color="primary"
+                  @click="loader = 'loading'"
+                  :loading="loading"
+                  :disabled="loading"
+                  :href="`https://marpicoprod.azurewebsites.net/api/productos/imagenes/${productoCodigo[0].id}?producto=${productoCodigo[0].familia}`"
+                >
+                  Descargar Imágenes
+                  <v-icon>
+                    {{ mdiDownload }}
+                  </v-icon>
+                </v-btn>
+              </v-card-acttions>
               <v-card-actions class="ml-1" v-if="productoCodigo[0].materiales[0].en_transito > 0">
                 <v-btn
                   outlined
