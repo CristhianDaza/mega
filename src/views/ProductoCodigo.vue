@@ -281,40 +281,31 @@
                         >
                     </div>
                   </template>
+                  <v-btn
+                    outlined
+                    color="primary"
+                    @click="loader = 'loading'"
+                    :loading="loading"
+                    :disabled="loading"
+                    :href="`https://marpicoprod.azurewebsites.net/api/productos/imagenes/${productoCodigo[0].id}?producto=${productoCodigo[0].familia}`"
+                  >
+                    Descargar Imágenes
+                    <v-icon>
+                      {{ mdiDownload }}
+                    </v-icon>
+                  </v-btn>
                 </v-row>
-                <template v-if="productoCodigo[0].materiales[0].en_transito > 0">
-                  <v-tooltip v-model="mostrarTooltip" bottom>
-                    <template v-slot:activator="{on, attrs}">
-                      <v-btn
-                        v-on="on"
-                        v-bind="attrs"
-                        icon
-                        @click.stop="dialogTransito = true"
-                        class="my-2"
-                      >
-                        <v-icon>{{mdiFerry}}</v-icon>
-                      </v-btn>
-                    </template>
-                    <span>Ver Importaciones</span>
-                  </v-tooltip>
-                </template>
               </v-card-actions>
-              <v-card-actions>
+              <v-card-actions class="ml-1" v-if="productoCodigo[0].materiales[0].en_transito > 0">
                 <v-btn
                   outlined
                   color="primary"
-                  class="my-2 white--text"
-                  @click="loader = 'loading'"
-                  :loading="loading"
-                  :disabled="loading"
-                  :href="`https://marpicoprod.azurewebsites.net/api/productos/imagenes/${productoCodigo[0].id}?producto=${productoCodigo[0].familia}`"
+                  class="my-1 pa-4"
+                  @click.stop="dialogTransito = true"
                 >
-                  Descargar Imágenes
-                  <v-icon
-                    right
-                    dark
-                  >
-                    {{ mdiDownload }}
+                  Importaciones
+                  <v-icon class="ml-1">
+                    {{mdiFerry}}
                   </v-icon>
                 </v-btn>
               </v-card-actions>
