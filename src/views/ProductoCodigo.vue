@@ -257,7 +257,8 @@
                       </v-card-title>
 
                       <v-card-subtitle class="px-0 pt-5">
-                        <span class="font-weight-black primary--text">Última Actualización de Precio:</span> {{moment(productoCodigo[0].materiales[0].ultima_actualizacion_precio).locale('es-CO').format('LL')}}
+                        <div v-if="productoCodigo[0].materiales[0].fin_descuento_promo != null"><span class="font-weight-black primary--text">Fin del descuento:</span> {{moment(productoCodigo[0].materiales[0].fin_descuento_promo).locale('es-CO').format('LL')}}</div>
+                        <div><span class="font-weight-black primary--text">Última Actualización de Precio:</span> {{moment(productoCodigo[0].materiales[0].ultima_actualizacion_precio).locale('es-CO').format('LL')}}</div>
                       </v-card-subtitle>
                     </div>
                   </template>
