@@ -283,7 +283,7 @@
                   </template>
                 </v-row>
               </v-card-actions>
-              <v-card-acttions class="ma-3">
+              <v-card-actions class="ml-1">
                 <v-btn
                   outlined
                   color="primary"
@@ -297,7 +297,7 @@
                     {{ mdiDownload }}
                   </v-icon>
                 </v-btn>
-              </v-card-acttions>
+              </v-card-actions>
               <v-card-actions class="ml-1" v-if="productoCodigo[0].materiales[0].en_transito > 0">
                 <v-btn
                   outlined
