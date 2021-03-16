@@ -376,36 +376,34 @@
                 <th class="text-left">REFERENCIA</th>
               </tr>
             </thead>
-            <tbody v-for="existencias in productoCodigo" :key="existencias.codigo">
-              <tr v-for="(existencia, index) in existencias.materiales" :key="index">
-                <template>
-                  <td>
-                    <v-tooltip bottom>
-                      <template v-slot:activator="{on, attrs}">
-                        <v-btn
-                          v-on="on"
-                          v-bind="attrs"
-                          icon
-                          small=""
-                          @click.stop="actualizar(existencia.codigo)"
-                          color="primary"
-                        >
-                          <v-icon>{{mdiMagnify}}</v-icon>
-                        </v-btn>
-                      </template>
-                      <span>Ver Sugerencia en {{existencia.color_nombre}}</span>
-                    </v-tooltip>
-                  </td>
-                  <td>
-                      {{existencia.color_nombre}}
-                  </td>
-                  <td>
-                    {{existencia.variedad}}
-                  </td>
-                  <td class="error--text" v-if="existencia.inventario < 10">Agotado</td>
-                  <td v-else>{{existencia.inventario}}</td>
-                  <td>{{existencia.codigo}}</td>
-                </template>
+            <tbody v-for="(existencia, index) in inventarioDisponible" :key="index">
+              <tr>
+                <td>
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{on, attrs}">
+                      <v-btn
+                        v-on="on"
+                        v-bind="attrs"
+                        icon
+                        small=""
+                        @click.stop="actualizar(existencia.codigo)"
+                        color="primary"
+                      >
+                        <v-icon>{{mdiMagnify}}</v-icon>
+                      </v-btn>
+                    </template>
+                    <span>Ver Sugerencia en {{existencia.color_nombre}}</span>
+                  </v-tooltip>
+                </td>
+                <td>
+                    {{existencia.color_nombre}}
+                </td>
+                <td>
+                  {{existencia.variedad}}
+                </td>
+                <td class="error--text" v-if="existencia.inventario < 10">Agotado</td>
+                <td v-else>{{existencia.inventario}}</td>
+                <td>{{existencia.codigo}}</td>
               </tr>
             </tbody>
           </v-simple-table>
@@ -480,25 +478,20 @@
                   <div class="red--text" v-if="producto.inventario < 10">Agotado en {{producto.color_nombre}}</div>
                   <div v-else :style="{color: $vuetify.theme.themes[theme].basetexto}">Inventario: {{producto.inventario}} color {{producto.color_nombre}}.</div>
                 </v-card-text>
-                  <div class="text-center">
-                    <template v-if="productoCodigo[0].etiquetas.length > 0">
-                      <div
-                        v-for="etiqueta in productoCodigo[0].etiquetas"
-                        :key="etiqueta.id"
-                      >
-                        <img
-                          width="80px"
-                          :src="etiqueta.imagen.file_sm"
-                          :alt="etiqueta.nombre"
-                          >
-                      </div>
-                    </template>
-                  </div>
-                <!-- <v-card-title
-                  :style="{color: $vuetify.theme.themes[theme].basetexto}"
-                  v-if="existeUsuario">
-                  ${{ addCommas(Math.round(producto.precio)) }} + iva
-                </v-card-title> -->
+                <div class="text-center">
+                  <template v-if="productoCodigo[0].etiquetas.length > 0">
+                    <div
+                      v-for="etiqueta in productoCodigo[0].etiquetas"
+                      :key="etiqueta.id"
+                    >
+                      <img
+                        width="80px"
+                        :src="etiqueta.imagen.file_sm"
+                        :alt="etiqueta.nombre"
+                        >
+                    </div>
+                  </template>
+                </div>
                 <v-divider class="mx-5"></v-divider>
                 <v-card-actions>
                 <v-btn
@@ -642,6 +635,10 @@ export default {
   },
   computed: {
     ...mapGetters(['existeUsuario']),
+    inventarioDisponible() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      return this.materiales.sort((a, b) => a.codigo - b.codigo);
+    },
     valorVariedad() {
       return Object.values(
         // eslint-disable-next-line function-paren-newline
