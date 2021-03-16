@@ -363,50 +363,51 @@
       </v-sheet>
       <v-row>
         <v-col cols="12" sm="6">
-          <v-card class="mt-5">
-          <v-simple-table
+          <v-card
+            class="mt-5 "
             :style="{background: $vuetify.theme.themes[theme].basebackground}"
           >
-            <thead>
-              <tr>
-                <th class="text-left">SUGERIDOS</th>
-                <th class="text-left">COLOR</th>
-                <th class="text-left"></th>
-                <th class="text-left">DISPONIBLES</th>
-                <th class="text-left">REFERENCIA</th>
-              </tr>
-            </thead>
-            <tbody v-for="(existencia, index) in inventarioDisponible" :key="index">
-              <tr>
-                <td>
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{on, attrs}">
-                      <v-btn
-                        v-on="on"
-                        v-bind="attrs"
-                        icon
-                        small=""
-                        @click.stop="actualizar(existencia.codigo)"
-                        color="primary"
-                      >
-                        <v-icon>{{mdiMagnify}}</v-icon>
-                      </v-btn>
-                    </template>
-                    <span>Ver Sugerencia en {{existencia.color_nombre}}</span>
-                  </v-tooltip>
-                </td>
-                <td>
-                    {{existencia.color_nombre}}
-                </td>
-                <td>
-                  {{existencia.variedad}}
-                </td>
-                <td class="error--text" v-if="existencia.inventario < 10">Agotado</td>
-                <td v-else>{{existencia.inventario}}</td>
-                <td>{{existencia.codigo}}</td>
-              </tr>
-            </tbody>
-          </v-simple-table>
+            <v-simple-table>
+              <template v-slot:default>
+                <thead style="background: #0077bd">
+                  <tr style="background: #0077bd">
+                    <th class=" white--text">COLOR DEL<br> PRODUCTO</th>
+                    <th class=""></th>
+                    <th class="white--text">UNIDADES<br>DISPONIBLES</th>
+                    <th class="white--text">PRODUCTOS<br>SIMILARES</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(existencia, index) in inventarioDisponible" :key="index">
+                    <td>
+                        {{existencia.color_nombre}}
+                    </td>
+                    <td>
+                      {{existencia.variedad}}
+                    </td>
+                    <td class="error--text" v-if="existencia.inventario < 10">Agotado</td>
+                    <td v-else>{{addCommas(Math.round(existencia.inventario))}}</td>
+                    <td>
+                      <v-tooltip right>
+                        <template v-slot:activator="{on, attrs}">
+                          <v-btn
+                            v-on="on"
+                            v-bind="attrs"
+                            icon
+                            small
+                            @click.stop="actualizar(existencia.codigo)"
+                            color="primary"
+                          >
+                            <v-icon>{{mdiMagnify}}</v-icon>
+                          </v-btn>
+                        </template>
+                        <span>Sugerencia en color {{existencia.color_nombre}}</span>
+                      </v-tooltip>
+                    </td>
+                  </tr>
+                </tbody>
+              </template>
+            </v-simple-table>
           </v-card>
           <div v-if="productoCodigo[0].videos.length > 0" class="mt-3">
             <v-responsive :aspect-ratio="16/9">
