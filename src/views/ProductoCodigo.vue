@@ -367,20 +367,44 @@
             class="mt-5 "
             :style="{background: $vuetify.theme.themes[theme].basebackground}"
           >
-            <v-simple-table>
+            <v-simple-table
+              :style="{background: $vuetify.theme.themes[theme].basebackground}"
+            >
               <template v-slot:default>
-                <thead style="background: #0077bd">
+                <thead>
                   <tr style="background: #0077bd">
                     <th class=" white--text">COLOR DEL<br> PRODUCTO</th>
                     <th class=""></th>
                     <th class="white--text">UNIDADES<br>DISPONIBLES</th>
-                    <th class="white--text">PRODUCTOS<br>SIMILARES</th>
+                    <th class="white--text">PRODUCTOS<br>SUGERIDOS</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr v-for="(existencia, index) in inventarioDisponible" :key="index">
-                    <td>
+                    <td class="d-flex">
+                      <div
+                        :style="{'border': theme == 'light' ? '1px solid black' : '1px solid white'}"
+                        class="contenedor_color mt-3 mr-2"
+                      >
+                        <template>
+                          <div
+                            v-if="existencia.color_hex_2 !== null && existencia.color_hex_3 !== null"
+                            :style="`background: linear-gradient(rgb(${hextToRgb(existencia.color_hex_1)[0]}, ${hextToRgb(existencia.color_hex_1)[1]}, ${hextToRgb(existencia.color_hex_1)[2]}) 0%, rgb(${hextToRgb(existencia.color_hex_2)[0]}, ${hextToRgb(existencia.color_hex_2)[1]}, ${hextToRgb(existencia.color_hex_2)[2]}) 48%, rgb(${hextToRgb(existencia.color_hex_2)[0]}, ${hextToRgb(existencia.color_hex_2)[1]}, ${hextToRgb(existencia.color_hex_2)[2]}) 62%, rgb(${hextToRgb(existencia.color_hex_3)[0]}, ${hextToRgb(existencia.color_hex_3)[1]}, ${hextToRgb(existencia.color_hex_3)[2]}) 66%, rgb(${hextToRgb(existencia.color_hex_3)[0]}, ${hextToRgb(existencia.color_hex_3)[1]}, ${hextToRgb(existencia.color_hex_3)[2]}) 100%)`"
+                          ></div>
+                          <div
+                            v-else-if="existencia.color_hex_2 !== null && existencia.color_hex_3 === null"
+                            :style="`background: linear-gradient(rgb(${hextToRgb(existencia.color_hex_1)[0]}, ${hextToRgb(existencia.color_hex_1)[1]}, ${hextToRgb(existencia.color_hex_1)[2]}) 40%, rgb(${hextToRgb(existencia.color_hex_2)[0]}, ${hextToRgb(existencia.color_hex_2)[1]}, ${hextToRgb(existencia.color_hex_2)[2]}) 50%)`"
+                          >
+                          </div>
+                          <div
+                            v-else
+                            :style="'background:' + existencia.color_hex_1"
+                          ></div>
+                        </template>
+                      </div>
+                      <div class="mt-3">
                         {{existencia.color_nombre}}
+                      </div>
                     </td>
                     <td>
                       {{existencia.variedad}}
@@ -874,8 +898,7 @@ export default {
   border-radius: 100%;
   user-select: none;
   overflow: hidden;
-  cursor: pointer;
-  border: 1px solid black;
+  cursor: auto;
 }
 .contenedor_color div {
   display: flex;
