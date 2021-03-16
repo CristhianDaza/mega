@@ -111,7 +111,7 @@
                   <p
                   :style="{color: $vuetify.theme.themes[theme].basetexto}"
                   class="ma-0">
-                    <strong class="font-weight-black primary--text">Categorias:</strong> <router-link class="linksCategorias" :to="`/productos?categoria=${productoCodigo[0].subcategoria_1.categoria.jerarquia}&titulo=${productoCodigo[0].subcategoria_1.categoria.nombre}`">{{productoCodigo[0].subcategoria_1.categoria.nombre}}</router-link> | <router-link class="linksCategorias" :to="`/productos?subCategoria=${productoCodigo[0].subcategoria_1.jerarquia}&titulo=${productoCodigo[0].subcategoria_1.nombre}`">{{ productoCodigo[0].subcategoria_1.nombre }}</router-link>
+                    <strong class="font-weight-black primary--text">CATEGORIAS:</strong> <router-link class="linksCategorias" :to="`/productos?categoria=${productoCodigo[0].subcategoria_1.categoria.jerarquia}&titulo=${productoCodigo[0].subcategoria_1.categoria.nombre}`">{{productoCodigo[0].subcategoria_1.categoria.nombre}}</router-link> | <router-link class="linksCategorias" :to="`/productos?subCategoria=${productoCodigo[0].subcategoria_1.jerarquia}&titulo=${productoCodigo[0].subcategoria_1.nombre}`">{{ productoCodigo[0].subcategoria_1.nombre }}</router-link>
                   </p>
                   <template v-if="existeUsuario">
                     <div>
