@@ -16,11 +16,11 @@
       </div>
       <p class="ma-0 primary--text">El color de los artículos pueden variar según la calibración y resolución de la pantalla.</p>
     </v-card-text>
-    <div
-      class="d-block title primary--text my-2"
+    <v-card-text
+      class="d-block title primary--text my-2 py-0"
       v-if="Math.round(producto.materiales[0].precio_descuento) !== Math.round(producto.materiales[0].precio)">
-        {{Math.round(producto.materiales[0].descuento)}}% de descuento.
-    </div>
+        {{Math.abs(Math.round(producto.materiales[0].descuento))}}% de descuento.
+    </v-card-text>
     <v-card-actions>
       <v-row class="ml-1">
         <template v-if="producto.etiquetas.length > 0">
