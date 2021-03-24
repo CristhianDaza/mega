@@ -52,36 +52,10 @@
       </v-card>
     </v-container>
     <v-container class="pt-0">
-      <v-sheet
-        :style="{background: $vuetify.theme.themes[theme].basebackground}"
-        class="mx-auto mt-3"
-        elevation="2">
-        <v-slide-group v-model="model" class="px-4 py-5" :prev-icon="mdiChevronLeft" :next-icon="mdiChevronRight">
-          <v-slide-item v-for="imagen in productoCodigo[0].imagenes" :key="imagen.id">
-            <v-row class="grupoImagenes">
-              <v-card class="mx-1" outlined>
-                <v-img
-                  @click="imagenReferencia(imagen.imagen.file_md, imagen.imagen.file), $vuetify.goTo(target2, options2)"
-                  width="150"
-                  :src="imagen.imagen.file_sm"
-                  :alt="productoCodigo[0].descripcion_comercial"
-                  class="imagenReferencia"
-                >
-                  <template v-slot:placeholder>
-                    <v-row
-                      class="fill-height ma-0"
-                      align="center"
-                      justify="center"
-                    >
-                      <Loader />
-                    </v-row>
-                  </template>
-                </v-img>
-              </v-card>
-            </v-row>
-          </v-slide-item>
-        </v-slide-group>
-      </v-sheet>
+      <ImagenesProducto
+        :imagenes="productoCodigo[0].imagenes"
+        @cambiarImagen="cambiarImagenHijo"
+      />
       <v-row>
         <v-col cols="12" sm="6">
           <v-card
@@ -322,11 +296,10 @@
 import Loader from '@/components/Global/Loader.vue';
 import ImagenProducto from '@/components/Producto/ImagenProducto.vue';
 import InfoProducto from '@/components/Producto/InfoProducto.vue';
+import ImagenesProducto from '@/components/Producto/ImagenesProducto.vue';
 import axios from 'axios';
 import {
   mdiCloseCircleOutline,
-  mdiChevronRight,
-  mdiChevronLeft,
   mdiMagnify,
 } from '@mdi/js';
 
@@ -345,10 +318,7 @@ export default {
       codigo: this.$route.params.codigo,
       dialogTransito: false,
       mdiCloseCircleOutline,
-      mdiChevronRight,
-      mdiChevronLeft,
       mdiMagnify,
-      model: null,
       overlay: false,
       mostrarTooltip: false,
       categoriaPrincipal: '',
@@ -439,6 +409,10 @@ export default {
       this.productoSugerencia = [];
       this.getProductosSugerencia(codigo);
     },
+    cambiarImagenHijo(imagen1, imagen2) {
+      this.imagenReferencia(imagen1, imagen2);
+      this.$vuetify.goTo(this.target2, this.options2);
+    },
     async getProductoCodigo() {
       const url = `https://marpicoprod.azurewebsites.net/api/productos/detail/${this.codigo}`;
       const config = {
@@ -519,6 +493,7 @@ export default {
     Loader,
     ImagenProducto,
     InfoProducto,
+    ImagenesProducto,
   },
 };
 </script>
@@ -529,19 +504,6 @@ export default {
   }
   .router-link-active:hover {
     color: #2196f3 !important;
-  }
-  .grupoImagenes {
-    margin: 0 !important;
-  }
-
-  .imagenReferencia {
-    cursor: pointer;
-    transition: 500ms;
-    opacity: .3;
-  }
-
-  .imagenReferencia:hover {
-    opacity: 1;
   }
 
   .linkCategoria:hover {
