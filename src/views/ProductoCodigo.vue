@@ -41,244 +41,11 @@
           </v-col>
           <v-col cols="12" md="6" :class="this.$vuetify.breakpoint.xs ? 'pt-0' : ''">
             <v-container :class="$vuetify.breakpoint.xs ? 'pt-0' : ''">
-              <v-card-title class="font-weight-black">
-                <h1
-                  :style="{color: $vuetify.theme.themes[theme].basetexto}"
-                  class="titulo">{{ productoCodigo[0].familia }} {{ productoCodigo[0].descripcion_comercial }}</h1>
-              </v-card-title>
-              <v-divider class="mx-8"></v-divider>
-              <v-card-text>
-                  <p
-                  :style="{color: $vuetify.theme.themes[theme].basetexto}"
-                  class="ma-0 text-justify">{{ productoCodigo[0].descripcion_larga }}</p>
-                  <p
-                  :style="{color: $vuetify.theme.themes[theme].basetexto}"
-                  class="ma-0" v-if="productoCodigo[0].material !== null">
-                    <strong class="font-weight-black primary--text">MATERIAL:</strong> {{ productoCodigo[0].material }}
-                  </p>
-                  <p
-                  :style="{color: $vuetify.theme.themes[theme].basetexto}"
-                  class="ma-0" v-if="productoCodigo[0].medidas !== null">
-                    <strong class="font-weight-black primary--text">MEDIDAS:</strong> {{ productoCodigo[0].medidas }}
-                  </p>
-                  <p
-                  :style="{color: $vuetify.theme.themes[theme].basetexto}"
-                  class="ma-0" v-if="productoCodigo[0].area_impresion !== null">
-                    <strong class="font-weight-black primary--text">ÁREA DE IMPRESIÓN APROXIMADA:</strong> {{ productoCodigo[0].area_impresion }}
-                  </p>
-                  <p
-                  :style="{color: $vuetify.theme.themes[theme].basetexto}"
-                  class="ma-0" v-if="productoCodigo[0].tecnica_marca_descripcion !== null">
-                    <strong class="font-weight-black primary--text">MARCA:</strong> {{ productoCodigo[0].tecnica_marca_descripcion }}
-                  </p>
-                  <p
-                  :style="{color: $vuetify.theme.themes[theme].basetexto}"
-                  class="ma-0" v-if="productoCodigo[0].empaque !== null">
-                    <strong class="font-weight-black primary--text">EMPAQUE:</strong> {{ productoCodigo[0].empaque }}
-                  </p>
-                  <p
-                  :style="{color: $vuetify.theme.themes[theme].basetexto}"
-                  class="ma-0">
-                    <strong class="font-weight-black primary--text">CATEGORIAS:</strong> <router-link class="linksCategorias" :to="`/productos?categoria=${productoCodigo[0].subcategoria_1.categoria.jerarquia}&titulo=${productoCodigo[0].subcategoria_1.categoria.nombre}`">{{productoCodigo[0].subcategoria_1.categoria.nombre}}</router-link> | <router-link class="linksCategorias" :to="`/productos?subCategoria=${productoCodigo[0].subcategoria_1.jerarquia}&titulo=${productoCodigo[0].subcategoria_1.nombre}`">{{ productoCodigo[0].subcategoria_1.nombre }}</router-link>
-                  </p>
-                  <template v-if="existeUsuario">
-                    <div>
-                      <v-card-subtitle class="font-weight-black primary--text px-0 pb-0">
-                        PRECIO:
-                      </v-card-subtitle>
-                      <v-card-title
-                        :style="{color: $vuetify.theme.themes[theme].basetexto}"
-                        class="pa-0">
-
-                        <template v-if="productoCodigo[0].etiquetas.length > 0">
-                          <template v-if="productoCodigo[0].etiquetas[0].id == 4 || productoCodigo[0].etiquetas[0].id == 10 || productoCodigo[0].etiquetas[0].id == 20">
-                            <template v-if="valorVariedad.length > 1">
-                              <v-simple-table
-                              :style="{background: $vuetify.theme.themes[theme].basebackground}"
-                              >
-                                <template v-slot:default>
-                                  <thead>
-                                    <tr>
-                                      <th class="text-left">
-                                        Variedad
-                                      </th>
-                                      <th class="text-left">
-                                        Precio
-                                      </th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr v-for="(precio, index) in valorVariedad" :key="index">
-                                      <td>{{ precio.variedad }}</td>
-                                      <td>
-                                        $ {{addCommas(Math.round(precio.precio * 1.35))}} + iva
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                                </template>
-                              </v-simple-table>
-                            </template>
-
-                            <template v-else>
-                              <td>$ {{addCommas(Math.round(valorVariedad[0].precio * 1.35))}} + iva</td>
-                            </template>
-                          </template>
-
-                          <template v-else>
-                            <template v-if="valorVariedad.length > 1">
-                              <v-simple-table
-                              :style="{background: $vuetify.theme.themes[theme].basebackground}"
-                              >
-                                <template v-slot:default>
-                                  <thead>
-                                    <tr>
-                                      <th class="text-left">
-                                        Variedad
-                                      </th>
-                                      <th class="text-left">
-                                        Precio
-                                      </th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr v-for="(precio, index) in valorVariedad" :key="index">
-                                      <td>{{ precio.variedad }}</td>
-                                      <td>
-                                        <template v-if="precio.precio > precio.precio_descuento">
-                                          <span class="text-decoration-line-through mr-3 subtitle-1" style="color: gray">
-                                            $ {{addCommas(Math.round(precio.precio))}} + iva
-                                          </span>
-                                          $ {{addCommas(Math.round(precio.precio_descuento))}} + iva
-                                        </template>
-                                        <template v-else>
-                                          $ {{addCommas(Math.round(precio.precio))}} + iva
-                                        </template>
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                                </template>
-                              </v-simple-table>
-                            </template>
-
-                            <template v-else>
-                              <template v-if="valorVariedad[0].precio > valorVariedad[0].precio_descuento">
-                                <span class="text-decoration-line-through mr-3 subtitle-1" style="color: gray">
-                                  $ {{addCommas(Math.round(valorVariedad[0].precio))}} + iva
-                                </span>
-                                $ {{addCommas(Math.round(valorVariedad[0].precio_descuento))}} + iva
-                              </template>
-                              <template v-else>
-                                <td>$ {{addCommas(Math.round(valorVariedad[0].precio))}} + iva</td>
-                              </template>
-                            </template>
-                          </template>
-                        </template>
-
-                        <template v-else>
-                          <template v-if="valorVariedad.length > 1">
-                            <v-simple-table
-                            :style="{background: $vuetify.theme.themes[theme].basebackground}"
-                            >
-                              <template v-slot:default>
-                                <thead>
-                                  <tr>
-                                    <th class="text-left">
-                                      Variedad
-                                    </th>
-                                    <th class="text-left">
-                                      Precio
-                                    </th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr v-for="(precio, index) in valorVariedad" :key="index">
-                                    <td>{{ precio.variedad }}</td>
-                                    <td>
-                                      <template v-if="precio.precio > precio.precio_descuento">
-                                        <span class="text-decoration-line-through mr-3 subtitle-1" style="color: gray">
-                                          $ {{addCommas(Math.round(precio.precio))}} + iva
-                                        </span>
-                                        $ {{addCommas(Math.round(precio.precio_descuento))}} + iva
-                                      </template>
-                                      <template v-else>
-                                        $ {{addCommas(Math.round(precio.precio))}} + iva
-                                      </template>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </template>
-                            </v-simple-table>
-                          </template>
-
-                          <template v-else>
-                            <template v-if="valorVariedad[0].precio > valorVariedad[0].precio_descuento">
-                              <span class="text-decoration-line-through mr-3 subtitle-1" style="color: gray">
-                                $ {{addCommas(Math.round(valorVariedad[0].precio))}} + iva
-                              </span>
-                              $ {{addCommas(Math.round(valorVariedad[0].precio_descuento))}} + iva
-                            </template>
-                            <template v-else>
-                              <td>$ {{addCommas(Math.round(valorVariedad[0].precio))}} + iva</td>
-                            </template>
-                          </template>
-                        </template>
-                      </v-card-title>
-
-                      <v-card-subtitle class="px-0 pt-5">
-                        <span class="font-weight-black primary--text">Última actualización del precio:</span> {{moment(productoCodigo[0].materiales[0].ultima_actualizacion_precio).locale('es-CO').format('LL')}}
-                      </v-card-subtitle>
-                    </div>
-                  </template>
-                  <div v-if="existeUsuario">
-                    <p v-if="productoCodigo[0].texto_informacion !== null" class="ma-0" :style="'color: ' + productoCodigo[0].color_texto_informacion">{{productoCodigo[0].texto_informacion}}</p>
-                  </div>
-                  <p class="ma-0 primary--text">El color de los artículos pueden variar según la calibración y resolución de la pantalla.</p>
-                <div class="d-block title primary--text my-2" v-if="Math.round(productoCodigo[0].materiales[0].precio_descuento) !== Math.round(productoCodigo[0].materiales[0].precio)">Con el {{Math.round(productoCodigo[0].materiales[0].descuento)}}% de descuento.</div>
-              </v-card-text>
-              <v-card-actions>
-                <v-row class="ml-1">
-                  <template v-if="productoCodigo[0].etiquetas.length > 0">
-                    <div
-                      v-for="etiqueta in productoCodigo[0].etiquetas"
-                      :key="etiqueta.id"
-                    >
-                      <img
-                        width="150px"
-                        :src="etiqueta.imagen.file_sm"
-                        :alt="etiqueta.nombre"
-                        >
-                    </div>
-                  </template>
-                </v-row>
-              </v-card-actions>
-              <v-card-actions class="ml-1">
-                <v-btn
-                  outlined
-                  color="primary"
-                  @click="loader = 'loading'"
-                  :loading="loading"
-                  :disabled="loading"
-                  :href="`https://marpicoprod.azurewebsites.net/api/productos/imagenes/${productoCodigo[0].id}?producto=${productoCodigo[0].familia}`"
-                >
-                  Descargar Imágenes
-                  <v-icon>
-                    {{ mdiDownload }}
-                  </v-icon>
-                </v-btn>
-              </v-card-actions>
-              <v-card-actions class="ml-1" v-if="productoCodigo[0].materiales[0].en_transito > 0">
-                <v-btn
-                  outlined
-                  color="primary"
-                  class="my-1 pa-4"
-                  @click.stop="dialogTransito = true"
-                >
-                  Importaciones
-                  <v-icon class="ml-1">
-                    {{mdiFerry}}
-                  </v-icon>
-                </v-btn>
-              </v-card-actions>
+              <InfoProducto
+                :producto="productoCodigo[0]"
+                :materiales="this.materiales"
+                @dialogo="dialogTransito = true"
+              />
             </v-container>
           </v-col>
         </v-row>
@@ -327,8 +94,8 @@
               <template v-slot:default>
                 <thead>
                   <tr style="background: #0077bd">
-                    <th class=" white--text">COLOR DEL<br> PRODUCTO</th>
-                    <th class=""></th>
+                    <th class="white--text">COLOR DEL<br> PRODUCTO</th>
+                    <th></th>
                     <th class="white--text">UNIDADES<br>DISPONIBLES</th>
                     <th class="white--text">PRODUCTOS<br>SUGERIDOS</th>
                   </tr>
@@ -506,12 +273,12 @@
         :style="{background: $vuetify.theme.themes[theme].basebackground}"
       >
         <thead>
-          <tr>
-            <th class="text-left">COLOR</th>
-            <th class="text-left">CANTIDADES<br>EN TRÁNSITO</th>
-            <th class="text-left">INGRESO<br>AL SISTEMA</th>
-            <th class="text-left">ESTADO DEL<br>TRÁNSITO</th>
-            <th class="text-left">ÚLTIMA<br>ACTUALIZACIÓN</th>
+          <tr style="background: #0077bd">
+            <th class="text-left white--text">COLOR</th>
+            <th class="text-left white--text">CANTIDADES<br>EN TRÁNSITO</th>
+            <th class="text-left white--text">INGRESO<br>AL SISTEMA</th>
+            <th class="text-left white--text">ESTADO DEL<br>TRÁNSITO</th>
+            <th class="text-left white--text">ÚLTIMA<br>ACTUALIZACIÓN</th>
           </tr>
         </thead>
         <tbody>
@@ -552,17 +319,15 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import Loader from '@/components/Global/Loader.vue';
 import ImagenProducto from '@/components/Producto/ImagenProducto.vue';
+import InfoProducto from '@/components/Producto/InfoProducto.vue';
 import axios from 'axios';
 import {
   mdiCloseCircleOutline,
   mdiChevronRight,
   mdiChevronLeft,
-  mdiFerry,
   mdiMagnify,
-  mdiDownload,
 } from '@mdi/js';
 
 export default {
@@ -570,7 +335,6 @@ export default {
   data() {
     return {
       loader: null,
-      loading: false,
       textoSugerido: '',
       textoInfo: '',
       productoCodigo: [],
@@ -583,9 +347,7 @@ export default {
       mdiCloseCircleOutline,
       mdiChevronRight,
       mdiChevronLeft,
-      mdiFerry,
       mdiMagnify,
-      mdiDownload,
       model: null,
       overlay: false,
       mostrarTooltip: false,
@@ -617,15 +379,9 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['existeUsuario']),
     inventarioDisponible() {
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       return this.materiales.sort((a, b) => a.codigo - b.codigo);
-    },
-    valorVariedad() {
-      return Object.values(
-        // eslint-disable-next-line function-paren-newline
-        this.materiales.reduce((prev, next) => Object.assign(prev, { [next.variedad]: next }), {}));
     },
     theme() {
       return (this.$vuetify.theme.dark) ? 'dark' : 'light';
@@ -762,6 +518,7 @@ export default {
   components: {
     Loader,
     ImagenProducto,
+    InfoProducto,
   },
 };
 </script>
@@ -775,10 +532,6 @@ export default {
   }
   .grupoImagenes {
     margin: 0 !important;
-  }
-
-  .titulo {
-    font-size: 20px;
   }
 
   .imagenReferencia {
@@ -797,14 +550,6 @@ export default {
   }
   .precio {
     padding: 0 !important;
-  }
-
-  .linksCategorias {
-    color: inherit !important;
-    transition: color .3s;
-  }
-  .linksCategorias:hover {
-    color: #1976d2 !important;
   }
 
 .links {
