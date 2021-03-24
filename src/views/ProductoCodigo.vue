@@ -32,43 +32,11 @@
         <v-row>
           <v-col cols="12" md="6" >
             <v-container>
-              <img v-if="this.imagenPrincipalMediana === ''" :class="$vuetify.breakpoint.xs ? '' : 'fotoTarjetaGrande'" class="fotoTarjeta elevation-18" @click.stop="dialog = true" :src="productoCodigo[0].imagenes[0].imagen.file_md" :alt="productoCodigo[0].descripcion_comercial" />
-
-              <img v-else :class="$vuetify.breakpoint.xs ? '' : 'fotoTarjetaGrande'" class="fotoTarjeta elevation-18" @click.stop="dialog = true" :src="imagenPrincipalMediana" :alt="productoCodigo[0].descripcion_comercial" />
-
-              <div v-if="productoCodigo[0].caracteristicas.length > 0" class="mt-8 mr-5 ml-2">
-                <h1
-                  :style="{color: $vuetify.theme.themes[theme].basetexto}"
-                  class="text-subtitle-2">Características:</h1>
-                <v-row>
-                  <template v-for="caracteristica in productoCodigo[0].caracteristicas">
-                    <v-tooltip top :key="caracteristica.id">
-                      <template v-slot:activator="{on, attrs}">
-                        <img
-                          class="imagenCaracteristica"
-                          :src="caracteristica.imagen"
-                          v-on="on"
-                          v-bind="attrs"
-                          :alt="caracteristica.nombre"
-                          @click.stop="mostrarTextoInfo(caracteristica.descripcion)">
-                      </template>
-                      <span>{{caracteristica.nombre}}</span>
-                    </v-tooltip>
-                  </template>
-                </v-row>
-              </div>
-              <v-card
-                :style="{background: $vuetify.theme.themes[theme].background}"
-                v-if="this.textoInfo !== ''" class="mt-5 elevation-10">
-                <v-card-text class="pb-0">
-                  <p
-                    :style="{color: $vuetify.theme.themes[theme].basetexto}"
-                  >{{textoInfo}}</p>
-                </v-card-text>
-                <v-card-actions class="pt-0">
-                  <v-btn color="primary" small @click="cerrarTextoInfo">Cerrar</v-btn>
-                </v-card-actions>
-              </v-card>
+              <ImagenProducto
+                :producto='productoCodigo[0]'
+                :imagenPrincipalMediana='this.imagenPrincipalMediana'
+                :imagenPrincipalGrande='this.imagenPrincipalGrande'
+              />
             </v-container>
           </v-col>
           <v-col cols="12" md="6" :class="this.$vuetify.breakpoint.xs ? 'pt-0' : ''">
@@ -316,13 +284,6 @@
         </v-row>
       </v-card>
     </v-container>
-    <v-dialog v-model="dialog" max-width="850" overlay-color="grey darken-4" overlay-opacity="0.9">
-      <v-btn dark icon class="float-right mr-5" color="white" @click.stop="dialog = false">
-        <v-icon>{{mdiCloseCircleOutline}}</v-icon>
-      </v-btn>
-      <img v-if="this.imagenPrincipalGrande === ''" :src="productoCodigo[0].imagenes[0].imagen.file" max-height="100%" :alt="productoCodigo[0].descripcion_comercial" />
-      <img v-else :src="imagenPrincipalGrande" max-height="100%" :alt="productoCodigo[0].descripcion_comercial" />
-    </v-dialog>
     <v-container class="pt-0">
       <v-sheet
         :style="{background: $vuetify.theme.themes[theme].basebackground}"
@@ -593,6 +554,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import Loader from '@/components/Global/Loader.vue';
+import ImagenProducto from '@/components/Producto/ImagenProducto.vue';
 import axios from 'axios';
 import {
   mdiCloseCircleOutline,
@@ -617,7 +579,6 @@ export default {
       imagenPrincipalMediana: '',
       imagenPrincipalGrande: '',
       codigo: this.$route.params.codigo,
-      dialog: false,
       dialogTransito: false,
       mdiCloseCircleOutline,
       mdiChevronRight,
@@ -713,12 +674,6 @@ export default {
         .substring(1).match(/.{2}/g)
         .map((x) => parseInt(x, 16));
     },
-    mostrarTextoInfo(texto) {
-      this.textoInfo = texto;
-    },
-    cerrarTextoInfo() {
-      this.textoInfo = '';
-    },
     imagenReferencia(imagenMediana, imagenGrande) {
       this.imagenPrincipalMediana = imagenMediana;
       this.imagenPrincipalGrande = imagenGrande;
@@ -806,6 +761,7 @@ export default {
   },
   components: {
     Loader,
+    ImagenProducto,
   },
 };
 </script>
@@ -817,22 +773,6 @@ export default {
   .router-link-active:hover {
     color: #2196f3 !important;
   }
-  .imagenCaracteristica {
-   width: 80px;
-   cursor: pointer;
-   margin-top: 15px;
-  }
-  .fotoTarjeta {
-    margin-top: -45px;
-    width: 100%;
-    max-width: 100%;
-    cursor: zoom-in;
-  }
-
-  .fotoTarjetaGrande {
-    margin-left: 20px;
-  }
-
   .grupoImagenes {
     margin: 0 !important;
   }
