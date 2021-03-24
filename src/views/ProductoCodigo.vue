@@ -153,7 +153,6 @@ export default {
   data() {
     return {
       loader: null,
-      textoInfo: '',
       productoCodigo: [],
       productoSugerencia: [],
       productoTraking: [],
@@ -163,7 +162,6 @@ export default {
       dialogTransito: false,
       mdiCloseCircleOutline,
       overlay: false,
-      mostrarTooltip: false,
       categoriaPrincipal: '',
       categoriaSecundaria: '',
       duration: 1000,
@@ -298,11 +296,6 @@ export default {
       await axios(config).then((res) => {
         res.data.forEach((producto) => {
           this.productoSugerencia.push(producto);
-          if (this.productoSugerencia === []) {
-            this.textoSugerido = 'No se encontraron productos';
-          } else {
-            this.textoSugerido = '';
-          }
         });
       });
     },
@@ -356,69 +349,69 @@ export default {
     padding: 0 !important;
   }
 
-.links {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  flex: 0 1 auto;
-  list-style: none;
-  margin: 0;
-  padding: 18px 12px;
-}
+  .links {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex: 0 1 auto;
+    list-style: none;
+    margin: 0;
+    padding: 18px 12px;
+  }
 
-.links li {
-  align-items: center;
-  display: inline-flex;
-  font-size: 14px;
-}
-.links__item {
-  align-items: center;
-  display: inline-flex;
-  text-decoration: none;
-  transition: all .3s cubic-bezier(0.25, 0.8, 0.5, 1);
-  color: #1976d2 !important;
-}
-.links li:nth-child(2n){
-  padding: 0 12px;
-}
+  .links li {
+    align-items: center;
+    display: inline-flex;
+    font-size: 14px;
+  }
+  .links__item {
+    align-items: center;
+    display: inline-flex;
+    text-decoration: none;
+    transition: all .3s cubic-bezier(0.25, 0.8, 0.5, 1);
+    color: #1976d2 !important;
+  }
+  .links li:nth-child(2n){
+    padding: 0 12px;
+  }
 
-.links ul {
-  padding: 0;
-}
-.custom-loader {
-  animation: loader 1s infinite;
-  display: flex;
-}
-@-moz-keyframes loader {
-  from {
-    transform: rotate(0);
+  .links ul {
+    padding: 0;
   }
-  to {
-    transform: rotate(360deg);
+  .custom-loader {
+    animation: loader 1s infinite;
+    display: flex;
   }
-}
-@-webkit-keyframes loader {
-  from {
-    transform: rotate(0);
+  @-moz-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
-  to {
-    transform: rotate(360deg);
+  @-webkit-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
-}
-@-o-keyframes loader {
-  from {
-    transform: rotate(0);
+  @-o-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
-  to {
-    transform: rotate(360deg);
+  @keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
-}
-@keyframes loader {
-  from {
-    transform: rotate(0);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 </style>
