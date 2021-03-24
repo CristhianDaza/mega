@@ -68,20 +68,9 @@
             />
           </v-card>
           <div v-if="productoCodigo[0].videos.length > 0" class="mt-3">
-            <v-responsive :aspect-ratio="16/9">
-              <div class="player-container">
-                <vue-core-video-player
-                  :autoplay="false"
-                  loop
-                  preload="metadata"
-                  :title="`${productoCodigo[0].familia} ${productoCodigo[0].descripcion_comercial}`"
-                  logo="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/opt_logo.webp?alt=media&amp;token=2e13ac36-784c-463a-a094-fa665516fffe&quot"
-                  :src="productoCodigo[0].videos[0].video"
-                  :cover="productoCodigo[0].imagenes[0].imagen.file_md"
-                  >
-                </vue-core-video-player>
-              </div>
-            </v-responsive>
+            <VideoProducto
+              :video="productoCodigo[0]"
+            />
           </div>
         </v-col>
         <v-col cols="12" sm="6">
@@ -237,6 +226,7 @@ import ImagenProducto from '@/components/Producto/ImagenProducto.vue';
 import InfoProducto from '@/components/Producto/InfoProducto.vue';
 import ImagenesProducto from '@/components/Producto/ImagenesProducto.vue';
 import ExistenciasProducto from '@/components/Producto/ExistenciasProducto.vue';
+import VideoProducto from '@/components/Producto/VideoProducto.vue';
 import axios from 'axios';
 import {
   mdiCloseCircleOutline,
@@ -429,6 +419,7 @@ export default {
     InfoProducto,
     ImagenesProducto,
     ExistenciasProducto,
+    VideoProducto,
   },
 };
 </script>
