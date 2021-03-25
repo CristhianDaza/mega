@@ -63,6 +63,7 @@
             <div
               class="black--text"
               v-if="producto.en_transito > 1"
+              :style="{color: $vuetify.theme.themes[theme].basetexto}"
             >
                 <span class="font-weight-black primary--text">En transito:</span> {{addCommas(producto.en_transito)}} unidades.
             </div>
