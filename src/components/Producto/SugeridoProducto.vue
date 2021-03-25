@@ -61,7 +61,6 @@
                 <span class="font-weight-black primary--text">Inventario:</span> {{addCommas(producto.inventario)}} color {{producto.color_nombre}}.
             </div>
             <div
-              class="black--text"
               v-if="producto.en_transito > 1"
               :style="{color: $vuetify.theme.themes[theme].basetexto}"
             >
