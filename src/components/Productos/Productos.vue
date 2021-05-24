@@ -130,7 +130,7 @@
         <v-btn
           :to="{path: `/producto/${producto.familia}`}"
           outlined block
-          color="primary"
+          :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
           text
         >
             Ver Producto
