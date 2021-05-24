@@ -22,6 +22,19 @@
         v-model="porPagina"
         @change="cambiarPorPagina(porPagina)"
       ></v-select>
+      <v-row v-if="this.productos.length > 0" justify="center">
+        <v-col v-if="Number(this.infoProductos[0].count) > 12" cols="12">
+          <v-container class="max-width">
+            <v-pagination
+              circle
+              v-model="pagina"
+              :length="totalPaginas"
+              @input="cambiarPagina(pagina)"
+            >
+            </v-pagination>
+          </v-container>
+        </v-col>
+      </v-row>
       <v-row v-if="this.productos.length > 0">
         <h2
           v-if="Number(this.infoProductos[0].count) === 0"
@@ -40,11 +53,11 @@
         </v-col>
       </v-row>
       <v-row v-if="this.productos.length > 0" justify="center">
-        <v-col cols="12">
+        <v-col v-if="Number(this.infoProductos[0].count) > 12" cols="12">
           <v-container class="max-width">
             <v-pagination
+              circle
               v-model="pagina"
-              class="my-4"
               :length="totalPaginas"
               @input="cambiarPagina(pagina)"
             >
