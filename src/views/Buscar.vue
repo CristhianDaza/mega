@@ -23,7 +23,7 @@
         @change="cambiarPorPagina(porPagina)"
       ></v-select>
       <v-row v-if="this.productos.length > 0" justify="center">
-        <v-col v-if="Number(this.infoProductos[0].count) > 12" cols="12">
+        <v-col v-if="Number(this.infoProductos[0].count) > 16" cols="12">
           <v-container class="max-width">
             <v-pagination
               circle
@@ -53,7 +53,7 @@
         </v-col>
       </v-row>
       <v-row v-if="this.productos.length > 0" justify="center">
-        <v-col v-if="Number(this.infoProductos[0].count) > 12" cols="12">
+        <v-col v-if="Number(this.infoProductos[0].count) > 16" cols="12">
           <v-container class="max-width">
             <v-pagination
               circle

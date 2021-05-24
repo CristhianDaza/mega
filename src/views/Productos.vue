@@ -93,7 +93,7 @@
         <v-col cols="12" sm="8" md="9">
           <h2 v-if="this.infoProductos.length > 0" class="text-subtitle-1 mb-2">Resultados: {{this.infoProductos[0].count}}</h2>
           <v-row v-if="this.productos.length > 0" justify="center">
-            <v-col v-if="Number(this.infoProductos[0].count) > 12" cols="12">
+            <v-col v-if="Number(this.infoProductos[0].count) > 16" cols="12">
               <v-container class="max-width">
                 <v-pagination
                   circle
@@ -119,7 +119,7 @@
             </v-col>
           </v-row>
           <v-row v-if="this.productos.length > 0" justify="center">
-            <v-col v-if="Number(this.infoProductos[0].count) > 12" cols="12">
+            <v-col v-if="Number(this.infoProductos[0].count) > 16" cols="12">
               <v-container class="max-width">
                 <v-pagination
                   v-model="pagina"
