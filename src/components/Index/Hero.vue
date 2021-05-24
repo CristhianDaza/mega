@@ -38,7 +38,7 @@
             </p>
             <v-btn
               to="/contacto"
-              :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
+              :style="{background: $vuetify.theme.themes[theme].colorPrimary}"
               elevation="20"
               class="mt-2 white--text">
               Contacto

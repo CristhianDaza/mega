@@ -33,7 +33,7 @@
         :to="{
           path: `/productos?etiqueta=${this.titulos[0].etiqueta}&titulo=${this.titulos[0].titulo}`
         }"
-        :style="{background: $vuetify.theme.themes[theme].colorPrimary}"
+        :style="[{background: $vuetify.theme.themes[theme].colorPrimary}, {color: 'white'}]"
         elevation="8"
       >
           Ver Todos los Productos
