@@ -14,10 +14,13 @@
       <div v-if="existeUsuario">
         <p v-if="producto.texto_informacion !== null" class="ma-0" :style="'color: ' + producto.color_texto_informacion">{{producto.texto_informacion}}</p>
       </div>
-      <p class="ma-0 primary--text">El color de los artículos pueden variar según la calibración y resolución de la pantalla.</p>
+      <p
+        :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
+        class="ma-0">El color de los artículos pueden variar según la calibración y resolución de la pantalla.</p>
     </v-card-text>
     <v-card-text
-      class="d-block title primary--text my-2 py-0"
+      class="d-block title my-2 py-0"
+      :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
       v-if="Math.round(producto.materiales[0].precio_descuento) !== Math.round(producto.materiales[0].precio)">
         {{Math.abs(Math.round(producto.materiales[0].descuento))}}% de descuento.
     </v-card-text>

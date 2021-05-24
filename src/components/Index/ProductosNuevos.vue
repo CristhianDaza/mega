@@ -28,17 +28,15 @@
         </v-col>
       </v-row>
       <v-btn
+        class="mt-6"
         v-if="this.productos.length > 0"
         :to="{
           path: `/productos?etiqueta=${this.titulos[0].etiqueta}&titulo=${this.titulos[0].titulo}`
         }"
-        block
-        color="primary"
-        x-large
+        :style="{background: $vuetify.theme.themes[theme].colorPrimary}"
         elevation="8"
-        outlined
       >
-          Ver más
+          Ver Todos los Productos
       </v-btn>
     </v-container>
   </div>
@@ -61,6 +59,9 @@ export default {
   },
   computed: {
     ...mapState(['productos', 'titulos']),
+    theme() {
+      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
+    },
   },
   mounted() {
     this.traerProducto();

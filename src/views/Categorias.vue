@@ -8,7 +8,7 @@
           <v-breadcrumbs-item
             :to="{ path: item.href}"
             :disabled="item.disabled"
-            class="primary--text"
+            :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
             exact
           >
             {{ item.titulo.toUpperCase() }}
@@ -181,6 +181,6 @@ export default {
     transition: color .3s;
   }
   a:hover {
-    color: #1976d2 !important;
+    color: #0077bd !important;
   }
 </style>

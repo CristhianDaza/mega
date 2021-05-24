@@ -19,7 +19,7 @@
         <v-col>
           <v-container>
             <p
-              class="primary--text"
+              :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
               :class="this.$vuetify.breakpoint.xs ? 'display-1' : 'headline'"
             >
               BIENVENID@ A</p>
@@ -27,7 +27,8 @@
               :style="{color: $vuetify.theme.themes.dark.basetexto}"
               :class="this.$vuetify.breakpoint.xs ? 'title' : 'display-1'"
             >
-              MEGAPROMOCIONALES <span class="primary--text">LTDA</span></p>
+              MEGAPROMOCIONALES <span
+              :style="{color: $vuetify.theme.themes[theme].colorPrimary}">LTDA</span></p>
             <p
               :style="{color: $vuetify.theme.themes.dark.basetexto}"
               class="body-1 mt-1 font-weight-medium">
@@ -37,7 +38,7 @@
             </p>
             <v-btn
               to="/contacto"
-              color="primary"
+              :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
               elevation="20"
               class="mt-2 white--text">
               Contacto
@@ -55,6 +56,11 @@ import Loader from '@/components/Global/Loader.vue';
 export default {
   components: {
     Loader,
+  },
+  computed: {
+    theme() {
+      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
+    },
   },
 };
 </script>

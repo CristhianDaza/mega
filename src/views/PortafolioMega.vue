@@ -7,7 +7,7 @@
           <v-breadcrumbs-item
             :to="{ path: item.href}"
             :disabled="item.disabled"
-            class="primary--text"
+            :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
             exact
           >
             {{ item.titulo.toUpperCase() }}
@@ -107,6 +107,11 @@ export default {
   components: {
     Flipbook,
     Hero,
+  },
+  computed: {
+    theme() {
+      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
+    },
   },
   metaInfo: {
     title: 'Portafolio 📖',

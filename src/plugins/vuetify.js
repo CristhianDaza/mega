@@ -14,6 +14,7 @@ export default new Vuetify({
     dark: false,
     themes: {
       light: {
+        colorPrimary: '#0077bd',
         primary: '#0077bd',
         basetexto: '#252525',
         basebackground: '#ffffff',
@@ -21,6 +22,7 @@ export default new Vuetify({
         basemenu: '#0077bd',
       },
       dark: {
+        colorPrimary: '#0077bd',
         secondary: '#05090c',
         basetexto: '#edf0f2',
         basebackground: '#05090c',

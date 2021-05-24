@@ -7,7 +7,7 @@
           <v-breadcrumbs-item
             :to="{ path: item.href}"
             :disabled="item.disabled"
-            class="primary--text"
+            :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
             exact
           >
             {{ item.titulo.toUpperCase() }}
@@ -43,7 +43,8 @@
                     :href="catalogo.linkVirtual"
                     target="_blank"
                   >
-                    <v-btn color="primary" width="100%" text>
+                    <v-btn
+                      :style="{color: $vuetify.theme.themes[theme].colorPrimary}" width="100%" text>
                       Catálogo  {{catalogo.nombre}} <v-icon class="ml-1" small>
                         {{mdiOpenInNew}}
                       </v-icon>

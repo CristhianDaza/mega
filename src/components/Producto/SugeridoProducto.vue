@@ -58,13 +58,15 @@
             <div
               v-else
               :style="{color: $vuetify.theme.themes[theme].basetexto}">
-                <span class="font-weight-black primary--text">Inventario:</span> {{addCommas(producto.inventario)}} color {{producto.color_nombre}}.
+                <span class="font-weight-black"
+                :style="{color: $vuetify.theme.themes[theme].colorPrimary}">Inventario:</span> {{addCommas(producto.inventario)}} color {{producto.color_nombre}}.
             </div>
             <div
               v-if="producto.en_transito > 1"
               :style="{color: $vuetify.theme.themes[theme].basetexto}"
             >
-                <span class="font-weight-black primary--text">En transito:</span> {{addCommas(producto.en_transito)}} unidades.
+                <span class="font-weight-black"
+                :style="{color: $vuetify.theme.themes[theme].colorPrimary}">En transito:</span> {{addCommas(producto.en_transito)}} unidades.
             </div>
           </v-card-text>
           <v-divider class="mx-5"></v-divider>

@@ -2,7 +2,8 @@
 <!-- eslint-disable max-len -->
   <v-card-text class="py-0">
     <v-card-subtitle
-      class="font-weight-black primary--text px-0 pb-0"
+      class="font-weight-black px-0 pb-0"
+      :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
     >
       PRECIO:
     </v-card-subtitle>
@@ -150,7 +151,7 @@
       </v-card-title>
 
     <v-card-subtitle class="px-0 pt-5">
-      <span class="font-weight-black primary--text">Última actualización del precio:</span> {{moment(precio.materiales[0].ultima_actualizacion_precio).locale('es-CO').format('LL')}}
+      <span :style="{color: $vuetify.theme.themes[theme].colorPrimary}" class="font-weight-black">Última actualización del precio:</span> {{moment(precio.materiales[0].ultima_actualizacion_precio).locale('es-CO').format('LL')}}
     </v-card-subtitle>
   </v-card-text>
 </template>

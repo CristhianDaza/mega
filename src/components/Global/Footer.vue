@@ -164,7 +164,8 @@
         class="text-center white"
         :style="{color: $vuetify.theme.themes.light.basetexto}"
       >
-        Design by <strong class="primary--text">Cristhian Daza</strong> With 💙
+        Design by <strong
+          :style="{color: $vuetify.theme.themes[theme].colorPrimary}">Cristhian Daza</strong> With 💙
       </v-card-text>
     </v-card>
   </v-footer>

@@ -18,7 +18,7 @@
           </li>
           <li class="links__divider">/</li>
           <li>
-            <router-link exact :to="`/productos?subCategoria=${productoCodigo[0].subcategoria_1.jerarquia}&titulo=${productoCodigo[0].subcategoria_1.nombre}`">{{this.categoriaSecundaria.toUpperCase()}}</router-link>
+            <router-link exact :to="`/productos?subCategoria=${productoCodigo[0].subcategoria_1.jerarquia}&titulo=${productoCodigo[0].subcategoria_1.nombre}`"  class="links__item">{{this.categoriaSecundaria.toUpperCase()}}</router-link>
           </li>
           <li class="links__divider">/</li>
           <li>
@@ -342,7 +342,7 @@ export default {
   }
 
   .linkCategoria:hover {
-    color: #1976d2 !important;
+    color: #0077bd !important;
     text-decoration: underline;
   }
   .precio {
@@ -369,7 +369,7 @@ export default {
     display: inline-flex;
     text-decoration: none;
     transition: all .3s cubic-bezier(0.25, 0.8, 0.5, 1);
-    color: #1976d2 !important;
+    color: #0077bd !important;
   }
   .links li:nth-child(2n){
     padding: 0 12px;

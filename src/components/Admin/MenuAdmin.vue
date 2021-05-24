@@ -105,12 +105,17 @@
       <v-spacer></v-spacer>
 
       <template v-if="this.$vuetify.breakpoint.xs">
-        <v-btn  to="/" color="primary" class="mr-2" icon>
+        <v-btn
+          to="/"
+          :style="{background: $vuetify.theme.themes[theme].colorPrimary}" class="mr-2" icon>
           <v-icon>{{mdiHome}}</v-icon>
         </v-btn>
       </template>
       <template v-else>
-        <v-btn  to="/" color="primary" class="mr-2">Ir a la página principal</v-btn>
+        <v-btn
+         to="/"
+         :style="{background: $vuetify.theme.themes[theme].colorPrimary}"
+          class="mr-2">Ir a la página principal</v-btn>
       </template>
 
       <template v-if="this.$vuetify.breakpoint.xs">
@@ -162,6 +167,9 @@ export default {
   },
   computed: {
     ...mapState(['usuario']),
+    theme() {
+      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
+    },
   },
 };
 </script>

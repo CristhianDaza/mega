@@ -7,7 +7,7 @@
           <v-breadcrumbs-item
             :to="{ path: item.href}"
             :disabled="item.disabled"
-            class="primary--text"
+            :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
             exact
           >
             {{ item.titulo.toUpperCase() }}
@@ -66,6 +66,11 @@ export default {
   },
   created() {
     this.$store.commit('setLayout', 'defaultLayout');
+  },
+  computed: {
+    theme() {
+      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
+    },
   },
 };
 </script>

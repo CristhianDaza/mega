@@ -37,7 +37,7 @@ body::-webkit-scrollbar {
 
  /* Estilos barra (thumb) de scroll */
 body::-webkit-scrollbar-thumb {
-  background: #1976d2;
+  background: #0077bd;
   border-radius: 4px;
 }
 

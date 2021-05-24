@@ -8,7 +8,7 @@
           <v-breadcrumbs-item
             :to="{ path: item.href}"
             :disabled="item.disabled"
-            class="primary--text"
+            :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
             exact
           >
             {{ item.titulo.toUpperCase() }}
@@ -17,14 +17,14 @@
       </v-breadcrumbs>
       <v-row>
         <v-col cols="12" md="6">
-          <h1 class="primary--text text-center display-1">Misión</h1>
+          <h1 class="text-center display-1" :style="{color: $vuetify.theme.themes[theme].colorPrimary}">Misión</h1>
           <v-divider class="mx-10 my-2"></v-divider>
           <p
           :style="{color: $vuetify.theme.themes[theme].basetexto}"
           class="text-justify">Compañía dedicada a la importación, distribución y comercialización de artículos promocionales y material publicitario, ofrecemos a nuestros clientes atención personalizada y asesoría en la elaboración de trabajos, garantizando resultados óptimos en menor tiempo de producción utilizando tecnología de punta y personal calificado con un alto grado de responsabilidad y relaciones humanas, fomentando el trabajo en equipo y comprometidos con el medío ambiente y la sociedad en beneficio de nuestros clientes y colaboradores.</p>
         </v-col>
         <v-col cols="12" md="6">
-          <h1 class="primary--text text-center display-1">Visión</h1>
+          <h1 class="text-center display-1" :style="{color: $vuetify.theme.themes[theme].colorPrimary}">Visión</h1>
           <v-divider class="mx-10 my-2"></v-divider>
           <p
           :style="{color: $vuetify.theme.themes[theme].basetexto}"

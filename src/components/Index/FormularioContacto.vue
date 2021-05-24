@@ -2,7 +2,9 @@
   <v-container class="fill-height">
     <v-row align="center" justify="center">
       <v-col cols="12" sm="6">
-        <h1 class="primary--text" :class="this.$vuetify.breakpoint.xs ? 'title' : 'headline'">
+        <h1
+          :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
+          :class="this.$vuetify.breakpoint.xs ? 'title' : 'headline'">
           MANTENTE EN CONTACTO CON NOSOTROS
         </h1>
         <p :style="{color: $vuetify.theme.themes[theme].basetexto}">
@@ -92,8 +94,9 @@
         <v-card :style="{background: $vuetify.theme.themes[theme].basebackground}">
           <v-card-title>
             <h1
-              :class="this.$vuetify.breakpoint.xs ? 'title' : 'headline'"
-              class="primary--text mx-auto"
+              :class="this.$vuetify.breakpoint.xs ? 'title' : 'headline'  "
+              class="mx-auto"
+              :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
             >
               FORMULARIO DE CONTACTO
             </h1>

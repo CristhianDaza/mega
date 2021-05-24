@@ -17,7 +17,7 @@
           right
           :color="
             $vuetify.theme.dark
-              ? 'primary'
+              ? '#0077bd'
               : '#111b27'
             "
           fixed
