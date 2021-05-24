@@ -92,6 +92,19 @@
         </v-col>
         <v-col cols="12" sm="8" md="9">
           <h2 v-if="this.infoProductos.length > 0" class="text-subtitle-1 mb-2">Resultados: {{this.infoProductos[0].count}}</h2>
+          <v-row v-if="this.productos.length > 0" justify="center">
+            <v-col cols="12">
+              <v-container class="max-width">
+                <v-pagination
+                  circle
+                  v-model="pagina"
+                  :length="totalPaginas"
+                  @input="cambiarPagina(pagina)"
+                >
+                </v-pagination>
+              </v-container>
+            </v-col>
+          </v-row>
           <v-row v-if="this.productos.length > 0">
             <h2 v-if="Number(this.infoProductos[0].count) === 0" class="text-center error mt-2 ml-2 sinResultados">Sin resultados</h2>
             <v-col
@@ -110,7 +123,7 @@
               <v-container class="max-width">
                 <v-pagination
                   v-model="pagina"
-                  class="my-4"
+                  circle
                   :length="totalPaginas"
                   @input="cambiarPagina(pagina)"
                 >
@@ -330,3 +343,14 @@ export default {
   },
 };
 </script>
+
+<style>
+  .theme--dark.v-pagination .v-pagination__item,
+  .theme--dark.v-pagination .v-pagination__navigation {
+    background: rgb(5, 9, 12) !important;
+  }
+
+  .theme--dark.v-pagination .v-pagination__item--active {
+    background:#0077bd !important;
+  }
+</style>
