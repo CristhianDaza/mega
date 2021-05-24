@@ -11,13 +11,19 @@
     >
       <v-slide-item v-for="imagen in imagenes" :key="imagen.id">
         <v-row class="grupoImagenes">
-          <v-card class="mx-1" outlined>
+          <v-card
+            class="mx-1"
+            outlined
+            :style="{background: $vuetify.theme.themes[theme].basebackground}"
+          >
             <v-img
               @click="$emit('cambiarImagen', imagen.imagen.file_md, imagen.imagen.file)"
               :alt="imagenes.nombre_original"
-              width="150"
+              width="140"
+              max-height="100"
               :src="imagen.imagen.file_sm"
               class="imagenReferencia"
+              contain
             >
               <template v-slot:placeholder>
                 <v-row
@@ -75,5 +81,6 @@ export default {
 
   .imagenReferencia:hover {
     opacity: 1;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
   }
 </style>
