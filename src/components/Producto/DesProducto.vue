@@ -4,7 +4,7 @@
     <v-card-title class="font-weight-black pt-0">
       <h1
         :style="{color: $vuetify.theme.themes[theme].basetexto}"
-        class="titulo">
+        class="titulo titleProd">
           {{ descripcion.familia }} {{ descripcion.descripcion_comercial }}
       </h1>
     </v-card-title>

@@ -32,7 +32,7 @@
         </v-card-text>
         <v-divider class="mx-8"></v-divider>
         <v-card-title
-          class="text-center text-subtitle-2"
+          class="text-center text-subtitle-2 titleProd"
           :style="{color: $vuetify.theme.themes[theme].basetext}"
         >
           {{ producto.descripcion_comercial }}
@@ -208,5 +208,8 @@ export default {
 }
 .tarjetaProducto:hover {
   transform: translateY(-15px);
+}
+.titleProd {
+  word-break: normal;
 }
 </style>
