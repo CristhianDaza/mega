@@ -28,19 +28,28 @@
       </div>
       <v-card
         :style="{background: $vuetify.theme.themes[theme].basebackground}"
-        class="mx-auto mt-10">
+        class="mx-auto mt-2">
         <v-row>
-          <v-col cols="12" md="6" >
+          <v-col cols="4" md="2">
             <v-container>
+              <ImagenProductosVertical
+                :imagenes="productoCodigo[0].imagenes"
+                @cambiarImagen="cambiarImagenHijo"
+              />
+            </v-container>
+          </v-col>
+          <v-col cols="8" md="5">
+            <v-container class="px-0">
               <ImagenProducto
                 :producto='productoCodigo[0]'
                 :imagenPrincipalMediana='this.imagenPrincipalMediana'
                 :imagenPrincipalGrande='this.imagenPrincipalGrande'
+                :inventarioDisponible="inventarioDisponible"
               />
             </v-container>
           </v-col>
-          <v-col cols="12" md="6" :class="this.$vuetify.breakpoint.xs ? 'pt-0' : ''">
-            <v-container :class="$vuetify.breakpoint.xs ? 'pt-0' : ''">
+          <v-col cols="12" md="5" :class="this.$vuetify.breakpoint.xs ? 'pt-0' : ''">
+            <v-container class="pl-0" :class="$vuetify.breakpoint.xs ? 'pt-0' : ''">
               <InfoProducto
                 :producto="productoCodigo[0]"
                 :materiales="this.materiales"
@@ -147,6 +156,7 @@ import axios from 'axios';
 import {
   mdiCloseCircleOutline,
 } from '@mdi/js';
+import ImagenProductosVertical from '../components/Producto/ImagenProductosVertical.vue';
 
 export default {
   name: 'codigo',
@@ -237,7 +247,6 @@ export default {
     imagenReferencia(imagenMediana, imagenGrande) {
       this.imagenPrincipalMediana = imagenMediana;
       this.imagenPrincipalGrande = imagenGrande;
-      this.overlay = !this.overlay;
     },
     actualizar(codigo) {
       this.productoSugerencia = [];
@@ -248,7 +257,6 @@ export default {
     },
     cambiarImagenHijo(imagen1, imagen2) {
       this.imagenReferencia(imagen1, imagen2);
-      this.$vuetify.goTo(this.target2, this.options2);
     },
     async getProductoCodigo() {
       const url = `https://marpicoprod.azurewebsites.net/api/productos/detail/${this.codigo}`;
@@ -329,6 +337,7 @@ export default {
     ExistenciasProducto,
     VideoProducto,
     SugeridoProducto,
+    ImagenProductosVertical,
   },
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
 <!-- eslint-disable max-len -->
   <div>
-    <v-card-title class="font-weight-black">
+    <v-card-title class="font-weight-black pt-0">
       <h1
         :style="{color: $vuetify.theme.themes[theme].basetexto}"
         class="titulo">

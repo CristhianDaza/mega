@@ -15,6 +15,7 @@
     "emailjs-com": "^2.6.4",
     "firebase": "^7.24.0",
     "flipbook-vue": "^0.10.2",
+    "hooper": "^0.3.4",
     "moment": "^2.29.1",
     "sweetalert2": "^10.16.7",
     "vue": "^2.6.12",

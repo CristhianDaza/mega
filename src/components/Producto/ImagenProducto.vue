@@ -1,10 +1,8 @@
 <template>
   <div>
     <img
-      v-if="imagenPrincipalMediana === ''" :class="$vuetify.breakpoint.xs ?
-        ''
-        : 'fotoTarjetaGrande'"
-      class="fotoTarjeta elevation-18"
+      v-if="imagenPrincipalMediana === ''"
+      class="fotoTarjeta border-black"
       @click.stop="dialog = true"
       :src="producto.imagenes[0].imagen.file_md"
       :alt="producto.descripcion_comercial"
@@ -12,10 +10,7 @@
 
     <img
       v-else
-      :class="$vuetify.breakpoint.xs ?
-        ''
-        : 'fotoTarjetaGrande'"
-      class="fotoTarjeta elevation-18"
+      class="fotoTarjeta border-black"
       @click.stop="dialog = true"
       :src="imagenPrincipalMediana"
       :alt="producto.descripcion_comercial"
@@ -89,7 +84,7 @@ export default {
       mdiCloseCircleOutline,
     };
   },
-  props: ['producto', 'imagenPrincipalMediana', 'imagenPrincipalGrande'],
+  props: ['producto', 'imagenPrincipalMediana', 'imagenPrincipalGrande', 'inventarioDisponible'],
   methods: {
     mostrarTextoInfo(texto) {
       this.textoInfo = texto;
@@ -108,12 +103,8 @@ export default {
 </script>
 
 <style>
-  .fotoTarjetaGrande {
-    margin-left: 20px;
-  }
 
   .fotoTarjeta {
-    margin-top: -45px;
     width: 100%;
     max-width: 100%;
     cursor: zoom-in;
@@ -123,5 +114,10 @@ export default {
    width: 80px;
    cursor: pointer;
    margin-top: 15px;
+  }
+
+  .border-black {
+    border: 2px solid rgb(197, 197, 197);
+    border-radius: 25px;
   }
 </style>
