@@ -19,10 +19,13 @@
         class="mt-5 white--text font-weight-bold">
           El color de los artículos pueden variar según la calibración y resolución de la pantalla.
         </p>
-    <div v-if="producto.caracteristicas.length > 0" class="mt-8 mr-5 ml-2">
+    <div v-if="producto.caracteristicas.length > 0" class="mt-8">
       <h1
-        :style="{color: $vuetify.theme.themes[theme].basetexto}"
-        class="text-subtitle-2">Características:</h1>
+        class="headline"
+        :style="{color: '#005C91'}"
+        >
+          Características:
+        </h1>
       <v-row>
         <template v-for="caracteristica in producto.caracteristicas">
           <v-tooltip top :key="caracteristica.id">
