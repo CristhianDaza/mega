@@ -121,6 +121,6 @@ export default {
 
   .border-black {
     border: 2px solid rgb(197, 197, 197);
-    border-radius: 25px;
+    border-radius: 10px;
   }
 </style>

@@ -1,22 +1,20 @@
 <template>
 <!-- eslint-disable max-len -->
-  <v-simple-table
-    :style="{background: $vuetify.theme.themes[theme].basebackground}"
-  >
+  <v-simple-table class="fondoCard">
     <template v-slot:default>
       <thead>
-        <tr style="background: #0077bd">
-          <th class="white--text">COLOR DEL<br> PRODUCTO</th>
-          <th></th>
-          <th class="white--text">UNIDADES<br>DISPONIBLES</th>
-          <th class="white--text">PRODUCTOS<br>SUGERIDOS</th>
+        <tr>
+          <th  :style="{color: '#005C91'}">COLOR DEL<br> PRODUCTO</th>
+          <th  :style="{color: '#005C91'}"></th>
+          <th  :style="{color: '#005C91'}">UNIDADES<br>DISPONIBLES</th>
+          <th  :style="{color: '#005C91'}">PRODUCTOS<br>SUGERIDOS</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(existencia, index) in inventarioDisponible" :key="index">
           <td class="d-flex">
             <div
-              :style="{'border': theme == 'light' ? '1px solid black' : '1px solid white'}"
+              style="border: 1px solid grey"
               class="contenedor_color mt-3 mr-2"
             >
               <template>
@@ -35,15 +33,15 @@
                 ></div>
               </template>
             </div>
-            <div class="mt-3">
+            <div class="mt-3 white--text">
               {{existencia.color_nombre}}
             </div>
           </td>
-          <td>
+          <td class="white--text">
             {{existencia.variedad}}
           </td>
           <td class="error--text" v-if="existencia.inventario < 10">Agotado</td>
-          <td v-else>{{addCommas(Math.round(existencia.inventario))}}</td>
+          <td v-else class="white--text">{{addCommas(Math.round(existencia.inventario))}}</td>
           <td>
             <v-tooltip right>
               <template v-slot:activator="{on, attrs}">
@@ -53,7 +51,7 @@
                   icon
                   small
                   @click.stop="$emit('actualizarSugerencias', existencia.codigo)"
-                  color="primary"
+                  :style="{color: '#005C91'}"
                 >
                   <v-icon>{{mdiMagnify}}</v-icon>
                 </v-btn>
@@ -126,5 +124,15 @@ export default {
     justify-content: center;
     width: 100%;
     height: 100%;
+  }
+  .theme--light.v-data-table, .theme--light.v-card {
+    background-color: transparent !important;
+  }
+  .theme--light
+  .v-data-table
+  >.v-data-table__wrapper
+  >table>tbody>tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper){
+    background: rgba(255, 255, 255, .4) !important;
+    color: black !important;
   }
 </style>

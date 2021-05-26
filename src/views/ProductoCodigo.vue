@@ -64,8 +64,7 @@
       <v-row>
         <v-col cols="12" sm="6">
           <v-card
-            class="mt-5 "
-            :style="{background: $vuetify.theme.themes[theme].basebackground}"
+            class="mt-5"
           >
             <ExistenciasProducto
               :inventarioDisponible="inventarioDisponible"
@@ -78,7 +77,7 @@
             />
           </div>
         </v-col>
-        <v-col cols="12" sm="6">
+        <v-col cols="12" sm="6" class="my-4">
           <SugeridoProducto
             :sugerencia="productoSugerencia"
           />
@@ -87,7 +86,7 @@
 
     </v-container>
 
-    <v-dialog v-model="dialogTransito" max-width="750" overlay-color="grey darken-4" overlay-opacity="0.9">
+    <v-dialog class="blurModal" v-model="dialogTransito" max-width="750" overlay-color="grey darken-4" overlay-opacity="0.5">
       <v-btn dark icon class="mr-5" color="white" @click.stop="dialogTransito = false">
         <v-icon>{{mdiCloseCircleOutline}}</v-icon>
       </v-btn>
@@ -372,7 +371,7 @@ export default {
     display: inline-flex;
     text-decoration: none;
     transition: all .3s cubic-bezier(0.25, 0.8, 0.5, 1);
-    color: #0077bd !important;
+    color: white !important;
   }
   .links li:nth-child(2n){
     padding: 0 12px;
@@ -386,7 +385,7 @@ export default {
     display: flex;
   }
   .fondoCard {
-    background-image: linear-gradient(to right bottom,
+    /* background-image: linear-gradient(to right bottom,
     #0077bd,
     #0681c9,
     #0c8ad5,
@@ -398,7 +397,13 @@ export default {
     #0f87ce,
     #0a78b9,
     #056aa5,
-    #005c91);
+    #005c91); */
+    background: rgba( 255, 255, 255, 0.25 ) !important;
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ) !important;
+    backdrop-filter: blur( 4px ) !important;
+    -webkit-backdrop-filter: blur( 4px ) !important;
+    border-radius: 10px !important;
+    border: 1px solid rgba( 255, 255, 255, 0.18 ) !important;
   }
   .infoProd {
     background: rgba( 255, 255, 255, 0.25 );
@@ -408,6 +413,9 @@ export default {
     border-radius: 10px;
     border: 1px solid rgba( 255, 255, 255, 0.18 );
     transform: translate(-10px, 10px);
+  }
+  .blurModal {
+    filter: blur(1.5rem);
   }
   @-moz-keyframes loader {
     from {

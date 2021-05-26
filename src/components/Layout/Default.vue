@@ -1,5 +1,6 @@
 <template>
-  <v-app :style="{background: $vuetify.theme.themes[theme].background}">
+<div>
+  <v-app class="fondoApp">
     <Cabecera />
     <MenuPrincipal />
     <v-main>
@@ -29,6 +30,7 @@
       </template>
     </v-speed-dial>
   </v-app>
+  </div>
 </template>
 
 <script>
@@ -105,6 +107,14 @@ export default {
   }
   .fade-enter-active, .fade-leave-active {
     transition: all.3s ease;
+  }
+  .fondoApp{
+    background-image: linear-gradient(to right bottom,
+      #008dde,
+      #0081e4,
+      #0073e7,
+      #0064e8,
+      #0252e6) !important;
   }
   @media (min-width: 1904px) {
     .container {
