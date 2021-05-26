@@ -86,7 +86,7 @@
 
     </v-container>
 
-    <v-dialog class="blurModal" v-model="dialogTransito" max-width="750" overlay-color="grey darken-4" overlay-opacity="0.5">
+    <v-dialog v-model="dialogTransito" max-width="750" overlay-color="grey darken-4" overlay-opacity="0.5">
       <v-btn dark icon class="mr-5" color="white" @click.stop="dialogTransito = false">
         <v-icon>{{mdiCloseCircleOutline}}</v-icon>
       </v-btn>
@@ -413,9 +413,6 @@ export default {
     border-radius: 10px;
     border: 1px solid rgba( 255, 255, 255, 0.18 );
     transform: translate(-10px, 10px);
-  }
-  .blurModal {
-    filter: blur(1.5rem);
   }
   @-moz-keyframes loader {
     from {
