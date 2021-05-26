@@ -1,5 +1,6 @@
 <template>
   <div>
+        <!-- :style="{background: $vuetify.theme.themes[theme].basebackground}" -->
 <!-- eslint-disable max-len -->
   <div v-if="this.productoCodigo.length > 0">
     <v-container>
@@ -27,10 +28,9 @@
         </ul>
       </div>
       <v-card
-        :style="{background: $vuetify.theme.themes[theme].basebackground}"
-        class="mx-auto mt-2">
+        class="mx-auto mt-2 fondoCard">
         <v-row>
-          <v-col cols="4" md="2">
+          <v-col cols="0" md="2">
             <v-container>
               <ImagenProductosVertical
                 :imagenes="productoCodigo[0].imagenes"
@@ -38,7 +38,7 @@
               />
             </v-container>
           </v-col>
-          <v-col cols="8" md="5">
+          <v-col cols="12" md="5" class="pl-0">
             <v-container class="px-0">
               <ImagenProducto
                 :producto='productoCodigo[0]'
@@ -49,7 +49,7 @@
             </v-container>
           </v-col>
           <v-col cols="12" md="5" :class="this.$vuetify.breakpoint.xs ? 'pt-0' : ''">
-            <v-container class="pl-0" :class="$vuetify.breakpoint.xs ? 'pt-0' : ''">
+            <v-container class="pl-0 mr-2 infoProd" :class="$vuetify.breakpoint.xs ? 'pt-0' : ''">
               <InfoProducto
                 :producto="productoCodigo[0]"
                 :materiales="this.materiales"
@@ -61,10 +61,6 @@
       </v-card>
     </v-container>
     <v-container class="pt-0">
-      <ImagenesProducto
-        :imagenes="productoCodigo[0].imagenes"
-        @cambiarImagen="cambiarImagenHijo"
-      />
       <v-row>
         <v-col cols="12" sm="6">
           <v-card
@@ -148,7 +144,6 @@
 import Loader from '@/components/Global/Loader.vue';
 import ImagenProducto from '@/components/Producto/ImagenProducto.vue';
 import InfoProducto from '@/components/Producto/InfoProducto.vue';
-import ImagenesProducto from '@/components/Producto/ImagenesProducto.vue';
 import ExistenciasProducto from '@/components/Producto/ExistenciasProducto.vue';
 import VideoProducto from '@/components/Producto/VideoProducto.vue';
 import SugeridoProducto from '@/components/Producto/SugeridoProducto.vue';
@@ -333,7 +328,6 @@ export default {
     Loader,
     ImagenProducto,
     InfoProducto,
-    ImagenesProducto,
     ExistenciasProducto,
     VideoProducto,
     SugeridoProducto,
@@ -390,6 +384,30 @@ export default {
   .custom-loader {
     animation: loader 1s infinite;
     display: flex;
+  }
+  .fondoCard {
+    background-image: linear-gradient(to right bottom,
+    #0077bd,
+    #0681c9,
+    #0c8ad5,
+    #1194e2,
+    #159eee,
+    #159bea,
+    #1499e7,
+    #1496e3,
+    #0f87ce,
+    #0a78b9,
+    #056aa5,
+    #005c91);
+  }
+  .infoProd {
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    transform: translate(-10px, 10px);
   }
   @-moz-keyframes loader {
     from {

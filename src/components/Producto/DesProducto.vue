@@ -1,9 +1,9 @@
 <template>
 <!-- eslint-disable max-len -->
   <div>
-    <v-card-title class="font-weight-black pt-0">
+    <v-card-title class="font-weight-bold pt-0">
       <h1
-        :style="{color: $vuetify.theme.themes[theme].basetexto}"
+        :style="{color: '#005C91'}"
         class="titulo titleProd">
           {{ descripcion.familia }} {{ descripcion.descripcion_comercial }}
       </h1>
@@ -11,58 +11,58 @@
     <v-divider class="mx-8"></v-divider>
     <v-card-text class="pb-0">
       <p
-      :style="{color: $vuetify.theme.themes[theme].basetexto}"
+      :style="{color: 'white'}"
       class="ma-0"
       >
         {{ descripcion.descripcion_larga }}
       </p>
       <p
-        :style="{color: $vuetify.theme.themes[theme].basetexto}"
+        :style="{color: 'white'}"
         class="ma-0"
         v-if="descripcion.material !== null"
       >
         <strong class="font-weight-black"
-        :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
+        :style="{color: '#005C91'}"
         >MATERIAL: </strong>{{ descripcion.material }}
       </p>
       <p
-        :style="{color: $vuetify.theme.themes[theme].basetexto}"
+        :style="{color: 'white'}"
         class="ma-0"
         v-if="descripcion.medidas !== null"
       >
         <strong class="font-weight-black"
-        :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
+        :style="{color: '#005C91'}"
         >MEDIDAS: </strong>{{ descripcion.medidas }}
       </p>
       <p
-        :style="{color: $vuetify.theme.themes[theme].basetexto}"
+        :style="{color: 'white'}"
         class="ma-0"
         v-if="descripcion.area_impresion !== null">
         <strong class="font-weight-black"
-        :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
+        :style="{color: '#005C91'}"
         >ÁREA DE IMPRESIÓN APROXIMADA: </strong>{{ descripcion.area_impresion }}
       </p>
       <p
-        :style="{color: $vuetify.theme.themes[theme].basetexto}"
+        :style="{color: 'white'}"
         class="ma-0"
         v-if="descripcion.tecnica_marca_descripcion !== null">
         <strong class="font-weight-black"
-        :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
+        :style="{color: '#005C91'}"
         >MARCA: </strong>{{ descripcion.tecnica_marca_descripcion }}
       </p>
       <p
-        :style="{color: $vuetify.theme.themes[theme].basetexto}"
+        :style="{color: 'white'}"
         class="ma-0"
         v-if="descripcion.empaque !== null">
         <strong class="font-weight-black"
-        :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
+        :style="{color: '#005C91'}"
         >EMPAQUE: </strong>{{ descripcion.empaque }}
       </p>
       <p
-        :style="{color: $vuetify.theme.themes[theme].basetexto}"
+        :style="{color: 'white'}"
         class="ma-0">
         <strong class="font-weight-black"
-        :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
+        :style="{color: '#005C91'}"
         >CATEGORIAS: </strong>
         <router-link
           class="linksCategorias"
@@ -94,7 +94,8 @@ export default {
 
 <style>
   .titulo {
-    font-size: 20px;
+    font-size: 30px;
+    word-break: normal;
   }
 
   .linksCategorias {

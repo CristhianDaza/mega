@@ -2,7 +2,7 @@
   <div>
     <button @click.prevent="slidePrev" class="iconVertical pb-3">
       <v-icon
-        color="primary"
+        color="white"
       >
         {{mdiArrowUpBoldCircle}}
       </v-icon>
@@ -39,7 +39,7 @@
     </Hooper>
     <button @click.prevent="slideNext" class="iconVertical">
       <v-icon
-        color="primary"
+        color="white"
       >
         {{mdiArrowDownBoldCircle}}
       </v-icon>

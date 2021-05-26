@@ -14,9 +14,6 @@
       <div v-if="existeUsuario">
         <p v-if="producto.texto_informacion !== null" class="ma-0" :style="'color: ' + producto.color_texto_informacion">{{producto.texto_informacion}}</p>
       </div>
-      <p
-        :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
-        class="ma-0">El color de los artículos pueden variar según la calibración y resolución de la pantalla.</p>
     </v-card-text>
     <v-card-text
       class="d-block title my-2 py-0"
@@ -40,10 +37,11 @@
         </template>
       </v-row>
     </v-card-actions>
-    <v-card-actions class="ml-1">
+    <v-card-actions class="ml-1 pt-0">
       <v-btn
+        large
         outlined
-        color="primary"
+        color="white"
         @click="loader = 'loading'"
         :loading="loading"
         :disabled="loading"
@@ -55,10 +53,11 @@
         </v-icon>
       </v-btn>
     </v-card-actions>
-    <v-card-actions class="ml-1" v-if="producto.materiales[0].en_transito > 0">
+    <v-card-actions class="ml-1 pt-0" v-if="producto.materiales[0].en_transito > 0">
       <v-btn
         outlined
-        color="primary"
+        large
+        color="white"
         class="my-1 pa-4"
         @click.stop="$emit('dialogo')"
       >

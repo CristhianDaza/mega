@@ -2,7 +2,7 @@
   <div>
     <img
       v-if="imagenPrincipalMediana === ''"
-      class="fotoTarjeta border-black"
+      class="fotoTarjeta border-black elevation-18"
       @click.stop="dialog = true"
       :src="producto.imagenes[0].imagen.file_md"
       :alt="producto.descripcion_comercial"
@@ -10,12 +10,15 @@
 
     <img
       v-else
-      class="fotoTarjeta border-black"
+      class="fotoTarjeta border-black elevation-18"
       @click.stop="dialog = true"
       :src="imagenPrincipalMediana"
       :alt="producto.descripcion_comercial"
     />
-
+      <p
+        class="mt-5 white--text font-weight-bold">
+          El color de los artículos pueden variar según la calibración y resolución de la pantalla.
+        </p>
     <div v-if="producto.caracteristicas.length > 0" class="mt-8 mr-5 ml-2">
       <h1
         :style="{color: $vuetify.theme.themes[theme].basetexto}"
