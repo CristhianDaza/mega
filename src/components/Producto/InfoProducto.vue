@@ -39,6 +39,7 @@
     </v-card-actions>
     <v-card-actions class="ml-1 pt-0">
       <v-btn
+        block
         large
         outlined
         color="white"
@@ -56,6 +57,7 @@
     <v-card-actions class="ml-1 pt-0" v-if="producto.materiales[0].en_transito > 0">
       <v-btn
         outlined
+        block
         large
         color="white"
         class="my-1 pa-4"
