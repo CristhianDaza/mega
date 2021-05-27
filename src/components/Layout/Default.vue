@@ -182,6 +182,15 @@ export default {
     width: 350px;
   }
 
+  @media (max-width: 400px) {
+    .bubble-five {
+      display: none;
+    }
+    .bubble-one {
+      left: 200px;
+    }
+  }
+
   @media (min-width: 1904px) {
     .container {
       max-width: 1185px !important;
