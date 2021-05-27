@@ -164,21 +164,21 @@ export default {
     width: 100px;
   }
   .bubble-five {
-    bottom: -200px;
+    top: 500px;
     height: 170px;
     left: 250px;
     width: 170px;
   }
-  .bubble-six {
+.bubble-six {
     height: 230px;
     right: 300px;
-    bottom: -350px;
+    top: 320px;
     width: 230px;
   }
   .bubble-seven {
     height: 350px;
-    right: -150px;
-    bottom: -800px;
+    left: -150px;
+    bottom: 700px;
     width: 350px;
   }
 
