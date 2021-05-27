@@ -17,26 +17,10 @@
     </v-card-text>
     <v-card-text
       class="d-block title my-2 py-0"
-      :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
+      :style="{color: '#005C91'}"
       v-if="Math.round(producto.materiales[0].precio_descuento) !== Math.round(producto.materiales[0].precio)">
-        {{Math.abs(Math.round(producto.materiales[0].descuento))}}% de descuento.
+        Producto con descuento del {{Math.abs(Math.round(producto.materiales[0].descuento))}}%.
     </v-card-text>
-    <!-- <v-card-actions>
-      <v-row class="ml-1">
-        <template v-if="producto.etiquetas.length > 0">
-          <div
-            v-for="etiqueta in producto.etiquetas"
-            :key="etiqueta.id"
-          >
-            <img
-              width="150px"
-              :src="etiqueta.imagen.file_sm"
-              :alt="etiqueta.nombre"
-              >
-          </div>
-        </template>
-      </v-row>
-    </v-card-actions> -->
     <v-card-actions class="ml-1 pt-0">
       <v-btn
         block
