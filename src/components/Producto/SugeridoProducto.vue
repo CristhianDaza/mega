@@ -9,7 +9,7 @@
       No se encontraron productos
     </h3>
     <v-row class="mt-3" v-if="sugerencia.length > 0">
-      <v-col cols="6" v-for="producto in sugerencia" :key="producto.familia">
+      <v-col cols="12" md="6" v-for="producto in sugerencia" :key="producto.familia">
         <v-card
           outlined
           class="mx-auto tarjetaProducto">

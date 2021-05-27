@@ -7,7 +7,7 @@
           <th  :style="{color: '#005C91'}">COLOR DEL<br> PRODUCTO</th>
           <th  :style="{color: '#005C91'}"></th>
           <th  :style="{color: '#005C91'}">UNIDADES<br>DISPONIBLES</th>
-          <th  :style="{color: '#005C91'}">PRODUCTOS<br>SUGERIDOS</th>
+          <th :style="{color: '#005C91'}">PRODUCTOS<br>SUGERIDOS</th>
         </tr>
       </thead>
       <tbody>

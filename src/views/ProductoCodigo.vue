@@ -30,7 +30,7 @@
       <v-card
         class="mx-auto mt-2 fondoCard">
         <v-row>
-          <v-col cols="0" md="2">
+          <v-col cols="6" sm="3" md="2" class="ProductosVertical">
             <v-container>
               <ImagenProductosVertical
                 :imagenes="productoCodigo[0].imagenes"
@@ -38,8 +38,14 @@
               />
             </v-container>
           </v-col>
-          <v-col cols="12" md="5" class="pl-0">
-            <v-container class="px-0">
+          <v-col
+            :class="this.$vuetify.breakpoint.xs ? '' : ''"
+            cols="12"
+            sm="4"
+            md=""
+            class="pl-0 contenedorImagenProducto"
+            >
+            <v-container>
               <ImagenProducto
                 :producto='productoCodigo[0]'
                 :imagenPrincipalMediana='this.imagenPrincipalMediana'
@@ -48,8 +54,13 @@
               />
             </v-container>
           </v-col>
-          <v-col cols="12" md="5" :class="this.$vuetify.breakpoint.xs ? 'pt-0' : ''">
-            <v-container class="pl-0 mr-2 infoProd" :class="$vuetify.breakpoint.xs ? 'pt-0' : ''">
+          <v-col
+            cols="12"
+            sm="5"
+            md="5"
+            class="contenedorInfoProducto"
+          >
+            <v-container class="pl-0 pb-0 mb-5 mr-2 infoProd">
               <InfoProducto
                 :producto="productoCodigo[0]"
                 :materiales="this.materiales"
@@ -60,6 +71,14 @@
         </v-row>
       </v-card>
     </v-container>
+    <v-col cols="12" class="contenedorProductosHorizontal">
+      <v-container>
+        <ImagenProductosHorizontal
+          :imagenes="productoCodigo[0].imagenes"
+          @cambiarImagen="cambiarImagenHijoHorizontal"
+        />
+      </v-container>
+    </v-col>
     <v-container class="pt-0">
       <v-row>
         <v-col cols="12" sm="6">
@@ -151,6 +170,7 @@ import {
   mdiCloseCircleOutline,
 } from '@mdi/js';
 import ImagenProductosVertical from '../components/Producto/ImagenProductosVertical.vue';
+import ImagenProductosHorizontal from '../components/Producto/ImagenProductosHorizontal.vue';
 
 export default {
   name: 'codigo',
@@ -249,6 +269,10 @@ export default {
     actualizarSugerencia(codigoSugerencia) {
       this.actualizar(codigoSugerencia);
     },
+    cambiarImagenHijoHorizontal(imagen1, imagen2) {
+      this.imagenReferencia(imagen1, imagen2);
+      this.$vuetify.goTo(this.target2, this.options2);
+    },
     cambiarImagenHijo(imagen1, imagen2) {
       this.imagenReferencia(imagen1, imagen2);
     },
@@ -331,6 +355,7 @@ export default {
     VideoProducto,
     SugeridoProducto,
     ImagenProductosVertical,
+    ImagenProductosHorizontal,
   },
 };
 </script>
@@ -385,19 +410,6 @@ export default {
     display: flex;
   }
   .fondoCard {
-    /* background-image: linear-gradient(to right bottom,
-    #0077bd,
-    #0681c9,
-    #0c8ad5,
-    #1194e2,
-    #159eee,
-    #159bea,
-    #1499e7,
-    #1496e3,
-    #0f87ce,
-    #0a78b9,
-    #056aa5,
-    #005c91); */
     background: rgba( 255, 255, 255, 0.25 ) !important;
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ) !important;
     backdrop-filter: blur( 4px ) !important;
@@ -414,6 +426,26 @@ export default {
     border: 1px solid rgba( 255, 255, 255, 0.18 );
     transform: translate(-10px, 10px);
   }
+  .contenedorProductosHorizontal {
+    display: none;
+  }
+  @media (max-width: 450px) {
+    .ProductosVertical {
+      display: none;
+    }
+    .contenedorImagenProducto {
+      padding: 20px !important;
+      padding-bottom: 0 !important;
+    }
+    .contenedorProductosHorizontal {
+      display: flex;
+    }
+    .contenedorInfoProducto {
+      padding-left: 30px;
+      padding-top: 0;
+    }
+  }
+
   @-moz-keyframes loader {
     from {
       transform: rotate(0);
