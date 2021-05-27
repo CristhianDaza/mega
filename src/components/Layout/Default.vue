@@ -1,5 +1,12 @@
 <template>
 <div>
+  <div class="bubble bubble-one glassmorphism-effect"></div>
+  <div class="bubble bubble-two glassmorphism-effect"></div>
+  <div class="bubble bubble-three glassmorphism-effect"></div>
+  <div class="bubble bubble-four glassmorphism-effect"></div>
+  <div class="bubble bubble-five glassmorphism-effect"></div>
+  <div class="bubble bubble-six glassmorphism-effect"></div>
+  <div class="bubble bubble-seven glassmorphism-effect"></div>
   <v-app class="fondoApp">
     <Cabecera />
     <MenuPrincipal />
@@ -116,6 +123,65 @@ export default {
       #0064e8,
       #0252e6) !important;
   }
+  .glassmorphism-effect {
+    background: rgba( 255, 255, 255, 0.10 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    -webkit-backdrop-filter: blur( 4px );
+            backdrop-filter: blur( 4px );
+    border-radius: 16px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+  }
+  .bubble {
+    border-radius: 50%;
+    position: absolute;
+  }
+
+  .bubble-one {
+    height: 80px;
+    left: 250px;
+    top: 250px;
+    width: 80px;
+  }
+
+  .bubble-two {
+    height: 230px;
+    right: 200px;
+    top: 150px;
+    width: 230px;
+  }
+
+  .bubble-three {
+    height: 50px;
+    right: 400px;
+    top: 200px;
+    width: 50px;
+  }
+
+  .bubble-four {
+    bottom: 40px;
+    height: 100px;
+    left: -30px;
+    width: 100px;
+  }
+  .bubble-five {
+    bottom: -200px;
+    height: 170px;
+    left: 250px;
+    width: 170px;
+  }
+  .bubble-six {
+    height: 230px;
+    right: 300px;
+    bottom: -350px;
+    width: 230px;
+  }
+  .bubble-seven {
+    height: 350px;
+    right: -150px;
+    bottom: -800px;
+    width: 350px;
+  }
+
   @media (min-width: 1904px) {
     .container {
       max-width: 1185px !important;
