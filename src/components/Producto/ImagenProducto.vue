@@ -19,6 +19,22 @@
         class="mt-5 white--text font-weight-bold">
           El color de los artículos pueden variar según la calibración y resolución de la pantalla.
         </p>
+    <v-card-actions v-if="producto.etiquetas.length > 0">
+      <v-row>
+        <template>
+          <div
+            v-for="etiqueta in producto.etiquetas"
+            :key="etiqueta.id"
+          >
+            <img
+              width="150px"
+              :src="etiqueta.imagen.file_sm"
+              :alt="etiqueta.nombre"
+              >
+          </div>
+        </template>
+      </v-row>
+    </v-card-actions>
     <div v-if="producto.caracteristicas.length > 0" class="mt-8">
       <h1
         class="headline"

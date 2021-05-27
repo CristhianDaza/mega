@@ -21,7 +21,7 @@
       v-if="Math.round(producto.materiales[0].precio_descuento) !== Math.round(producto.materiales[0].precio)">
         {{Math.abs(Math.round(producto.materiales[0].descuento))}}% de descuento.
     </v-card-text>
-    <v-card-actions>
+    <!-- <v-card-actions>
       <v-row class="ml-1">
         <template v-if="producto.etiquetas.length > 0">
           <div
@@ -36,7 +36,7 @@
           </div>
         </template>
       </v-row>
-    </v-card-actions>
+    </v-card-actions> -->
     <v-card-actions class="ml-1 pt-0">
       <v-btn
         block
