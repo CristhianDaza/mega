@@ -86,37 +86,37 @@
 
     </v-container>
 
-    <v-dialog v-model="dialogTransito" max-width="750" overlay-color="grey darken-4" overlay-opacity="0.5">
+    <v-dialog v-model="dialogTransito" max-width="750" overlay-color="blue-grey darken-4" overlay-opacity="0.9">
       <v-btn dark icon class="mr-5" color="white" @click.stop="dialogTransito = false">
         <v-icon>{{mdiCloseCircleOutline}}</v-icon>
       </v-btn>
       <v-simple-table
-        :style="{background: $vuetify.theme.themes[theme].basebackground}"
+        class="fondoCard"
       >
         <thead>
-          <tr style="background: #0077bd">
-            <th class="text-left white--text">COLOR</th>
-            <th class="text-left white--text">CANTIDADES<br>EN TRÁNSITO</th>
-            <th class="text-left white--text">INGRESO<br>AL SISTEMA</th>
-            <th class="text-left white--text">ESTADO DEL<br>TRÁNSITO</th>
-            <th class="text-left white--text">ÚLTIMA<br>ACTUALIZACIÓN</th>
+          <tr>
+            <th class="text-left">COLOR</th>
+            <th class="text-left">CANTIDADES<br>EN TRÁNSITO</th>
+            <th class="text-left">INGRESO<br>AL SISTEMA</th>
+            <th class="text-left">ESTADO DEL<br>TRÁNSITO</th>
+            <th class="text-left">ÚLTIMA<br>ACTUALIZACIÓN</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(existencia, index) in productoTraking[0]" :key="index">
-            <td v-if="existencia.trackings_importacion[0] !== undefined">
+            <td class="white--text" v-if="existencia.trackings_importacion[0] !== undefined">
               {{ coloresTransito(inventarioDisponible, existencia.trackings_importacion[0].material) }}
             </td>
-            <td v-if="existencia.trackings_importacion[0] !== undefined">
+            <td class="white--text" v-if="existencia.trackings_importacion[0] !== undefined">
               {{addCommas(existencia.trackings_importacion[0].cantidad)}}
             </td>
-            <td v-if="existencia.trackings_importacion[0] !== undefined">
+            <td class="white--text" v-if="existencia.trackings_importacion[0] !== undefined">
               {{moment(existencia.trackings_importacion[0].fecha).locale('es-CO').format('LL')}}
             </td>
-            <td v-if="existencia.trackings_importacion[0] !== undefined">
+            <td class="white--text" v-if="existencia.trackings_importacion[0] !== undefined">
               {{existencia.trackings_importacion[0].estado}}
             </td>
-            <td v-if="existencia.trackings_importacion[0] !== undefined">
+            <td class="white--text" v-if="existencia.trackings_importacion[0] !== undefined">
               {{moment(existencia.trackings_importacion[0].ultima_actualizacion).locale('es-CO').format('LL')}}
             </td>
           </tr>
