@@ -42,7 +42,7 @@
         >
           Características:
         </h1>
-      <v-row>
+      <v-row class="ml-1">
         <template v-for="caracteristica in producto.caracteristicas">
           <v-tooltip top :key="caracteristica.id">
             <template v-slot:activator="{on, attrs}">
@@ -60,15 +60,14 @@
       </v-row>
     </div>
     <v-card
-      :style="{background: $vuetify.theme.themes[theme].background}"
-      v-if="this.textoInfo !== ''" class="mt-5 elevation-10">
+      v-if="this.textoInfo !== ''" class="mt-1 fondoInfo">
       <v-card-text class="pb-0">
         <p
-          :style="{color: $vuetify.theme.themes[theme].basetexto}"
+          class="white--text"
         >{{textoInfo}}</p>
       </v-card-text>
       <v-card-actions class="pt-0">
-        <v-btn color="primary" small @click="cerrarTextoInfo">Cerrar</v-btn>
+        <v-btn color="white" block outlined small @click="cerrarTextoInfo">Cerrar</v-btn>
       </v-card-actions>
     </v-card>
     <v-dialog
@@ -141,5 +140,13 @@ export default {
   .border-black {
     border: 2px solid rgb(197, 197, 197);
     border-radius: 10px;
+  }
+  .fondoInfo {
+      background: rgba( 255, 255, 255, 0.25 ) !important;
+      box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ) !important;
+      backdrop-filter: blur( 4px ) !important;
+      -webkit-backdrop-filter: blur( 4px ) !important;
+      border-radius: 10px !important;
+      border: 1px solid rgba( 255, 255, 255, 0.18 ) !important;
   }
 </style>
