@@ -8,27 +8,24 @@
           <v-breadcrumbs-item
             :to="{ path: item.href}"
             :disabled="item.disabled"
-            :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
             exact
           >
             {{ item.titulo.toUpperCase() }}
           </v-breadcrumbs-item>
         </template>
       </v-breadcrumbs>
-      <v-row>
-        <v-col cols="12" md="6">
-          <h1 class="text-center display-1" :style="{color: $vuetify.theme.themes[theme].colorPrimary}">Misión</h1>
+      <v-row class="my-2 d-flex justify-space-around">
+        <v-col class="fondoCard mx-5 my-2" cols="12" md="5">
+          <h1 class="text-center display-1" :style="{color: '#005C91'}">Misión</h1>
           <v-divider class="mx-10 my-2"></v-divider>
           <p
-          :style="{color: $vuetify.theme.themes[theme].basetexto}"
-          class="text-justify">Compañía dedicada a la importación, distribución y comercialización de artículos promocionales y material publicitario, ofrecemos a nuestros clientes atención personalizada y asesoría en la elaboración de trabajos, garantizando resultados óptimos en menor tiempo de producción utilizando tecnología de punta y personal calificado con un alto grado de responsabilidad y relaciones humanas, fomentando el trabajo en equipo y comprometidos con el medío ambiente y la sociedad en beneficio de nuestros clientes y colaboradores.</p>
+          class="white--text">Compañía dedicada a la importación, distribución y comercialización de artículos promocionales y material publicitario, ofrecemos a nuestros clientes atención personalizada y asesoría en la elaboración de trabajos, garantizando resultados óptimos en menor tiempo de producción utilizando tecnología de punta y personal calificado con un alto grado de responsabilidad y relaciones humanas, fomentando el trabajo en equipo y comprometidos con el medío ambiente y la sociedad en beneficio de nuestros clientes y colaboradores.</p>
         </v-col>
-        <v-col cols="12" md="6">
-          <h1 class="text-center display-1" :style="{color: $vuetify.theme.themes[theme].colorPrimary}">Visión</h1>
+        <v-col class="fondoCard mx-5 my-2" cols="12" md="5">
+          <h1 class="text-center display-1" :style="{color: '#005C91'}">Visión</h1>
           <v-divider class="mx-10 my-2"></v-divider>
           <p
-          :style="{color: $vuetify.theme.themes[theme].basetexto}"
-          class="text-justify">Consolidarnos como una empresa líder en el mercado de artículos promocionales, ampliar nuestros horizontes e introducir al mercado productos de marca propia atendiendo a las necesidades de nuestros clientes, utilizando tecnología e ideas nuevas que nos permitan ofrecer un excelente servicio, con precios competitivos, conservando la calidez y responsabilidad social como pilares de nuestro crecimiento personal y económico mejorando calidad de vida de nuestros colaboradores directos e indirectos.</p>
+          class="white--text">Consolidarnos como una empresa líder en el mercado de artículos promocionales, ampliar nuestros horizontes e introducir al mercado productos de marca propia atendiendo a las necesidades de nuestros clientes, utilizando tecnología e ideas nuevas que nos permitan ofrecer un excelente servicio, con precios competitivos, conservando la calidez y responsabilidad social como pilares de nuestro crecimiento personal y económico mejorando calidad de vida de nuestros colaboradores directos e indirectos.</p>
         </v-col>
       </v-row>
     </v-container>
@@ -84,3 +81,18 @@ export default {
   },
 };
 </script>
+
+<style>
+  .fondoCard {
+    background: rgba( 255, 255, 255, 0.25 ) !important;
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ) !important;
+    backdrop-filter: blur( 4px ) !important;
+    -webkit-backdrop-filter: blur( 4px ) !important;
+    border-radius: 10px !important;
+    border: 1px solid rgba( 255, 255, 255, 0.18 ) !important;
+  }
+
+  .v-breadcrumbs__item {
+    color: white !important;
+  }
+</style>
