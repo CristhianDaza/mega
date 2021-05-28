@@ -10,7 +10,7 @@
       tile
     >
       <v-card-text class="text-center"
-        :style="{background: $vuetify.theme.themes[theme].basemenu}"
+        style="background: rgba(0,0,0,.6)"
       >
 
         <v-tooltip bottom>
@@ -113,7 +113,7 @@
 
       </v-card-text>
       <v-card-title
-        :style="{background: $vuetify.theme.themes[theme].basemenu}"
+        style="background: rgba(0,0,0,.6)"
       >
         <v-container>
           <strong class="subheading">¡Síguenos en las redes sociales!</strong>
@@ -157,7 +157,9 @@
         </v-container>
       </v-card-title>
 
-      <v-card-text class="py-2 text-center white--text">
+      <v-card-text
+        class="py-2 text-center white--text"
+        :style="{background: $vuetify.theme.themes[theme].basemenu}">
         <strong class="title">Megapromocionales LTDA © {{ new Date().getFullYear() }}</strong>
       </v-card-text>
       <v-card-text
