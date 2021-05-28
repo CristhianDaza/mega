@@ -66,21 +66,21 @@
             <v-col cols="10">
               <p
               :style="{color: 'white'}"
-              class="mb-0" :class="this.$vuetify.breakpoint.xs ? 'body-2' : ''">
+              class="mb-0 emails" :class="this.$vuetify.breakpoint.xs ? 'body-2' : ''">
                 <a href="mailto:megapromocional@gmail.com" target="_blank">
                   megapromocional@gmail.com
                 </a>
               </p>
               <p
               :style="{color: 'white'}"
-              class="mb-0" :class="this.$vuetify.breakpoint.xs ? 'body-2' : ''">
+              class="mb-0 emails" :class="this.$vuetify.breakpoint.xs ? 'body-2' : ''">
                 <a href="mailto:ventas@megapromocionales.com.co" target="_blank">
                   ventas@megapromocionales.com.co
                 </a>
               </p>
               <p
               :style="{color: 'white'}"
-              class="mb-0" :class="this.$vuetify.breakpoint.xs ? 'body-2' : ''">
+              class="mb-0 emails" :class="this.$vuetify.breakpoint.xs ? 'body-2' : ''">
                 <a href="mailto:contacto@megapromocionales.com.co" target="_blank">
                   contacto@megapromocionales.com.co
                 </a>
@@ -266,5 +266,16 @@ export default {
 <style scoped>
   a {
     color: inherit !important;
+  }
+  .emails {
+    word-break: break-all;
+  }
+  .fondoCard {
+    background: rgba( 255, 255, 255, 0.25 ) !important;
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ) !important;
+    backdrop-filter: blur( 4px ) !important;
+    -webkit-backdrop-filter: blur( 4px ) !important;
+    border-radius: 10px !important;
+    border: 1px solid rgba( 255, 255, 255, 0.18 ) !important;
   }
 </style>
