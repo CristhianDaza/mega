@@ -11,6 +11,15 @@
           class="text-subtitle-1 mb-4">
           Resultados: {{this.infoProductos.count}}
         </h2>
+        <v-btn
+          v-if="Number(this.totalPaginas) > 1"
+          block
+          outlined
+          x-large
+          color="white"
+          @click="cambiarPorPagina(infoProductos.count)">
+            Ver los {{ Number(this.infoProductos.count) }} productos
+        </v-btn>
         <v-row justify="center">
           <v-col v-if="Number(this.infoProductos.count) > 18" cols="12">
             <v-container class="max-width">

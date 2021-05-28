@@ -18,6 +18,7 @@
       <v-row>
         <v-col cols="12" sm="4" md="3">
           <v-card
+            v-if="this.productos.length > 0"
             class="fondoCard">
             <v-card-text class="pb-0">
               <v-select
@@ -90,47 +91,68 @@
           </v-card>
         </v-col>
         <v-col cols="12" sm="8" md="9">
-          <h2 v-if="this.infoProductos.length > 0" class="text-subtitle-1 mb-2" :style="{color: 'white'}">Resultados: {{this.infoProductos[0].count}}</h2>
-          <v-row v-if="this.productos.length > 0" justify="center">
-            <v-col v-if="Number(this.infoProductos[0].count) > 16" cols="12">
-              <v-container class="max-width">
-                <v-pagination
-                  circle
-                  v-model="pagina"
-                  :length="totalPaginas"
-                  @input="cambiarPagina(pagina)"
+          <h2 v-if="this.infoProductos.length > 0" class="text-subtitle-1 mb-2" :style="{color: 'white'}">Resultados: {{this.infoProductos.count}}</h2>
+            <div v-if="this.productos.length > 0" >
+              <v-btn
+                v-if="Number(this.totalPaginas) > 1"
+                block
+                outlined
+                large
+                color="white"
+                @click="cambiarPorPagina(Number(infoProductos.count))">
+                  Ver los {{Number(this.infoProductos.count) }} productos
+              </v-btn>
+              <v-row justify="center">
+                <v-col v-if="Number(this.infoProductos.count) > 16" cols="12">
+                  <v-container class="max-width">
+                    <v-pagination
+                      circle
+                      v-model="pagina"
+                      :length="totalPaginas"
+                      @input="cambiarPagina(pagina)"
+                    >
+                    </v-pagination>
+                  </v-container>
+                </v-col>
+              </v-row>
+
+              <v-row v-if="this.productos.length > 0">
+                <h2 v-if="Number(this.infoProductos.count) === 0" class="text-center error mt-2 ml-2 sinResultados">Sin resultados</h2>
+                <v-col
+                  cols="12"
+                  sm="6"
+                  md="4"
+                  lg="3"
+                  v-for="(producto) in productos[0]"
+                  :key="producto.id"
+                  class="pa-1"
                 >
-                </v-pagination>
-              </v-container>
-            </v-col>
-          </v-row>
-          <v-row v-if="this.productos.length > 0">
-            <h2 v-if="Number(this.infoProductos[0].count) === 0" class="text-center error mt-2 ml-2 sinResultados">Sin resultados</h2>
-            <v-col
-              cols="12"
-              sm="6"
-              md="4"
-              lg="3"
-              v-for="(producto) in productos[0]"
-              :key="producto.id"
-              class="pa-1"
-            >
-              <Productos :producto='producto' :colores='producto.materiales' />
-            </v-col>
-          </v-row>
-          <v-row v-if="this.productos.length > 0" justify="center">
-            <v-col v-if="Number(this.infoProductos[0].count) > 16" cols="12">
-              <v-container class="max-width">
-                <v-pagination
-                  v-model="pagina"
-                  circle
-                  :length="totalPaginas"
-                  @input="cambiarPagina(pagina)"
-                >
-                </v-pagination>
-              </v-container>
-            </v-col>
-          </v-row>
+                  <Productos :producto='producto' :colores='producto.materiales' />
+                </v-col>
+              </v-row>
+              <v-row v-if="this.productos.length > 0" justify="center">
+                <v-col v-if="Number(this.infoProductos.count) > 16" cols="12">
+                  <v-container class="max-width">
+                    <v-pagination
+                      v-model="pagina"
+                      circle
+                      :length="totalPaginas"
+                      @input="cambiarPagina(pagina)"
+                    >
+                    </v-pagination>
+                  </v-container>
+                </v-col>
+              </v-row>
+              <v-btn
+                v-if="Number(this.totalPaginas) > 1"
+                block
+                outlined
+                large
+                color="white"
+                @click="cambiarPorPagina(Number(infoProductos.count))">
+                  Ver los {{Number(this.infoProductos.count) }} productos
+              </v-btn>
+            </div>
           <div v-else class="mx-auto">
             <v-container class="fill-height mt-16 mx-auto">
               <v-row align="center" justify="center">
@@ -216,8 +238,8 @@ export default {
 
       await axios(config).then((res) => {
         this.productos.push(res.data.results);
-        this.infoProductos.push(res.data);
-        this.totalPaginas = Math.ceil((this.infoProductos[0].count / this.porPagina));
+        this.infoProductos = res.data;
+        this.totalPaginas = Math.ceil((this.infoProductos.count / this.porPagina));
         this.listaEtiquetas = res.data.filtros.etiquetas;
       });
     },
