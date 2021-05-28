@@ -7,7 +7,7 @@
           <v-breadcrumbs-item
             :to="{ path: item.href}"
             :disabled="item.disabled"
-            :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
+            :style="{color: 'white'}"
             exact
           >
             {{ item.titulo.toUpperCase() }}
@@ -20,9 +20,8 @@
             <template v-slot:default="{ hover }">
               <v-card
                 outlined
-                class="mx-auto transition-swing"
-                :class="`elevation-${hover ? 24 : 0}`"
-                :style="{background: $vuetify.theme.themes[theme].basebackground}"
+                class="mx-auto transition-swing fondoCard"
+                :class="`elevation-${hover ? 0 : 24}`"
               >
                 <div class="div-catalogo hidden">
                   <v-img :src="catalogo.linkImagen" :alt="catalogo.nombre" class="imagen-catalogo">
@@ -42,9 +41,10 @@
                     class="linksCatalogos"
                     :href="catalogo.linkVirtual"
                     target="_blank"
+
                   >
                     <v-btn
-                      :style="{color: $vuetify.theme.themes[theme].colorPrimary}" width="100%" text>
+                      :style="{color: 'white'}" width="100%" text>
                       Catálogo  {{catalogo.nombre}} <v-icon class="ml-1" small>
                         {{mdiOpenInNew}}
                       </v-icon>
@@ -157,4 +157,12 @@ export default {
 .linksCatalogos {
   width: 100%;
 }
+  .fondoCard {
+    background: rgba( 255, 255, 255, 0.25 ) !important;
+    /* box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ) !important; */
+    backdrop-filter: blur( 4px ) !important;
+    -webkit-backdrop-filter: blur( 4px ) !important;
+    border-radius: 10px !important;
+    border: 1px solid rgba( 255, 255, 255, 0.18 ) !important;
+  }
 </style>
