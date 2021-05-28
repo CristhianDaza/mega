@@ -5,8 +5,7 @@
       <v-card
         outlined
         :class="`elevation-${hover ? 8 : 0}`"
-        class="mx-auto pa-0 transition-swing tarjetaProducto"
-        :style="{background: $vuetify.theme.themes[theme].basebackground}"
+        class="mx-auto pa-0 transition-swing tarjetaProducto fondoCard"
       >
         <v-card-text class="pa-0">
           <router-link
@@ -33,12 +32,12 @@
         <v-divider class="mx-8"></v-divider>
         <v-card-title
           class="text-center text-subtitle-2 titleProd"
-          :style="{color: $vuetify.theme.themes[theme].basetext}"
+          :style="{color: 'white'}"
         >
           {{ producto.descripcion_comercial }}
         </v-card-title>
         <v-card-subtitle
-          :style="{color: $vuetify.theme.themes[theme].basetext}"
+          :style="{color: 'white'}"
         >
           {{ producto.familia }}
         </v-card-subtitle>
@@ -93,7 +92,7 @@
           </template>
         </div>
         <v-card-title
-          :style="{color: $vuetify.theme.themes[theme].basetext}"
+          :style="{color: 'white'}"
           v-if="existeUsuario" class="precio">
           <template v-if="producto.etiquetas.length > 0">
             <template v-if="producto.etiquetas[0].id == 4 || producto.etiquetas[0].id == 10 || producto.etiquetas[0].id == 20">
@@ -130,7 +129,7 @@
         <v-btn
           :to="{path: `/producto/${producto.familia}`}"
           outlined block
-          :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
+          :style="{color: 'white'}"
           text
         >
             Ver Producto
@@ -212,4 +211,12 @@ export default {
 .titleProd {
   word-break: normal;
 }
+  .fondoCard {
+    background: rgba( 255, 255, 255, 0.25 ) !important;
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ) !important;
+    backdrop-filter: blur( 4px ) !important;
+    -webkit-backdrop-filter: blur( 4px ) !important;
+    border-radius: 10px !important;
+    border: 1px solid rgba( 255, 255, 255, 0.18 ) !important;
+  }
 </style>
