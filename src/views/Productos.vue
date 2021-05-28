@@ -3,18 +3,17 @@
   <div>
     <Hero :titulo="titulo"/>
     <v-container>
-      <v-breadcrumbs :items="items">
-        <template v-slot:item="{ item }">
-          <v-breadcrumbs-item
-            :to="{ path: item.href}"
-            :disabled="item.disabled"
-            :style="{color: 'white'}"
-            exact
-          >
-            {{ item.titulo.toUpperCase() }}
-          </v-breadcrumbs-item>
-        </template>
-      </v-breadcrumbs>
+      <div class="links">
+        <ul>
+          <li>
+            <router-link exact to="/" class="links__item">INICIO</router-link>
+          </li>
+          <li class="links__divider">/</li>
+          <li>
+            PRODUCTOS
+          </li>
+        </ul>
+      </div>
       <v-row>
         <v-col cols="12" sm="4" md="3">
           <v-card

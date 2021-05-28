@@ -4,15 +4,17 @@
     <Hero titulo="Nosotros"/>
     <v-container>
       <v-breadcrumbs :items="items">
-        <template v-slot:item="{ item }">
-          <v-breadcrumbs-item
-            :to="{ path: item.href}"
-            :disabled="item.disabled"
-            exact
-          >
-            {{ item.titulo.toUpperCase() }}
-          </v-breadcrumbs-item>
-        </template>
+        <div class="links">
+          <ul>
+            <li>
+              <router-link exact to="/" class="links__item">INICIO</router-link>
+            </li>
+            <li class="links__divider">/</li>
+            <li>
+              NOSOTROS
+            </li>
+          </ul>
+        </div>
       </v-breadcrumbs>
       <v-row class="my-2 d-flex justify-space-around">
         <v-col class="fondoCard mx-5 my-2" cols="12" md="5">

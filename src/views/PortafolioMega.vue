@@ -2,18 +2,17 @@
   <div>
     <Hero titulo="Portafolio"/>
     <v-container>
-      <v-breadcrumbs :items="items">
-        <template v-slot:item="{ item }">
-          <v-breadcrumbs-item
-            :to="{ path: item.href}"
-            :disabled="item.disabled"
-            :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
-            exact
-          >
-            {{ item.titulo.toUpperCase() }}
-          </v-breadcrumbs-item>
-        </template>
-      </v-breadcrumbs>
+      <div class="links">
+        <ul>
+          <li>
+            <router-link exact to="/" class="links__item">INICIO</router-link>
+          </li>
+          <li class="links__divider">/</li>
+          <li>
+            PORTAFOLIO MEGA
+          </li>
+        </ul>
+      </div>
     </v-container>
     <div
       id="app"

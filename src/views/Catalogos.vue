@@ -2,18 +2,17 @@
   <div>
     <Hero titulo="Catálogos"/>
     <v-container v-if="this.catalogos.length > 0">
-      <v-breadcrumbs :items="items">
-        <template v-slot:item="{ item }">
-          <v-breadcrumbs-item
-            :to="{ path: item.href}"
-            :disabled="item.disabled"
-            :style="{color: 'white'}"
-            exact
-          >
-            {{ item.titulo.toUpperCase() }}
-          </v-breadcrumbs-item>
-        </template>
-      </v-breadcrumbs>
+      <div class="links">
+        <ul>
+          <li>
+            <router-link exact to="/" class="links__item">INICIO</router-link>
+          </li>
+          <li class="links__divider">/</li>
+          <li>
+            CATÁLOGOS
+          </li>
+        </ul>
+      </div>
       <v-row>
         <v-col cols="12" sm="6" md="4" lg="3" v-for="catalogo in catalogos" :key="catalogo.id">
           <v-hover>

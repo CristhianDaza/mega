@@ -2,6 +2,17 @@
   <div>
     <Hero titulo="Buscar"/>
     <v-container>
+      <div class="links">
+        <ul>
+          <li>
+            <router-link exact to="/" class="links__item">INICIO</router-link>
+          </li>
+          <li class="links__divider">/</li>
+          <li>
+            BUSCAR
+          </li>
+        </ul>
+      </div>
       <div v-if="this.productos.length > 0">
         <h1
           :style="{color: 'white'}"

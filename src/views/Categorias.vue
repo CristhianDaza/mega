@@ -3,18 +3,21 @@
   <div>
     <Hero titulo="Categorías"/>
     <v-container>
-      <v-breadcrumbs :items="items">
-        <template v-slot:item="{ item }">
-          <v-breadcrumbs-item
-            :to="{ path: item.href}"
-            :disabled="item.disabled"
-            :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
-            exact
-          >
-            {{ item.titulo.toUpperCase() }}
-          </v-breadcrumbs-item>
-        </template>
-      </v-breadcrumbs>
+      <div class="links">
+        <ul>
+          <li>
+            <router-link exact to="/" class="links__item">INICIO</router-link>
+          </li>
+          <li class="links__divider">/</li>
+          <li>
+            <router-link exact to="/productos" class="links__item">PRODUCTOS</router-link>
+          </li>
+          <li class="links__divider">/</li>
+          <li>
+            CATEGORÍAS
+          </li>
+        </ul>
+      </div>
         <div v-if="this.categorias.length > 0">
           <v-row class="fondoCard my-5">
             <v-col
@@ -178,5 +181,34 @@ export default {
 
   .tituloCategoria {
     word-break: keep-all;
+  }
+    .links {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex: 0 1 auto;
+    list-style: none;
+    margin: 0;
+    padding: 18px 12px;
+  }
+
+  .links li {
+    align-items: center;
+    display: inline-flex;
+    font-size: 14px;
+  }
+  .links__item {
+    align-items: center;
+    display: inline-flex;
+    text-decoration: none;
+    transition: all .3s cubic-bezier(0.25, 0.8, 0.5, 1);
+    color: white !important;
+  }
+  .links li:nth-child(2n){
+    padding: 0 12px;
+  }
+
+  .links ul {
+    padding: 0;
   }
 </style>

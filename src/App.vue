@@ -62,4 +62,33 @@ body::-webkit-scrollbar-track:active {
 .theme--light.v-data-table, .theme--light.v-card {
   background-color: inherit;
 }
+  .links {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex: 0 1 auto;
+    list-style: none;
+    margin: 0;
+    padding: 18px 12px;
+  }
+
+  .links li {
+    align-items: center;
+    display: inline-flex;
+    font-size: 14px;
+  }
+  .links__item {
+    align-items: center;
+    display: inline-flex;
+    text-decoration: none;
+    transition: all .3s cubic-bezier(0.25, 0.8, 0.5, 1);
+    color: white !important;
+  }
+  .links li:nth-child(2n){
+    padding: 0 12px;
+  }
+
+  .links ul {
+    padding: 0;
+  }
 </style>
