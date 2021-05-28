@@ -16,7 +16,7 @@
         </template>
       </v-breadcrumbs>
         <div v-if="this.categorias.length > 0">
-          <v-row>
+          <v-row class="fondoCard my-5">
             <v-col
               cols="12"
               sm="6"
@@ -24,47 +24,43 @@
               v-for="categoria in this.categorias[0]"
               :key="categoria.id_pagina"
             >
-              <v-card>
-                <div class="d-flex flex-no-wrap justify-space-between">
-                  <v-img
-                    :aspect-ratio="16/9"
-                    :src="categoria.imagen.file_md"
-                    :alt="categoria.nombre">
-                    <div
-                      class="contenedorCategoria"
-                      :class="$vuetify.theme.dark
-                      ? 'contenedorCategoriaOscuro'
-                      : 'contenedorCategoriaClaro'
-                      "
-                    >
-                      <v-card-title
-                        :style="{color: $vuetify.theme.themes[theme].basetexto}"
-                      >
-                        <router-link
-                          :to="`/productos?categoria=${categoria.jerarquia}&titulo=${categoria.nombre}`"
-                        >
-                          {{categoria.nombre}}
-                        </router-link>
-                      </v-card-title>
-                      <v-card-subtitle>
-                        <ul>
-                          <li
-                            v-for="subCategoria in categoria.subcategorias"
-                            :key="subCategoria.id_pagina"
-                            class="font-weight-medium"
-                            :style="{color: $vuetify.theme.themes[theme].basetexto}"
-                          >
-                            <router-link
-                            :to="`/productos?subCategoria=${subCategoria.jerarquia}&titulo=${subCategoria.nombre}`"
-                            >
-                              {{subCategoria.nombre}}
-                            </router-link>
-                          </li>
-                        </ul>
-                      </v-card-subtitle>
-                    </div>
-                  </v-img>
+              <v-card class="fondoCard">
+                <div class="d-flex flex-no-wrap justify-flex-start">
+                  <v-avatar
+                    class="ma-3"
+                    size="100"
+                    tile
+                  >
+                    <v-img
+                      :aspect-ratio="16/9"
+                      :src="categoria.imagen.file_md"
+                      :alt="categoria.nombre">
+                    </v-img>
+                  </v-avatar>
+                    <v-card-title class="tituloCategoria headline" :style="{color: '#005C91'}" >
+                      <router-link
+                        :to="`/productos?categoria=${categoria.jerarquia}&titulo=${categoria.nombre}`" >
+                        {{categoria.nombre}}
+                      </router-link>
+                    </v-card-title>
                 </div>
+                <v-divider class="mx-5"></v-divider>
+                <v-card-subtitle class="tituloCategoria">
+                  <ul>
+                    <li
+                      v-for="subCategoria in categoria.subcategorias"
+                      :key="subCategoria.id_pagina"
+                      class="font-weight-medium"
+                      :style="{color: 'white'}"
+                    >
+                      <router-link
+                      :to="`/productos?subCategoria=${subCategoria.jerarquia}&titulo=${subCategoria.nombre}`"
+                      >
+                        {{subCategoria.nombre}}
+                      </router-link>
+                    </li>
+                  </ul>
+                </v-card-subtitle>
               </v-card>
             </v-col>
           </v-row>
@@ -164,23 +160,23 @@ export default {
     height: 100%;
     transition: background .4s;
   }
-  .contenedorCategoriaOscuro {
-    background: rgba(0, 0, 0, .7);
-  }
-  .contenedorCategoriaClaro {
-    background: rgba(255, 255, 255, .7);
-  }
-  .contenedorCategoriaOscuro:hover {
-    background: rgba(0, 0, 0, .9);
-  }
-  .contenedorCategoriaClaro:hover {
-    background: rgba(255, 255, 255, .9);
-  }
   a {
     color: inherit !important;
     transition: color .3s;
   }
   a:hover {
-    color: #0077bd !important;
+    color:  #005C91 !important;
+  }
+  .fondoCard {
+    background: rgba( 255, 255, 255, 0.25 ) !important;
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ) !important;
+    backdrop-filter: blur( 4px ) !important;
+    -webkit-backdrop-filter: blur( 4px ) !important;
+    border-radius: 10px !important;
+    border: 1px solid rgba( 255, 255, 255, 0.18 ) !important;
+  }
+
+  .tituloCategoria {
+    word-break: keep-all;
   }
 </style>
