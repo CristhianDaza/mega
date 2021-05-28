@@ -30,7 +30,7 @@
 .loader .face:nth-child(1) {
     width: 100%;
     height: 100%;
-    color: #0077bd;
+    color: white;
     border-color: currentColor transparent transparent currentColor;
     border-width: 0.2em 0.2em 0em 0em;
     --deg: -45deg;
