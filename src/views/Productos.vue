@@ -107,9 +107,10 @@
           <v-row v-if="this.productos.length > 0">
             <h2 v-if="Number(this.infoProductos[0].count) === 0" class="text-center error mt-2 ml-2 sinResultados">Sin resultados</h2>
             <v-col
-              cols="6"
-              sm="4"
-              md="3"
+              cols="12"
+              sm="6"
+              md="4"
+              lg="3"
               v-for="(producto) in productos[0]"
               :key="producto.id"
               class="pa-1"
