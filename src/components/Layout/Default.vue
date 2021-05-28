@@ -23,11 +23,7 @@
           dark
           bottom
           right
-          :color="
-            $vuetify.theme.dark
-              ? '#0077bd'
-              : '#111b27'
-            "
+          :color="'#111b27'"
           fixed
           class="elevation-15 mr-15 mb-6"
           @click="$vuetify.goTo(target, options)"
@@ -77,9 +73,9 @@ export default {
         easing: this.easing,
       };
     },
-    theme() {
-      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
-    },
+    // theme() {
+    //   return (this.$vuetify.theme.dark) ? 'dark' : 'light';
+    // },
   },
   methods: {
     onScroll(e) {
@@ -88,18 +84,18 @@ export default {
       this.mostrarBoton = top > 200;
     },
   },
-  mounted() {
-    const theme = localStorage.getItem('darkTheme');
-    if (theme) {
-      if (theme === 'true') {
-        this.$vuetify.theme.dark = true;
-      } else {
-        this.$vuetify.theme.dark = false;
-      }
-    } else {
-      this.$vuetify.theme.dark = false;
-    }
-  },
+  // mounted() {
+  //   const theme = localStorage.getItem('darkTheme');
+  //   if (theme) {
+  //     if (theme === 'true') {
+  //       this.$vuetify.theme.dark = true;
+  //     } else {
+  //       this.$vuetify.theme.dark = false;
+  //     }
+  //   } else {
+  //     this.$vuetify.theme.dark = false;
+  //   }
+  // },
   metaInfo: {
     title: 'Megapromocionales LTDA',
     titleTemplate: '%s | Megapromocionales LTDA',

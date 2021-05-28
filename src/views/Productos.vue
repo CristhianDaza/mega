@@ -8,7 +8,7 @@
           <v-breadcrumbs-item
             :to="{ path: item.href}"
             :disabled="item.disabled"
-            :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
+            :style="{color: 'white'}"
             exact
           >
             {{ item.titulo.toUpperCase() }}
@@ -18,7 +18,7 @@
       <v-row>
         <v-col cols="12" sm="4" md="3">
           <v-card
-            :style="{background: $vuetify.theme.themes[theme].basebackground}">
+            class="fondoCard">
             <v-card-text class="pb-0">
               <v-select
                 :items="listaPorPaginas"
@@ -44,26 +44,25 @@
             </v-card-text>
           </v-card>
           <v-card
-            :style="{background: $vuetify.theme.themes[theme].basebackground}"
+            v-if="this.listaEtiquetas.length > 0"
             class="mt-3">
-            <v-list dense :style="{background: $vuetify.theme.themes[theme].basebackground}">
-              <v-subheader :style="{color: $vuetify.theme.themes[theme].basetexto}">Etiqueta</v-subheader>
+            <v-list class="fondoCard" dense>
+              <v-subheader :style="{color: '#005C91'}">Etiquetas</v-subheader>
               <v-list-item-group>
-                <v-list-item v-for="etiqueta in this.listaEtiquetas[0]" :key="etiqueta.id">
+                <v-list-item v-for="etiqueta in this.listaEtiquetas" :key="etiqueta.id">
                   <v-list-item-title
-                    :style="{color: $vuetify.theme.themes[theme].basetexto}"
+                    :style="{color: 'white'}"
                     @click="buscarEtiqueta(etiqueta.id)">
-                    {{ etiqueta.nombre }} ({{etiqueta.count}})
+                    {{ etiqueta.nombre }} {{ etiqueta.count === 1 ? `(${etiqueta.count} producto)` : `(${etiqueta.count} productos)` }}
                   </v-list-item-title>
                 </v-list-item>
               </v-list-item-group>
             </v-list>
           </v-card>
           <v-card
-            :style="{background: $vuetify.theme.themes[theme].basebackground}"
             class="mt-3">
-            <v-list v-if="this.categorias.length > 0" dense :style="{background: $vuetify.theme.themes[theme].basebackground}">
-              <v-subheader :style="{color: $vuetify.theme.themes[theme].basetexto}">Categorías</v-subheader>
+            <v-list v-if="this.categorias.length > 0" dense class="fondoCard">
+              <v-subheader :style="{color: '#005C91'}">Categorías</v-subheader>
               <v-list-group
                 v-for="categoria in this.categorias[0]"
                 :key="categoria.id_pagina"
@@ -72,7 +71,7 @@
                 <template v-slot:activator>
                   <v-list-item-content>
                     <v-list-item-title
-                      :style="{color: $vuetify.theme.themes[theme].basetexto}"
+                      :style="{color: '#005C91'}"
                       v-text="categoria.nombre"
                     ></v-list-item-title>
                   </v-list-item-content>
@@ -83,7 +82,7 @@
                   @click="buscarSubCategoria(subCategoria.jerarquia, subCategoria.nombre)"
                 >
                   <v-list-item-content>
-                    <v-list-item-title v-text="subCategoria.nombre"></v-list-item-title>
+                    <v-list-item-title :style="{color: 'white'}" v-text="subCategoria.nombre"></v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
               </v-list-group>
@@ -91,7 +90,7 @@
           </v-card>
         </v-col>
         <v-col cols="12" sm="8" md="9">
-          <h2 v-if="this.infoProductos.length > 0" class="text-subtitle-1 mb-2">Resultados: {{this.infoProductos[0].count}}</h2>
+          <h2 v-if="this.infoProductos.length > 0" class="text-subtitle-1 mb-2" :style="{color: 'white'}">Resultados: {{this.infoProductos[0].count}}</h2>
           <v-row v-if="this.productos.length > 0" justify="center">
             <v-col v-if="Number(this.infoProductos[0].count) > 16" cols="12">
               <v-container class="max-width">
@@ -218,7 +217,7 @@ export default {
         this.productos.push(res.data.results);
         this.infoProductos.push(res.data);
         this.totalPaginas = Math.ceil((this.infoProductos[0].count / this.porPagina));
-        this.listaEtiquetas.push(res.data.filtros.etiquetas);
+        this.listaEtiquetas = res.data.filtros.etiquetas;
       });
     },
     hextToRgb(hex) {
@@ -336,21 +335,19 @@ export default {
   created() {
     this.$store.commit('setLayout', 'defaultLayout');
   },
-  computed: {
-    theme() {
-      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
-    },
-  },
 };
 </script>
 
 <style>
-  .theme--dark.v-pagination .v-pagination__item,
-  .theme--dark.v-pagination .v-pagination__navigation {
-    background: rgb(5, 9, 12) !important;
+  .theme--light.v-pagination .v-pagination__item,
+  .theme--light.v-pagination .v-pagination__navigation {
+    background: white !important;
   }
 
-  .theme--dark.v-pagination .v-pagination__item--active {
-    background:#0077bd !important;
+  .theme--light.v-pagination .v-pagination__item--active {
+    background:#005C91 !important;
   }
-</style>
+  .theme--light.v-sheet {
+    background: inherit;
+  }
+  </style>

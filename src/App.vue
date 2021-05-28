@@ -59,5 +59,7 @@ body::-webkit-scrollbar-track:hover,
 body::-webkit-scrollbar-track:active {
   background: #d4d4d4;
 }
-
+.theme--light.v-data-table, .theme--light.v-card {
+  background-color: inherit;
+}
 </style>

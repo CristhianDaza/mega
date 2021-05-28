@@ -1,11 +1,10 @@
 <template>
 <!-- eslint-disable max-len -->
   <v-hover>
-    <template v-slot:default="{ hover }">
+    <template>
       <v-card
         outlined
-        :class="`elevation-${hover ? 8 : 0}`"
-        class="mx-auto pa-0 transition-swing tarjetaProducto fondoCard"
+        class="mx-auto pa-0 tarjetaProductos fondoCard"
       >
         <v-card-text class="pa-0">
           <router-link
@@ -16,6 +15,7 @@
               width="100%"
               max-width="100%"
               :alt="producto.descripcion_comercial"
+              class="imagenProducto"
             >
               <template v-slot:placeholder>
                 <v-row
@@ -151,9 +151,6 @@ export default {
   },
   computed: {
     ...mapGetters(['existeUsuario']),
-    theme() {
-      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
-    },
   },
   methods: {
     addCommas(nStr) {
@@ -179,7 +176,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoed>
 .contenedor_color {
   position: relative;
   height: 18px;
@@ -202,21 +199,25 @@ export default {
 .circuloProducto {
   cursor: auto;
 }
-.tarjetaProducto {
+.tarjetaProductos {
   transition: all .4s;
 }
-.tarjetaProducto:hover {
+.tarjetaProductos:hover {
   transform: translateY(-15px);
 }
 .titleProd {
   word-break: normal;
 }
-  .fondoCard {
-    background: rgba( 255, 255, 255, 0.25 ) !important;
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ) !important;
-    backdrop-filter: blur( 4px ) !important;
-    -webkit-backdrop-filter: blur( 4px ) !important;
-    border-radius: 10px !important;
-    border: 1px solid rgba( 255, 255, 255, 0.18 ) !important;
-  }
+.fondoCard {
+  background-color: rgba( 255, 255, 255, 0.25 ) !important;
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ) !important;
+  backdrop-filter: blur( 4px ) !important;
+  -webkit-backdrop-filter: blur( 4px ) !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba( 255, 255, 255, 0.18 ) !important;
+}
+.imagenProducto {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
 </style>
