@@ -3,6 +3,13 @@
     :style="{ backgroundImage: `url(${Informacion})` }"
     class="fondoInformacion mt-5"
   >
+    <h1
+      :class="this.$vuetify.breakpoint.xs ? 'display-1 mt-2' : 'display-2'"
+      class="mb-2 py-5 text-center font-weight-black"
+      :style="{color: '#ffcd17'}"
+    >
+      Newsletters
+    </h1>
     <v-row class="mx-0">
       <v-col
         v-for="imagen in imagenInfo"
