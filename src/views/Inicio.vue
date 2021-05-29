@@ -7,7 +7,6 @@
     <InfoImagen />
     <ProductosNuevos />
     <Instagram />
-    <FormularioContacto />
   </div>
 </template>
 
@@ -18,7 +17,6 @@ import Servicios from '@/components/Index/Servicios.vue';
 import InfoImagen from '@/components/Index/InfoImagen.vue';
 import ProductosNuevos from '@/components/Index/ProductosNuevos.vue';
 import Instagram from '@/components/Index/Instagram.vue';
-import FormularioContacto from '@/components/Index/FormularioContacto.vue';
 import VideoPromocion from '@/components/Index/VideoPromocion.vue';
 
 export default {
@@ -29,7 +27,6 @@ export default {
     Servicios,
     InfoImagen,
     Instagram,
-    FormularioContacto,
     ProductosNuevos,
     VideoPromocion,
   },
