@@ -1,16 +1,22 @@
 <template>
-  <div :class="this.$vuetify.breakpoint.xs ? '' : 'container'">
+  <div
+    :style="{ backgroundImage: `url(${Informacion})` }"
+    class="fondoInformacion mt-5"
+  >
     <v-row class="mx-0">
       <v-col
         v-for="imagen in imagenInfo"
         :key="imagen.id"
-        cols="12"
-        md="6"
+        cols="6"
+        sm="3"
+        md="2"
+        lg="2"
       >
         <router-link :to="imagen.url">
           <v-img
             :src="imagen.linkImagen"
             :alt="imagen.nombre"
+            class="imagenInfo"
           >
             <template v-slot:placeholder>
               <v-row
@@ -31,8 +37,14 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import Loader from '@/components/Global/Loader.vue';
+import Informacion from '@/assets/informacion.svg';
 
 export default {
+  data() {
+    return {
+      Informacion,
+    };
+  },
   methods: {
     ...mapActions(['traerImagenInfo']),
   },
@@ -47,3 +59,12 @@ export default {
   },
 };
 </script>
+<style>
+.fondoInformacion {
+  background-size: 100%;
+  background-position: bottom;
+}
+.imagenInfo {
+  border-radius: 10px;
+}
+</style>
