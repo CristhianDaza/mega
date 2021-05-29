@@ -71,10 +71,9 @@
           <v-card-actions>
           <v-btn
             :to="{path: `/producto/${producto.producto.familia}`}"
-            outlined block
+            outlined
+            block
             class="white--text"
-            text
-            append
           >
               Ver Producto
           </v-btn>

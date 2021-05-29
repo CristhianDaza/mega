@@ -14,24 +14,11 @@
           </li>
         </ul>
       </div>
-      <v-row>
+      <v-row class="fondoCard my-3">
         <v-col cols="12" sm="4" md="3">
           <v-card
             v-if="this.productos.length > 0"
             class="fondoCard">
-            <v-card-text class="pb-0">
-              <v-select
-                :items="listaPorPaginas"
-                item-text="text"
-                item-value="value"
-                label="Ítems por Página"
-                class="mt-2"
-                dense
-                filled
-                v-model="porPagina"
-                @change="cambiarPorPagina(porPagina)"
-              ></v-select>
-            </v-card-text>
             <v-card-text class="pb-0">
               <v-text-field
                 label="Inventario"
