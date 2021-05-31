@@ -59,9 +59,12 @@ body::-webkit-scrollbar-track:hover,
 body::-webkit-scrollbar-track:active {
   background: #d4d4d4;
 }
-.theme--light.v-data-table, .theme--light.v-card {
-  background-color: inherit;
-}
+  .tarjetaProductos.fondoCard.v-card.v-sheet.theme--light{
+    background-color: rgba( 255, 255, 255, 0.25 ) !important;
+  }
+  .fondoCard.v-card.v-sheet.theme--light {
+    background-color: rgba( 255, 255, 255, 0.25 ) !important;
+  }
   .links {
     align-items: center;
     display: flex;

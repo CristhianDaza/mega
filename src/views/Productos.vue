@@ -14,7 +14,7 @@
           </li>
         </ul>
       </div>
-      <v-row class="fondoCard my-3">
+      <v-row class="my-3">
         <v-col cols="12" sm="4" md="3">
           <v-card
             v-if="this.productos.length > 0"
