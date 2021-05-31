@@ -16,6 +16,7 @@
             :controls="false"
             preload="metadata"
             width="100%"
+            height="100%"
             logo="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/opt_logo.webp?alt=media&amp;token=2e13ac36-784c-463a-a094-fa665516fffe&quot"
             :src="video.linkVideo"
             type="video/mp4"
@@ -54,5 +55,8 @@ export default {
 .fondoVideo {
   background-size: 100%;
   background-position: center;
+}
+.vcp-container, .vcp-container video{
+  background-color: transparent;
 }
 </style>
