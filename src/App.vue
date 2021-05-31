@@ -18,6 +18,9 @@ export default {
 </script>
 
 <style>
+html {
+  scroll-behavior: smooth;
+}
 body {
   font-family: 'Source Sans Pro', sans-serif;
 }
@@ -31,34 +34,20 @@ h6 {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-body::-webkit-scrollbar {
-  width: 9px;
-}
-
- /* Estilos barra (thumb) de scroll */
-body::-webkit-scrollbar-thumb {
-  background: #0077bd;
-  border-radius: 4px;
-}
-
-body::-webkit-scrollbar-thumb:active {
-  background-color: rgb(15, 14, 164);
-}
-
-body::-webkit-scrollbar-thumb:hover {
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
-}
-
- /* Estilos track de scroll */
 body::-webkit-scrollbar-track {
-  background: #e1e1e1;
-  border-radius: 4px;
+  border: 1px solid #ffcd17;
+  background-color: #F5F5F5;
 }
 
-body::-webkit-scrollbar-track:hover,
-body::-webkit-scrollbar-track:active {
-  background: #d4d4d4;
+body::-webkit-scrollbar {
+  width: 10px;
+  background-color: #F5F5F5;
 }
+
+body::-webkit-scrollbar-thumb {
+  background-color: #0077bd;
+}
+
   .tarjetaProductos.fondoCard.v-card.v-sheet.theme--light{
     background-color: rgba( 255, 255, 255, 0.25 ) !important;
   }
