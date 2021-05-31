@@ -18,9 +18,6 @@ export default {
 </script>
 
 <style>
-html {
-  scroll-behavior: smooth;
-}
 body {
   font-family: 'Source Sans Pro', sans-serif;
 }
