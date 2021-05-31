@@ -13,7 +13,7 @@
       :key="i"
     >
       <router-link :to="slide.urlProducto">
-        <img width="100%" :src="slide.linkImagen" :alt="slide.nombreProducto">
+        <img width="100%" height="100%" :src="slide.linkImagen" :alt="slide.nombreProducto">
       </router-link>
     </slide>
   </carousel>
@@ -60,12 +60,12 @@ export default {
   height: 100%;
   position: absolute;
   top: 0 !important;
-  transition-duration: 0.3s;
-  width: 80px;
+  transition-duration: 0.5s;
+  width: 50px;
 }
 
 .VueCarousel-navigation-button:hover {
-  background-color: rgba(0, 0, 0, 0.5) !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
   opacity: 1;
 }
 </style>
