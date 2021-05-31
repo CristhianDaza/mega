@@ -3,7 +3,7 @@
     <Hero />
     <Carrusel />
     <VideoPromocion />
-    <Servicios />
+    <!-- <Servicios /> -->
     <InfoImagen />
     <ProductosNuevos />
     <Instagram />
@@ -13,7 +13,7 @@
 <script>
 import Hero from '@/components/Index/Hero.vue';
 import Carrusel from '@/components/Index/Carrusel.vue';
-import Servicios from '@/components/Index/Servicios.vue';
+// import Servicios from '@/components/Index/Servicios.vue';
 import InfoImagen from '@/components/Index/InfoImagen.vue';
 import ProductosNuevos from '@/components/Index/ProductosNuevos.vue';
 import Instagram from '@/components/Index/Instagram.vue';
@@ -24,7 +24,7 @@ export default {
   components: {
     Hero,
     Carrusel,
-    Servicios,
+    // Servicios,
     InfoImagen,
     Instagram,
     ProductosNuevos,
