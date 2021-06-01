@@ -60,7 +60,7 @@
       </v-row>
     </div>
     <v-card
-      v-if="this.textoInfo !== ''" class="mt-1 fondoInfo">
+      v-if="this.textoInfo !== ''" class="mt-5 fondoInfo">
       <v-card-text class="pb-0">
         <p
           class="white--text"
