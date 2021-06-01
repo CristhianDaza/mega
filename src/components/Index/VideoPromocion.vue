@@ -20,6 +20,7 @@
             logo="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/opt_logo.webp?alt=media&amp;token=2e13ac36-784c-463a-a094-fa665516fffe&quot"
             :src="video.linkVideo"
             type="video/mp4"
+            class="videoPromocion"
             >
           </vue-core-video-player>
         </div>
@@ -57,6 +58,12 @@ export default {
   background-position: center;
 }
 .vcp-container, .vcp-container video{
-  background-color: transparent;
+  background-color: transparent !important;
+}
+.vcp-layer.loading-layer {
+  border-radius: 10px;
+}
+video {
+  border-radius: 10px;
 }
 </style>
