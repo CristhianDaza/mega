@@ -98,7 +98,7 @@
 
         <template v-else>
           <template v-if="producto.materiales[0].precio > producto.materiales[0].precio_descuento">
-            <span class="text-decoration-line-through mr-3 subtitle-1" style="color: gray">
+            <span class="text-decoration-line-through mr-3 subtitle-1" style="color: black">
               $ {{addCommas(Math.round(producto.materiales[0].precio))}} + iva
             </span>
             $ {{addCommas(Math.round(producto.materiales[0].precio_descuento))}} + iva
@@ -111,7 +111,7 @@
 
       <template v-else>
         <template v-if="producto.materiales[0].precio > producto.materiales[0].precio_descuento">
-          <span class="text-decoration-line-through mr-3 subtitle-1" style="color: gray">
+          <span class="text-decoration-line-through mr-3 subtitle-1" style="color: black">
             $ {{addCommas(Math.round(producto.materiales[0].precio))}} + iva
           </span>
           $ {{addCommas(Math.round(producto.materiales[0].precio_descuento))}} + iva
