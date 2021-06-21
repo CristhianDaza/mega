@@ -16,14 +16,14 @@
           </ul>
         </div>
       </v-breadcrumbs>
-      <v-row class="my-2 d-flex justify-space-around">
-        <v-col class="fondoCard mx-5 my-2" cols="12" md="5">
+      <v-row class="d-flex justify-space-around pa-5 fondoCard mb-2">
+        <v-col cols="12" md="6">
           <h1 class="text-center display-1" :style="{color: '#005C91'}">Misión</h1>
           <v-divider class="mx-10 my-2"></v-divider>
           <p
           class="white--text">Compañía dedicada a la importación, distribución y comercialización de artículos promocionales y material publicitario, ofrecemos a nuestros clientes atención personalizada y asesoría en la elaboración de trabajos, garantizando resultados óptimos en menor tiempo de producción utilizando tecnología de punta y personal calificado con un alto grado de responsabilidad y relaciones humanas, fomentando el trabajo en equipo y comprometidos con el medío ambiente y la sociedad en beneficio de nuestros clientes y colaboradores.</p>
         </v-col>
-        <v-col class="fondoCard mx-5 my-2" cols="12" md="5">
+        <v-col cols="12" md="6">
           <h1 class="text-center display-1" :style="{color: '#005C91'}">Visión</h1>
           <v-divider class="mx-10 my-2"></v-divider>
           <p
