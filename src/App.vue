@@ -20,6 +20,7 @@ export default {
 <style>
 body {
   font-family: 'Source Sans Pro', sans-serif;
+  min-height: 100vh;
 }
 
 h1,

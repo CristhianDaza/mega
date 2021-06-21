@@ -1,7 +1,7 @@
 <template>
   <v-container class="fill-height">
     <v-row align="center" justify="center" class="fondoCard mb-5">
-      <v-col cols="12" sm="6">
+      <v-col cols="12" sm="6" class="px-10">
         <h1
           :style="{color: '#005C91'}"
           :class="this.$vuetify.breakpoint.xs ? 'title' : 'headline'">
