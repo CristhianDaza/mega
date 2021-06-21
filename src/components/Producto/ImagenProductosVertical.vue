@@ -17,10 +17,9 @@
         :key="i"
       >
         <v-img
-          @mouseover="$emit('cambiarImagen', imagen.imagen.file_md, imagen.imagen.file)"
+          @click="$emit('cambiarImagen', imagen.imagen.file_md, imagen.imagen.file)"
           class="imgSlideVertical"
           aspect-ratio="1.4"
-          contain
           :src="imagen.imagen.file_sm">
             <template v-slot:placeholder>
               <v-row
@@ -97,7 +96,7 @@ export default {
   }
   .imgSlideVertical:hover {
     transition: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    border: 2px solid black;
+    border: 2px solid #0077bd;
   }
   .imgSlideVertical:active {
     border: 2px solid rgb(197, 197, 197);
