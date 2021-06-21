@@ -57,7 +57,7 @@
             lg="2"
             v-for="(producto) in productos[0]"
             :key="producto.id"
-            class="pa-1"
+            class="pa-1 mb-5"
           >
             <Productos :producto='producto' :colores='producto.materiales' />
           </v-col>
