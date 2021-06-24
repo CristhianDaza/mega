@@ -100,6 +100,9 @@ export default {
     title: 'Megapromocionales LTDA',
     titleTemplate: '%s | Megapromocionales LTDA',
   },
+  created() {
+    this.$vuetify.theme.dark = false;
+  },
 };
 </script>
 

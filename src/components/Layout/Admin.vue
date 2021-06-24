@@ -9,7 +9,7 @@
     <v-footer
       :style="{background: $vuetify.theme.themes.dark.basebackground}"
       app>
-      <span>
+      <span class="text-right foot">
         &copy; {{ new Date().getFullYear() }} - Design by
         <strong>Cristhian Daza</strong> With 💙</span>
     </v-footer>
@@ -36,3 +36,9 @@ export default {
   },
 };
 </script>
+
+<style>
+  .foot {
+    width: 100%;
+  }
+</style>

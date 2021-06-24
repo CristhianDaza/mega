@@ -16,7 +16,7 @@
         <v-tooltip bottom>
           <template v-slot:activator="{on, attrs}">
             <v-btn
-              class="mx-4 white--text"
+              class="mx-4"
               v-on="on"
               v-bind="attrs"
               icon to="/"
@@ -30,7 +30,7 @@
         <v-tooltip bottom>
           <template v-slot:activator="{on, attrs}">
             <v-btn
-              class="mx-4 white--text"
+              class="mx-4"
               v-on="on"
               v-bind="attrs"
               icon to="/categorias"
@@ -44,7 +44,7 @@
         <v-tooltip bottom>
           <template v-slot:activator="{on, attrs}">
             <v-btn
-              class="mx-4 white--text"
+              class="mx-4"
               v-on="on"
               v-bind="attrs"
               icon to="/catalogos"
@@ -58,7 +58,7 @@
         <v-tooltip bottom>
           <template v-slot:activator="{on, attrs}">
             <v-btn
-              class="mx-4 white--text"
+              class="mx-4"
               v-on="on"
               v-bind="attrs"
               icon to="/contacto"
@@ -72,7 +72,7 @@
         <v-tooltip bottom>
           <template v-slot:activator="{on, attrs}">
             <v-btn
-              class="mx-4 white--text"
+              class="mx-4"
               v-on="on"
               v-bind="attrs"
               icon to="/nosotros"
@@ -86,7 +86,7 @@
         <v-tooltip v-if="existeUsuario" bottom>
           <template v-slot:activator="{on, attrs}">
             <v-btn
-              class="mx-4 white--text"
+              class="mx-4"
               v-on="on"
               v-bind="attrs"
               icon to="/admin"
@@ -100,7 +100,7 @@
         <v-tooltip v-if="!existeUsuario" bottom>
           <template v-slot:activator="{on, attrs}">
             <v-btn
-              class="mx-4 white--text"
+              class="mx-4"
               v-on="on"
               v-bind="attrs"
               icon to="/admin/login"
@@ -214,3 +214,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .theme--dark.v-btn--active:before, .theme--dark.v-btn--active:hover:before {
+    opacity: 0 !important;
+  }
+</style>
