@@ -1,11 +1,11 @@
 <template>
   <div
     :style="{ backgroundImage: `url(${Novedades})` }"
-    class="fondoNovedades"
+    class="fondoNovedades py-10"
   >
     <h1
       :class="this.$vuetify.breakpoint.xs ? 'display-1 mt-2' : 'display-2'"
-      class="mb-2 pt-5 text-center font-weight-black"
+      class="mb-5 pt-5 text-center font-weight-black text-uppercase"
       :style="{color: '#005C91'}"
     >
       {{this.titulos[0].titulo}}

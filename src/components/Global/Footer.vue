@@ -149,7 +149,7 @@
               class="mx-4"
               icon
             >
-              <a href="https://api.whatsapp.com/send?phone=573159275144&text=Hola%20quisiera%20informaci%c3%b3n&source=&data=&app_absent=" target="_blank" class="white--text">
+              <a href="https://api.whatsapp.com/send?phone=573159274144&text=Hola%20quisiera%20informaci%c3%b3n&source=&data=&app_absent=" target="_blank" class="white--text">
                 <v-icon size="24px">{{mdiWhatsapp}}</v-icon>
               </a>
             </v-btn>
@@ -166,8 +166,13 @@
         class="text-center white"
         :style="{color: $vuetify.theme.themes.light.basetexto}"
       >
-        Design by <strong
-          :style="{color: $vuetify.theme.themes[theme].colorPrimary}">Cristhian Daza</strong> With 💙
+        Design by
+        <a href="https://www.linkedin.com/in/cristhiandaza/" target="_blank">
+          <strong :style="{color: $vuetify.theme.themes[theme].colorPrimary}">
+              Cristhian Daza
+            </strong>
+        </a>
+        With 💙
       </v-card-text>
     </v-card>
   </v-footer>

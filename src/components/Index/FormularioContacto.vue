@@ -45,10 +45,10 @@
             <v-col cols="10">
               <p
               :style="{color: 'white'}"
-              class="mb-0" :class="this.$vuetify.breakpoint.xs ? 'body-2' : ''"><a href="https://api.whatsapp.com/send?phone=573159275144&text=Hola%20quisiera%20informaci%c3%b3n&source=&data=&app_absent=" target="_blank">315 927 51 44</a></p>
+              class="mb-0" :class="this.$vuetify.breakpoint.xs ? 'body-2' : ''"><a href="https://api.whatsapp.com/send?phone=573159275144&text=Hola%20quisiera%20informaci%c3%b3n&source=&data=&app_absent=" target="_blank">315 927 41 44</a></p>
               <p
               :style="{color: 'white'}"
-              class="mb-0" :class="this.$vuetify.breakpoint.xs ? 'body-2' : ''"><a href="https://api.whatsapp.com/send?phone=573159274144&text=Hola%20quisiera%20informaci%c3%b3n&source=&data=&app_absent=" target="_blank">315 927 41 44</a></p>
+              class="mb-0" :class="this.$vuetify.breakpoint.xs ? 'body-2' : ''"><a href="https://api.whatsapp.com/send?phone=573159274144&text=Hola%20quisiera%20informaci%c3%b3n&source=&data=&app_absent=" target="_blank">315 927 51 44</a></p>
               <p
               :style="{color: 'white'}"
               class="mb-0" :class="this.$vuetify.breakpoint.xs ? 'body-2' : ''"><a href="https://api.whatsapp.com/send?phone=573205855531&text=Hola%20quisiera%20informaci%c3%b3n&source=&data=&app_absent=" target="_blank">320 585 55 31</a></p>

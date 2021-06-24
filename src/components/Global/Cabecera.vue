@@ -38,8 +38,8 @@
                 ? 'ma-0 body-1'
                 : 'subtitle-1'"
                 class="font-weight-medium">
-                <v-icon class="pb-1" color="white">{{ mdiWhatsapp }}</v-icon> 315 927 5144 |
-                <v-icon class="pb-1 ml-2" color="white">{{ mdiWhatsapp }}</v-icon> 315 927 4144 |
+                <v-icon class="pb-1" color="white">{{ mdiWhatsapp }}</v-icon> 315 927 4144 |
+                <v-icon class="pb-1 ml-2" color="white">{{ mdiWhatsapp }}</v-icon> 315 927 5144 |
                 <v-icon class="pb-1 ml-2" color="white">{{ mdiWhatsapp }}</v-icon> 320 585 5531
               </p>
             </div>
