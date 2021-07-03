@@ -1,6 +1,6 @@
 {
   "name": "megapromocionales",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -11,21 +11,21 @@
     "@babel/polyfill": "^7.12.1",
     "@mdi/js": "^5.9.55",
     "axios": "^0.21.1",
-    "core-js": "^3.12.1",
+    "core-js": "^3.15.2",
     "emailjs-com": "^2.6.4",
     "firebase": "^7.24.0",
     "flipbook-vue": "^0.10.2",
     "hooper": "^0.3.4",
     "moment": "^2.29.1",
-    "sweetalert2": "^10.16.7",
-    "vue": "^2.6.12",
+    "sweetalert2": "^11.0.18",
+    "vue": "^2.6.14",
     "vue-analytics": "^5.22.1",
     "vue-carousel": "^0.18.0",
     "vue-core-video-player": "^0.2.0",
     "vue-meta": "^2.4.0",
-    "vue-router": "^3.5.1",
+    "vue-router": "^3.5.2",
     "vue-router-sitemap": "^0.0.4",
-    "vuetify": "^2.5.0",
+    "vuetify": "^2.5.6",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
@@ -35,9 +35,9 @@
     "@vue/eslint-config-airbnb": "^5.3.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
-    "eslint-plugin-import": "^2.23.0",
+    "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-vue": "^6.2.2",
-    "vue-cli-plugin-vuetify": "^2.4.0",
-    "vue-template-compiler": "^2.6.12"
+    "vue-cli-plugin-vuetify": "^2.4.1",
+    "vue-template-compiler": "^2.6.14"
   }
 }
