@@ -13,6 +13,7 @@ import App from './App.vue';
 import store from './store';
 import vuetify from './plugins/vuetify';
 import '@babel/polyfill';
+import './assets/css/globalstyle.css';
 
 Vue.config.productionTip = false;
 Vue.prototype.moment = moment;

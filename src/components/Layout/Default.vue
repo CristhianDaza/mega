@@ -104,9 +104,6 @@ export default {
   .fade-enter-active, .fade-leave-active {
     transition: all.3s ease;
   }
-  .fondoApp{
-    background: #111b27 !important;
-  }
 
   @media (min-width: 1904px) {
     .container {

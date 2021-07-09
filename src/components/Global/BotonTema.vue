@@ -66,7 +66,6 @@ export default {
   display: -ms-flexbox;
   display: flex;
   outline: none;
-  transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .switch::after {
@@ -84,16 +83,19 @@ export default {
   transition: 0.3s ease all;
   -webkit-box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.2);
+  transition: all 5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .switch.active {
   background: #f2f5f8;
   color: #000;
+  transition: all 2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .switch.active::after {
   right: 0;
   left: unset;
+  transition: all 5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .switch span {
