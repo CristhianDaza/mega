@@ -31,8 +31,7 @@ export default {
     VideoPromocion,
   },
   metaInfo: {
-    title: 'Inicio 🏠',
-    titleTemplate: '%s | Megapromocionales LTDA',
+    title: 'Megapromocionales LTDA',
     meta: [
       { charset: 'utf8' },
       { name: 'description', content: 'Megapromocionales, venta de articulos publicitarios y merchandising, productos promocionales de la mejor calidad y al mejor precio.' },
