@@ -9,6 +9,11 @@
   RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 </IfModule>
 
+# Quitar el www del nombre de dominio  
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^www\.megapromocionales\.com.co$ [NC]  
+RewriteRule ^(.*)$ https://megapromocionales.com.co/$1 [R=301,QSA,L] 
+
 # php -- BEGIN cPanel-generated handler, do not edit
 # Set the “ea-php56” package as the default “PHP” programming language.
 <IfModule mime_module>
