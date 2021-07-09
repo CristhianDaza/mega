@@ -25,6 +25,7 @@
           </v-btn>
         </div>
         <v-spacer></v-spacer>
+        <BotonTema />
         <Buscador />
       </v-layout>
     </v-app-bar>
@@ -62,6 +63,7 @@
 <script>
 import { mapGetters, mapActions, mapState } from 'vuex';
 import Buscador from '@/components/Global/Buscador.vue';
+import BotonTema from '@/components/Global/BotonTema.vue';
 
 export default {
   data() {
@@ -77,6 +79,7 @@ export default {
   },
   components: {
     Buscador,
+    BotonTema,
   },
   methods: {
     ...mapActions(['traerMenus']),

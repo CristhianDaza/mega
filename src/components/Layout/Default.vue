@@ -77,24 +77,21 @@ export default {
       this.mostrarBoton = top > 200;
     },
   },
-  // mounted() {
-  //   const theme = localStorage.getItem('darkTheme');
-  //   if (theme) {
-  //     if (theme === 'true') {
-  //       this.$vuetify.theme.dark = true;
-  //     } else {
-  //       this.$vuetify.theme.dark = false;
-  //     }
-  //   } else {
-  //     this.$vuetify.theme.dark = false;
-  //   }
-  // },
+  mounted() {
+    const theme = localStorage.getItem('darkTheme');
+    if (theme) {
+      if (theme === 'true') {
+        this.$vuetify.theme.dark = true;
+      } else {
+        this.$vuetify.theme.dark = false;
+      }
+    } else {
+      this.$vuetify.theme.dark = false;
+    }
+  },
   metaInfo: {
     title: 'Megapromocionales LTDA',
     titleTemplate: '%s | Megapromocionales LTDA',
-  },
-  created() {
-    this.$vuetify.theme.dark = false;
   },
 };
 </script>
@@ -108,12 +105,7 @@ export default {
     transition: all.3s ease;
   }
   .fondoApp{
-    background-image: linear-gradient(to right bottom,
-      #008dde,
-      #0081e4,
-      #0073e7,
-      #0064e8,
-      #0252e6) !important;
+    background: #111b27 !important;
   }
 
   @media (min-width: 1904px) {
