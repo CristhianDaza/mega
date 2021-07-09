@@ -1,78 +1,109 @@
 <template>
   <div>
     <v-img
-      src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/opt_megapromocionales.webp?alt=media&token=9650fc01-9559-4b48-b8f1-b298ebbe6aa7"
+      :src="(this.$vuetify.theme.dark) ? imgHeroDark : imgHero"
       alt="Imagen Principal Megapromocionales"
-      class="imagenPrincipal"
-      height="400px"
+      height="350px"
+      position="bottom"
       >
-      <template v-slot:placeholder>
-        <v-row
-          class="fill-height ma-0"
-          align="center"
-          justify="center"
-        >
-          <Loader />
-        </v-row>
-      </template>
-      <v-row :class="this.$vuetify.breakpoint.xs ? 'fondoOscuro' : ''" align="center" class="pa-2">
-        <v-col>
-          <v-container>
-            <p
-              :style="{color: $vuetify.theme.themes[theme].colorPrimary}"
-              :class="this.$vuetify.breakpoint.xs ? 'display-1' : 'headline'"
-            >
-              BIENVENID@ A</p>
-            <p
-              :style="{color: $vuetify.theme.themes.dark.basetexto}"
-              :class="this.$vuetify.breakpoint.xs ? 'title' : 'display-1'"
-            >
-              MEGAPROMOCIONALES <span
-              :style="{color: $vuetify.theme.themes[theme].colorPrimary}">LTDA</span></p>
-            <p
-              :style="{color: $vuetify.theme.themes.dark.basetexto}"
-              class="body-1 mt-1 font-weight-medium">
-              Somos una empresa dedicada a la venta de artículos
-              <br> promocionales, comprometidos con nuestro equipo
-              <br> de trabajo a tener la mejor calidad de servicio y productos.
-            </p>
-            <v-btn
-              to="/contacto"
-              :style="{background: $vuetify.theme.themes[theme].colorPrimary}"
-              elevation="20"
-              class="mt-2 white--text">
-              Contacto
-            </v-btn>
-          </v-container>
-        </v-col>
-      </v-row>
+      <v-container class="contenedorHero fondoOscuro">
+        <div class="infoHero">
+          <p
+            style="color: #FFCD17"
+            :class="this.$vuetify.breakpoint.xs ? 'display-1' : 'headline'"
+          >
+            BIENVENID@ A</p>
+          <p
+            :style="{color: $vuetify.theme.themes.dark.basetexto}"
+            :class="this.$vuetify.breakpoint.xs ? 'title' : 'display-1'"
+          >
+            MEGAPROMOCIONALES <span
+            style="color: #FFCD17">LTDA</span></p>
+          <p
+            :style="{color: $vuetify.theme.themes.dark.basetexto}"
+            class="body-1 mt-1 font-weight-medium">
+            Somos una empresa dedicada a la venta de artículos
+            <br> promocionales, comprometidos con nuestro equipo
+            <br> de trabajo a tener la mejor calidad de servicio y productos.
+          </p>
+          <v-btn
+            to="/contacto"
+            elevation="5"
+            large
+            outlined
+            block
+            style="color: #FFCD17"
+            class="mt-2">
+            Contacto
+          </v-btn>
+        </div>
+        <div class="imgHero">
+          <v-img
+            src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/hongo.png?alt=media&token=a77aaf62-9ca2-41de-907b-59b0b756bfde"
+            width="300px"
+            class="imagenHero mt-5"
+          ></v-img>
+        </div>
+      </v-container>
     </v-img>
   </div>
 </template>
 
 <script>
-import Loader from '@/components/Global/Loader.vue';
+import imgHeroDark from '@/assets/hero-dark.svg';
+import imgHero from '@/assets/hero.svg';
 
 export default {
-  components: {
-    Loader,
+  data() {
+    return {
+      imgHero,
+      imgHeroDark,
+    };
   },
   computed: {
     theme() {
       return (this.$vuetify.theme.dark) ? 'dark' : 'light';
     },
   },
+  components: {
+  },
 };
 </script>
 
 <style>
-  .fondoOscuro {
-    background: rgba(0, 0, 0, .8);
-    width: 100%;
+  .contenedorHero {
+    display: flex;
     height: 100%;
-    margin: 0;
+    max-height: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
-  .imagenPrincipal {
-    height: 100%;
+  .imagenHero {
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float {
+    0% {
+      transform: translatey(0px);
+    }
+    50% {
+      transform: translatey(-15px);
+    }
+    100% {
+      transform: translatey(0px);
+    }
+  }
+  @media (max-width: 900px) {
+    .fondoOscuro {
+      background: rgba(0, 0, 0, .8);
+      width: 100%;
+      height: 100%;
+      margin: 0;
+    }
+  }
+  @media (max-width: 750px) {
+    .imagenHero {
+      display: none;
+    }
   }
 </style>
