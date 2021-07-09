@@ -52,7 +52,7 @@ export default {
 }
 
 .VueCarousel-navigation-button{
-  background-color: rgba(0, 0, 0, 0.1) !important;
+  background-color: rgba(0, 92, 145, 0.1) !important;
   border: none;
   color: #fff;
   cursor: pointer;
@@ -65,7 +65,7 @@ export default {
 }
 
 .VueCarousel-navigation-button:hover {
-  background-color: rgba(0, 0, 0, 0.8) !important;
+  background-color: rgba(0, 92, 145, 0.8) !important;
   opacity: 1;
 }
 </style>
