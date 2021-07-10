@@ -1,33 +1,29 @@
 <template>
   <div
-    :style="{background: $vuetify.theme.themes[theme].primary}"
+    :style="{ backgroundImage: `url(${this.$vuetify.theme.dark ? newsletterDark : newsletter })` }"
+    class="fondoInformacion pt-10 pb-5"
   >
-    <div
-      :style="{ backgroundImage: `url(${Informacion})` }"
-      class="fondoInformacion pt-10 pb-5"
+    <h1
+      :class="this.$vuetify.breakpoint.xs ? 'display-1 mt-2' : 'display-2'"
+      class="mb-2 py-5 text-center font-weight-black"
+      :style="{color: $vuetify.theme.themes[theme].colorText}"
     >
-      <h1
-        :class="this.$vuetify.breakpoint.xs ? 'display-1 mt-2' : 'display-2'"
-        class="mb-2 py-5 text-center font-weight-black"
-        :style="{color: '#ffcd17'}"
-      >
-        Newsletters
-      </h1>
-      <div id="infinite" class="mx-0 slider">
-        <div class="contenedor barrier">
-          <div class="lane">
-            <div class="car"
-              v-for="imagen in imagenInfo"
-              :key="imagen.id"
-            >
-              <router-link :to="imagen.url">
-                <img
-                  :src="imagen.linkImagen"
-                  :alt="imagen.nombre"
-                  class="imagenInfo"
-                >
-              </router-link>
-            </div>
+      BOLETÍN
+    </h1>
+    <div id="infinite" class="mx-0 slider">
+      <div class="contenedor barrier">
+        <div class="lane">
+          <div class="car"
+            v-for="imagen in imagenInfo"
+            :key="imagen.id"
+          >
+            <router-link :to="imagen.url">
+              <img
+                :src="imagen.linkImagen"
+                :alt="imagen.nombre"
+                class="imagenInfo"
+              >
+            </router-link>
           </div>
         </div>
       </div>
@@ -37,13 +33,15 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import Informacion from '@/assets/informacion.svg';
+import newsletter from '@/assets/newsletter.svg';
+import newsletterDark from '@/assets/newsletter-dark.svg';
 
 export default {
   name: 'Newsletters',
   data() {
     return {
-      Informacion,
+      newsletter,
+      newsletterDark,
     };
   },
   methods: {
