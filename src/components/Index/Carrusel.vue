@@ -7,6 +7,7 @@
     :speed="1000"
     :autoplayTimeout="5000"
     :navigationEnabled="true"
+    :class="(this.$vuetify.theme.dark) ? 'dark' : ''"
   >
     <slide
       v-for="(slide, i) in imagenSlider"
@@ -44,11 +45,21 @@ export default {
 .VueCarousel-navigation-prev {
   transform: translateX(0) !important;
   left: 0;
+  color: #FFCD17 !important;
+}
+
+.dark .VueCarousel-navigation-prev {
+  color: #05090c !important;
 }
 
 .VueCarousel-navigation-next {
   transform: translateX(0) !important;
   right: 0;
+  color: #FFCD17 !important;
+}
+
+.dark .VueCarousel-navigation-next {
+  color: #05090c !important;
 }
 
 .VueCarousel-navigation-button{
@@ -63,9 +74,24 @@ export default {
   transition-duration: 0.5s;
   width: 50px;
 }
+.dark .VueCarousel-navigation-button {
+  background-color: rgba(17, 27, 39, 0.1) !important;
+}
 
 .VueCarousel-navigation-button:hover {
   background-color: rgba(0, 92, 145, 0.8) !important;
   opacity: 1;
+}
+
+.VueCarousel-navigation-button:active {
+  background-color: rgba(0, 92, 145, 0.1) !important;
+}
+
+.dark .VueCarousel-navigation-button:hover {
+  background-color: rgba(17, 27, 39, 0.8) !important;
+}
+
+.dark .VueCarousel-navigation-button:active {
+  background-color: rgba(17, 27, 39, 0.1) !important;
 }
 </style>
