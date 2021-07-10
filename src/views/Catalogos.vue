@@ -1,11 +1,18 @@
 <template>
-  <div>
+  <div :style="{ background: $vuetify.theme.themes[theme].primary }">
     <Hero titulo="Catálogos"/>
     <v-container v-if="this.catalogos.length > 0">
-      <div class="links">
-        <ul>
+      <div
+        class="links"
+      >
+        <ul :style="{ color: $vuetify.theme.themes[theme].colorText }">
           <li>
-            <router-link exact to="/" class="links__item">INICIO</router-link>
+            <router-link
+              :style="{ color: $vuetify.theme.themes[theme].colorText }"
+              exact
+              to="/"
+              class="links__item"
+            >INICIO</router-link>
           </li>
           <li class="links__divider">/</li>
           <li>
@@ -19,8 +26,9 @@
             <template v-slot:default="{ hover }">
               <v-card
                 outlined
-                class="mx-auto transition-swing fondoCard"
+                class="mx-auto transition-swing"
                 :class="`elevation-${hover ? 0 : 24}`"
+                :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
               >
                 <div class="div-catalogo hidden">
                   <v-img :src="catalogo.linkImagen" :alt="catalogo.nombre" class="imagen-catalogo">
@@ -43,7 +51,10 @@
 
                   >
                     <v-btn
-                      :style="{color: 'white'}" width="100%" text>
+                      :style="{ color: $vuetify.theme.themes[theme].colorText }"
+                      width="100%"
+                      text
+                    >
                       Catálogo  {{catalogo.nombre}} <v-icon class="ml-1" small>
                         {{mdiOpenInNew}}
                       </v-icon>
@@ -156,12 +167,4 @@ export default {
 .linksCatalogos {
   width: 100%;
 }
-  .fondoCard {
-    background: rgba( 255, 255, 255, 0.25 ) !important;
-    /* box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ) !important; */
-    backdrop-filter: blur( 4px ) !important;
-    -webkit-backdrop-filter: blur( 4px ) !important;
-    border-radius: 10px !important;
-    border: 1px solid rgba( 255, 255, 255, 0.18 ) !important;
-  }
 </style>
