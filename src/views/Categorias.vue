@@ -1,9 +1,12 @@
 <template>
 <!-- eslint-disable max-len -->
-  <div>
+  <div :style="{ background: $vuetify.theme.themes[theme].primary }">
     <Hero titulo="Categorías"/>
     <v-container>
-      <div class="links">
+      <div
+        class="links"
+        :style="{ color: $vuetify.theme.themes[theme].colorText }"
+      >
         <ul>
           <li>
             <router-link exact to="/" class="links__item">INICIO</router-link>
@@ -19,7 +22,7 @@
         </ul>
       </div>
         <div v-if="this.categorias.length > 0">
-          <v-row class="fondoCard my-5">
+          <v-row class="my-5">
             <v-col
               cols="12"
               sm="6"
@@ -27,7 +30,10 @@
               v-for="categoria in this.categorias[0]"
               :key="categoria.id_pagina"
             >
-              <v-card class="fondoCard">
+              <v-card
+                :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
+                class="tarjetaCategoria"
+              >
                 <div class="d-flex flex-no-wrap justify-flex-start">
                   <v-avatar
                     class="ma-3"
@@ -54,7 +60,7 @@
                       v-for="subCategoria in categoria.subcategorias"
                       :key="subCategoria.id_pagina"
                       class="font-weight-medium"
-                      :style="{color: 'white'}"
+                      :style="{ color: $vuetify.theme.themes[theme].colorText }"
                     >
                       <router-link
                       :to="`/productos?subCategoria=${subCategoria.jerarquia}&titulo=${subCategoria.nombre}`"
@@ -158,57 +164,18 @@ export default {
 </script>
 
 <style scoped>
-  .contenedorCategoria {
-    width: 100%;
-    height: 100%;
-    transition: background .4s;
-  }
-  a {
-    color: inherit !important;
-    transition: color .3s;
-  }
-  a:hover {
-    color:  #005C91 !important;
-  }
-  .fondoCard {
-    background: rgba( 255, 255, 255, 0.25 ) !important;
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ) !important;
-    backdrop-filter: blur( 4px ) !important;
-    -webkit-backdrop-filter: blur( 4px ) !important;
-    border-radius: 10px !important;
-    border: 1px solid rgba( 255, 255, 255, 0.18 ) !important;
-  }
+.tarjetaCategoria {
+  min-height: 350px;
+}
 
-  .tituloCategoria {
-    word-break: keep-all;
-  }
-    .links {
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    flex: 0 1 auto;
-    list-style: none;
-    margin: 0;
-    padding: 18px 12px;
-  }
-
-  .links li {
-    align-items: center;
-    display: inline-flex;
-    font-size: 14px;
-  }
-  .links__item {
-    align-items: center;
-    display: inline-flex;
-    text-decoration: none;
-    transition: all .3s cubic-bezier(0.25, 0.8, 0.5, 1);
-    color: white !important;
-  }
-  .links li:nth-child(2n){
-    padding: 0 12px;
-  }
-
-  .links ul {
-    padding: 0;
-  }
+a {
+  color: inherit !important;
+  transition: color .3s;
+}
+a:hover {
+  color:  #005C91 !important;
+}
+.tituloCategoria {
+  word-break: keep-all;
+}
 </style>
