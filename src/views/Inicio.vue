@@ -4,7 +4,6 @@
     <Carrusel />
     <VideoPromocion />
     <Servicios />
-    <Redes />
     <InfoImagen />
     <ProductosNuevos />
   </div>
@@ -16,7 +15,6 @@ import Carrusel from '@/components/Index/Carrusel.vue';
 import Servicios from '@/components/Index/Servicios.vue';
 import InfoImagen from '@/components/Index/InfoImagen.vue';
 import ProductosNuevos from '@/components/Index/ProductosNuevos.vue';
-import Redes from '@/components/Index/Redes.vue';
 import VideoPromocion from '@/components/Index/VideoPromocion.vue';
 
 export default {
@@ -26,7 +24,6 @@ export default {
     Carrusel,
     Servicios,
     InfoImagen,
-    Redes,
     ProductosNuevos,
     VideoPromocion,
   },
