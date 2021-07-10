@@ -13,24 +13,24 @@
       >
         Newsletters
       </h1>
-      <v-row class="mx-0 animacion">
-        <v-col
-          v-for="imagen in imagenInfo"
-          :key="imagen.id"
-          cols="6"
-          sm="3"
-          md="2"
-          class="contenedorAnimacion"
-        >
-          <router-link :to="imagen.url">
-            <img
-              :src="imagen.linkImagen"
-              :alt="imagen.nombre"
-              class="imagenInfo"
+      <div id="infinite" class="mx-0 slider">
+        <div class="contenedor barrier">
+          <div class="lane">
+            <div class="car"
+              v-for="imagen in imagenInfo"
+              :key="imagen.id"
             >
-          </router-link>
-        </v-col>
-      </v-row>
+              <router-link :to="imagen.url">
+                <img
+                  :src="imagen.linkImagen"
+                  :alt="imagen.nombre"
+                  class="imagenInfo"
+                >
+              </router-link>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -66,40 +66,56 @@ export default {
   background-position: bottom;
 }
 
-.contenedorAnimacion {
-  position: relative;
-}
-
 .imagenInfo {
   border-radius: 10px;
-  width: 100%;
-  max-width: 100%;
-  transition: all .3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  width: 300px;
+  transition: all .3s;
 }
 
 .imagenInfo:hover {
-  transform: scale(1.05);
+  transform: scale(.99);
 }
 
-.animacion {
+.contenedor {
+  transition: all .3s ease;
+}
+
+.slider {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  animation: newletter 2s linear infinite alternate-reverse;
+  justify-content: center;
+  width: 100%;
+  height: 800px;
+}
+
+.slider .barrier {
+  overflow: hidden;
   position: relative;
 }
 
-.animacion:hover{
-  animation-play-state: paused;
+.slider .lane {
+  display: flex;
+  height: 100%;
 }
 
-@keyframes newletter {
-  0% {
-    transform: translateX(100%);
-  }
+.slider .lane .car {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+#infinite .barrier .lane {
+  width: calc(4200px)
+}
+
+#infinite .barrier .lane .car {
+  width: 100%;
+  animation: translateInfinite 30s linear infinite;
+}
+
+@keyframes translateInfinite {
   100% {
-    transform: translateX(0);
+    transform: translateX(calc(-2100px));
   }
 }
 </style>
