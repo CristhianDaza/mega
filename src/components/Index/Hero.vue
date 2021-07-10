@@ -9,18 +9,18 @@
       <v-container class="contenedorHero fondoOscuro">
         <div class="infoHero">
           <p
-            style="color: #FFCD17"
+            :style="{ color: $vuetify.theme.themes[theme].amarillo }"
             :class="this.$vuetify.breakpoint.xs ? 'display-1' : 'headline'"
           >
             BIENVENID@ A</p>
           <p
-            :style="{color: $vuetify.theme.themes.dark.basetexto}"
+            style="color: white"
             :class="this.$vuetify.breakpoint.xs ? 'title' : 'display-1'"
           >
             MEGAPROMOCIONALES <span
-            style="color: #FFCD17">LTDA</span></p>
+            :style="{ color: $vuetify.theme.themes[theme].amarillo }">LTDA</span></p>
           <p
-            :style="{color: $vuetify.theme.themes.dark.basetexto}"
+            style="color: white"
             class="body-1 mt-1 font-weight-medium">
             Somos una empresa dedicada a la venta de artículos
             <br> promocionales, comprometidos con nuestro equipo
@@ -32,7 +32,7 @@
             large
             outlined
             block
-            style="color: #FFCD17"
+            :style="{ color: $vuetify.theme.themes[theme].amarillo }"
             class="mt-2">
             Contacto
           </v-btn>
