@@ -47,6 +47,7 @@ import Loader from '@/components/Global/Loader.vue';
 import Informacion from '@/assets/informacion.svg';
 
 export default {
+  name: 'Newsletters',
   data() {
     return {
       Informacion,

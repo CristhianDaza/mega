@@ -4,7 +4,7 @@
     <Carrusel />
     <VideoPromocion />
     <Servicios />
-    <InfoImagen />
+    <Newsletters />
     <ProductosNuevos />
   </div>
 </template>
@@ -13,7 +13,7 @@
 import Hero from '@/components/Index/Hero.vue';
 import Carrusel from '@/components/Index/Carrusel.vue';
 import Servicios from '@/components/Index/Servicios.vue';
-import InfoImagen from '@/components/Index/InfoImagen.vue';
+import Newsletters from '@/components/Index/Newsletters.vue';
 import ProductosNuevos from '@/components/Index/ProductosNuevos.vue';
 import VideoPromocion from '@/components/Index/VideoPromocion.vue';
 
@@ -23,7 +23,7 @@ export default {
     Hero,
     Carrusel,
     Servicios,
-    InfoImagen,
+    Newsletters,
     ProductosNuevos,
     VideoPromocion,
   },
