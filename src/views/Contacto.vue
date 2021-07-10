@@ -1,11 +1,16 @@
 <template>
-  <div>
+  <div  :style="{ background: $vuetify.theme.themes[theme].primary }">
     <Hero titulo="Contacto"/>
     <v-container>
       <div class="links">
-        <ul>
+        <ul :style="{ color: $vuetify.theme.themes[theme].colorText }">
           <li>
-            <router-link exact to="/" class="links__item">INICIO</router-link>
+            <router-link
+              :style="{ color: $vuetify.theme.themes[theme].colorText }"
+              exact
+              to="/"
+              class="links__item"
+            >INICIO</router-link>
           </li>
           <li class="links__divider">/</li>
           <li>
@@ -28,20 +33,7 @@ import Redes from '@/components/Index/Redes.vue';
 export default {
   name: 'Contacto',
   data() {
-    return {
-      items: [
-        {
-          titulo: 'Inicio',
-          disabled: false,
-          href: '/',
-        },
-        {
-          titulo: 'contacto',
-          disabled: true,
-          href: '/contacto/',
-        },
-      ],
-    };
+    return {};
   },
   components: {
     Hero,

@@ -1,13 +1,13 @@
 <template>
   <v-container class="fill-height">
-    <v-row align="center" justify="center" class="fondoCard mb-5">
+    <v-row align="center" justify="center" class=" mb-5">
       <v-col cols="12" sm="6" class="px-10">
         <h1
-          :style="{color: '#005C91'}"
+          :style="{ color: $vuetify.theme.themes[theme].amarillo }"
           :class="this.$vuetify.breakpoint.xs ? 'title' : 'headline'">
           MANTENTE EN CONTACTO CON NOSOTROS
         </h1>
-        <p :style="{color: 'white'}">
+        <p :style="{ color: $vuetify.theme.themes[theme].colorText }">
           Visitanos en nuestro almacén, también nos puedes escribir por WhatsApp,
           correo electrónico o envíanos un mensaje por medio del formulario de contacto. 🤝🏼
         </p>
@@ -16,20 +16,21 @@
           <v-row>
             <v-col cols="2">
               <v-avatar>
-                <v-icon :style="{color: '#005C91'}">{{mdiMapMarker}}</v-icon>
+                <v-icon
+                :style="{ color: $vuetify.theme.themes[theme].amarillo }">{{mdiMapMarker}}</v-icon>
               </v-avatar>
             </v-col>
             <v-col cols="10">
               <p
-              :style="{color: 'white'}"
+              :style="{ color: $vuetify.theme.themes[theme].colorText }"
               class="mb-0" :class="this.$vuetify.breakpoint.xs ? 'body-2' : ''">
                 Centro Nacional de Artes Gráficas
               </p>
               <p
-              :style="{color: 'white'}"
+              :style="{ color: $vuetify.theme.themes[theme].colorText }"
               class="mb-0" :class="this.$vuetify.breakpoint.xs ? 'body-2' : ''"><a href="https://www.google.com/maps/place/Megapromocionales/@4.609466,-74.0949077,17z/data=!3m1!4b1!4m5!3m4!1s0x8e3f998d474cd877:0x65ee5ebb4dd5eb1d!8m2!3d4.609466!4d-74.092719" target="_blankn">Carrera 28 # 10 - 60</a></p>
               <p
-              :style="{color: 'white'}"
+              :style="{ color: $vuetify.theme.themes[theme].colorText }"
               class="mb-0" :class="this.$vuetify.breakpoint.xs ? 'body-2' : ''">Local 137</p>
             </v-col>
           </v-row>
@@ -39,18 +40,19 @@
           <v-row>
             <v-col cols="2">
               <v-avatar>
-                <v-icon :style="{color: '#005C91'}">{{mdiCellphone}}</v-icon>
+                <v-icon
+                :style="{ color: $vuetify.theme.themes[theme].amarillo }">{{mdiCellphone}}</v-icon>
               </v-avatar>
             </v-col>
             <v-col cols="10">
               <p
-              :style="{color: 'white'}"
+              :style="{ color: $vuetify.theme.themes[theme].colorText }"
               class="mb-0" :class="this.$vuetify.breakpoint.xs ? 'body-2' : ''"><a href="https://api.whatsapp.com/send?phone=573159275144&text=Hola%20quisiera%20informaci%c3%b3n&source=&data=&app_absent=" target="_blank">315 927 41 44</a></p>
               <p
-              :style="{color: 'white'}"
+              :style="{ color: $vuetify.theme.themes[theme].colorText }"
               class="mb-0" :class="this.$vuetify.breakpoint.xs ? 'body-2' : ''"><a href="https://api.whatsapp.com/send?phone=573159274144&text=Hola%20quisiera%20informaci%c3%b3n&source=&data=&app_absent=" target="_blank">315 927 51 44</a></p>
               <p
-              :style="{color: 'white'}"
+              :style="{ color: $vuetify.theme.themes[theme].colorText }"
               class="mb-0" :class="this.$vuetify.breakpoint.xs ? 'body-2' : ''"><a href="https://api.whatsapp.com/send?phone=573205855531&text=Hola%20quisiera%20informaci%c3%b3n&source=&data=&app_absent=" target="_blank">320 585 55 31</a></p>
             </v-col>
           </v-row>
@@ -60,26 +62,27 @@
           <v-row>
             <v-col cols="2">
               <v-avatar>
-                <v-icon :style="{color: '#005C91'}">{{mdiEmail}}</v-icon>
+                <v-icon
+                :style="{ color: $vuetify.theme.themes[theme].amarillo }">{{mdiEmail}}</v-icon>
               </v-avatar>
             </v-col>
             <v-col cols="10">
               <p
-              :style="{color: 'white'}"
+              :style="{ color: $vuetify.theme.themes[theme].colorText }"
               class="mb-0 emails" :class="this.$vuetify.breakpoint.xs ? 'body-2' : ''">
                 <a href="mailto:megapromocional@gmail.com" target="_blank">
                   megapromocional@gmail.com
                 </a>
               </p>
               <p
-              :style="{color: 'white'}"
+              :style="{ color: $vuetify.theme.themes[theme].colorText }"
               class="mb-0 emails" :class="this.$vuetify.breakpoint.xs ? 'body-2' : ''">
                 <a href="mailto:ventas@megapromocionales.com.co" target="_blank">
                   ventas@megapromocionales.com.co
                 </a>
               </p>
               <p
-              :style="{color: 'white'}"
+              :style="{ color: $vuetify.theme.themes[theme].colorText }"
               class="mb-0 emails" :class="this.$vuetify.breakpoint.xs ? 'body-2' : ''">
                 <a href="mailto:contacto@megapromocionales.com.co" target="_blank">
                   contacto@megapromocionales.com.co
@@ -91,12 +94,14 @@
         </v-container>
       </v-col>
       <v-col cols="12" sm="6">
-        <v-card class="fondoCard">
+        <v-card
+          :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
+        >
           <v-card-title>
             <h1
               :class="this.$vuetify.breakpoint.xs ? 'title' : 'headline'  "
               class="mx-auto"
-              :style="{color: '#005C91'}"
+              :style="{ color: $vuetify.theme.themes[theme].azul }"
             >
               FORMULARIO DE CONTACTO
             </h1>
@@ -269,13 +274,5 @@ export default {
   }
   .emails {
     word-break: break-all;
-  }
-  .fondoCard {
-    background: rgba( 255, 255, 255, 0.25 ) !important;
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ) !important;
-    backdrop-filter: blur( 4px ) !important;
-    -webkit-backdrop-filter: blur( 4px ) !important;
-    border-radius: 10px !important;
-    border: 1px solid rgba( 255, 255, 255, 0.18 ) !important;
   }
 </style>
