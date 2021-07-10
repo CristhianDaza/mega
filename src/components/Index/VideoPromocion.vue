@@ -1,6 +1,6 @@
 <template>
   <div
-    :style="{background: $vuetify.theme.themes[theme].background}"
+    :style="{background: $vuetify.theme.themes[theme].primary}"
   >
     <div
     :style="{ backgroundImage: `url(${this.$vuetify.theme.dark ? VideoPromDark : VideoProm })` }"
