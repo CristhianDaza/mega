@@ -1,12 +1,12 @@
 <template>
   <div
-    :style="{ backgroundImage: `url(${Novedades})` }"
+    :style="{background: $vuetify.theme.themes[theme].primary}"
     class="fondoNovedades py-10"
   >
     <h1
       :class="this.$vuetify.breakpoint.xs ? 'display-1 mt-2' : 'display-2'"
       class="mb-5 pt-5 text-center font-weight-black text-uppercase"
-      :style="{color: '#005C91'}"
+      :style="{color: $vuetify.theme.themes[theme].colorText}"
     >
       {{this.titulos[0].titulo}}
     </h1>
@@ -34,8 +34,8 @@
         outlined
         block
         large
-        color="white"
-        elevation="8"
+        :style="{ color: $vuetify.theme.themes[theme].colorText }"
+        elevation="5"
       >
           Ver más Productos
       </v-btn>
@@ -47,14 +47,12 @@
 import { mapActions, mapState } from 'vuex';
 import Productos from '@/components/Productos/Productos.vue';
 import { mdiSale, mdiArrowRight } from '@mdi/js';
-import Novedades from '@/assets/novedades.svg';
 
 export default {
   data() {
     return {
       mdiSale,
       mdiArrowRight,
-      Novedades,
     };
   },
   methods: {
@@ -75,7 +73,9 @@ export default {
 };
 </script>
 <style>
-.fondoNovedades {
-  background-size: contain;
+.fondoNovedades{
+  background-position: center;
+  /* background-size: 100%; */
+  background-size: cover
 }
 </style>

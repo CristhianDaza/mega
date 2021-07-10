@@ -1,7 +1,8 @@
-<template class="fondoCard">
+<template>
 <!-- eslint-disable max-len -->
   <v-card
-    class="tarjetaProductos fondoCard"
+    class="tarjetaProductos"
+    :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
   >
     <v-card-text class="pa-0">
       <router-link
@@ -14,27 +15,18 @@
           :alt="producto.descripcion_comercial"
           class="imagenProducto"
         >
-          <template v-slot:placeholder>
-            <v-row
-              class="fill-height ma-0"
-              align="center"
-              justify="center"
-            >
-              <Loader />
-            </v-row>
-          </template>
         </v-img>
       </router-link>
     </v-card-text>
     <v-divider class="mx-8"></v-divider>
     <v-card-title
       class="text-center text-subtitle-2 titleProd"
-      :style="{color: 'white'}"
+      :style="{ color: $vuetify.theme.themes[theme].colorText }"
     >
       {{ producto.descripcion_comercial }}
     </v-card-title>
     <v-card-subtitle
-      :style="{color: 'white'}"
+      :style="{ color: $vuetify.theme.themes[theme].colorText }"
     >
       {{ producto.familia }}
     </v-card-subtitle>
@@ -127,7 +119,7 @@
       :to="{path: `/producto/${producto.familia}`}"
       outlined
       block
-      :style="{color: 'white'}"
+      :style="{ color: $vuetify.theme.themes[theme].colorText }"
     >
         Ver Producto
     </v-btn>
@@ -137,15 +129,14 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import Loader from '@/components/Global/Loader.vue';
 
 export default {
   props: ['producto', 'colores'],
-  components: {
-    Loader,
-  },
   computed: {
     ...mapGetters(['existeUsuario']),
+    theme() {
+      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
+    },
   },
   methods: {
     addCommas(nStr) {
@@ -202,14 +193,6 @@ export default {
 }
 .titleProd {
   word-break: normal;
-}
-.fondoCard {
-  background-color: rgba( 255, 255, 255, 0.25 ) !important;
-  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ) !important;
-  backdrop-filter: blur( 4px ) !important;
-  -webkit-backdrop-filter: blur( 4px ) !important;
-  border-radius: 10px !important;
-  border: 1px solid rgba( 255, 255, 255, 0.18 ) !important;
 }
 .imagenProducto {
   border-top-left-radius: 10px;
