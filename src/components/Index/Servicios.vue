@@ -1,138 +1,88 @@
 <template>
   <!-- <div class="fondoServicio contenedorServicios"> -->
   <div
-    :style="{background: '#ffcd17'}"
+    :style="{backgroundColor: $vuetify.theme.themes[theme].secondary}"
     class="contenedorServicios"
   >
     <v-container class="pb-10">
       <v-row>
         <v-col cols="12" class="mb-5 mt-16 headline">
-          <h1 :style="{color: '#005C91'}"
+          <h1
+            :style="{color: $vuetify.theme.themes[theme].colorText}"
           >NUESTROS SERVICIOS</h1>
         </v-col>
 
-        <v-hover v-slot:default="{ hover }">
-          <v-col cols="6" md="4" lg="3">
-            <v-card class="fondoCard pa-3">
-              <v-avatar class="avatar" size="80" tile>
-                <v-icon :style="{color: '#005C91'}" :class="{ 'change-color': hover }">
-                  {{mdiWaterOutline}}
-                </v-icon>
-              </v-avatar>
-              <h2 :style="{color: '#005C91'}" :class="{ 'change-color': hover }">
-                Tampografía
-              </h2>
-              <v-divider class="my-3"></v-divider>
-              <p :style="{color: '#005C91'}">
-                <!-- eslint-disable-next-line max-len -->
-                La tampografía es uno de los métodos más usados para la impresión y marca de productos. Básicamente, funciona mediante la transferencia de una imagen de marca desde una placa de impresión a través de y sobre un objeto determinado de una manera repetitiva.
-              </p>
-            </v-card>
-          </v-col>
-        </v-hover>
-
-        <v-hover v-slot:default="{ hover }">
-          <v-col cols="6" md="4" lg="3">
-            <v-card class="fondoCard pa-3">
-              <v-avatar class="avatar" size="80" tile>
-                <v-icon :style="{color: '#005C91'}" :class="{ 'change-color': hover }">
-                  {{mdiUmbrellaOutline}}
-                </v-icon>
-              </v-avatar>
-              <h2 :style="{color: '#005C91'}" :class="{ 'change-color': hover }">
-                Screen
-              </h2>
-              <v-divider class="my-3"></v-divider>
-              <p :style="{color: '#005C91'}">
-                <!-- eslint-disable-next-line max-len -->
-                Es un procedimiento de impresión utilizado para hacer reproducciones de arte o anuncios, que consiste en filtrar los colores a través de una trama de seda, mientras que se recubren con una cola impermeabilizadora las partes que no deben filtrar.
-              </p>
-            </v-card>
-          </v-col>
-        </v-hover>
-
-        <v-hover v-slot:default="{ hover }">
-          <v-col cols="6" md="4" lg="3">
-            <v-card class="fondoCard pa-3">
-              <v-avatar class="avatar" size="80" tile>
-                <v-icon :style="{color: '#005C91'}" :class="{ 'change-color': hover }">
-                  {{mdiLaserPointer}}
-                </v-icon>
-              </v-avatar>
-              <h2 :style="{color: '#005C91'}" :class="{ 'change-color': hover }">
-                Láser
-              </h2>
-              <v-divider class="my-3"></v-divider>
-              <p :style="{color: '#005C91'}">
-                <!-- eslint-disable-next-line max-len -->
-                El grabado láser es la remoción del material desde la superficie superior hasta una profundidad determinada. Es un método rápido, ya que el material se elimina con cada pulsación del láser. La profundidad de las marcas se controla variando el número de pasadas del láser sobre la superficie.
-              </p>
-            </v-card>
-          </v-col>
-        </v-hover>
-
-        <v-hover v-slot:default="{ hover }">
-          <v-col cols="6" md="4" lg="3">
-            <v-card class="fondoCard pa-3">
-              <v-avatar class="avatar" size="80" tile>
-                <v-icon :style="{color: '#005C91'}" :class="{ 'change-color': hover }">
-                  {{mdiCoffeeOutline}}
-                </v-icon>
-              </v-avatar>
-              <h2 :style="{color: '#005C91'}" :class="{ 'change-color': hover }">
-                Sublimación
-              </h2>
-              <v-divider class="my-3"></v-divider>
-              <p :style="{color: '#005C91'}">
-                <!-- eslint-disable-next-line max-len -->
-                La sublimación es una novedosa técnica de impresión digital -y de nueva generación- con la que es posible personalizar diferentes tipos de prendas y objetos mediante la transferencia de una imagen impresa. Se puede hacer sobre prendas textiles o sobre superficies de madera, lienzo tratado, cartón o ceramicas.
-              </p>
-            </v-card>
-          </v-col>
-        </v-hover>
+        <v-col
+          cols="12"
+          sm="6"
+          md="3"
+          v-for="servicio in servicios"
+          :key="servicio.id"
+          class="mt-5"
+        >
+          <v-card
+            class="pa-5 text-center servicio"
+            :class="$vuetify.theme.dark ? 'servicioDark' : 'servicioLight'"
+            :style="{background: $vuetify.theme.themes[theme].secondary}"
+          >
+            <v-avatar class="avatar" size="80" tile>
+              <v-icon
+                :style="{color: $vuetify.theme.themes[theme].colorText}"
+              >
+                {{ servicio.icono }}
+              </v-icon>
+            </v-avatar>
+            <v-divider class="mx-10 my-2"></v-divider>
+            <h2
+              :style="{color: $vuetify.theme.themes[theme].colorText}"
+            >
+              {{ servicio.titulo }}
+            </h2>
+          </v-card>
+        </v-col>
       </v-row>
     </v-container>
   </div>
 </template>
 
 <script>
-import {
-  mdiWaterOutline,
-  mdiUmbrellaOutline,
-  mdiCoffeeOutline,
-  mdiLaserPointer,
-} from '@mdi/js';
+import servicios from '@/utils/servicios';
 
 export default {
   name: 'servicios',
   data() {
     return {
-      mdiWaterOutline,
-      mdiUmbrellaOutline,
-      mdiCoffeeOutline,
-      mdiLaserPointer,
-      transparent: 'rgba(255, 255, 255, 0)',
+      servicios,
     };
+  },
+  computed: {
+    theme() {
+      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
+    },
   },
 };
 </script>
 
 <style>
-  .titleService {
-    color: rgba(255, 255, 255, 0);
-  }
-  .show-btns {
-    color: rgba(255, 255, 255, 1) !important;
-  }
-  .color-ico {
-    color: #0077bd !important;
-  }
-  .change-color {
-    color: white !important;
-  }
-  .fondoServicio {
-    background: red;
-    border: 1px solid white;
-    border-radius: 10px;
-  }
+.servicio {
+  transition: all .5s cubic-bezier(0.215, 0.610, 0.355, 1);
+  opacity: 1;
+}
+
+.servicioLight {
+  border-radius: 50px !important;
+  box-shadow:  7px 7px 14px #d6ac13,
+              -7px -7px 14px #ffee1b !important;
+}
+
+.servicioDark {
+  border-radius: 50px !important;
+  box-shadow:  7px 7px 14px #04080a,
+              -7px -7px 14px #060a0e !important;
+}
+
+.servicio:hover {
+  transform: scale(1.1);
+  z-index: 10;
+}
 </style>
