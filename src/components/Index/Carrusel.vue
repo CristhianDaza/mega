@@ -87,11 +87,19 @@ export default {
   background-color: rgba(0, 92, 145, 0.1) !important;
 }
 
+.VueCarousel-navigation-button:focus {
+  outline: none !important;
+}
+
 .dark .VueCarousel-navigation-button:hover {
   background-color: rgba(17, 27, 39, 0.8) !important;
 }
 
 .dark .VueCarousel-navigation-button:active {
   background-color: rgba(17, 27, 39, 0.1) !important;
+}
+
+.dark .VueCarousel-navigation-button:focus {
+  outline: none !important;
 }
 </style>
