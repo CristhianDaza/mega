@@ -1,29 +1,34 @@
 <template>
   <div
-    :style="{ backgroundImage: `url(${this.$vuetify.theme.dark ? newsletterDark : newsletter })` }"
-    class="fondoInformacion pt-10 pb-5"
+    :style="{background: $vuetify.theme.themes[theme].primary}"
   >
-    <h1
-      :class="this.$vuetify.breakpoint.xs ? 'display-1 mt-2' : 'display-2'"
-      class="mb-2 py-5 text-center font-weight-black"
-      :style="{color: $vuetify.theme.themes[theme].colorText}"
+    <div
+      :style="{ backgroundImage:
+      `url(${this.$vuetify.theme.dark ? newsletterDark : newsletter })` }"
+      class="fondoInformacion pt-10 pb-5"
     >
-      BOLETÍN
-    </h1>
-    <div id="infinite" class="mx-0 slider">
-      <div class="contenedor barrier">
-        <div class="lane">
-          <div class="car"
-            v-for="imagen in imagenInfo"
-            :key="imagen.id"
-          >
-            <router-link :to="imagen.url">
-              <img
-                :src="imagen.linkImagen"
-                :alt="imagen.nombre"
-                class="imagenInfo"
-              >
-            </router-link>
+      <h1
+        :class="this.$vuetify.breakpoint.xs ? 'display-1 mt-2' : 'display-2'"
+        class="mb-2 py-5 text-center font-weight-black"
+        :style="{color: $vuetify.theme.themes[theme].colorText}"
+      >
+        BOLETÍN
+      </h1>
+      <div id="infinite" class="mx-0 slider">
+        <div class="contenedor barrier">
+          <div class="lane">
+            <div class="car"
+              v-for="imagen in imagenInfo"
+              :key="imagen.id"
+            >
+              <router-link :to="imagen.url">
+                <img
+                  :src="imagen.linkImagen"
+                  :alt="imagen.nombre"
+                  class="imagenInfo"
+                >
+              </router-link>
+            </div>
           </div>
         </div>
       </div>
