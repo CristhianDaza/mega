@@ -39,7 +39,7 @@ import VideoProm from '@/assets/videoProm.svg';
 import VideoPromDark from '@/assets/videoProm-dark.svg';
 
 export default {
-  name: 'videoComponent',
+  name: 'videoPromocion',
   data() {
     return {
       VideoProm,

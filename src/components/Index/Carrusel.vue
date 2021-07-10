@@ -25,6 +25,7 @@ import { Carousel, Slide } from 'vue-carousel';
 import { mapState, mapActions } from 'vuex';
 
 export default {
+  name: 'Carrousel',
   components: {
     Carousel,
     Slide,

@@ -54,6 +54,7 @@ import imgHeroDark from '@/assets/hero-dark.svg';
 import imgHero from '@/assets/hero.svg';
 
 export default {
+  name: 'HeroPrincipal',
   data() {
     return {
       imgHero,
