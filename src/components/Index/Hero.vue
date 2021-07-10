@@ -80,19 +80,36 @@ export default {
     justify-content: space-between;
   }
   .imagenHero {
-    animation: float 6s ease-in-out infinite;
+    animation: imgHero 20s linear 0s infinite normal none;
   }
-  @keyframes float {
-    0% {
-      transform: translatey(0px);
-    }
-    50% {
-      transform: translatey(-15px);
-    }
+  @keyframes imgHero {
+    0%,
     100% {
-      transform: translatey(0px);
+      transform: translateY(0);
+    }
+
+    10%,
+    30%,
+    50%,
+    70% {
+      transform: translateY(-8px);
+    }
+
+    20%,
+    40%,
+    60% {
+      transform: translateY(8px);
+    }
+
+    80% {
+      transform: translateY(6.4px);
+    }
+
+    90% {
+      transform: translateY(-6.4px);
     }
   }
+
   @media (max-width: 900px) {
     .fondoOscuro {
       background: rgba(0, 0, 0, .8);
