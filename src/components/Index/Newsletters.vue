@@ -61,7 +61,7 @@ export default {
 <style>
 .fondoInformacion {
   background-size: 100%;
-  background-position: bottom;
+  background-position: center;
 }
 
 .imagenInfo {
