@@ -1,27 +1,32 @@
 <template>
-  <div  :style="{ background: $vuetify.theme.themes[theme].primary }">
+  <div :style="{ background: $vuetify.theme.themes[theme].primary }">
     <Hero titulo="Contacto"/>
-    <v-container>
-      <div class="links">
-        <ul :style="{ color: $vuetify.theme.themes[theme].colorText }">
-          <li>
-            <router-link
-              :style="{ color: $vuetify.theme.themes[theme].colorText }"
-              exact
-              to="/"
-              class="links__item"
-            >INICIO</router-link>
-          </li>
-          <li class="links__divider">/</li>
-          <li>
-            CONTACTO
-          </li>
-        </ul>
-      </div>
-    </v-container>
-    <Redes />
-    <FormularioContacto />
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.9149134310364!2d-74.09503018525827!3d4.609251243727199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f998d474cd877%3A0x65ee5ebb4dd5eb1d!2sMegapromocionales!5e0!3m2!1ses!2sco!4v1593195206764!5m2!1ses!2sco" width="100%" height="400" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+    <div :style="{ backgroundImage:
+        `url(${this.$vuetify.theme.dark ? contactoDark : contacto })` }"
+        class="fondoContacto"
+      >
+      <v-container>
+        <div class="links">
+          <ul :style="{ color: $vuetify.theme.themes[theme].colorText }">
+            <li>
+              <router-link
+                :style="{ color: $vuetify.theme.themes[theme].colorText }"
+                exact
+                to="/"
+                class="links__item"
+              >INICIO</router-link>
+            </li>
+            <li class="links__divider">/</li>
+            <li>
+              CONTACTO
+            </li>
+          </ul>
+        </div>
+      </v-container>
+      <Redes />
+      <FormularioContacto />
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.9149134310364!2d-74.09503018525827!3d4.609251243727199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f998d474cd877%3A0x65ee5ebb4dd5eb1d!2sMegapromocionales!5e0!3m2!1ses!2sco!4v1593195206764!5m2!1ses!2sco" width="100%" height="400" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+    </div>
   </div>
 </template>
 
@@ -29,11 +34,16 @@
 import Hero from '@/components/Global/Hero.vue';
 import FormularioContacto from '@/components/Index/FormularioContacto.vue';
 import Redes from '@/components/Index/Redes.vue';
+import contacto from '@/assets/contacto.svg';
+import contactoDark from '@/assets/contacto-dark.svg';
 
 export default {
   name: 'Contacto',
   data() {
-    return {};
+    return {
+      contacto,
+      contactoDark,
+    };
   },
   components: {
     Hero,
@@ -65,3 +75,10 @@ export default {
   },
 };
 </script>
+
+<style>
+.fondoContacto {
+  background-position: top;
+  background-size: 100%;
+}
+</style>
