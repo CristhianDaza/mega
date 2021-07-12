@@ -17,7 +17,7 @@
     </v-card-text>
     <v-card-text
       class="d-block title my-2 py-0"
-      :style="{color: '#005C91'}"
+      :style="{ color: $vuetify.theme.themes[theme].azul }"
       v-if="Math.round(producto.materiales[0].precio_descuento) !== Math.round(producto.materiales[0].precio)">
         Producto con descuento del {{Math.abs(Math.round(producto.materiales[0].descuento))}}%.
     </v-card-text>
@@ -27,10 +27,9 @@
         large
         outlined
         color="white"
-        @click="loader = 'loading'"
         :loading="loading"
         :disabled="loading"
-        :href="`https://marpicoprod.azurewebsites.net/api/productos/imagenes/${producto.id}?producto=${producto.familia}`"
+        @click="descargarImagenes(producto.id, producto.familia)"
       >
         Descargar Imágenes
         <v-icon>
@@ -65,6 +64,8 @@ import {
 } from '@mdi/js';
 import DesProducto from '@/components/Producto/DesProducto.vue';
 import PrecioProducto from '@/components/Producto/PrecioProducto.vue';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default {
   data() {
@@ -82,6 +83,34 @@ export default {
   components: {
     DesProducto,
     PrecioProducto,
+  },
+  methods: {
+    descargarImagenes(id, familia) {
+      this.loading = true;
+      const urlBlob = `https://marpicoprod.azurewebsites.net/api/productos/imagenes/${id}?producto=${familia}`;
+
+      axios({
+        methods: 'GET',
+        url: urlBlob,
+        responseType: 'blob',
+      })
+        .then((res) => {
+          const blob = new Blob([res.data], { type: 'application/zip' });
+          const url = window.URL.createObjectURL(blob);
+          window.location.href = url;
+        })
+        .catch((error) => {
+          Swal.fire(
+            'Error!',
+            'Hubo un error, intente de nuevo.',
+            'error',
+          );
+          console.log(error);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
   },
 };
 </script>
