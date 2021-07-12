@@ -200,6 +200,7 @@ import ExistenciasProducto from '@/components/Producto/ExistenciasProducto.vue';
 import VideoProducto from '@/components/Producto/VideoProducto.vue';
 import SugeridoProducto from '@/components/Producto/SugeridoProducto.vue';
 import addCommas from '@/mixins/addCommas';
+import layoutPrincipal from '@/mixins/layoutPrincipal';
 import axios from 'axios';
 import {
   mdiCloseCircleOutline,
@@ -209,7 +210,7 @@ import ImagenProductosHorizontal from '../components/Producto/ImagenProductosHor
 
 export default {
   name: 'codigo',
-  mixins: [addCommas],
+  mixins: [addCommas, layoutPrincipal],
   data() {
     return {
       loader: null,
@@ -364,9 +365,6 @@ export default {
       { name: 'og:description', content: 'Productos promocionales, boligrafos viajes recreacion y deportes, usb, tecnologia, bolsos, paja de trigo, bar, salud y belleza, oficina, hogar y estilos de vida, antiestrés, gorras, escritura y más.' },
       { name: 'og:site_name', content: 'Megapromocionales LTDA' },
     ],
-  },
-  created() {
-    this.$store.commit('setLayout', 'defaultLayout');
   },
   components: {
     Loader,

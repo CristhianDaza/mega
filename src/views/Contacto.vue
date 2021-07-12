@@ -34,11 +34,13 @@
 import Hero from '@/components/Global/Hero.vue';
 import FormularioContacto from '@/components/Index/FormularioContacto.vue';
 import Redes from '@/components/Index/Redes.vue';
+import layoutPrincipal from '@/mixins/layoutPrincipal';
 import contacto from '@/assets/contacto.svg';
 import contactoDark from '@/assets/contacto-dark.svg';
 
 export default {
   name: 'Contacto',
+  mixins: [layoutPrincipal],
   data() {
     return {
       contacto,
@@ -64,9 +66,6 @@ export default {
       { name: 'og:description', content: 'Visitanos en nuestro almacen, tambien nos puedes escribir por WhatsApp, por correo electrónico 💬 o envianos un mensaje por medio del formulario de contacto. 🤝🏼. Centro Nacional de Artes Gráficas Carrera 28 # 10 - 60 Local 137. WhatsApp 315 927 51 44. WhatsApp 315 927 41 44. WhatsApp 320 585 55 31. Correo Electrónico megapromocional@gmail.com' },
       { name: 'og:site_name', content: 'Megapromocionales LTDA' },
     ],
-  },
-  created() {
-    this.$store.commit('setLayout', 'defaultLayout');
   },
 };
 </script>

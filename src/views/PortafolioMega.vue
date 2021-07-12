@@ -64,6 +64,7 @@
 </template>
 
 <script>
+import layoutPrincipal from '@/mixins/layoutPrincipal';
 import Flipbook from 'flipbook-vue';
 import Hero from '@/components/Global/Hero.vue';
 import {
@@ -74,6 +75,7 @@ import {
 } from '@mdi/js';
 
 export default {
+  mixins: [layoutPrincipal],
   data() {
     return {
       mdiArrowLeftBoldCircle,

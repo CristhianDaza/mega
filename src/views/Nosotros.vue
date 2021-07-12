@@ -60,11 +60,13 @@
 
 <script>
 import Hero from '@/components/Global/Hero.vue';
+import layoutPrincipal from '@/mixins/layoutPrincipal';
 import nosotros from '@/assets/nosotros.svg';
 import nosotrosDark from '@/assets/nosotros-dark.svg';
 
 export default {
   name: 'Nosotros',
+  mixins: [layoutPrincipal],
   data() {
     return {
       items: [
@@ -100,9 +102,6 @@ export default {
       { name: 'og:description', content: 'Compañía dedicada a la importación, distribución y comercialización de artículos promocionales y material publicitario, ofrecemos a nuestros clientes atención personalizada y asesoría en la elaboración de trabajos, garantizando resultados óptimos en menor tiempo de producción utilizando tecnología de punta y personal calificado con un alto grado de responsabilidad y relaciones humanas, fomentando el trabajo en equipo y comprometidos con el medío ambiente y la sociedad en beneficio de nuestros clientes y colaboradores.' },
       { name: 'og:site_name', content: 'Megapromocionales LTDA' },
     ],
-  },
-  created() {
-    this.$store.commit('setLayout', 'defaultLayout');
   },
 };
 </script>

@@ -81,10 +81,12 @@
 import Hero from '@/components/Global/Hero.vue';
 import Loader from '@/components/Global/Loader.vue';
 import { mapState, mapActions } from 'vuex';
+import layoutPrincipal from '@/mixins/layoutPrincipal';
 import { mdiFilePdfBox, mdiOpenInNew } from '@mdi/js';
 
 export default {
   name: 'Catalogos',
+  mixins: [layoutPrincipal],
   data() {
     return {
       mdiFilePdfBox,
@@ -130,9 +132,6 @@ export default {
       { name: 'og:description', content: 'Descarga o mira nuestros catálogos virtuales. Catálogo Escritura, Catálogo de Bolsos, Catálogo de Antiestrés, Catálogo de USB, Catálogo de Bebidas, Catálogo de Hogar, Catálogo de Tecnología, Catálogo de Oficina, Catálogo de Herramientas, Catálogo de Gorras, Catálogo Viejes, Recreación y Deportes, Catálogo de Paraguas, Catálogo de Salud.' },
       { name: 'og:site_name', content: 'Megapromocionales LTDA' },
     ],
-  },
-  created() {
-    this.$store.commit('setLayout', 'defaultLayout');
   },
 };
 </script>

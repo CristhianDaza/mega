@@ -178,9 +178,11 @@ import Productos from '@/components/Productos/Productos.vue';
 import axios from 'axios';
 import Hero from '@/components/Global/Hero.vue';
 import Loader from '@/components/Global/Loader.vue';
+import layoutPrincipal from '@/mixins/layoutPrincipal';
 
 export default {
   name: 'productosmega',
+  mixins: [layoutPrincipal],
   data() {
     return {
       listaCategorias: true,
@@ -354,9 +356,6 @@ export default {
       { name: 'og:description', content: 'Productos promocionales, boligrafos viajes recreacion y deportes, usb, tecnologia, bolsos, paja de trigo, bar, salud y belleza, oficina, hogar y estilos de vida, antiestrés, gorras, escritura y más.' },
       { name: 'og:site_name', content: 'Megapromocionales LTDA' },
     ],
-  },
-  created() {
-    this.$store.commit('setLayout', 'defaultLayout');
   },
 };
 </script>

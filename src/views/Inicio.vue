@@ -13,12 +13,14 @@
 import Hero from '@/components/Index/Hero.vue';
 import Carrusel from '@/components/Index/Carrusel.vue';
 import Servicios from '@/components/Index/Servicios.vue';
+import layoutPrincipal from '@/mixins/layoutPrincipal';
 import Newsletters from '@/components/Index/Newsletters.vue';
 import ProductosNuevos from '@/components/Index/ProductosNuevos.vue';
 import VideoPromocion from '@/components/Index/VideoPromocion.vue';
 
 export default {
   name: 'Inicio',
+  mixins: [layoutPrincipal],
   components: {
     Hero,
     Carrusel,
@@ -40,9 +42,6 @@ export default {
       { name: 'og:description', content: 'Megapromocionales, venta de articulos publicitarios y merchandising, productos promocionales de la mejor calidad y al mejor precio.' },
       { name: 'og:site_name', content: 'Megapromocionales LTDA' },
     ],
-  },
-  created() {
-    this.$store.commit('setLayout', 'defaultLayout');
   },
 };
 </script>
