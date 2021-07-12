@@ -158,7 +158,7 @@
 
       <v-card-text
         class="py-2 text-center white--text"
-        :style="{background: $vuetify.theme.themes[dark].fondoTarjeta}">
+        :style="{background: $vuetify.theme.themes.dark.fondoTarjeta}">
         <strong class="title">Megapromocionales LTDA © {{ new Date().getFullYear() }}</strong>
       </v-card-text>
       <v-card-text
