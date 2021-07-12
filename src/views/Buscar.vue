@@ -3,9 +3,14 @@
     <Hero titulo="Buscar"/>
     <v-container>
       <div class="links">
-        <ul>
+        <ul :style="{ color: $vuetify.theme.themes[theme].colorText }">
           <li>
-            <router-link exact to="/" class="links__item">INICIO</router-link>
+            <router-link
+              exact
+              to="/"
+              class="links__item"
+              :style="{ color: $vuetify.theme.themes[theme].colorText }"
+            >INICIO</router-link>
           </li>
           <li class="links__divider">/</li>
           <li>
@@ -54,7 +59,7 @@
             cols="12"
             sm="6"
             md="4"
-            lg="2"
+            lg="3"
             v-for="(producto) in productos[0]"
             :key="producto.id"
             class="pa-1 mb-5"
@@ -112,7 +117,7 @@ export default {
       infoProductos: [],
       busqueda: this.$route.query.busqueda || '',
       pagina: Number(this.$route.query.pagina) || 1,
-      porPagina: Number(this.$route.query.porPagina) || 18,
+      porPagina: Number(this.$route.query.porPagina) || 20,
       totalPaginas: 0,
     };
   },
