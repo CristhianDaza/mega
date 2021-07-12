@@ -8,9 +8,9 @@
       class="flex"
       flat
       tile
+      :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
     >
       <v-card-text class="text-center"
-        style="background: rgba(0,0,0,.6)"
       >
 
         <v-tooltip bottom>
@@ -164,7 +164,10 @@
       </v-card-text>
       <v-card-text
         class="text-center"
-        :style="{color: $vuetify.theme.themes.themes[theme].textoNegro}"
+        :style="[
+          { color: $vuetify.theme.themes[theme].textoNegro },
+          { background: $vuetify.theme.themes[theme].textoBlanco },
+        ]"
       >
         Design by
         <a href="https://www.linkedin.com/in/cristhiandaza/" target="_blank">
