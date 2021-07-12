@@ -1,21 +1,22 @@
 <template>
   <div :class="this.$vuetify.breakpoint.xs ? '' : 'container'">
     <v-btn
-      color="primary"
+      :style="{color: $vuetify.theme.themes[theme].amarillo}"
       large
       outlined
-      class="mb-3"
       to="/admin/carrusel/agregar-carousel">
         Agregar Imagen
     </v-btn>
-    <v-divider></v-divider>
+    <v-divider class="my-5"></v-divider>
     <v-row class="mx-0">
-      <v-col cols="12" sm="6" md="4" v-for="imagen in imagenSlider" :key="imagen.uid">
+      <v-col cols="12" sm="6" md="4" lg="3" v-for="imagen in imagenSlider" :key="imagen.uid">
         <v-card
-          :style="{background: $vuetify.theme.themes.dark.basebackground}"
+          :style="{background: $vuetify.theme.themes[theme].fondoTarjeta}"
         >
-          <v-card-subtitle>
-            <h2>{{imagen.nombreProducto.toUpperCase()}}</h2>
+          <v-card-subtitle
+            :style="{color: $vuetify.theme.themes[theme].colorText}"
+          >
+            <h2>{{imagen.nombreProducto}}</h2>
           </v-card-subtitle>
           <v-card-text class="pb-0">
             <v-img :src="imagen.linkImagen" :alt="imagen.nombreProducto">
@@ -36,7 +37,7 @@
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   icon
-                  color="red"
+                  :style="{color: $vuetify.theme.themes[theme].textoError}"
                   v-bind="attrs"
                   v-on="on"
                   class="mt-3"

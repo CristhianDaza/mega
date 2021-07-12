@@ -1,18 +1,17 @@
 <template>
   <div :class="this.$vuetify.breakpoint.xs ? '' : 'container'">
     <v-btn
-      color="primary"
+      :style="{color: $vuetify.theme.themes[theme].amarillo}"
       large outlined
-      class="mb-5"
       to="/admin/videoPromocion/agregar-video">
         Agregar Video
       </v-btn>
-      <v-divider></v-divider>
+      <v-divider class="my-5"></v-divider>
 
       <v-row class="mx-0">
       <v-col cols="12" md="6" lg="4" v-for="video in videos" :key="video.id">
         <v-card
-          :style="{background: $vuetify.theme.themes.dark.basebackground}"
+          :style="{background: $vuetify.theme.themes[theme].fondoTarjeta}"
           class="mx-auto">
           <v-card-text class="pb-0">
             <v-responsive :aspect-ratio="16/9">
@@ -21,8 +20,10 @@
               </video>
             </v-responsive>
             <h2>{{video.nombre}}</h2>
-            <p>{{video.urlProducto}}</p>
-            <router-link :to="video.urlProducto">Ir al Link</router-link>
+            <router-link
+              :to="video.urlProducto"
+              :style="{color: $vuetify.theme.themes[theme].amarillo}"
+            >Ir al Link</router-link>
           </v-card-text>
           <v-divider class="mt-3"></v-divider>
           <v-card-actions>
@@ -30,7 +31,7 @@
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   icon
-                  color="red"
+                  :style="{color: $vuetify.theme.themes[theme].textoError}"
                   v-bind="attrs"
                   v-on="on"
                   class="ml-2"

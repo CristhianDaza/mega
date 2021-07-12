@@ -1,18 +1,17 @@
 <template>
   <div :class="this.$vuetify.breakpoint.xs ? '' : 'container'">
     <v-btn
-      color="primary"
+      :style="{color: $vuetify.theme.themes[theme].amarillo}"
       large outlined
-      class="mb-5"
       to="/admin/imagen-info/agregar-imagen-info">
         Agregar Imagen
       </v-btn>
-      <v-divider></v-divider>
+      <v-divider class="my-5"></v-divider>
 
       <v-row class="mx-0">
-      <v-col cols="12" md="6" lg="4" v-for="imagen in imagenInfo" :key="imagen.id">
+      <v-col cols="12" md="6" lg="3" v-for="imagen in imagenInfo" :key="imagen.id">
         <v-card
-          :style="{background: $vuetify.theme.themes.dark.basebackground}"
+          :style="{background: $vuetify.theme.themes[theme].fondoTarjeta}"
           class="mx-auto">
           <v-card-text class="pb-0">
             <v-img :src="imagen.linkImagen" :alt="imagen.nombre">
@@ -33,7 +32,7 @@
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   icon
-                  color="red"
+                  :style="{color: $vuetify.theme.themes[theme].textoError}"
                   v-bind="attrs"
                   v-on="on"
                   class="ml-2"

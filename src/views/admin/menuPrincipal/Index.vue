@@ -1,14 +1,14 @@
 <template>
   <div :class="this.$vuetify.breakpoint.xs ? '' : 'container'">
     <v-btn
-      color="primary"
+      :style="{color: $vuetify.theme.themes[theme].amarillo}"
       large outlined
       to="/admin/menu-principal/agregar-menu">
       Agregar Menú
     </v-btn>
-    <v-divider class="my-3"></v-divider>
+    <v-divider class="my-5"></v-divider>
     <v-simple-table
-      :style="{background: $vuetify.theme.themes.dark.basebackground}"
+      :style="{background: $vuetify.theme.themes[theme].fondoTarjeta}"
     >
       <template v-slot:default>
         <thead>
@@ -29,7 +29,7 @@
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
                     icon
-                    color="success"
+                    :style="{color: $vuetify.theme.themes[theme].azul}"
                     v-bind="attrs"
                     v-on="on"
                     class="ml-2"
@@ -44,7 +44,7 @@
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
                     icon
-                    color="red"
+                    :style="{color: $vuetify.theme.themes[theme].textoError}"
                     v-bind="attrs"
                     v-on="on"
                     class="ml-2"

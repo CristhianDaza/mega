@@ -4,7 +4,7 @@
       <v-row align="center" justify="center">
         <v-col cols="12" sm="8" md="5" xl="6">
           <v-card
-            :style="{background: $vuetify.theme.themes.dark.basebackground}"
+            :style="{background: $vuetify.theme.themes[theme].fondoTarjeta}"
             class="elevation-12">
             <v-progress-linear
               color="light-blue"
@@ -32,12 +32,16 @@
               <v-card-actions>
                 <v-btn
                   outlined
-                  color="primary"
+                  :style="{color: $vuetify.theme.themes[theme].azul}"
                   type="submit"
                   :loading="loading">
                     Editar Producto
                   </v-btn>
-                <v-btn outlined @click="$router.back()" color="error">Atras</v-btn>
+                <v-btn
+                  outlined
+                  :style="{color: $vuetify.theme.themes[theme].amarillo}"
+                  @click="$router.back()"
+                >Atras</v-btn>
               </v-card-actions>
             </v-form>
           </v-card>

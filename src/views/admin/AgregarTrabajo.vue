@@ -4,7 +4,7 @@
     <v-row align="center" justify="center">
       <v-col cols="12" sm="8" md="5" xl="6">
         <v-card
-          :style="{background: $vuetify.theme.themes.dark.basebackground}"
+          :style="{background: $vuetify.theme.themes[theme].fondoTarjeta}"
           class="elevation-12">
           <v-progress-linear
             color="light-blue"
@@ -53,11 +53,20 @@
                 ></v-text-field>
               </template>
               <v-date-picker
-                :style="{background: $vuetify.theme.themes.dark.basebackground}"
-                v-model="start" scrollable locale="es-co" :weekdays="[1, 2, 3, 4, 5, 6, 0]" color="primary">
+                :style="[
+                  {background: $vuetify.theme.themes[theme].fondoTarjeta},
+                  {color: $vuetify.theme.themes[theme].azul}
+                ]"
+                v-model="start" scrollable locale="es-co" :weekdays="[1, 2, 3, 4, 5, 6, 0]"
+                >
                 <v-spacer></v-spacer>
-                <v-btn text color="primary" @click="modalInicio = false">Cancelar</v-btn>
-                <v-btn text color="primary" @click="$refs.dialogInicio.save(start)">OK</v-btn>
+                <v-btn
+                outlined
+                :style="{color: $vuetify.theme.themes[theme].textoError}"
+                @click="modalInicio = false">Cancelar</v-btn>
+                <v-btn
+                :style="{background: $vuetify.theme.themes[theme].azul}"
+                @click="$refs.dialogInicio.save(start)">OK</v-btn>
               </v-date-picker>
             </v-dialog>
 
@@ -79,11 +88,22 @@
                 ></v-text-field>
               </template>
               <v-date-picker
-                :style="{background: $vuetify.theme.themes.dark.basebackground}"
-                v-model="end" scrollable locale="es-co" :weekdays="[1, 2, 3, 4, 5, 6, 0]" color="primary">
+                :style="[
+                  {background: $vuetify.theme.themes[theme].fondoTarjeta},
+                  {color: $vuetify.theme.themes[theme].azul}
+                ]"
+                v-model="end" scrollable locale="es-co" :weekdays="[1, 2, 3, 4, 5, 6, 0]"
+                >
                 <v-spacer></v-spacer>
-                <v-btn text color="primary" @click="modalFin = false">Cancelar</v-btn>
-                <v-btn text color="primary" @click="$refs.dialogFin.save(end)">OK</v-btn>
+                <v-btn
+                  tex
+                  outlined
+                  :style="{color: $vuetify.theme.themes[theme].textoError}"
+                  @click="modalFin = false">Cancelar</v-btn>
+                <v-btn
+                  text
+                  :style="{background: $vuetify.theme.themes[theme].azul}"
+                  @click="$refs.dialogFin.save(end)">OK</v-btn>
               </v-date-picker>
             </v-dialog>
 
@@ -108,8 +128,15 @@
                 <v-color-picker v-model="color" class="ma-2" hide-inputs>
                 </v-color-picker>
                 <v-spacer></v-spacer>
-                <v-btn outlined color="primary" @click="modalColor = false">Cancelar</v-btn>
-                <v-btn outlined color="primary" @click="$refs.dialogColor.save(color)">OK</v-btn>
+                <div class="pa-5">
+                  <v-btn
+                    :style="{color: $vuetify.theme.themes[theme].textoError}"
+                    outlined
+                    @click="modalColor = false">Cancelar</v-btn>
+                  <v-btn
+                    :style="{background: $vuetify.theme.themes[theme].azul}"
+                    @click="$refs.dialogColor.save(color)">OK</v-btn>
+                </div>
               </v-card>
             </v-dialog>
 
@@ -129,11 +156,15 @@
           </v-card-text>
           <v-divider class="mx-4"> </v-divider>
           <v-card-actions>
-            <v-btn color="primary" type="submit" outlined :loading="loading">
+            <v-btn
+            :style="{color: $vuetify.theme.themes[theme].azul}"
+            type="submit" outlined :loading="loading">
               Crear Trabajo
             </v-btn>
 
-            <v-btn text @click="$router.back()" outlined color="error" >
+            <v-btn
+             :style="{color: $vuetify.theme.themes[theme].amarillo}"
+            text @click="$router.back()" outlined >
               Volver
             </v-btn>
           </v-card-actions>

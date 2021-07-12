@@ -1,14 +1,18 @@
 <template>
   <div :class="this.$vuetify.breakpoint.xs ? '' : 'container'">
     <v-btn
-      color="primary"
-      large outlined
+      :style="{color: $vuetify.theme.themes[theme].amarillo}"
+      large
+      outlined
       to="/admin/usuarios/agregar-usuario">
       Agregar Usuario
     </v-btn>
-    <v-divider class="my-3"></v-divider>
+    <v-divider class="my-5"></v-divider>
     <v-simple-table
-      :style="{background: $vuetify.theme.themes.dark.basebackground}"
+       :style="[
+       {color: $vuetify.theme.themes[theme].colorText},
+       {background: $vuetify.theme.themes[theme].fondoTarjeta},
+       ]"
     >
       <template v-slot:default>
         <thead>
@@ -26,7 +30,7 @@
             <th>{{usuario.rol}}</th>
             <th class="text-right">
               <v-btn
-                color="info"
+                :style="{color: $vuetify.theme.themes[theme].azul}"
                 outlined
                 @click.prevent="cambiarPass(usuario.email)"
                 class="mr-3"
@@ -34,7 +38,7 @@
                   Cambiar Contraseña
                 </v-btn>
               <v-btn
-                color="error"
+                :style="{color: $vuetify.theme.themes[theme].textoError}"
                 outlined
                 @click="confirmarEliminarUsuario(usuario.id)">
                   Eliminar

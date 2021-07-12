@@ -1,18 +1,17 @@
 <template>
   <v-container fluid>
     <v-btn
-      color="primary"
+      :style="{color: $vuetify.theme.themes[theme].amarillo}"
       large
       outlined
-      class="mb-3"
       to="/admin/agregar-trabajo">
       Agregar Trabajo
     </v-btn>
-    <v-divider></v-divider>
+    <v-divider class="my-5"></v-divider>
 
     <v-row>
         <v-col cols="12">
-          <v-card :style="{background: $vuetify.theme.themes.dark.basebackground}">
+          <v-card :style="{background: $vuetify.theme.themes[theme].fondoTarjeta}">
             <v-card-title>
               Trabajos
               <v-spacer></v-spacer>
@@ -25,7 +24,7 @@
               ></v-text-field>
             </v-card-title>
             <v-data-table
-              :style="{background: $vuetify.theme.themes.dark.basebackground}"
+              :style="{background: $vuetify.theme.themes[theme].fondoTarjeta}"
               :headers="headers"
               :items="trabajosCalendario"
               :items-per-page="10"
@@ -50,7 +49,7 @@
         <v-col cols="12">
           <v-sheet height="64">
             <v-toolbar
-              :style="{background: $vuetify.theme.themes.dark.basebackground}"
+              :style="{background: $vuetify.theme.themes[theme].fondoTarjeta}"
               flat>
               <v-btn outlined class="mr-4" @click="setToday">
                 Hoy
@@ -92,7 +91,7 @@
           </v-sheet>
           <v-sheet height="600">
             <v-calendar
-              :style="{background: $vuetify.theme.themes.dark.basebackground}"
+              :style="{background: $vuetify.theme.themes[theme].fondoTarjeta}"
               locale="es-co"
               :short-weekdays="false"
               :short-months="false"
@@ -150,7 +149,7 @@
                     <template v-slot:activator="{ on, attrs }">
                       <v-btn
                         icon
-                        color="primary"
+                        :style="{color: $vuetify.theme.themes[theme].azul}"
                         v-bind="attrs"
                         v-on="on"
                         :to="{name: 'ver-trabajo', params: { id: trabajoSeleccionado.id } }"

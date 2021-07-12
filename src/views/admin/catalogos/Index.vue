@@ -1,20 +1,19 @@
 <template>
   <div :class="this.$vuetify.breakpoint.xs ? '' : 'container'">
     <v-btn
-      color="primary"
+      :style="{color: $vuetify.theme.themes[theme].amarillo}"
       large
       outlined
-      class="mb-3"
       to="/admin/catalogos/agregar-catalogo"
     >
       Agregar Catálogo
     </v-btn>
-    <v-divider></v-divider>
+    <v-divider class="my-5"></v-divider>
 
       <v-row class="mx-0">
       <v-col cols="12" md="6" lg="3" v-for="catalogo in catalogos" :key="catalogo.id">
         <v-card
-          :style="{background: $vuetify.theme.themes.dark.basebackground}"
+          :style="{background: $vuetify.theme.themes[theme].fondoTarjeta}"
           class="mx-auto">
           <v-card-text class="pb-0">
             <v-img :src="catalogo.linkImagen" :alt="catalogo.nombre">
@@ -35,7 +34,9 @@
               :href="catalogo.linkVirtual"
               target="_blank"
             >
-              <v-btn color="primary" width="100%" text>
+              <v-btn
+                :style="{color: $vuetify.theme.themes[theme].amarillo}"
+                width="100%" text>
                 {{catalogo.nombre}} <v-icon class="ml-1" small>
                   {{mdiOpenInNew}}
                 </v-icon>

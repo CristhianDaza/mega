@@ -4,7 +4,7 @@
     <v-container class="fill-height">
       <v-row align="center" justify="center">
         <v-col class="mt-10" cols="12" sm="8" md="6">
-          <v-card :style="{background: $vuetify.theme.themes.dark.basebackground}" class="elevation-19">
+          <v-card :style="{background: $vuetify.theme.themes[theme].fondoTarjeta}" class="elevation-19">
             <v-container class="fill-height" fluid>
               <v-row
                 class="mt-5"
@@ -40,23 +40,28 @@
                 ></v-text-field>
               </v-card-text>
               <p
+                :style="{color: $vuetify.theme.themes[theme].textoError}"
                 v-if="error == 'The password is invalid or the user does not have a password.'"
-                class="ma-2 error--text">La contraseña no es válida o el usuario no tiene una contraseña.</p>
+                class="ma-2">La contraseña no es válida o el usuario no tiene una contraseña.</p>
               <p
+                :style="{color: $vuetify.theme.themes[theme].textoError}"
                 v-else-if="error == 'Too many unsuccessful login attempts. Please try again later.'"
-                class="ma-2 error--text">Demasiados intentos de inicio de sesión fallidos. Por favor, inténtelo de nuevo más tarde.</p>
+                class="ma-2">Demasiados intentos de inicio de sesión fallidos. Por favor, inténtelo de nuevo más tarde.</p>
               <p
+                :style="{color: $vuetify.theme.themes[theme].textoError}"
                 v-else-if="error == 'There is no user record corresponding to this identifier. The user may have been deleted.'"
-                class="ma-2 error--text">Correo Electrónico no válido</p>
+                class="ma-2">Correo Electrónico no válido</p>
               <p
+                :style="{color: $vuetify.theme.themes[theme].textoError}"
                 v-else-if="error == 'The user account has been disabled by an administrator.'"
-                class="ma-2 error--text">La cuenta de usuario ha sido deshabilitada por un administrador.</p>
-              <p v-else-if="error" class="ma-2 error--text">Error del sistema, inténtelo de nuevo más tarde. </p>
+                class="ma-2">La cuenta de usuario ha sido deshabilitada por un administrador.</p>
+              <p
+                :style="{color: $vuetify.theme.themes[theme].textoError}" v-else-if="error" class="ma-2">Error del sistema, inténtelo de nuevo más tarde. </p>
               <v-divider class="mx-4"> </v-divider>
               <v-card-actions>
                 <v-btn
                   :disabled="!valid"
-                  color="success"
+                  :style="{background: $vuetify.theme.themes[theme].azul}"
                   type="submit"
                 >
                   Iniciar Sesión
@@ -65,7 +70,7 @@
                 <v-btn
                   text
                   to="/"
-                  color="info"
+                  :style="{color: $vuetify.theme.themes[theme].amarillo}"
                 >
                   Volver al Inicio
                 </v-btn>

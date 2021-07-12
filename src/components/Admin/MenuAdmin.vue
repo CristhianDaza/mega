@@ -5,8 +5,8 @@
       clipped
       v-model="drawer"
       :style="[
-        {background: $vuetify.theme.themes.dark.basebackground},
-        {color: $vuetify.theme.themes.dark.basetext}
+        {background: $vuetify.theme.themes[theme].fondoTarjeta},
+        {color: $vuetify.theme.themes[theme].colorText}
       ]"
     >
       <v-list dense>
@@ -51,7 +51,7 @@
             <v-icon>{{ mdiInformation }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Imágenes Información</v-list-item-title>
+            <v-list-item-title>Imágenes Boletín</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -88,7 +88,7 @@
     <v-app-bar
       app
       clipped-left
-      :style="{background: $vuetify.theme.themes.dark.basebackground}"
+      :style="{background: $vuetify.theme.themes[theme].fondoTarjeta}"
     >
       <template v-if="this.$vuetify.breakpoint.xs">
         <v-app-bar-nav-icon class="white--text mx-2" @click.stop="drawer = !drawer">
@@ -107,24 +107,31 @@
       <template v-if="this.$vuetify.breakpoint.xs">
         <v-btn
           to="/"
-          :style="{background: $vuetify.theme.themes[theme].colorPrimary}" class="mr-2" icon>
+          :style="{background: $vuetify.theme.themes[theme].azul}" class="mr-2" icon>
           <v-icon>{{mdiHome}}</v-icon>
         </v-btn>
       </template>
       <template v-else>
         <v-btn
          to="/"
-         :style="{background: $vuetify.theme.themes[theme].colorPrimary}"
+         :style="{background: $vuetify.theme.themes[theme].azul}"
           class="mr-2">Ir a la página principal</v-btn>
       </template>
 
       <template v-if="this.$vuetify.breakpoint.xs">
-        <v-btn  @click="cerrarSesion" color="error" icon>
+        <v-btn
+        :style="{background: $vuetify.theme.themes[theme].textoError}"
+         @click="cerrarSesion"
+         icon
+        >
           <v-icon>{{mdiLogout}}</v-icon>
         </v-btn>
       </template>
       <template v-else>
-        <v-btn @click="cerrarSesion" color="error">Cerrar Sesión</v-btn>
+        <v-btn
+        :style="{background: $vuetify.theme.themes[theme].textoError}"
+        @click="cerrarSesion"
+        >Cerrar Sesión</v-btn>
       </template>
 
     </v-app-bar>
