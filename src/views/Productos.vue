@@ -335,11 +335,6 @@ export default {
       });
     },
   },
-  computed: {
-    theme() {
-      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
-    },
-  },
   mounted() {
     this.getProductos(
       this.pagina,

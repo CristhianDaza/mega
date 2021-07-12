@@ -109,9 +109,6 @@ export default {
   },
   computed: {
     ...mapState(['catalogos']),
-    theme() {
-      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
-    },
   },
   methods: {
     ...mapActions(['traerCatalogo']),

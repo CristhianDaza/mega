@@ -114,11 +114,6 @@ export default {
       return x1 + x2;
     },
   },
-  computed: {
-    theme() {
-      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
-    },
-  },
   components: {
     Loader,
   },

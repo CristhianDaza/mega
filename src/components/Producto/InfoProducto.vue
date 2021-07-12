@@ -78,9 +78,6 @@ export default {
   props: ['producto', 'materiales', 'transito'],
   computed: {
     ...mapGetters(['existeUsuario']),
-    theme() {
-      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
-    },
   },
   components: {
     DesProducto,

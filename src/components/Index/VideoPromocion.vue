@@ -51,9 +51,6 @@ export default {
   },
   computed: {
     ...mapState(['videos']),
-    theme() {
-      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
-    },
   },
   mounted() {
     this.traerVideos();

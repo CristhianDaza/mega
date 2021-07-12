@@ -20,6 +20,14 @@ Vue.use(VueMeta);
 Vue.use(VueCarousel);
 Vue.use(flipbook);
 
+Vue.mixin({
+  computed: {
+    theme() {
+      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
+    },
+  },
+});
+
 auth.onAuthStateChanged((user) => {
   if (user) {
     store.dispatch('detectarUsuario', {

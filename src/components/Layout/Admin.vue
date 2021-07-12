@@ -24,9 +24,6 @@ export default {
   name: 'Admin',
   computed: {
     ...mapGetters(['existeUsuario']),
-    theme() {
-      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
-    },
   },
   components: {
     MenuAdmin,

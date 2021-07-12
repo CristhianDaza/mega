@@ -61,13 +61,6 @@ export default {
       imgHeroDark,
     };
   },
-  computed: {
-    theme() {
-      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
-    },
-  },
-  components: {
-  },
 };
 </script>
 

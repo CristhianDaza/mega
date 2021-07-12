@@ -54,9 +54,6 @@ export default {
   },
   computed: {
     ...mapState(['imagenInfo']),
-    theme() {
-      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
-    },
   },
   mounted() {
     this.traerImagenInfo();

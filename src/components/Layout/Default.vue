@@ -66,9 +66,6 @@ export default {
         easing: this.easing,
       };
     },
-    // theme() {
-    //   return (this.$vuetify.theme.dark) ? 'dark' : 'light';
-    // },
   },
   methods: {
     onScroll(e) {

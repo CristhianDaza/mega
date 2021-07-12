@@ -87,9 +87,6 @@ export default {
   computed: {
     ...mapGetters(['existeUsuario']),
     ...mapState(['menus']),
-    theme() {
-      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
-    },
   },
   mounted() {
     this.traerMenus();

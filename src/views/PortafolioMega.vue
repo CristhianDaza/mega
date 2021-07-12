@@ -107,11 +107,6 @@ export default {
     Flipbook,
     Hero,
   },
-  computed: {
-    theme() {
-      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
-    },
-  },
   metaInfo: {
     title: 'Portafolio 📖',
     titleTemplate: '%s | Megapromocionales LTDA',

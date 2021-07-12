@@ -167,9 +167,6 @@ export default {
   },
   computed: {
     ...mapState(['usuario']),
-    theme() {
-      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
-    },
   },
 };
 </script>

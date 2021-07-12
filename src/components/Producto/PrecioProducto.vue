@@ -169,9 +169,6 @@ export default {
         // eslint-disable-next-line function-paren-newline
         this.materiales.reduce((prev, next) => Object.assign(prev, { [next.variedad]: next }), {}));
     },
-    theme() {
-      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
-    },
   },
   methods: {
     addCommas(nStr) {

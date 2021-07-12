@@ -56,11 +56,6 @@ export default {
     };
   },
   props: ['imagenes'],
-  computed: {
-    theme() {
-      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
-    },
-  },
   components: {
     Loader,
   },

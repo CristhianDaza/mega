@@ -201,11 +201,6 @@ export default {
   created() {
     this.$store.commit('setLayout', 'defaultLayout');
   },
-  computed: {
-    theme() {
-      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
-    },
-  },
 };
 </script>
 

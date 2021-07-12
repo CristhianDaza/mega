@@ -134,9 +134,6 @@ export default {
   props: ['producto', 'colores'],
   computed: {
     ...mapGetters(['existeUsuario']),
-    theme() {
-      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
-    },
   },
   methods: {
     addCommas(nStr) {

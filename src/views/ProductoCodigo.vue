@@ -218,9 +218,6 @@ export default {
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       return this.materiales.sort((a, b) => a.codigo - b.codigo);
     },
-    theme() {
-      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
-    },
     target2() {
       const value = this[this.type2];
       // eslint-disable-next-line no-restricted-globals

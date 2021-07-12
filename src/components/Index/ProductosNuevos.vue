@@ -60,9 +60,6 @@ export default {
   },
   computed: {
     ...mapState(['productos', 'titulos']),
-    theme() {
-      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
-    },
   },
   mounted() {
     this.traerProducto();
