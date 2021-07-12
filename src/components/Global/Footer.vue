@@ -2,14 +2,14 @@
   <v-footer
     dark
     padless
-    :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
+    :style="{ background: $vuetify.theme.themes.dark.fondoTarjeta }"
   >
 
     <v-card
       class="flex"
       flat
       tile
-      :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
+      :style="{ background: $vuetify.theme.themes.dark.fondoTarjeta }"
     >
       <v-card-text class="text-center"
       >
