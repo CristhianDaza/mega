@@ -2,6 +2,7 @@
   <v-footer
     dark
     padless
+    :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
   >
 
     <v-card
@@ -112,9 +113,7 @@
         </v-tooltip>
 
       </v-card-text>
-      <v-card-title
-        style="background: rgba(0,0,0,.6)"
-      >
+      <v-card-title>
         <v-container>
           <strong class="subheading">¡Síguenos en las redes sociales!</strong>
           <div class="float-right">
@@ -159,7 +158,7 @@
 
       <v-card-text
         class="py-2 text-center white--text"
-        :style="{background: $vuetify.theme.themes[theme].secondary}">
+        :style="{background: $vuetify.theme.themes[dark].fondoTarjeta}">
         <strong class="title">Megapromocionales LTDA © {{ new Date().getFullYear() }}</strong>
       </v-card-text>
       <v-card-text
