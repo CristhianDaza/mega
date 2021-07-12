@@ -4,15 +4,15 @@
     v-on:keyup.enter="buscarProducto(busqueda)"
     @click:prepend-inner="buscarProducto(busqueda)"
     clearable
-    class="mt-1 mx-2"
-    placeholder="Buscar"
+    class="mx-2"
+    placeholder="Buscar..."
     :prepend-inner-icon="mdiMagnify"
     outlined
     rounded
     filled
     dense
-    dark
     hide-details="auto"
+    color="primary"
     id="buscador"
   ></v-text-field>
 </template>
