@@ -359,25 +359,3 @@ export default {
   },
 };
 </script>
-
-<style>
-  .theme--light.v-pagination .v-pagination__item,
-  .theme--light.v-pagination .v-pagination__navigation {
-    background: #E3E3E3 !important;
-  }
-
-  .theme--dark.v-pagination .v-pagination__item,
-  .theme--dark.v-pagination .v-pagination__navigation {
-    background: #005C91 !important;
-  }
-
-  .theme--light.v-pagination .v-pagination__item--active {
-    background:#FFCD17 !important;
-  }
-  .theme--dark.v-pagination .v-pagination__item--active {
-    background:#05090C !important;
-  }
-  .theme--light.v-sheet {
-    background: inherit;
-  }
-  </style>
