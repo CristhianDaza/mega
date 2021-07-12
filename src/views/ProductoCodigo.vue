@@ -1,25 +1,38 @@
 <template>
   <div>
-        <!-- :style="{background: $vuetify.theme.themes[theme].basebackground}" -->
 <!-- eslint-disable max-len -->
   <div v-if="this.productoCodigo.length > 0">
     <v-container>
       <div class="links">
-        <ul>
+        <ul
+          :style="{ color: $vuetify.theme.themes[theme].colorText }"
+        >
           <li>
-            <router-link exact to="/" class="links__item">INICIO</router-link>
+            <router-link
+            :style="{ color: $vuetify.theme.themes[theme].colorText }"
+            exact
+            to="/" class="links__item">INICIO</router-link>
           </li>
           <li class="links__divider">/</li>
           <li>
-            <router-link exact to="/productos" class="links__item">PRODUCTOS</router-link>
+            <router-link
+            :style="{ color: $vuetify.theme.themes[theme].colorText }"
+            exact
+            to="/productos" class="links__item">PRODUCTOS</router-link>
           </li>
           <li class="links__divider">/</li>
           <li>
-            <router-link exact :to="`/productos?categoria=${productoCodigo[0].subcategoria_1.categoria.jerarquia}&titulo=${productoCodigo[0].subcategoria_1.categoria.nombre}`" class="links__item">{{this.categoriaPrincipal.toUpperCase()}}</router-link>
+            <router-link
+            :style="{ color: $vuetify.theme.themes[theme].colorText }"
+            exact
+            :to="`/productos?categoria=${productoCodigo[0].subcategoria_1.categoria.jerarquia}&titulo=${productoCodigo[0].subcategoria_1.categoria.nombre}`" class="links__item">{{this.categoriaPrincipal.toUpperCase()}}</router-link>
           </li>
           <li class="links__divider">/</li>
           <li>
-            <router-link exact :to="`/productos?subCategoria=${productoCodigo[0].subcategoria_1.jerarquia}&titulo=${productoCodigo[0].subcategoria_1.nombre}`"  class="links__item">{{this.categoriaSecundaria.toUpperCase()}}</router-link>
+            <router-link
+            :style="{ color: $vuetify.theme.themes[theme].colorText }"
+            exact
+            :to="`/productos?subCategoria=${productoCodigo[0].subcategoria_1.jerarquia}&titulo=${productoCodigo[0].subcategoria_1.nombre}`"  class="links__item">{{this.categoriaSecundaria.toUpperCase()}}</router-link>
           </li>
           <li class="links__divider">/</li>
           <li>
@@ -28,7 +41,9 @@
         </ul>
       </div>
       <v-card
-        class="mx-auto mt-2 fondoCard">
+        :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
+        class="mx-auto mt-2"
+      >
         <v-row>
           <v-col cols="6" sm="3" md="2" class="ProductosVertical">
             <v-container>
@@ -84,6 +99,7 @@
         <v-col cols="12" sm="6">
           <v-card
             class="mt-5"
+            :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
           >
             <ExistenciasProducto
               :inventarioDisponible="inventarioDisponible"
@@ -110,32 +126,52 @@
         <v-icon>{{mdiCloseCircleOutline}}</v-icon>
       </v-btn>
       <v-simple-table
-        class="fondoCard"
+        :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
       >
         <thead>
           <tr>
-            <th class="text-left">COLOR</th>
-            <th class="text-left">CANTIDADES<br>EN TRÁNSITO</th>
-            <th class="text-left">INGRESO<br>AL SISTEMA</th>
-            <th class="text-left">ESTADO DEL<br>TRÁNSITO</th>
-            <th class="text-left">ÚLTIMA<br>ACTUALIZACIÓN</th>
+            <th
+              :style="{ color: $vuetify.theme.themes[theme].azul }"
+              class="text-left">COLOR</th>
+            <th
+              :style="{ color: $vuetify.theme.themes[theme].azul }"
+              class="text-left">CANTIDADES<br>EN TRÁNSITO</th>
+            <th
+              :style="{ color: $vuetify.theme.themes[theme].azul }"
+              class="text-left">INGRESO<br>AL SISTEMA</th>
+            <th
+              :style="{ color: $vuetify.theme.themes[theme].azul }"
+              class="text-left">ESTADO DEL<br>TRÁNSITO</th>
+            <th
+              :style="{ color: $vuetify.theme.themes[theme].azul }"
+              class="text-left">ÚLTIMA<br>ACTUALIZACIÓN</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(existencia, index) in productoTraking[0]" :key="index">
-            <td class="white--text" v-if="existencia.trackings_importacion[0] !== undefined">
+            <td
+              :style="{ color: $vuetify.theme.themes[theme].colorText }"
+              v-if="existencia.trackings_importacion[0] !== undefined">
               {{ coloresTransito(inventarioDisponible, existencia.trackings_importacion[0].material) }}
             </td>
-            <td class="white--text" v-if="existencia.trackings_importacion[0] !== undefined">
+            <td
+              :style="{ color: $vuetify.theme.themes[theme].colorText }"
+              v-if="existencia.trackings_importacion[0] !== undefined">
               {{addCommas(existencia.trackings_importacion[0].cantidad)}}
             </td>
-            <td class="white--text" v-if="existencia.trackings_importacion[0] !== undefined">
+            <td
+              :style="{ color: $vuetify.theme.themes[theme].colorText }"
+              v-if="existencia.trackings_importacion[0] !== undefined">
               {{moment(existencia.trackings_importacion[0].fecha).locale('es-CO').format('LL')}}
             </td>
-            <td class="white--text" v-if="existencia.trackings_importacion[0] !== undefined">
+            <td
+              :style="{ color: $vuetify.theme.themes[theme].colorText }"
+              v-if="existencia.trackings_importacion[0] !== undefined">
               {{existencia.trackings_importacion[0].estado}}
             </td>
-            <td class="white--text" v-if="existencia.trackings_importacion[0] !== undefined">
+            <td
+              :style="{ color: $vuetify.theme.themes[theme].colorText }"
+              v-if="existencia.trackings_importacion[0] !== undefined">
               {{moment(existencia.trackings_importacion[0].ultima_actualizacion).locale('es-CO').format('LL')}}
             </td>
           </tr>
@@ -348,71 +384,6 @@ export default {
 </script>
 
 <style scoped>
-  .router-link-active {
-    color: inherit !important;
-  }
-  .router-link-active:hover {
-    color: #2196f3 !important;
-  }
-
-  .linkCategoria:hover {
-    color: #0077bd !important;
-    text-decoration: underline;
-  }
-  .precio {
-    padding: 0 !important;
-  }
-
-  .links {
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    flex: 0 1 auto;
-    list-style: none;
-    margin: 0;
-    padding: 18px 12px;
-  }
-
-  .links li {
-    align-items: center;
-    display: inline-flex;
-    font-size: 14px;
-  }
-  .links__item {
-    align-items: center;
-    display: inline-flex;
-    text-decoration: none;
-    transition: all .3s cubic-bezier(0.25, 0.8, 0.5, 1);
-    color: white !important;
-  }
-  .links li:nth-child(2n){
-    padding: 0 12px;
-  }
-
-  .links ul {
-    padding: 0;
-  }
-  .custom-loader {
-    animation: loader 1s infinite;
-    display: flex;
-  }
-  .fondoCard {
-    background: rgba( 255, 255, 255, 0.25 ) !important;
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ) !important;
-    backdrop-filter: blur( 4px ) !important;
-    -webkit-backdrop-filter: blur( 4px ) !important;
-    border-radius: 10px !important;
-    border: 1px solid rgba( 255, 255, 255, 0.18 ) !important;
-  }
-  .infoProd {
-    background: rgba( 255, 255, 255, 0.25 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 4px );
-    -webkit-backdrop-filter: blur( 4px );
-    border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-    transform: translate(-10px, 10px);
-  }
   .contenedorProductosHorizontal {
     display: none;
   }

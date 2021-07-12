@@ -26,7 +26,7 @@
         block
         large
         outlined
-        color="white"
+        :style="{ color: $vuetify.theme.themes[theme].azul }"
         :loading="loading"
         :disabled="loading"
         @click="descargarImagenes(producto.id, producto.familia)"
@@ -42,7 +42,7 @@
         outlined
         block
         large
-        color="white"
+        :style="{ color: $vuetify.theme.themes[theme].azul }"
         class="my-1 pa-4"
         @click.stop="$emit('dialogo')"
       >

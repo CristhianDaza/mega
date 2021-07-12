@@ -1,6 +1,8 @@
 <template>
 <!-- eslint-disable max-len -->
-  <v-simple-table>
+  <v-simple-table
+    :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
+  >
     <template v-slot:default>
       <thead>
         <tr>
@@ -120,15 +122,5 @@ export default {
     justify-content: center;
     width: 100%;
     height: 100%;
-  }
-  .theme--light.v-data-table, .theme--light.v-card {
-    background-color: transparent !important;
-  }
-  .theme--light
-  .v-data-table
-  >.v-data-table__wrapper
-  >table>tbody>tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper){
-    background: rgba(255, 255, 255, .4) !important;
-    color: black !important;
   }
 </style>

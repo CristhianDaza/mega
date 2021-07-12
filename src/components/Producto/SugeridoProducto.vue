@@ -1,7 +1,7 @@
 <template>
 <!-- eslint-disable max-len -->
   <div class="pa-2">
-    <h1 :style="{ color: $vuetify.theme.themes[theme].azul }" class="text-center">
+    <h1 :style="{ color: $vuetify.theme.themes[theme].amarillo }" class="text-center">
       Productos Sugeridos
     </h1>
     <v-divider class="mx-10"></v-divider>
