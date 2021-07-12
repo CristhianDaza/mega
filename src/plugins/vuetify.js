@@ -22,6 +22,7 @@ export default new Vuetify({
         textoNegro: '#2B2B2B',
         textoBlanco: '#E3E3E3',
         fondoTarjeta: '#E3E3E3',
+        textoError: '#D13D3D',
       },
       dark: {
         primary: '#111B27',
@@ -32,6 +33,7 @@ export default new Vuetify({
         textoNegro: '#2B2B2B',
         textoBlanco: '#E3E3E3',
         fondoTarjeta: '#05090C',
+        textoError: '#D13D3D',
       },
     },
   },
