@@ -76,8 +76,8 @@
     </v-card>
     <v-dialog
       v-model="dialog"
-      max-width="850"
-      overlay-color="grey darken-4"
+      max-width="700"
+      :overlay-color="this.$vuetify.theme.dark ? 'blue-grey darken-4' : 'grey darken-4'"
       overlay-opacity="0.9"
     >
       <v-btn dark icon class="float-right mr-5" color="white" @click.stop="dialog = false">
@@ -85,13 +85,17 @@
       </v-btn>
       <img
         v-if="imagenPrincipalGrande === ''" :src="producto.imagenes[0].imagen.file"
-        max-height="100%"
+        max-width="100%"
+        width="100%"
+        cover
         :alt="producto.descripcion_comercial"
       />
       <img
         v-else
         :src="imagenPrincipalGrande"
-        max-height="100%"
+        max-width="100%"
+        width="100%"
+        cover
         :alt="producto.descripcion_comercial"
       />
     </v-dialog>
