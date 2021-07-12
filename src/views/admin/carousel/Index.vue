@@ -56,12 +56,14 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import layoutAdmin from '@/mixins/layoutAdmin';
 import { mdiDelete } from '@mdi/js';
 import Swal from 'sweetalert2';
 import { storage } from '@/firebase';
 
 export default {
   name: 'Carousel',
+  mixins: [layoutAdmin],
   data() {
     return {
       mdiDelete,
@@ -112,9 +114,6 @@ export default {
   },
   mounted() {
     this.traerImagenSlider();
-  },
-  created() {
-    this.$store.commit('setLayout', 'adminLayout');
   },
 };
 </script>

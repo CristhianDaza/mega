@@ -49,11 +49,13 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
+import layoutAdmin from '@/mixins/layoutAdmin';
 import Swal from 'sweetalert2';
 import { auth } from '@/firebase';
 
 export default {
   name: 'usuarios',
+  mixins: [layoutAdmin],
   metaInfo: {
     title: 'Usuarios',
     titleTemplate: '%s | Megapromocionales LTDA',
@@ -108,9 +110,6 @@ export default {
   },
   mounted() {
     this.traerUsuarios();
-  },
-  created() {
-    this.$store.commit('setLayout', 'adminLayout');
   },
 };
 </script>

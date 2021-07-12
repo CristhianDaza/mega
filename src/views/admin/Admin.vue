@@ -205,6 +205,7 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
+import layoutAdmin from '@/mixins/layoutAdmin';
 import {
   mdiDelete,
   mdiCloseCircleOutline,
@@ -217,6 +218,7 @@ import Swal from 'sweetalert2';
 
 export default {
   name: 'Admin',
+  mixins: [layoutAdmin],
   data() {
     return {
       mdiDelete,
@@ -371,9 +373,6 @@ export default {
         }
       });
     },
-  },
-  created() {
-    this.$store.commit('setLayout', 'adminLayout');
   },
 };
 </script>

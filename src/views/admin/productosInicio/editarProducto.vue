@@ -49,6 +49,7 @@
 
 <script>
 import { mdiFormatTitle, mdiCartArrowRight } from '@mdi/js';
+import layoutAdmin from '@/mixins/layoutAdmin';
 import { db } from '@/firebase';
 import Swal from 'sweetalert2';
 import router from '@/router';
@@ -56,6 +57,7 @@ import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'editar-producto',
+  mixins: [layoutAdmin],
   data() {
     return {
       mdiFormatTitle,
@@ -104,9 +106,6 @@ export default {
         });
       this.loading = false;
     },
-  },
-  created() {
-    this.$store.commit('setLayout', 'adminLayout');
   },
   computed: {
     ...mapState(['producto']),

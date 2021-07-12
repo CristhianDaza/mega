@@ -69,12 +69,14 @@
 
 <script>
 import { mdiLinkVariant, mdiCartArrowRight } from '@mdi/js';
+import layoutAdmin from '@/mixins/layoutAdmin';
 import { storage, db } from '@/firebase';
 import Swal from 'sweetalert2';
 import router from '@/router';
 
 export default {
   name: 'agregar-slider',
+  mixins: [layoutAdmin],
   data() {
     return {
       mdiLinkVariant,
@@ -158,9 +160,6 @@ export default {
         this.loading = false;
       }
     },
-  },
-  created() {
-    this.$store.commit('setLayout', 'adminLayout');
   },
 };
 </script>

@@ -52,11 +52,13 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 import Swal from 'sweetalert2';
+import layoutAdmin from '@/mixins/layoutAdmin';
 import { db } from '@/firebase';
 import router from '@/router';
 
 export default {
   name: 'trabajo',
+  mixins: [layoutAdmin],
   data() {
     return {
       id: this.$route.params.id,
@@ -97,9 +99,6 @@ export default {
   },
   mounted() {
     this.traerTrabajoCalendario(this.id);
-  },
-  created() {
-    this.$store.commit('setLayout', 'adminLayout');
   },
 };
 </script>

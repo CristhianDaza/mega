@@ -52,12 +52,14 @@
 
 <script>
 import { mdiFormatTitle, mdiLinkVariant, mdiNumeric } from '@mdi/js';
+import layoutAdmin from '@/mixins/layoutAdmin';
 import { db } from '@/firebase';
 import Swal from 'sweetalert2';
 import router from '@/router';
 
 export default {
   name: 'agregar-menu',
+  mixins: [layoutAdmin],
   data() {
     return {
       mdiFormatTitle,
@@ -111,9 +113,6 @@ export default {
         this.loading = false;
       }
     },
-  },
-  created() {
-    this.$store.commit('setLayout', 'adminLayout');
   },
 };
 </script>

@@ -81,6 +81,7 @@
 
 <script>
 import Logo from '@/components/Global/Logo.vue';
+import layoutAdmin from '@/mixins/layoutAdmin';
 import {
   mdiAt,
   mdiLock,
@@ -91,6 +92,7 @@ import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'Login',
+  mixins: [layoutAdmin],
   data: () => ({
     mostrar: false,
     mdiAt,
@@ -124,9 +126,6 @@ export default {
   },
   computed: {
     ...mapState(['error']),
-  },
-  created() {
-    this.$store.commit('setLayout', 'adminLayout');
   },
 };
 </script>

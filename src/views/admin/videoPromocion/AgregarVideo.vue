@@ -79,11 +79,13 @@
 <script>
 import { mdiBookOpenPageVariant, mdiLinkVariant, mdiImageSizeSelectLarge } from '@mdi/js';
 import Swal from 'sweetalert2';
+import layoutAdmin from '@/mixins/layoutAdmin';
 import { storage, db } from '@/firebase';
 import router from '@/router';
 
 export default {
   name: 'agregar-video',
+  mixins: [layoutAdmin],
   data() {
     return {
       mdiBookOpenPageVariant,
@@ -163,9 +165,6 @@ export default {
         this.loading = false;
       }
     },
-  },
-  created() {
-    this.$store.commit('setLayout', 'adminLayout');
   },
 };
 </script>

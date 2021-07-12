@@ -65,12 +65,14 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import layoutAdmin from '@/mixins/layoutAdmin';
 import { mdiFilePdfBox, mdiOpenInNew, mdiDelete } from '@mdi/js';
 import Swal from 'sweetalert2';
 import { storage } from '@/firebase';
 
 export default {
   name: 'lita-catalogos',
+  mixins: [layoutAdmin],
   data() {
     return {
       mdiFilePdfBox,
@@ -123,9 +125,6 @@ export default {
   },
   mounted() {
     this.traerCatalogo();
-  },
-  created() {
-    this.$store.commit('setLayout', 'adminLayout');
   },
 };
 </script>

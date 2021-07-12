@@ -150,12 +150,14 @@ import {
   mdiAccountSupervisor,
 } from '@mdi/js';
 import { mapActions, mapState } from 'vuex';
+import layoutAdmin from '@/mixins/layoutAdmin';
 import Swal from 'sweetalert2';
 import router from '@/router';
 import { db } from '@/firebase';
 
 export default {
   name: 'agregar-trabajo',
+  mixins: [layoutAdmin],
   data() {
     return {
       id: this.$route.params.id,
@@ -253,7 +255,6 @@ export default {
     });
   },
   created() {
-    this.$store.commit('setLayout', 'adminLayout');
     this.usuarios.forEach((usuario) => {
       this.listaUsuarios.push({ name: usuario.nombre, value: usuario.nombre });
     });

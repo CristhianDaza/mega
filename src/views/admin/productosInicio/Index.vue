@@ -63,11 +63,13 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
+import layoutAdmin from '@/mixins/layoutAdmin';
 import Swal from 'sweetalert2';
 import { mdiDelete, mdiPencil } from '@mdi/js';
 
 export default {
   name: 'productos-inicio',
+  mixins: [layoutAdmin],
   data() {
     return {
       mdiDelete,
@@ -111,9 +113,6 @@ export default {
   },
   mounted() {
     this.traerProducto();
-  },
-  created() {
-    this.$store.commit('setLayout', 'adminLayout');
   },
 };
 </script>

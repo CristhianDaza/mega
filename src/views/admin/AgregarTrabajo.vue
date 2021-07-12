@@ -146,6 +146,7 @@
 </template>
 
 <script>
+import layoutAdmin from '@/mixins/layoutAdmin';
 import {
   mdiCalendar,
   mdiCalendarText,
@@ -160,6 +161,7 @@ import { db } from '@/firebase';
 
 export default {
   name: 'agregar-trabajo',
+  mixins: [layoutAdmin],
   data() {
     return {
       start: new Date().toISOString().substr(0, 10),
@@ -251,7 +253,6 @@ export default {
     ...mapState(['error', 'usuarios']),
   },
   created() {
-    this.$store.commit('setLayout', 'adminLayout');
     this.usuarios.forEach((usuario) => {
       this.listaUsuarios.push({ name: usuario.nombre, value: usuario.nombre });
     });

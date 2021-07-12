@@ -84,6 +84,7 @@
 </template>
 
 <script>
+import layoutAdmin from '@/mixins/layoutAdmin';
 import {
   mdiAt,
   mdiLock,
@@ -95,6 +96,7 @@ import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'agregar-usaurio',
+  mixins: [layoutAdmin],
   data() {
     return {
       mostrar: false,
@@ -144,9 +146,6 @@ export default {
     desactivar() {
       return this.password === this.password2 && this.password !== '';
     },
-  },
-  created() {
-    this.$store.commit('setLayout', 'adminLayout');
   },
 };
 </script>
