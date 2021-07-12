@@ -1,5 +1,5 @@
 <template>
-  <v-app :style="{background: $vuetify.theme.themes[theme].background}">
+  <v-app :style="{background: $vuetify.theme.themes[theme].primary}">
     <div v-if="existeUsuario">
       <MenuAdmin class="mb-3" />
     </div>
@@ -7,7 +7,7 @@
       <router-view />
     </v-main>
     <v-footer
-      :style="{background: $vuetify.theme.themes.dark.basebackground}"
+      :style="{background: $vuetify.theme.themes[theme].fondoTarjeta}"
       app>
       <span class="text-right foot">
         &copy; {{ new Date().getFullYear() }} - Design by
