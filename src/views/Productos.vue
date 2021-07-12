@@ -1,12 +1,17 @@
 <template>
 <!-- eslint-disable max-len -->
-  <div>
+  <div :style="{ background: $vuetify.theme.themes[theme].primary }">
     <Hero :titulo="titulo"/>
     <v-container>
       <div class="links">
-        <ul>
+        <ul :style="{ color: $vuetify.theme.themes[theme].colorText }">
           <li>
-            <router-link exact to="/" class="links__item">INICIO</router-link>
+            <router-link
+              exact
+              to="/"
+              class="links__item"
+              :style="{ color: $vuetify.theme.themes[theme].colorText }"
+            >INICIO</router-link>
           </li>
           <li class="links__divider">/</li>
           <li>
@@ -18,7 +23,8 @@
         <v-col cols="12" sm="4" md="3">
           <v-card
             v-if="this.productos.length > 0"
-            class="fondoCard">
+            :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
+          >
             <v-card-text class="pb-0">
               <v-text-field
                 label="Inventario"
@@ -32,13 +38,19 @@
           </v-card>
           <v-card
             v-if="this.listaEtiquetas.length > 0"
+            :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
             class="mt-3">
-            <v-list class="fondoCard" dense>
-              <v-subheader :style="{color: '#005C91'}">Etiquetas</v-subheader>
+            <v-list
+              :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
+              dense
+            >
+              <v-subheader
+                :style="{ color: $vuetify.theme.themes[theme].colorText }"
+              >Etiquetas</v-subheader>
               <v-list-item-group>
                 <v-list-item v-for="etiqueta in this.listaEtiquetas" :key="etiqueta.id">
                   <v-list-item-title
-                    :style="{color: 'white'}"
+                    :style="{ color: $vuetify.theme.themes[theme].colorText }"
                     @click="buscarEtiqueta(etiqueta.id)">
                     {{ etiqueta.nombre }} {{ etiqueta.count === 1 ? `(${etiqueta.count} producto)` : `(${etiqueta.count} productos)` }}
                   </v-list-item-title>
@@ -47,9 +59,16 @@
             </v-list>
           </v-card>
           <v-card
+            :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
             class="mt-3">
-            <v-list v-if="this.categorias.length > 0" dense class="fondoCard">
-              <v-subheader :style="{color: '#005C91'}">Categorías</v-subheader>
+            <v-list
+              :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
+              v-if="this.categorias.length > 0"
+              dense
+            >
+              <v-subheader
+                :style="{ color: $vuetify.theme.themes[theme].colorText }"
+              >Categorías</v-subheader>
               <v-list-group
                 v-for="categoria in this.categorias[0]"
                 :key="categoria.id_pagina"
@@ -58,7 +77,7 @@
                 <template v-slot:activator>
                   <v-list-item-content>
                     <v-list-item-title
-                      :style="{color: '#005C91'}"
+                      :style="{ color: $vuetify.theme.themes[theme].azul }"
                       v-text="categoria.nombre"
                     ></v-list-item-title>
                   </v-list-item-content>
@@ -69,7 +88,9 @@
                   @click="buscarSubCategoria(subCategoria.jerarquia, subCategoria.nombre)"
                 >
                   <v-list-item-content>
-                    <v-list-item-title :style="{color: 'white'}" v-text="subCategoria.nombre"></v-list-item-title>
+                    <v-list-item-title
+                    :style="{ color: $vuetify.theme.themes[theme].colorText }"
+                    v-text="subCategoria.nombre"></v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
               </v-list-group>
@@ -312,6 +333,11 @@ export default {
       await axios(config).then((res) => {
         this.categorias.push(res.data);
       });
+    },
+  },
+  computed: {
+    theme() {
+      return (this.$vuetify.theme.dark) ? 'dark' : 'light';
     },
   },
   mounted() {
