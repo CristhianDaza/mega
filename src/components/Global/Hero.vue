@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import Imagen from '@/assets/header.jpg';
+import Imagen from '@/assets/header.webp';
 import Loader from '@/components/Global/Loader.vue';
 
 export default {
