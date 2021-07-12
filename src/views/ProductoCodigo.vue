@@ -165,6 +165,7 @@ import InfoProducto from '@/components/Producto/InfoProducto.vue';
 import ExistenciasProducto from '@/components/Producto/ExistenciasProducto.vue';
 import VideoProducto from '@/components/Producto/VideoProducto.vue';
 import SugeridoProducto from '@/components/Producto/SugeridoProducto.vue';
+import addCommas from '@/mixins/addCommas';
 import axios from 'axios';
 import {
   mdiCloseCircleOutline,
@@ -174,6 +175,7 @@ import ImagenProductosHorizontal from '../components/Producto/ImagenProductosHor
 
 export default {
   name: 'codigo',
+  mixins: [addCommas],
   data() {
     return {
       loader: null,
@@ -242,18 +244,6 @@ export default {
       });
 
       return codigo;
-    },
-    addCommas(nStr) {
-      // eslint-disable-next-line no-param-reassign
-      nStr += '';
-      const x = nStr.split('.');
-      let x1 = x[0];
-      const x2 = x.length > 1 ? `.${x[1]}` : '';
-      const rgx = /(\d+)(\d{3})/;
-      while (rgx.test(x1)) {
-        x1 = x1.replace(rgx, '$1.$2');
-      }
-      return x1 + x2;
     },
     imagenReferencia(imagenMediana, imagenGrande) {
       this.imagenPrincipalMediana = imagenMediana;

@@ -161,27 +161,16 @@
 </template>
 
 <script>
+import addCommas from '@/mixins/addCommas';
+
 export default {
   props: ['materiales', 'precio'],
+  mixins: [addCommas],
   computed: {
     valorVariedad() {
       return Object.values(
         // eslint-disable-next-line function-paren-newline
         this.materiales.reduce((prev, next) => Object.assign(prev, { [next.variedad]: next }), {}));
-    },
-  },
-  methods: {
-    addCommas(nStr) {
-      // eslint-disable-next-line no-param-reassign
-      nStr += '';
-      const x = nStr.split('.');
-      let x1 = x[0];
-      const x2 = x.length > 1 ? `.${x[1]}` : '';
-      const rgx = /(\d+)(\d{3})/;
-      while (rgx.test(x1)) {
-        x1 = x1.replace(rgx, '$1.$2');
-      }
-      return x1 + x2;
     },
   },
 };

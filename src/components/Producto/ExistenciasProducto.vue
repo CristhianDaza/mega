@@ -66,37 +66,19 @@
 </template>
 
 <script>
+import addCommas from '@/mixins/addCommas';
+import hextToRgb from '@/mixins/hextToRgb';
 import {
   mdiMagnify,
 } from '@mdi/js';
 
 export default {
   props: ['inventarioDisponible'],
+  mixins: [addCommas, hextToRgb],
   data() {
     return {
       mdiMagnify,
     };
-  },
-  methods: {
-    hextToRgb(hex) {
-      return hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i,
-        // eslint-disable-next-line prefer-template
-        (m, r, g, b) => '#' + r + r + g + g + b + b)
-        .substring(1).match(/.{2}/g)
-        .map((x) => parseInt(x, 16));
-    },
-    addCommas(nStr) {
-      // eslint-disable-next-line no-param-reassign
-      nStr += '';
-      const x = nStr.split('.');
-      let x1 = x[0];
-      const x2 = x.length > 1 ? `.${x[1]}` : '';
-      const rgx = /(\d+)(\d{3})/;
-      while (rgx.test(x1)) {
-        x1 = x1.replace(rgx, '$1.$2');
-      }
-      return x1 + x2;
-    },
   },
 };
 </script>
