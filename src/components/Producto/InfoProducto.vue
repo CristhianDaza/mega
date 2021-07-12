@@ -85,11 +85,11 @@ export default {
     PrecioProducto,
   },
   methods: {
-    descargarImagenes(id, familia) {
+    async descargarImagenes(id, familia) {
       this.loading = true;
       const urlBlob = `https://marpicoprod.azurewebsites.net/api/productos/imagenes/${id}?producto=${familia}`;
 
-      axios({
+      await axios({
         methods: 'GET',
         url: urlBlob,
         responseType: 'blob',
