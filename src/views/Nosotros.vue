@@ -34,7 +34,7 @@
           class="d-flex justify-space-around pa-5 mb-2">
           <v-col cols="12" md="6">
             <h1 class="text-center display-1"
-              :style="{color: $vuetify.theme.themes[theme].amarillo}"
+              :style="{color: $vuetify.theme.themes[theme].azul}"
             >Misión</h1>
             <v-divider class="mx-10 my-2"></v-divider>
             <p
@@ -44,7 +44,7 @@
           </v-col>
           <v-col cols="12" md="6">
             <h1 class="text-center display-1"
-              :style="{color: $vuetify.theme.themes[theme].amarillo}"
+              :style="{color: $vuetify.theme.themes[theme].azul}"
             >Visión</h1>
             <v-divider class="mx-10 my-2"></v-divider>
             <p
