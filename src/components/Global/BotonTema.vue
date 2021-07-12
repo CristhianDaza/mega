@@ -8,14 +8,14 @@
     >
       <span>
         <v-icon
-         color="black"
+          :style="{ color: $vuetify.theme.themes[theme].azul }"
         >
           {{ mdiWhiteBalanceSunny }}
         </v-icon>
       </span>
       <span>
         <v-icon
-          color="white"
+          :style="{ color: $vuetify.theme.themes[theme].amarillo }"
         >
           {{ mdiMoonWaningCrescent }}
         </v-icon>
