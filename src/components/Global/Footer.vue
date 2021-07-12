@@ -159,16 +159,16 @@
 
       <v-card-text
         class="py-2 text-center white--text"
-        :style="{background: $vuetify.theme.themes[theme].basemenu}">
+        :style="{background: $vuetify.theme.themes[theme].secondary}">
         <strong class="title">Megapromocionales LTDA © {{ new Date().getFullYear() }}</strong>
       </v-card-text>
       <v-card-text
-        class="text-center white"
-        :style="{color: $vuetify.theme.themes.light.basetexto}"
+        class="text-center"
+        :style="{color: $vuetify.theme.themes.themes[theme].textoNegro}"
       >
         Design by
         <a href="https://www.linkedin.com/in/cristhiandaza/" target="_blank">
-          <strong :style="{color: $vuetify.theme.themes[theme].colorPrimary}">
+          <strong :style="{color: $vuetify.theme.themes[theme].azul}">
               Cristhian Daza
             </strong>
         </a>
