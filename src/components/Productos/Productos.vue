@@ -81,7 +81,7 @@
       </template>
     </div>
     <v-card-title
-      :style="{color: 'white'}"
+      :style="{ color: $vuetify.theme.themes[theme].colorText }"
       v-if="existeUsuario" class="precio">
       <template v-if="producto.etiquetas.length > 0">
         <template v-if="producto.etiquetas[0].id == 4 || producto.etiquetas[0].id == 10 || producto.etiquetas[0].id == 20">
@@ -90,7 +90,10 @@
 
         <template v-else>
           <template v-if="producto.materiales[0].precio > producto.materiales[0].precio_descuento">
-            <span class="text-decoration-line-through mr-3 subtitle-1" style="color: black">
+            <span
+            :style="{ color: $vuetify.theme.themes[theme].textoError }"
+            class="text-decoration-line-through mr-3 subtitle-1"
+            >
               $ {{addCommas(Math.round(producto.materiales[0].precio))}} + iva
             </span>
             $ {{addCommas(Math.round(producto.materiales[0].precio_descuento))}} + iva
@@ -103,7 +106,10 @@
 
       <template v-else>
         <template v-if="producto.materiales[0].precio > producto.materiales[0].precio_descuento">
-          <span class="text-decoration-line-through mr-3 subtitle-1" style="color: black">
+          <span
+          :style="{ color: $vuetify.theme.themes[theme].textoError }"
+          class="text-decoration-line-through mr-3 subtitle-1"
+          >
             $ {{addCommas(Math.round(producto.materiales[0].precio))}} + iva
           </span>
           $ {{addCommas(Math.round(producto.materiales[0].precio_descuento))}} + iva
