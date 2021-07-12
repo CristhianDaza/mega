@@ -3,6 +3,7 @@
     class="fondoNovedades py-10"
   >
     <h1
+      v-if="this.titulos[0]"
       :class="this.$vuetify.breakpoint.xs ? 'display-1 mt-2' : 'display-2'"
       class="mb-5 pt-5 text-center font-weight-black text-uppercase"
       :style="{color: $vuetify.theme.themes[theme].colorText}"
