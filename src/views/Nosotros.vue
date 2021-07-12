@@ -1,6 +1,6 @@
 <template>
 <!-- eslint-disable max-len -->
-  <div :style="{background: $vuetify.theme.themes[theme].primary}">
+  <div>
     <Hero titulo="Nosotros"/>
     <div
       :style="{ backgroundImage:

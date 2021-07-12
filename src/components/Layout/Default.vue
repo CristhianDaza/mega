@@ -1,6 +1,6 @@
 <template>
 <div>
-  <v-app class="fondoApp">
+  <v-app :style="{ background: $vuetify.theme.themes[theme].primary }">
     <Cabecera />
     <MenuPrincipal />
     <v-main>

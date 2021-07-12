@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app-bar
-      style="background: rgba(0,0,0,.6)"
+      :style="{background: $vuetify.theme.themes[theme].secondary}"
       flat
     >
       <v-layout>

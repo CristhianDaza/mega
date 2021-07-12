@@ -1,5 +1,4 @@
 <template>
-  <div>
 <!-- eslint-disable max-len -->
   <div v-if="this.productoCodigo.length > 0">
     <v-container>
@@ -190,7 +189,6 @@
         <Loader />
       </v-row>
     </v-container>
-  </div>
   </div>
 </template>
 

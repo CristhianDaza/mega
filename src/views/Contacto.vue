@@ -1,5 +1,5 @@
 <template>
-  <div :style="{ background: $vuetify.theme.themes[theme].primary }">
+  <div>
     <Hero titulo="Contacto"/>
     <div :style="{ backgroundImage:
         `url(${this.$vuetify.theme.dark ? contactoDark : contacto })` }"

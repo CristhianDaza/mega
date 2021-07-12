@@ -1,5 +1,5 @@
 <template>
-  <div :style="{ background: $vuetify.theme.themes[theme].primary }">
+  <div>
     <Hero titulo="Catálogos"/>
     <v-container v-if="this.catalogos.length > 0">
       <div

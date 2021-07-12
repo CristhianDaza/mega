@@ -1,5 +1,4 @@
 <template>
-  <!-- <div class="fondoServicio contenedorServicios"> -->
   <div
     :style="{backgroundColor: $vuetify.theme.themes[theme].secondary}"
     class="contenedorServicios"

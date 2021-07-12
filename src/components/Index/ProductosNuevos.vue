@@ -1,6 +1,5 @@
 <template>
   <div
-    :style="{background: $vuetify.theme.themes[theme].primary}"
     class="fondoNovedades py-10"
   >
     <h1
