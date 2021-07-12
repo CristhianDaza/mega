@@ -23,15 +23,6 @@
               class="imagenReferencia"
               contain
             >
-              <template v-slot:placeholder>
-                <v-row
-                  class="fill-height ma-0"
-                  align="center"
-                  justify="center"
-                >
-                  <Loader />
-                </v-row>
-              </template>
             </v-img>
           </v-card>
         </v-row>
@@ -41,7 +32,6 @@
 </template>
 
 <script>
-import Loader from '@/components/Global/Loader.vue';
 import {
   mdiChevronRight,
   mdiChevronLeft,
@@ -56,9 +46,6 @@ export default {
     };
   },
   props: ['imagenes'],
-  components: {
-    Loader,
-  },
 };
 </script>
 

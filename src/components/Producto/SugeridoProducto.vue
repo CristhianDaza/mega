@@ -1,16 +1,14 @@
 <template>
 <!-- eslint-disable max-len -->
-  <div class="fondoCard pa-2">
-    <h1 :style="{color: '#005C91'}" class="text-center">
+  <div class="pa-2">
+    <h1 :style="{ color: $vuetify.theme.themes[theme].azul }" class="text-center">
       Productos Sugeridos
     </h1>
     <v-divider class="mx-10"></v-divider>
-    <h3 v-if="sugerencia.length === 0" class="text-center white--text">
-      No se encontraron productos
-    </h3>
     <v-row class="mt-3" v-if="sugerencia.length > 0">
       <v-col cols="12" md="6" v-for="producto in sugerencia" :key="producto.familia">
         <v-card
+          :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
           outlined
           class="mx-auto tarjetaProducto">
           <v-card-text class="pa-0">
@@ -36,35 +34,39 @@
               </v-img>
             </router-link>
           </v-card-text>
-              <v-card-title
-            class="text-center text-subtitle-2 white--text"
-          >
+            <v-card-title
+              :style="{ color: $vuetify.theme.themes[theme].colorText }"
+              class="text-center text-subtitle-2"
+            >
             {{ producto.producto.descripcion_comercial }}
           </v-card-title>
           <v-card-subtitle
-            class="white--text"
+            :style="{ color: $vuetify.theme.themes[theme].colorText }"
           >
             {{ producto.producto.familia }}
           </v-card-subtitle>
           <v-card-text class="text-center">
             <div
-              class="error--text"
+              :style="{ color: $vuetify.theme.themes[theme].textoError }"
               v-if="producto.inventario < 10"
             >
                 Agotado en {{producto.color_nombre}}.
             </div>
             <div
               v-else
-              class="white--text">
+              :style="{ color: $vuetify.theme.themes[theme].colorText }"
+            >
                 <span class="font-weight-black"
-                :style="{color: '#005C91'}">Inventario:</span> {{addCommas(producto.inventario)}} color {{producto.color_nombre}}.
+                :style="{ color: $vuetify.theme.themes[theme].azul }"
+              >Inventario:</span> {{addCommas(producto.inventario)}} color {{producto.color_nombre}}.
             </div>
             <div
               v-if="producto.en_transito > 1"
-              class="white--text"
+              :style="{ color: $vuetify.theme.themes[theme].colorText }"
             >
                 <span class="font-weight-black"
-                :style="{color: '#005C91'}">En transito:</span> {{addCommas(producto.en_transito)}} unidades.
+                :style="{ color: $vuetify.theme.themes[theme].azul }"
+              >En transito:</span> {{addCommas(producto.en_transito)}} unidades.
             </div>
           </v-card-text>
           <v-divider class="mx-5"></v-divider>
@@ -111,12 +113,6 @@ export default {
 <style>
   .tarjetaProducto {
     transition: all .4s;
-    background: rgba( 255, 255, 255, 0.25 ) !important;
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 4px );
-    -webkit-backdrop-filter: blur( 4px );
-    border-radius: 10px !important;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
   }
   .tarjetaProducto:hover {
     transform: translateY(-15px);

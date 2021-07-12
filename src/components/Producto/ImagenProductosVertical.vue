@@ -2,7 +2,7 @@
   <div>
     <button @click.prevent="slidePrev" class="iconVertical pb-3">
       <v-icon
-        color="white"
+        :style="{ color: $vuetify.theme.themes[theme].azul }"
       >
         {{mdiArrowUpBoldCircle}}
       </v-icon>
@@ -21,24 +21,12 @@
           class="imgSlideVertical"
           aspect-ratio="1.4"
           :src="imagen.imagen.file_sm">
-            <template v-slot:placeholder>
-              <v-row
-                class="fill-height ma-0"
-                align="center"
-                justify="center"
-              >
-                <Loader />
-              </v-row>
-            </template>
           </v-img>
       </slide>
-      <!-- <hooper-navigation
-        slot="hooper-addons"
-      ></hooper-navigation> -->
     </Hooper>
     <button @click.prevent="slideNext" class="iconVertical">
       <v-icon
-        color="white"
+        :style="{ color: $vuetify.theme.themes[theme].azul }"
       >
         {{mdiArrowDownBoldCircle}}
       </v-icon>
@@ -47,9 +35,7 @@
 </template>
 
 <script>
-import Loader from '@/components/Global/Loader.vue';
 import { mdiArrowUpBoldCircle, mdiArrowDownBoldCircle } from '@mdi/js';
-// import { Hooper, Slide, Navigation as HooperNavigation } from 'hooper';
 import { Hooper, Slide } from 'hooper';
 import 'hooper/dist/hooper.css';
 
@@ -70,8 +56,6 @@ export default {
   components: {
     Hooper,
     Slide,
-    // HooperNavigation,
-    Loader,
   },
   methods: {
     slidePrev() {

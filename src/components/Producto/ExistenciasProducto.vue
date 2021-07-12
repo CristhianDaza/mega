@@ -1,13 +1,21 @@
 <template>
 <!-- eslint-disable max-len -->
-  <v-simple-table class="fondoCard">
+  <v-simple-table>
     <template v-slot:default>
       <thead>
         <tr>
-          <th  :style="{color: '#005C91'}">COLOR DEL<br> PRODUCTO</th>
-          <th  :style="{color: '#005C91'}"></th>
-          <th  :style="{color: '#005C91'}">UNIDADES<br>DISPONIBLES</th>
-          <th :style="{color: '#005C91'}">PRODUCTOS<br>SUGERIDOS</th>
+          <th
+          :style="{ color: $vuetify.theme.themes[theme].azul }"
+          >COLOR DEL<br> PRODUCTO</th>
+          <th
+          :style="{ color: $vuetify.theme.themes[theme].azul }"
+          ></th>
+          <th
+          :style="{ color: $vuetify.theme.themes[theme].azul }"
+          >UNIDADES<br>DISPONIBLES</th>
+          <th
+          :style="{ color: $vuetify.theme.themes[theme].azul }"
+          >PRODUCTOS<br>SUGERIDOS</th>
         </tr>
       </thead>
       <tbody>
@@ -33,15 +41,26 @@
                 ></div>
               </template>
             </div>
-            <div class="mt-3 white--text">
+            <div
+              :style="{ color: $vuetify.theme.themes[theme].colorText }"
+              class="mt-3"
+            >
               {{existencia.color_nombre}}
             </div>
           </td>
-          <td class="white--text">
+          <td
+            :style="{ color: $vuetify.theme.themes[theme].colorText }"
+          >
             {{existencia.variedad}}
           </td>
-          <td class="error--text" v-if="existencia.inventario < 10">Agotado</td>
-          <td v-else class="white--text">{{addCommas(Math.round(existencia.inventario))}}</td>
+          <td
+            :style="{ color: $vuetify.theme.themes[theme].textoError }"
+            v-if="existencia.inventario < 10"
+          >Agotado</td>
+          <td
+            :style="{ color: $vuetify.theme.themes[theme].colorText }"
+            v-else
+          >{{addCommas(Math.round(existencia.inventario))}}</td>
           <td>
             <v-tooltip right>
               <template v-slot:activator="{on, attrs}">

@@ -2,7 +2,7 @@
   <div>
     <img
       v-if="imagenPrincipalMediana === ''"
-      class="fotoTarjeta border-black elevation-18"
+      class="fotoTarjeta border-black elevation-5"
       @click.stop="dialog = true"
       :src="producto.imagenes[0].imagen.file_md"
       :alt="producto.descripcion_comercial"
@@ -10,13 +10,15 @@
 
     <img
       v-else
-      class="fotoTarjeta border-black elevation-18"
+      class="fotoTarjeta border-black elevation-5"
       @click.stop="dialog = true"
       :src="imagenPrincipalMediana"
       :alt="producto.descripcion_comercial"
     />
       <p
-        class="mt-5 white--text font-weight-bold">
+        :style="{ color: $vuetify.theme.themes[theme].azul }"
+        class="mt-5 font-weight-bold"
+      >
           El color de los artículos pueden variar según la calibración y resolución de la pantalla.
         </p>
     <v-card-actions v-if="producto.etiquetas.length > 0">
@@ -27,7 +29,7 @@
             :key="etiqueta.id"
           >
             <img
-              width="150px"
+              width="100px"
               :src="etiqueta.imagen.file_sm"
               :alt="etiqueta.nombre"
               >
@@ -36,12 +38,12 @@
       </v-row>
     </v-card-actions>
     <div v-if="producto.caracteristicas.length > 0" class="mt-8">
-      <h1
-        class="headline"
-        :style="{color: '#005C91'}"
+      <h2
+        class="h6"
+        :style="{ color: $vuetify.theme.themes[theme].azul }"
         >
           Características:
-        </h1>
+        </h2>
       <v-row class="ml-1">
         <template v-for="caracteristica in producto.caracteristicas">
           <v-tooltip top :key="caracteristica.id">
@@ -60,14 +62,16 @@
       </v-row>
     </div>
     <v-card
-      v-if="this.textoInfo !== ''" class="mt-5 fondoInfo">
+      v-if="this.textoInfo !== ''" class="mt-5">
       <v-card-text class="pb-0">
         <p
-          class="white--text"
+          :style="{ color: $vuetify.theme.themes[theme].colorText }"
         >{{textoInfo}}</p>
       </v-card-text>
       <v-card-actions class="pt-0">
-        <v-btn color="white" block outlined small @click="cerrarTextoInfo">Cerrar</v-btn>
+        <v-btn
+        :style="{ color: $vuetify.theme.themes[theme].azul }"
+        block outlined small @click="cerrarTextoInfo">Cerrar</v-btn>
       </v-card-actions>
     </v-card>
     <v-dialog
@@ -135,13 +139,5 @@ export default {
   .border-black {
     border: 2px solid rgb(197, 197, 197);
     border-radius: 10px;
-  }
-  .fondoInfo {
-      background: rgba( 255, 255, 255, 0.25 ) !important;
-      box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ) !important;
-      backdrop-filter: blur( 4px ) !important;
-      -webkit-backdrop-filter: blur( 4px ) !important;
-      border-radius: 10px !important;
-      border: 1px solid rgba( 255, 255, 255, 0.18 ) !important;
   }
 </style>
