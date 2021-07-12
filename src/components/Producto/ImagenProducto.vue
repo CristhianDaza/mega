@@ -62,7 +62,8 @@
       </v-row>
     </div>
     <v-card
-      v-if="this.textoInfo !== ''" class="mt-5">
+      :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
+      v-if="this.textoInfo !== ''" class="mt-5 elevation-10">
       <v-card-text class="pb-0">
         <p
           :style="{ color: $vuetify.theme.themes[theme].colorText }"
