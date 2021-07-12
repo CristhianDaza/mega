@@ -1,24 +1,24 @@
 <template>
   <div>
     <v-app-bar
-      :style="{background: $vuetify.theme.themes[theme].secondary}"
+      :style="{background: $vuetify.theme.themes.dark.secondary}"
       flat
     >
       <v-layout>
 
         <div class="d-flex d-lg-none">
           <v-app-bar-nav-icon
-            :style="{color: $vuetify.theme.themes.dark.basetexto}"
+            :style="{color: $vuetify.theme.themes[theme].textoBlanco}"
             @click.stop="drawer = !drawer"
           ></v-app-bar-nav-icon>
         </div>
 
-        <div class="d-none d-lg-flex" v-for="menu in menus" :key="menu.uid">
+        <div class="d-none d-lg-flex align-center" v-for="menu in menus" :key="menu.uid">
           <v-btn
-            :style="{color: $vuetify.theme.themes.dark.basetexto}"
+            :style="{color: $vuetify.theme.themes[theme].textoBlanco}"
             text
-            large
             exact
+            small
             :to="menu.link"
           >
             <span>{{menu.nombre}}</span>
@@ -43,7 +43,7 @@
         <v-divider class="mx-5"></v-divider>
         <v-list-item-group
           v-model="group"
-          :style="{color: $vuetify.theme.themes.dark.basetexto}"
+          :style="{color: $vuetify.theme.themes[theme].textoBlanco}"
           v-for="menu in menus"
           :key="menu.uid"
         >

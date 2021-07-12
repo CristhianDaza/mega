@@ -13,6 +13,7 @@
     dense
     hide-details="auto"
     color="primary"
+    dark
     id="buscador"
   ></v-text-field>
 </template>
