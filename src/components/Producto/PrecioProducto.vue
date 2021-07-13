@@ -19,7 +19,9 @@
           <template
             v-if="valorVariedad.length > 1"
           >
-            <v-simple-table>
+            <v-simple-table
+              :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
+            >
               <template v-slot:default>
                 <thead>
                   <tr>
@@ -60,7 +62,9 @@
 
           <template v-else>
             <template v-if="valorVariedad.length > 1">
-              <v-simple-table>
+              <v-simple-table
+                :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
+              >
                 <template v-slot:default>
                   <thead>
                     <tr>
@@ -131,7 +135,7 @@
         <template v-else>
           <template v-if="valorVariedad.length > 1">
             <v-simple-table
-            :style="{background: $vuetify.theme.themes[theme].basebackground}"
+            :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
             >
               <template v-slot:default>
                 <thead>
