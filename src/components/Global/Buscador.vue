@@ -4,19 +4,18 @@
     v-on:keyup.enter="buscarProducto(busqueda)"
     @click:prepend-inner="buscarProducto(busqueda)"
     clearable
-    class="mx-2"
-    placeholder="Buscar..."
+    label="Buscar..."
     :prepend-inner-icon="mdiMagnify"
     outlined
-    rounded
-    filled
     dense
     hide-details="auto"
-    color="primary"
-    dark
     id="buscador"
+    color="amarillo"
+    dark
+    class="d-flex align-center ml-2"
   ></v-text-field>
 </template>
+    <!-- v-bind="this.$vuetify.theme.dark ? '' : dark " -->
 
 <script>
 import router from '@/router';
