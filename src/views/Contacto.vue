@@ -5,7 +5,7 @@
         `url(${this.$vuetify.theme.dark ? contactoDark : contacto })` }"
         class="fondoContacto"
       >
-      <v-container>
+      <v-container class="pt-0">
         <div class="links">
           <ul>
             <li>

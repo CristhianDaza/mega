@@ -2,7 +2,7 @@
 <!-- eslint-disable max-len -->
   <div>
     <Hero titulo="Categorías"/>
-    <v-container>
+    <v-container class="pt-0">
       <div
         class="links"
       >
@@ -29,7 +29,7 @@
         </ul>
       </div>
         <div v-if="this.categorias.length > 0">
-          <v-row class="my-5">
+          <v-row>
             <v-col
               cols="12"
               sm="6"

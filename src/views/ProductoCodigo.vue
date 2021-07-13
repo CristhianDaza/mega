@@ -1,7 +1,7 @@
 <template>
 <!-- eslint-disable max-len -->
   <div v-if="this.productoCodigo.length > 0">
-    <v-container>
+    <v-container class="pt-0">
       <div class="links">
         <ul
           :style="{ color: $vuetify.theme.themes[theme].colorText }"

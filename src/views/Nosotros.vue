@@ -7,26 +7,26 @@
         `url(${this.$vuetify.theme.dark ? nosotrosDark : nosotros })` }"
         class="fondoNosotros"
     >
+      <v-container class="py-0">
+        <div
+          class="links"
+        >
+          <ul>
+            <li>
+              <router-link
+                exact
+                to="/"
+                class="links__item"
+              >INICIO</router-link>
+            </li>
+            <li class="links__divider">/</li>
+            <li>
+              NOSOTROS
+            </li>
+          </ul>
+        </div>
+      </v-container>
       <v-container>
-        <v-breadcrumbs :items="items">
-          <div
-            class="links"
-          >
-            <ul>
-              <li>
-                <router-link
-                  exact
-                  to="/"
-                  class="links__item"
-                >INICIO</router-link>
-              </li>
-              <li class="links__divider">/</li>
-              <li>
-                NOSOTROS
-              </li>
-            </ul>
-          </div>
-        </v-breadcrumbs>
         <v-row
           :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
           class="d-flex justify-space-around pa-5 mb-2">

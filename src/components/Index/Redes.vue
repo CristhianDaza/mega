@@ -1,18 +1,19 @@
 <template>
   <div
     class="text-center">
-    <v-container>
-      <v-row class="my-3">
+    <v-container class="pt-0">
+      <v-row>
         <v-col
           cols="12"
           sm="6"
           md="3"
           v-for="red in redes"
           :key="red.id"
+          class="pt-0"
         >
           <a :href="red.http" target="_blank">
             <v-card
-              class="pa-5"
+              class="pa-5 mt-0"
               :style="red.style"
             >
               <v-avatar size="50" tile>

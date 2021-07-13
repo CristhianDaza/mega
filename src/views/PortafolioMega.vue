@@ -1,7 +1,7 @@
 <template>
   <div>
     <Hero titulo="Portafolio"/>
-    <v-container>
+    <v-container class="pt-0">
       <div class="links">
         <ul>
           <li>

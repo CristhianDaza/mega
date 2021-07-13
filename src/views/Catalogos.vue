@@ -1,7 +1,7 @@
 <template>
   <div>
     <Hero titulo="Catálogos"/>
-    <v-container v-if="this.catalogos.length > 0">
+    <v-container class="pt-0" v-if="this.catalogos.length > 0">
       <div
         class="links"
       >

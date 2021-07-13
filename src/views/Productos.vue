@@ -2,7 +2,7 @@
 <!-- eslint-disable max-len -->
   <div>
     <Hero :titulo="titulo"/>
-    <v-container>
+    <v-container class="pt-0">
       <div class="links">
         <ul>
           <li>
@@ -18,7 +18,7 @@
           </li>
         </ul>
       </div>
-      <v-row class="my-3">
+      <v-row>
         <v-col cols="12" sm="4" md="3">
           <v-card
             v-if="this.productos.length > 0"
