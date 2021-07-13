@@ -166,7 +166,7 @@ export default {
 
 <style>
 .tarjetaCategoria {
-  min-height: 350px;
+  min-height: 360px;
 }
 
 .tituloCategoria a {
