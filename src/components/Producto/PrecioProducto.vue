@@ -196,11 +196,11 @@
 
     <v-card-subtitle class="px-0 pt-5">
       <span
-        :style="{ color: $vuetify.theme.themes[theme].colorText }"
+        :style="{ color: $vuetify.theme.themes[theme].azul }"
         class="font-weight-black"
       >
         Última actualización del precio:</span> <span
-
+          :style="{ color: $vuetify.theme.themes[theme].colorText }"
         >{{moment(precio.materiales[0].ultima_actualizacion_precio).locale('es-CO').format('LL')}}</span>
     </v-card-subtitle>
   </v-card-text>
