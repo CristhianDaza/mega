@@ -64,7 +64,7 @@ export default {
 
 .imagenInfo {
   border-radius: 10px;
-  width: 300px;
+  width: 270px;
   transition: all .3s;
 }
 
@@ -80,7 +80,7 @@ export default {
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 800px;
+  height: 670px;
 }
 
 .slider .barrier {
@@ -101,7 +101,7 @@ export default {
 }
 
 #infinite .barrier .lane {
-  width: calc(4200px)
+  width: calc(5220px)
 }
 
 #infinite .barrier .lane .car {
@@ -111,7 +111,7 @@ export default {
 
 @keyframes translateInfinite {
   100% {
-    transform: translateX(calc(-2100px));
+    transform: translateX(calc(-2610px));
   }
 }
 </style>
