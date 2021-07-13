@@ -11,7 +11,6 @@
         <v-breadcrumbs :items="items">
           <div
             class="links"
-            :style="{ color: $vuetify.theme.themes[theme].colorText }"
           >
             <ul>
               <li>
@@ -19,7 +18,6 @@
                   exact
                   to="/"
                   class="links__item"
-                  :style="{ color: $vuetify.theme.themes[theme].colorText }"
                 >INICIO</router-link>
               </li>
               <li class="links__divider">/</li>

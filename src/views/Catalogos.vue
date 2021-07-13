@@ -5,10 +5,9 @@
       <div
         class="links"
       >
-        <ul :style="{ color: $vuetify.theme.themes[theme].colorText }">
+        <ul>
           <li>
             <router-link
-              :style="{ color: $vuetify.theme.themes[theme].colorText }"
               exact
               to="/"
               class="links__item"

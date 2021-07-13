@@ -8,21 +8,18 @@
         >
           <li>
             <router-link
-            :style="{ color: $vuetify.theme.themes[theme].colorText }"
             exact
             to="/" class="links__item">INICIO</router-link>
           </li>
           <li class="links__divider">/</li>
           <li>
             <router-link
-            :style="{ color: $vuetify.theme.themes[theme].colorText }"
             exact
             to="/productos" class="links__item">PRODUCTOS</router-link>
           </li>
           <li class="links__divider">/</li>
           <li>
             <router-link
-            :style="{ color: $vuetify.theme.themes[theme].colorText }"
             exact
             :to="`/productos?categoria=${productoCodigo[0].subcategoria_1.categoria.jerarquia}&titulo=${productoCodigo[0].subcategoria_1.categoria.nombre}`" class="links__item">{{this.categoriaPrincipal.toUpperCase()}}</router-link>
           </li>

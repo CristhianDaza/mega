@@ -7,13 +7,12 @@
       >
       <v-container>
         <div class="links">
-          <ul :style="{ color: $vuetify.theme.themes[theme].colorText }">
+          <ul>
             <li>
               <router-link
-                :style="{ color: $vuetify.theme.themes[theme].colorText }"
                 exact
                 to="/"
-                class="links__item"
+                class="links__item links__itme_amarillo"
               >INICIO</router-link>
             </li>
             <li class="links__divider">/</li>

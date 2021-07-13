@@ -5,19 +5,26 @@
     <v-container>
       <div
         class="links"
-        :style="{ color: $vuetify.theme.themes[theme].colorText }"
       >
         <ul>
           <li>
-            <router-link exact to="/" class="links__item">INICIO</router-link>
+            <router-link
+              exact
+              to="/"
+              class="links__item"
+            >INICIO</router-link>
           </li>
           <li class="links__divider">/</li>
           <li>
-            <router-link exact to="/productos" class="links__item">PRODUCTOS</router-link>
+            <router-link
+              exact
+              to="/productos"
+              class="links__item"
+            >PRODUCTOS</router-link>
           </li>
           <li class="links__divider">/</li>
           <li>
-            CATEGORÍAS
+            CATÁLOGOS
           </li>
         </ul>
       </div>
@@ -157,16 +164,16 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .tarjetaCategoria {
   min-height: 350px;
 }
 
-a {
+.tituloCategoria a {
   color: inherit !important;
   transition: color .3s;
 }
-a:hover {
+.tituloCategoria a:hover {
   color:  #005C91 !important;
 }
 .tituloCategoria {
