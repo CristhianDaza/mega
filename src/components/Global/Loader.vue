@@ -1,6 +1,9 @@
 <template>
   <div class="loader">
-    <div class="face">
+    <div
+      class="face"
+      :class="this.$vuetify.theme.dark ? 'dark' : '' "
+    >
       <div class="circle"></div>
     </div>
     <div class="face">
@@ -35,6 +38,10 @@
     border-width: 0.2em 0.2em 0em 0em;
     --deg: -45deg;
     animation-direction: normal;
+}
+
+.loader .face.dark:nth-child(1) {
+    color: #005C91;
 }
 
 .loader .face:nth-child(2) {
