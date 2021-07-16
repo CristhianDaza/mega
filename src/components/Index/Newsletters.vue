@@ -34,8 +34,8 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import newsletter from '@/assets/newsletter.svg';
-import newsletterDark from '@/assets/newsletter-dark.svg';
+import newsletter from '@/assets/img/newsletter.svg';
+import newsletterDark from '@/assets/img/newsletter-dark.svg';
 
 export default {
   name: 'Newsletters',

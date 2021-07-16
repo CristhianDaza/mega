@@ -31,8 +31,8 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import VideoProm from '@/assets/videoProm.svg';
-import VideoPromDark from '@/assets/videoProm-dark.svg';
+import VideoProm from '@/assets/img/videoProm.svg';
+import VideoPromDark from '@/assets/img/videoProm-dark.svg';
 
 export default {
   name: 'videoPromocion',

@@ -34,8 +34,8 @@ import Hero from '@/components/Global/Hero.vue';
 import FormularioContacto from '@/components/Index/FormularioContacto.vue';
 import Redes from '@/components/Index/Redes.vue';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
-import contacto from '@/assets/contacto.svg';
-import contactoDark from '@/assets/contacto-dark.svg';
+import contacto from '@/assets/img/contacto.svg';
+import contactoDark from '@/assets/img/contacto-dark.svg';
 
 export default {
   name: 'Contacto',

@@ -48,8 +48,8 @@
 </template>
 
 <script>
-import imgHeroDark from '@/assets/hero-dark.svg';
-import imgHero from '@/assets/hero.svg';
+import imgHeroDark from '@/assets/img/hero-dark.svg';
+import imgHero from '@/assets/img/hero.svg';
 
 export default {
   name: 'HeroPrincipal',

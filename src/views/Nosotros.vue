@@ -59,8 +59,8 @@
 <script>
 import Hero from '@/components/Global/Hero.vue';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
-import nosotros from '@/assets/nosotros.svg';
-import nosotrosDark from '@/assets/nosotros-dark.svg';
+import nosotros from '@/assets/img/nosotros.svg';
+import nosotrosDark from '@/assets/img/nosotros-dark.svg';
 
 export default {
   name: 'Nosotros',
