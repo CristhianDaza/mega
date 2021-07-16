@@ -34,7 +34,7 @@ const redes = [
     id: 4,
     clase: 'whatsapp',
     nombre: 'WhatsApp',
-    http: 'https://api.whatsapp.com/send?phone=573159275144&text=Hola%20quisiera%20informaci%c3%b3n&source=&data=&app_absent=',
+    http: 'https://api.whatsapp.com/send?phone=573159274144&text=Hola%20quisiera%20informaci%c3%b3n&source=&data=&app_absent=',
     icono: mdiWhatsapp,
     url: '315 927 4144',
     style: 'background-color: #4AC959 !important',
