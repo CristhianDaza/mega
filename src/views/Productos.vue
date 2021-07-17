@@ -71,7 +71,11 @@
               <v-list-item-group>
                 <v-card-subtitle class="d-flex flex-wrap pt-0">
                   <template v-for="color in this.listaColores">
-                    <div class="contenedor_color" :key="color.id">
+                    <div
+                      class="contenedor_color"
+                      :key="color.id"
+                      @click="buscarColor(color.id)"
+                    >
                       <v-tooltip bottom dense>
                         <template v-slot:activator="{on, attrs}">
                           <div
@@ -244,6 +248,7 @@ export default {
       inventario: Number(this.$route.query.inventario) || '',
       busqueda: this.$route.query.busqueda || '',
       titulo: this.$route.query.titulo || 'Productos',
+      color: this.$route.query.color || '',
       infoProductos: [],
       totalPaginas: 0,
       porPagina: Number(this.$route.query.porPagina) || 16,
@@ -283,8 +288,9 @@ export default {
       etiqueta,
       inventario,
       busqueda,
+      color,
     ) {
-      const url = `https://marpicoprod.azurewebsites.net/api/productos/?page_size=${porPagina}&page=${pagina}&categoria=${categoria}&subcategoria=${subCategoria}&order=paginacion_web&etiqueta=${etiqueta}&inventario=${inventario}&search=${busqueda}`;
+      const url = `https://marpicoprod.azurewebsites.net/api/productos/?page_size=${porPagina}&page=${pagina}&categoria=${categoria}&subcategoria=${subCategoria}&order=paginacion_web&etiqueta=${etiqueta}&inventario=${inventario}&search=${busqueda}${color ? `&color=${color}` : ''}`;
       const config = {
         method: 'get',
         url,
@@ -364,6 +370,18 @@ export default {
         },
       });
     },
+    buscarColor(color) {
+      this.$router.push({
+        path: this.$route.path,
+        query: {
+          categoria: this.$route.query.categoria,
+          subCategoria: this.$route.query.subCategoria,
+          etiqueta: this.$route.query.etiqueta,
+          titulo: this.$route.query.titulo,
+          color,
+        },
+      });
+    },
     async getCategorias() {
       const url = 'https://marpicoprod.azurewebsites.net/api/categorias/';
       const config = {
@@ -388,6 +406,7 @@ export default {
       this.etiqueta,
       this.inventario,
       this.busqueda,
+      this.color,
     );
     this.getCategorias();
   },
