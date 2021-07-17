@@ -58,6 +58,53 @@
             </v-list>
           </v-card>
           <v-card
+            v-if="this.listaColores.length > 0"
+            :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
+            class="mt-3">
+            <v-list
+              :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
+              dense
+            >
+              <v-subheader
+                :style="{ color: $vuetify.theme.themes[theme].colorText }"
+              >Filtrar por color</v-subheader>
+              <v-list-item-group>
+                <v-card-subtitle class="d-flex flex-wrap pt-0">
+                  <template v-for="color in this.listaColores">
+                    <div class="contenedor_color" :key="color.id">
+                      <v-tooltip bottom dense>
+                        <template v-slot:activator="{on, attrs}">
+                          <div
+                            v-if="color.hex_2 !== null && color.hex_3 !== null"
+                            v-bind="attrs"
+                            v-on="on"
+                            :style="`background: linear-gradient(rgb(${hextToRgb(color.hex_1)[0]}, ${hextToRgb(color.hex_1)[1]}, ${hextToRgb(color.hex_1)[2]}) 0%, rgb(${hextToRgb(color.hex_2)[0]}, ${hextToRgb(color.hex_2)[1]}, ${hextToRgb(color.hex_2)[2]}) 48%, rgb(${hextToRgb(color.hex_2)[0]}, ${hextToRgb(color.hex_2)[1]}, ${hextToRgb(color.hex_2)[2]}) 62%, rgb(${hextToRgb(color.hex_3)[0]}, ${hextToRgb(color.hex_3)[1]}, ${hextToRgb(color.hex_3)[2]}) 66%, rgb(${hextToRgb(color.hex_3)[0]}, ${hextToRgb(color.hex_3)[1]}, ${hextToRgb(color.hex_3)[2]}) 100%)`"
+                          ></div>
+                          <div
+                            v-else-if="color.hex_2 !== null && color.hex_3 === null"
+                            v-bind="attrs"
+                            v-on="on"
+                            :style="`background: linear-gradient(rgb(${hextToRgb(color.hex_1)[0]}, ${hextToRgb(color.hex_1)[1]}, ${hextToRgb(color.hex_1)[2]}) 40%, rgb(${hextToRgb(color.hex_2)[0]}, ${hextToRgb(color.hex_2)[1]}, ${hextToRgb(color.hex_2)[2]}) 50%)`"
+                          >
+                          </div>
+                          <div
+                            v-else
+                            v-bind="attrs"
+                            v-on="on"
+                            :style="'background:' + color.hex_1"
+                          ></div>
+                        </template>
+                        <span>
+                          {{color.nombre}}
+                        </span>
+                      </v-tooltip>
+                    </div>
+                  </template>
+                </v-card-subtitle>
+              </v-list-item-group>
+            </v-list>
+          </v-card>
+          <v-card
             :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
             class="mt-3">
             <v-list
@@ -178,10 +225,11 @@ import axios from 'axios';
 import Hero from '@/components/Global/Hero.vue';
 import Loader from '@/components/Global/Loader.vue';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
+import hextToRgb from '@/mixins/hextToRgb';
 
 export default {
   name: 'productosmega',
-  mixins: [layoutPrincipal],
+  mixins: [layoutPrincipal, hextToRgb],
   data() {
     return {
       listaCategorias: true,
@@ -217,6 +265,7 @@ export default {
         },
       ],
       listaEtiquetas: [],
+      listaColores: [],
       nombreCategoria: 'Productos',
     };
   },
@@ -249,6 +298,7 @@ export default {
         this.infoProductos = res.data;
         this.totalPaginas = Math.ceil((this.infoProductos.count / this.porPagina));
         this.listaEtiquetas = res.data.filtros.etiquetas;
+        this.listaColores = res.data.filtros.colores;
       });
     },
     cambiarPagina(pagina) {
