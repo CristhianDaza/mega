@@ -119,6 +119,16 @@
         </template>
       </template>
     </v-card-title>
+    <v-card-subtitle class="pb-1 pt-0">
+      <template v-if="totalInventario(producto.materiales) > 10">
+        <span class="font-weight-bold">Inventario:</span> {{ addCommas(totalInventario(producto.materiales)) }} unidades
+      </template>
+      <template v-else>
+        <span
+          :style="{ color: $vuetify.theme.themes[theme].textoError }"
+        >Agotado</span>
+      </template>
+    </v-card-subtitle>
     <v-divider class="mx-5"></v-divider>
     <v-card-actions>
     <v-btn
@@ -143,6 +153,15 @@ export default {
   mixins: [addCommas, hextToRgb],
   computed: {
     ...mapGetters(['existeUsuario']),
+  },
+  methods: {
+    totalInventario(productos) {
+      let total = 0;
+      productos.forEach((producto) => {
+        total += producto.inventario;
+      });
+      return total;
+    },
   },
 };
 </script>
