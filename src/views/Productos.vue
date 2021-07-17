@@ -319,6 +319,7 @@ export default {
           inventario: this.$route.query.inventario,
           busqueda: this.$route.query.busqueda,
           titulo: this.$route.query.titulo,
+          color: this.$route.query.color,
         },
       });
     },
@@ -334,6 +335,7 @@ export default {
           inventario: this.$route.query.inventario,
           busqueda: this.$route.query.busqueda,
           titulo: this.$route.query.titulo,
+          color: this.$route.query.color,
         },
       });
     },
@@ -356,6 +358,7 @@ export default {
           inventario,
           busqueda: this.$route.query.busqueda,
           titulo: this.$route.query.titulo,
+          color: this.$route.query.color,
         },
       });
     },
@@ -367,6 +370,7 @@ export default {
           subCategoria: this.$route.query.subCategoria,
           etiqueta,
           titulo: this.$route.query.titulo,
+          color: this.$route.query.color,
         },
       });
     },
