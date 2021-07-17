@@ -147,29 +147,7 @@ export default {
 };
 </script>
 
-<style scoed>
-.contenedor_color {
-  position: relative;
-  height: 18px;
-  max-height: 18px;
-  width: 18px;
-  margin: 2px 4px;
-  border-radius: 100%;
-  user-select: none;
-  overflow: hidden;
-  cursor: pointer;
-  border: .2px solid gray;
-}
-.contenedor_color div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-}
-.circuloProducto {
-  cursor: auto;
-}
+<style>
 .tarjetaProductos {
   transition: all .6s;
 }
