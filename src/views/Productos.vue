@@ -46,7 +46,7 @@
                   block
                   outlined
                 >
-                  Filtrar Inventario
+                  Filtrar
                 </v-btn>
               </v-list>
             </v-card-text>
