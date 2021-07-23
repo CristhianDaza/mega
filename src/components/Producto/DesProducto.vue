@@ -48,7 +48,7 @@
         v-if="descripcion.tecnica_marca_descripcion !== null">
         <strong class="font-weight-black"
         :style="{ color: $vuetify.theme.themes[theme].azul }"
-        >MARCA: </strong>{{ descripcion.tecnica_marca_descripcion }}
+        >MARCA: </strong>{{ marcaProducto }}
       </p>
       <p
         :style="{ color: $vuetify.theme.themes[theme].colorText }"
@@ -91,6 +91,12 @@ export default {
         return this.descripcion.descripcion_larga.replaceAll('asesora', 'asesor');
       }
       return this.descripcion.descripcion_larga;
+    },
+    marcaProducto() {
+      if (this.descripcion.tecnica_marca_descripcion.includes('asesora')) {
+        return this.descripcion.tecnica_marca_descripcion.replaceAll('asesora', 'asesor');
+      }
+      return this.descripcion.tecnica_marca_descripcion;
     },
   },
 };
