@@ -19,7 +19,7 @@
         </ul>
       </div>
       <v-row>
-        <v-col cols="12" sm="4" md="3">
+        <v-col class="pt-1" cols="12" sm="4" md="3">
           <v-card
             v-if="this.productos.length > 0"
             :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
