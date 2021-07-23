@@ -367,7 +367,15 @@ export default {
     },
     // eslint-disable-next-line consistent-return
     buscarInventario(inventario) {
-      if (inventario.trim() === '') {
+      if (inventario == null) {
+        Swal.fire(
+          '¡Error!',
+          'El filtro no puede ir vacío.',
+          'error',
+        );
+        return;
+      }
+      if (inventario.trim() === '' || inventario == null) {
         Swal.fire(
           '¡Error!',
           'El filtro no puede ir vacío.',
