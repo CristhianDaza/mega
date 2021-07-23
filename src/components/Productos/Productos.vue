@@ -121,7 +121,7 @@
     </v-card-title>
     <v-card-subtitle class="pb-1 pt-0">
       <template v-if="totalInventario(producto.materiales) > 10">
-        <span class="font-weight-bold">Inventario:</span> {{ addCommas(totalInventario(producto.materiales)) }} unidades
+        <span class="font-weight-bold">Existencias:</span> {{ addCommas(totalInventario(producto.materiales)) }} unidades
       </template>
       <template v-else>
         <span
