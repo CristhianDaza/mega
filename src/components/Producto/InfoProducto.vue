@@ -12,7 +12,9 @@
     </template>
     <v-card-text class="pt-0">
       <div v-if="existeUsuario">
-        <p v-if="producto.texto_informacion !== null" class="ma-0" :style="'color: ' + producto.color_texto_informacion">{{producto.texto_informacion}}</p>
+        <p v-if="producto.texto_informacion !== null" class="ma-0" :style="'color: ' + producto.color_texto_informacion">
+          {{ descripcionProducto }}
+        </p>
       </div>
     </v-card-text>
     <v-card-text
@@ -80,6 +82,12 @@ export default {
   props: ['producto', 'materiales', 'transito'],
   computed: {
     ...mapGetters(['existeUsuario']),
+    descripcionProducto() {
+      if (this.producto.texto_informacion.includes('asesora')) {
+        return this.producto.texto_informacion.replaceAll('asesora', 'asesor');
+      }
+      return this.producto.texto_informacion;
+    },
   },
   components: {
     DesProducto,

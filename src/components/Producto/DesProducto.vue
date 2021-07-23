@@ -14,7 +14,7 @@
       :style="{ color: $vuetify.theme.themes[theme].colorText }"
       class="ma-0"
       >
-        {{ descripcion.descripcion_larga }}
+        {{ descripcionProducto }}
       </p>
       <p
         :style="{ color: $vuetify.theme.themes[theme].colorText }"
@@ -85,6 +85,14 @@
 export default {
   name: 'DescripcionProducto',
   props: ['descripcion'],
+  computed: {
+    descripcionProducto() {
+      if (this.descripcion.descripcion_larga.includes('asesora')) {
+        return this.descripcion.descripcion_larga.replaceAll('asesora', 'asesor');
+      }
+      return this.descripcion.descripcion_larga;
+    },
+  },
 };
 </script>
 
