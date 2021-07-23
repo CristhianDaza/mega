@@ -25,7 +25,7 @@
           <td class="d-flex">
             <div
               style="border: 1px solid grey"
-              class="contenedor_color mt-3 mr-2"
+              class="contenedor_color circuloProducto mt-3 mr-2"
             >
               <template>
                 <div
@@ -103,24 +103,3 @@ export default {
   },
 };
 </script>
-
-<style>
-  .contenedor_color {
-    position: relative;
-    height: 20px;
-    max-height: 20px;
-    width: 20px;
-    margin: 2px 4px;
-    border-radius: 100%;
-    user-select: none;
-    overflow: hidden;
-    cursor: auto;
-  }
-  .contenedor_color div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-  }
-</style>
