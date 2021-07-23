@@ -63,6 +63,16 @@
                 :imagenPrincipalGrande='this.imagenPrincipalGrande'
                 :inventarioDisponible="inventarioDisponible"
               />
+              <v-col cols="12" class="contenedorProductosHorizontal pa-0">
+                <v-container
+                  class="pa-0"
+                >
+                  <ImagenProductosHorizontal
+                    :imagenes="productoCodigo[0].imagenes"
+                    @cambiarImagen="cambiarImagenHijoHorizontal"
+                  />
+                </v-container>
+              </v-col>
             </v-container>
           </v-col>
           <v-col
@@ -82,16 +92,6 @@
         </v-row>
       </v-card>
     </v-container>
-    <v-col cols="12" class="contenedorProductosHorizontal">
-      <v-container
-        class="pa-0"
-      >
-        <ImagenProductosHorizontal
-          :imagenes="productoCodigo[0].imagenes"
-          @cambiarImagen="cambiarImagenHijoHorizontal"
-        />
-      </v-container>
-    </v-col>
     <v-container class="pt-0">
       <v-row>
         <v-col cols="12" sm="6">
