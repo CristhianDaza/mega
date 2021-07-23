@@ -36,7 +36,7 @@ import Footer from '@/components/Global/Footer.vue';
 import { mdiArrowUpDropCircle } from '@mdi/js';
 
 export default {
-
+  name: 'Default',
   data: () => ({
     mdiArrowUpDropCircle,
     mostrarBoton: false,

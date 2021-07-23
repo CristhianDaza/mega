@@ -49,6 +49,7 @@ import Productos from '@/components/Productos/Productos.vue';
 import { mdiSale, mdiArrowRight } from '@mdi/js';
 
 export default {
+  name: 'ProductosNuevos',
   data() {
     return {
       mdiSale,

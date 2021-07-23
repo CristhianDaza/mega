@@ -75,6 +75,7 @@ import {
 } from '@mdi/js';
 
 export default {
+  name: 'Portafolio',
   mixins: [layoutPrincipal],
   data() {
     return {

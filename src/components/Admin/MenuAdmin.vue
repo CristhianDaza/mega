@@ -155,6 +155,7 @@ import {
 import { mapActions, mapState } from 'vuex';
 
 export default {
+  name: 'MenuAdmin',
   data: () => ({
     drawer: true,
     mdiViewDashboard,

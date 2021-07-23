@@ -204,7 +204,7 @@ import ImagenProductosVertical from '../components/Producto/ImagenProductosVerti
 import ImagenProductosHorizontal from '../components/Producto/ImagenProductosHorizontal.vue';
 
 export default {
-  name: 'codigo',
+  name: 'Codigo',
   mixins: [addCommas, layoutPrincipal],
   data() {
     return {

@@ -28,6 +28,7 @@
 import { mdiMoonWaningCrescent, mdiWhiteBalanceSunny } from '@mdi/js';
 
 export default {
+  name: 'BotonTema',
   data() {
     return {
       mostrarTooltip: false,

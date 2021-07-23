@@ -98,6 +98,7 @@ import Loader from '@/components/Global/Loader.vue';
 import addCommas from '@/mixins/addCommas';
 
 export default {
+  name: 'SugeridoProducto',
   props: ['sugerencia'],
   mixins: [addCommas],
   data() {

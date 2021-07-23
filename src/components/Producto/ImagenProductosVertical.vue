@@ -40,6 +40,7 @@ import { Hooper, Slide } from 'hooper';
 import 'hooper/dist/hooper.css';
 
 export default {
+  name: 'ImagenProductosVertical',
   props: ['imagenes'],
   data() {
     return {

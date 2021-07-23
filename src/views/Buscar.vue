@@ -109,6 +109,7 @@ import axios from 'axios';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
 
 export default {
+  name: 'Buscar',
   mixins: [layoutPrincipal],
   data() {
     return {

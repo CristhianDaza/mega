@@ -107,6 +107,7 @@
 import { mdiCloseCircleOutline } from '@mdi/js';
 
 export default {
+  name: 'ImagenProducto',
   data() {
     return {
       textoInfo: '',

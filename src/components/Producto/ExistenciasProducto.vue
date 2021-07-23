@@ -94,6 +94,7 @@ import {
 } from '@mdi/js';
 
 export default {
+  name: 'ExistenciasProductos',
   props: ['inventarioDisponible'],
   mixins: [addCommas, hextToRgb],
   data() {

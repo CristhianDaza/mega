@@ -25,6 +25,7 @@ import {
 } from '@mdi/js';
 
 export default {
+  name: 'Buscador',
   data() {
     return {
       mdiMagnify,

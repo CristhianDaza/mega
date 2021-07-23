@@ -214,6 +214,7 @@
 import addCommas from '@/mixins/addCommas';
 
 export default {
+  name: 'PrecioProducto',
   props: ['materiales', 'precio'],
   mixins: [addCommas],
   computed: {

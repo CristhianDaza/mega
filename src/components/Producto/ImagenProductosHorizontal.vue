@@ -37,6 +37,7 @@ import {
 } from '@mdi/js';
 
 export default {
+  name: 'ImagenProductosHorizontal',
   data() {
     return {
       mdiChevronRight,

@@ -83,6 +83,7 @@
 
 <script>
 export default {
+  name: 'DescripcionProducto',
   props: ['descripcion'],
 };
 </script>

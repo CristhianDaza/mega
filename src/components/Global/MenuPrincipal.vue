@@ -66,6 +66,7 @@ import Buscador from '@/components/Global/Buscador.vue';
 import BotonTema from '@/components/Global/BotonTema.vue';
 
 export default {
+  name: 'MenuPrincipal',
   data() {
     return {
       drawer: false,

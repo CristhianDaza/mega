@@ -17,6 +17,7 @@
 
 <script>
 export default {
+  name: 'VideoProducto',
   props: ['video'],
 };
 </script>

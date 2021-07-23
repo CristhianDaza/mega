@@ -187,7 +187,7 @@ import emailjs from 'emailjs-com';
 import Swal from 'sweetalert2';
 
 export default {
-  name: 'contact',
+  name: 'FormularioContacto',
   data() {
     return {
       mdiAccount,

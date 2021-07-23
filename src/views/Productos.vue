@@ -232,7 +232,7 @@ import layoutPrincipal from '@/mixins/layoutPrincipal';
 import hextToRgb from '@/mixins/hextToRgb';
 
 export default {
-  name: 'productosmega',
+  name: 'ProductosMega',
   mixins: [layoutPrincipal, hextToRgb],
   data() {
     return {

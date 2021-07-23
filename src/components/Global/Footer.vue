@@ -169,7 +169,7 @@
         ]"
       >
         Design by
-        <a href="https://www.linkedin.com/in/cristhiandaza/" target="_blank">
+        <a href="https://co.linkedin.com/in/cristhiandaza?trk=people-guest_people_search-card" target="_blank">
           <strong :style="{color: $vuetify.theme.themes[theme].azul}">
               Cristhian Daza
             </strong>
@@ -196,6 +196,7 @@ import {
 import { mapGetters } from 'vuex';
 
 export default {
+  name: 'Footer',
   data: () => ({
     mdiHome,
     mdiCart,

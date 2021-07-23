@@ -7,6 +7,7 @@ import adminLayout from '@/components/Layout/Admin.vue';
 import defaultLayout from './components/Layout/Default.vue';
 
 export default {
+  name: 'App',
   components: {
     adminLayout,
     defaultLayout,

@@ -48,7 +48,7 @@
 import servicios from '@/utils/servicios';
 
 export default {
-  name: 'servicios',
+  name: 'Servicios',
   data() {
     return {
       servicios,
