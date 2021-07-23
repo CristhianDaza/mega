@@ -17,86 +17,123 @@
           </li>
         </ul>
       </div>
-      <div v-if="this.productos.length > 0">
-        <h1
-          :style="{color: 'white'}"
-        >Busqueda: {{this.$route.query.busqueda}}</h1>
-        <h2
-          :style="{color: 'white'}"
-          class="text-subtitle-1 mb-4">
-          Resultados: {{this.infoProductos.count}}
-        </h2>
-        <v-btn
-          v-if="Number(this.totalPaginas) > 1"
-          block
-          outlined
-          x-large
-          color="white"
-          @click="cambiarPorPagina(infoProductos.count)">
-            Ver los {{ Number(this.infoProductos.count) }} productos
-        </v-btn>
-        <v-row justify="center">
-          <v-col v-if="Number(this.infoProductos.count) > 18" cols="12">
-            <v-container class="max-width">
-              <v-pagination
-                circle
-                v-model="pagina"
-                :length="totalPaginas"
-                @input="cambiarPagina(pagina)"
-              >
-              </v-pagination>
-            </v-container>
-          </v-col>
-        </v-row>
-        <v-row>
-          <h2
-            v-if="Number(this.infoProductos.count) === 0"
-            class="text-center error mt-2 ml-2 sinResultados">
-            Sin resultados
-          </h2>
-          <v-col
-            cols="12"
-            sm="6"
-            md="4"
-            lg="3"
-            v-for="(producto) in productos[0]"
-            :key="producto.id"
-            class="pa-1 mb-5"
+      <v-row>
+        <v-col cols="12" sm="4" md="3">
+          <v-card
+            v-if="this.productos.length > 0"
+            :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
           >
-            <Productos :producto='producto' :colores='producto.materiales' />
-          </v-col>
-        </v-row>
-        <v-row justify="center">
-          <v-col v-if="Number(this.infoProductos.count) > 18" cols="12">
-            <v-container class="max-width">
-              <v-pagination
-                circle
-                v-model="pagina"
-                :length="totalPaginas"
-                @input="cambiarPagina(pagina)"
+            <v-card-text class="py-0">
+              <v-list
+                :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
               >
-              </v-pagination>
-            </v-container>
-          </v-col>
-        </v-row>
-        <v-btn
-          v-if="Number(this.totalPaginas) > 1"
-          block
-          outlined
-          x-large
-          color="white"
-          @click="cambiarPorPagina(infoProductos.count)">
-            Ver los {{ Number(this.infoProductos.count) }} productos
-        </v-btn>
-      </div>
+                <v-subheader
+                  class="pa-0"
+                  :style="{ color: $vuetify.theme.themes[theme].colorText }"
+                >Filtrar por inventario</v-subheader>
+                <v-text-field
+                  label="Inventario Mayor a"
+                  outlined
+                  type="number"
+                  v-model="inputInventario"
+                  @keyup.enter="buscarInventario(inputInventario)"
+                >
+                </v-text-field>
+                <v-btn
+                  @click="buscarInventario(inputInventario)"
+                  :style="{ color: $vuetify.theme.themes[theme].azul }"
+                  block
+                  outlined
+                >
+                  Filtrar Inventario
+                </v-btn>
+              </v-list>
+            </v-card-text>
+          </v-card>
+        </v-col>
+        <v-col cols="12" sm="8" md="9">
+          <div v-if="this.productos.length > 0">
+            <h1
+              :style="{color: 'white'}"
+            >Busqueda: {{this.$route.query.busqueda}}</h1>
+            <h2
+              :style="{color: 'white'}"
+              class="text-subtitle-1 mb-4">
+              Resultados: {{this.infoProductos.count}}
+            </h2>
+            <v-btn
+              v-if="Number(this.totalPaginas) > 1"
+              block
+              outlined
+              x-large
+              color="white"
+              @click="cambiarPorPagina(infoProductos.count)">
+                Ver los {{ Number(this.infoProductos.count) }} productos
+            </v-btn>
+            <v-row justify="center">
+              <v-col v-if="Number(this.infoProductos.count) > 18" cols="12">
+                <v-container class="max-width">
+                  <v-pagination
+                    circle
+                    v-model="pagina"
+                    :length="totalPaginas"
+                    @input="cambiarPagina(pagina)"
+                  >
+                  </v-pagination>
+                </v-container>
+              </v-col>
+            </v-row>
+            <v-row>
+              <h2
+                v-if="Number(this.infoProductos.count) === 0"
+                class="text-center error mt-2 ml-2 sinResultados">
+                Sin resultados
+              </h2>
+              <v-col
+                cols="12"
+                sm="6"
+                md="4"
+                lg="3"
+                v-for="(producto) in productos[0]"
+                :key="producto.id"
+                class="pa-1 mb-5"
+              >
+                <Productos :producto='producto' :colores='producto.materiales' />
+              </v-col>
+            </v-row>
+            <v-row justify="center">
+              <v-col v-if="Number(this.infoProductos.count) > 18" cols="12">
+                <v-container class="max-width">
+                  <v-pagination
+                    circle
+                    v-model="pagina"
+                    :length="totalPaginas"
+                    @input="cambiarPagina(pagina)"
+                  >
+                  </v-pagination>
+                </v-container>
+              </v-col>
+            </v-row>
+            <v-btn
+              v-if="Number(this.totalPaginas) > 1"
+              block
+              outlined
+              x-large
+              color="white"
+              @click="cambiarPorPagina(infoProductos.count)">
+                Ver los {{ Number(this.infoProductos.count) }} productos
+            </v-btn>
+          </div>
 
-      <div v-else class="mx-auto">
-        <v-container class="fill-height mt-16 mx-auto">
-          <v-row align="center" justify="center">
-            <Loader />
-          </v-row>
-        </v-container>
-      </div>
+          <div v-else class="mx-auto">
+            <v-container class="fill-height mt-16 mx-auto">
+              <v-row align="center" justify="center">
+                <Loader />
+              </v-row>
+            </v-container>
+          </div>
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>
@@ -107,6 +144,7 @@ import Productos from '@/components/Productos/Productos.vue';
 import Loader from '@/components/Global/Loader.vue';
 import axios from 'axios';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
+import Swal from 'sweetalert2';
 
 export default {
   name: 'Buscar',
@@ -118,6 +156,8 @@ export default {
       busqueda: this.$route.query.busqueda || '',
       pagina: Number(this.$route.query.pagina) || 1,
       porPagina: Number(this.$route.query.porPagina) || 20,
+      inputInventario: Number(this.$route.query.inventario) || null,
+      inventario: Number(this.$route.query.inventario) || '',
       totalPaginas: 0,
     };
   },
@@ -131,8 +171,9 @@ export default {
       pagina,
       porPagina,
       busqueda,
+      inventario,
     ) {
-      const url = `https://marpicoprod.azurewebsites.net/api/productos/?page_size=${porPagina}&page=${pagina}&search=${busqueda}`;
+      const url = `https://marpicoprod.azurewebsites.net/api/productos/?page_size=${porPagina}&page=${pagina}&search=${busqueda}&inventario=${inventario}`;
       const config = {
         method: 'get',
         url,
@@ -160,8 +201,6 @@ export default {
         query: {
           pagina,
           porPagina: this.$route.query.porPagina,
-          categoria: this.$route.query.categoria,
-          subCategoria: this.$route.query.subCategoria,
           etiqueta: this.$route.query.etiqueta,
           inventario: this.$route.query.inventario,
           busqueda: this.$route.query.busqueda,
@@ -174,11 +213,54 @@ export default {
         query: {
           pagina: 1,
           porPagina,
-          categoria: this.$route.query.categoria,
-          subCategoria: this.$route.query.subCategoria,
-          etiqueta: this.$route.query.etiqueta,
           inventario: this.$route.query.inventario,
           busqueda: this.$route.query.busqueda,
+        },
+      });
+    },
+    // eslint-disable-next-line consistent-return
+    buscarInventario(inventario) {
+      if (inventario == null) {
+        Swal.fire(
+          '¡Error!',
+          'El filtro no puede ir vacío.',
+          'error',
+        );
+        return;
+      }
+      if (inventario.trim() === '' || inventario == null) {
+        Swal.fire(
+          '¡Error!',
+          'El filtro no puede ir vacío.',
+          'error',
+        );
+        return;
+      }
+      if (inventario.trim() < 0) {
+        Swal.fire(
+          '¡Error!',
+          'El filtro no puede ser negativo.',
+          'error',
+        );
+        return;
+      }
+      // eslint-disable-next-line eqeqeq
+      if (inventario.trim() == 0) {
+        Swal.fire(
+          '¡Error!',
+          'El filtro debe ser mayor a 0.',
+          'error',
+        );
+        return;
+      }
+      this.$router.push({
+        path: this.$route.path,
+        query: {
+          etiqueta: this.$route.query.etiqueta,
+          inventario,
+          busqueda: this.$route.query.busqueda,
+          titulo: this.$route.query.titulo,
+          color: this.$route.query.color,
         },
       });
     },
@@ -188,6 +270,7 @@ export default {
       this.pagina,
       this.porPagina,
       this.busqueda,
+      this.inventario,
     );
   },
   metaInfo: {
