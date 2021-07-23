@@ -4,7 +4,7 @@
     v-on:keyup.enter="buscarProducto(busqueda)"
     @click:prepend-inner="buscarProducto(busqueda)"
     clearable
-    label="Buscar..."
+    label="Buscar"
     :prepend-inner-icon="mdiMagnify"
     outlined
     dense
@@ -15,7 +15,6 @@
     class="d-flex align-center ml-2"
   ></v-text-field>
 </template>
-    <!-- v-bind="this.$vuetify.theme.dark ? '' : dark " -->
 
 <script>
 import router from '@/router';
@@ -35,7 +34,7 @@ export default {
   methods: {
     buscarProducto(busqueda) {
       const buscar = document.getElementById('buscador');
-      if (busqueda === '') {
+      if (busqueda.trim() === '') {
         Swal.fire(
           '¡Error!',
           'La busqueda no puede ir vacía.',
@@ -43,7 +42,7 @@ export default {
         );
         return;
       }
-      if (busqueda.length < 3) {
+      if (busqueda.trim().length < 3) {
         Swal.fire(
           '¡Error!',
           'La busqueda debe contener al menos 3 caracteres.',
