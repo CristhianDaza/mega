@@ -177,10 +177,6 @@
       </v-simple-table>
     </v-dialog>
 
-    <v-overlay :value="overlay">
-      <Loader />
-    </v-overlay>
-
   </div>
   <div v-else class="mx-auto">
     <v-container class="fill-height mt-16 mx-auto">
@@ -212,7 +208,6 @@ export default {
   mixins: [addCommas, layoutPrincipal],
   data() {
     return {
-      loader: null,
       productoCodigo: [],
       productoSugerencia: [],
       productoTraking: [],
@@ -221,7 +216,6 @@ export default {
       codigo: this.$route.params.codigo,
       dialogTransito: false,
       mdiCloseCircleOutline,
-      overlay: false,
       categoriaPrincipal: '',
       categoriaSecundaria: '',
       duration: 1000,
@@ -231,23 +225,6 @@ export default {
       type2: 'number2',
       materiales: [],
     };
-  },
-  watch: {
-    overlay(valor) {
-      // eslint-disable-next-line no-unused-expressions
-      valor && setTimeout(() => {
-        this.overlay = false;
-      }, 500);
-    },
-    loader() {
-      const l = this.loader;
-      this[l] = !this[l];
-
-      // eslint-disable-next-line no-return-assign
-      setTimeout(() => (this[l] = false), 3000);
-
-      this.loader = null;
-    },
   },
   computed: {
     inventarioDisponible() {
@@ -396,39 +373,6 @@ export default {
     .contenedorInfoProducto {
       padding-left: 30px;
       padding-top: 0;
-    }
-  }
-
-  @-moz-keyframes loader {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  @-webkit-keyframes loader {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  @-o-keyframes loader {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  @keyframes loader {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
     }
   }
 </style>
