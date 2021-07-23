@@ -24,15 +24,31 @@
             v-if="this.productos.length > 0"
             :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
           >
-            <v-card-text class="pb-0">
-              <v-text-field
-                label="Inventario"
-                placeholder="Inventario mayor a:"
-                filled
-                v-model="inputInventario"
-                type="number"
-                @keyup.enter="buscarInventario(inputInventario)"
-              ></v-text-field>
+            <v-card-text class="py-0">
+              <v-list
+                :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
+              >
+                <v-subheader
+                  class="pa-0"
+                  :style="{ color: $vuetify.theme.themes[theme].colorText }"
+                >Filtrar por inventario</v-subheader>
+                <v-text-field
+                  label="Inventario Mayor a"
+                  outlined
+                  type="number"
+                  v-model="inputInventario"
+                  @keyup.enter="buscarInventario(inputInventario)"
+                >
+                </v-text-field>
+                <v-btn
+                  @click="buscarInventario(inputInventario)"
+                  :style="{ color: $vuetify.theme.themes[theme].azul }"
+                  block
+                  outlined
+                >
+                  Filtrar Inventario
+                </v-btn>
+              </v-list>
             </v-card-text>
           </v-card>
           <v-card
@@ -225,6 +241,7 @@
 
 <script>
 import Productos from '@/components/Productos/Productos.vue';
+import Swal from 'sweetalert2';
 import axios from 'axios';
 import Hero from '@/components/Global/Hero.vue';
 import Loader from '@/components/Global/Loader.vue';
@@ -240,7 +257,7 @@ export default {
       productos: [],
       categorias: [],
       colores: [],
-      inputInventario: Number(this.$route.query.inventario) || 0,
+      inputInventario: Number(this.$route.query.inventario) || null,
       pagina: Number(this.$route.query.pagina) || 1,
       categoria: Number(this.$route.query.categoria) || '',
       subCategoria: Number(this.$route.query.subCategoria) || '',
@@ -348,7 +365,33 @@ export default {
         },
       });
     },
+    // eslint-disable-next-line consistent-return
     buscarInventario(inventario) {
+      if (inventario.trim() === '') {
+        Swal.fire(
+          '¡Error!',
+          'El filtro no puede ir vacío.',
+          'error',
+        );
+        return;
+      }
+      if (inventario.trim() < 0) {
+        Swal.fire(
+          '¡Error!',
+          'El filtro no puede ser negativo.',
+          'error',
+        );
+        return;
+      }
+      // eslint-disable-next-line eqeqeq
+      if (inventario.trim() == 0) {
+        Swal.fire(
+          '¡Error!',
+          'El filtro debe ser mayor a 0.',
+          'error',
+        );
+        return;
+      }
       this.$router.push({
         path: this.$route.path,
         query: {
@@ -431,3 +474,9 @@ export default {
   },
 };
 </script>
+
+<style>
+  .v-text-field__details {
+    display: none !important;
+  }
+</style>
