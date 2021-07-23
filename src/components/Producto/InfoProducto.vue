@@ -100,13 +100,12 @@ export default {
           const url = window.URL.createObjectURL(blob);
           window.location.href = url;
         })
-        .catch((error) => {
+        .catch(() => {
           Swal.fire(
             'Error!',
             'Hubo un error, intente de nuevo.',
             'error',
           );
-          console.log(error);
         })
         .finally(() => {
           this.loading = false;
