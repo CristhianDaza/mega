@@ -1,8 +1,6 @@
 <template>
   <v-sheet
-    :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
-    class="mx-auto infoProd"
-    elevation="2">
+    :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }">
     <v-slide-group
       v-model="model"
       class="px-2 py-2"

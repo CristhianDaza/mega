@@ -83,7 +83,9 @@
       </v-card>
     </v-container>
     <v-col cols="12" class="contenedorProductosHorizontal">
-      <v-container>
+      <v-container
+        class="pa-0"
+      >
         <ImagenProductosHorizontal
           :imagenes="productoCodigo[0].imagenes"
           @cambiarImagen="cambiarImagenHijoHorizontal"
