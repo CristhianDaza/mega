@@ -1,4 +1,5 @@
 <template>
+<!-- eslint-disable max-len -->
   <div>
     <Hero titulo="Buscar"/>
     <v-container class="pt-0">
@@ -49,6 +50,57 @@
                 </v-btn>
               </v-list>
             </v-card-text>
+          </v-card>
+          <v-card
+            v-if="this.listaColores.length > 0"
+            :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
+            class="mt-3">
+            <v-list
+              :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
+              dense
+            >
+              <v-subheader
+                :style="{ color: $vuetify.theme.themes[theme].colorText }"
+              >Filtrar por color</v-subheader>
+              <v-list-item-group>
+                <v-card-subtitle class="d-flex flex-wrap pt-0">
+                  <template v-for="color in this.listaColores">
+                    <div
+                      class="contenedor_color"
+                      :key="color.id"
+                      @click="buscarColor(color.id)"
+                    >
+                      <v-tooltip bottom dense>
+                        <template v-slot:activator="{on, attrs}">
+                          <div
+                            v-if="color.hex_2 !== null && color.hex_3 !== null"
+                            v-bind="attrs"
+                            v-on="on"
+                            :style="`background: linear-gradient(rgb(${hextToRgb(color.hex_1)[0]}, ${hextToRgb(color.hex_1)[1]}, ${hextToRgb(color.hex_1)[2]}) 0%, rgb(${hextToRgb(color.hex_2)[0]}, ${hextToRgb(color.hex_2)[1]}, ${hextToRgb(color.hex_2)[2]}) 48%, rgb(${hextToRgb(color.hex_2)[0]}, ${hextToRgb(color.hex_2)[1]}, ${hextToRgb(color.hex_2)[2]}) 62%, rgb(${hextToRgb(color.hex_3)[0]}, ${hextToRgb(color.hex_3)[1]}, ${hextToRgb(color.hex_3)[2]}) 66%, rgb(${hextToRgb(color.hex_3)[0]}, ${hextToRgb(color.hex_3)[1]}, ${hextToRgb(color.hex_3)[2]}) 100%)`"
+                          ></div>
+                          <div
+                            v-else-if="color.hex_2 !== null && color.hex_3 === null"
+                            v-bind="attrs"
+                            v-on="on"
+                            :style="`background: linear-gradient(rgb(${hextToRgb(color.hex_1)[0]}, ${hextToRgb(color.hex_1)[1]}, ${hextToRgb(color.hex_1)[2]}) 40%, rgb(${hextToRgb(color.hex_2)[0]}, ${hextToRgb(color.hex_2)[1]}, ${hextToRgb(color.hex_2)[2]}) 50%)`"
+                          >
+                          </div>
+                          <div
+                            v-else
+                            v-bind="attrs"
+                            v-on="on"
+                            :style="'background:' + color.hex_1"
+                          ></div>
+                        </template>
+                        <span>
+                          {{color.nombre}}
+                        </span>
+                      </v-tooltip>
+                    </div>
+                  </template>
+                </v-card-subtitle>
+              </v-list-item-group>
+            </v-list>
           </v-card>
         </v-col>
         <v-col cols="12" sm="8" md="9">
@@ -153,11 +205,13 @@ export default {
     return {
       productos: [],
       infoProductos: [],
+      listaColores: [],
       busqueda: this.$route.query.busqueda || '',
       pagina: Number(this.$route.query.pagina) || 1,
       porPagina: Number(this.$route.query.porPagina) || 20,
       inputInventario: Number(this.$route.query.inventario) || null,
       inventario: Number(this.$route.query.inventario) || '',
+      color: this.$route.query.color || '',
       totalPaginas: 0,
     };
   },
@@ -172,8 +226,9 @@ export default {
       porPagina,
       busqueda,
       inventario,
+      color,
     ) {
-      const url = `https://marpicoprod.azurewebsites.net/api/productos/?page_size=${porPagina}&page=${pagina}&search=${busqueda}&inventario=${inventario}`;
+      const url = `https://marpicoprod.azurewebsites.net/api/productos/?page_size=${porPagina}&page=${pagina}&search=${busqueda}&inventario=${inventario}${color ? `&color=${color}` : ''}`;
       const config = {
         method: 'get',
         url,
@@ -186,6 +241,7 @@ export default {
         this.productos.push(res.data.results);
         this.infoProductos = res.data;
         this.totalPaginas = Math.ceil((this.infoProductos.count / this.porPagina));
+        this.listaColores = res.data.filtros.colores;
       });
     },
     hextToRgb(hex) {
@@ -204,6 +260,7 @@ export default {
           etiqueta: this.$route.query.etiqueta,
           inventario: this.$route.query.inventario,
           busqueda: this.$route.query.busqueda,
+          color: this.$route.query.color,
         },
       });
     },
@@ -215,6 +272,7 @@ export default {
           porPagina,
           inventario: this.$route.query.inventario,
           busqueda: this.$route.query.busqueda,
+          color: this.$route.query.color,
         },
       });
     },
@@ -256,11 +314,19 @@ export default {
       this.$router.push({
         path: this.$route.path,
         query: {
-          etiqueta: this.$route.query.etiqueta,
           inventario,
           busqueda: this.$route.query.busqueda,
-          titulo: this.$route.query.titulo,
           color: this.$route.query.color,
+        },
+      });
+    },
+    buscarColor(color) {
+      this.$router.push({
+        path: this.$route.path,
+        query: {
+          inventario: this.$route.query.inventario,
+          busqueda: this.$route.query.busqueda,
+          color,
         },
       });
     },
@@ -271,6 +337,7 @@ export default {
       this.porPagina,
       this.busqueda,
       this.inventario,
+      this.color,
     );
   },
   metaInfo: {

@@ -256,7 +256,6 @@ export default {
       listaCategorias: true,
       productos: [],
       categorias: [],
-      colores: [],
       inputInventario: Number(this.$route.query.inventario) || null,
       pagina: Number(this.$route.query.pagina) || 1,
       categoria: Number(this.$route.query.categoria) || '',
@@ -433,6 +432,7 @@ export default {
           subCategoria: this.$route.query.subCategoria,
           etiqueta: this.$route.query.etiqueta,
           titulo: this.$route.query.titulo,
+          inventario: this.$route.query.inventario,
           color,
         },
       });
