@@ -64,10 +64,10 @@ import {
   mdiDownload,
   mdiCloseCircleOutline,
 } from '@mdi/js';
-import DesProducto from '@/components/Producto/DesProducto.vue';
-import PrecioProducto from '@/components/Producto/PrecioProducto.vue';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import DesProducto from '@/components/Producto/DesProducto.vue';
+import PrecioProducto from '@/components/Producto/PrecioProducto.vue';
 
 export default {
   name: 'InfoProducto',

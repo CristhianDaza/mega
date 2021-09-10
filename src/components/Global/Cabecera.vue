@@ -51,8 +51,8 @@
 </template>
 
 <script>
-import Logo from '@/components/Global/Logo.vue';
 import { mdiWhatsapp, mdiMoonWaningCrescent, mdiWhiteBalanceSunny } from '@mdi/js';
+import Logo from '@/components/Global/Logo.vue';
 
 export default {
   name: 'Cabecera',

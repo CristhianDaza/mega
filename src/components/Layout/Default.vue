@@ -30,10 +30,10 @@
 </template>
 
 <script>
+import { mdiArrowUpDropCircle } from '@mdi/js';
 import Cabecera from '@/components/Global/Cabecera.vue';
 import MenuPrincipal from '@/components/Global/MenuPrincipal.vue';
 import Footer from '@/components/Global/Footer.vue';
-import { mdiArrowUpDropCircle } from '@mdi/js';
 
 export default {
   name: 'Default',

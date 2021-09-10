@@ -17,11 +17,11 @@
 </template>
 
 <script>
-import router from '@/router';
 import Swal from 'sweetalert2';
 import {
   mdiMagnify,
 } from '@mdi/js';
+import router from '@/router';
 
 export default {
   name: 'Buscador',

@@ -59,11 +59,11 @@
 
 <script>
 import { mdiFormatTitle, mdiLinkVariant, mdiNumeric } from '@mdi/js';
+import Swal from 'sweetalert2';
+import { mapActions, mapState } from 'vuex';
 import layoutAdmin from '@/mixins/layoutAdmin';
 import { db } from '@/firebase';
-import Swal from 'sweetalert2';
 import router from '@/router';
-import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'editar-producto',

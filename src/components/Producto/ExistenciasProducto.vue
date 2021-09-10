@@ -87,11 +87,11 @@
 </template>
 
 <script>
-import addCommas from '@/mixins/addCommas';
-import hextToRgb from '@/mixins/hextToRgb';
 import {
   mdiMagnify,
 } from '@mdi/js';
+import addCommas from '@/mixins/addCommas';
+import hextToRgb from '@/mixins/hextToRgb';
 
 export default {
   name: 'ExistenciasProductos',

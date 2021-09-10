@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import axios from 'axios';
 import Vuex from 'vuex';
+import Swal from 'sweetalert2';
 import {
   auth,
   db,
 } from '@/firebase';
 import router from '@/router';
-import Swal from 'sweetalert2';
 
 Vue.use(Vuex);
 

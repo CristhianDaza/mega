@@ -57,9 +57,9 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import layoutAdmin from '@/mixins/layoutAdmin';
 import { mdiDelete } from '@mdi/js';
 import Swal from 'sweetalert2';
+import layoutAdmin from '@/mixins/layoutAdmin';
 import { storage } from '@/firebase';
 
 export default {

@@ -53,8 +53,8 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import layoutAdmin from '@/mixins/layoutAdmin';
 import Swal from 'sweetalert2';
+import layoutAdmin from '@/mixins/layoutAdmin';
 import { auth } from '@/firebase';
 
 export default {

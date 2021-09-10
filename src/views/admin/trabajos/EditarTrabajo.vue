@@ -150,8 +150,8 @@ import {
   mdiAccountSupervisor,
 } from '@mdi/js';
 import { mapActions, mapState } from 'vuex';
-import layoutAdmin from '@/mixins/layoutAdmin';
 import Swal from 'sweetalert2';
+import layoutAdmin from '@/mixins/layoutAdmin';
 import router from '@/router';
 import { db } from '@/firebase';
 

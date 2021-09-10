@@ -188,6 +188,10 @@
 </template>
 
 <script>
+import axios from 'axios';
+import {
+  mdiCloseCircleOutline,
+} from '@mdi/js';
 import Loader from '@/components/Global/Loader.vue';
 import ImagenProducto from '@/components/Producto/ImagenProducto.vue';
 import InfoProducto from '@/components/Producto/InfoProducto.vue';
@@ -196,10 +200,6 @@ import VideoProducto from '@/components/Producto/VideoProducto.vue';
 import SugeridoProducto from '@/components/Producto/SugeridoProducto.vue';
 import addCommas from '@/mixins/addCommas';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
-import axios from 'axios';
-import {
-  mdiCloseCircleOutline,
-} from '@mdi/js';
 import ImagenProductosVertical from '../components/Producto/ImagenProductosVertical.vue';
 import ImagenProductosHorizontal from '../components/Producto/ImagenProductosHorizontal.vue';
 

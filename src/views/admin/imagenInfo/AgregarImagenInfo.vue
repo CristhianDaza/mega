@@ -71,8 +71,8 @@
 
 <script>
 import { mdiBookOpenPageVariant, mdiCartArrowRight } from '@mdi/js';
-import layoutAdmin from '@/mixins/layoutAdmin';
 import Swal from 'sweetalert2';
+import layoutAdmin from '@/mixins/layoutAdmin';
 import { storage, db } from '@/firebase';
 import router from '@/router';
 

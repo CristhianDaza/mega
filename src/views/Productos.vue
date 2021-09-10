@@ -240,9 +240,9 @@
 </template>
 
 <script>
-import Productos from '@/components/Productos/Productos.vue';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import Productos from '@/components/Productos/Productos.vue';
 import Hero from '@/components/Global/Hero.vue';
 import Loader from '@/components/Global/Loader.vue';
 import layoutPrincipal from '@/mixins/layoutPrincipal';

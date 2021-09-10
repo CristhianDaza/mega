@@ -204,7 +204,6 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import layoutAdmin from '@/mixins/layoutAdmin';
 import {
   mdiDelete,
   mdiCloseCircleOutline,
@@ -214,6 +213,7 @@ import {
   mdiCancel,
 } from '@mdi/js';
 import Swal from 'sweetalert2';
+import layoutAdmin from '@/mixins/layoutAdmin';
 
 export default {
   name: 'Admin',

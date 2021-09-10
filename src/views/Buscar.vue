@@ -191,12 +191,12 @@
 </template>
 
 <script>
+import axios from 'axios';
+import Swal from 'sweetalert2';
 import Hero from '@/components/Global/Hero.vue';
 import Productos from '@/components/Productos/Productos.vue';
 import Loader from '@/components/Global/Loader.vue';
-import axios from 'axios';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
-import Swal from 'sweetalert2';
 
 export default {
   name: 'Buscar',

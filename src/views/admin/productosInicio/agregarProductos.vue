@@ -51,9 +51,9 @@
 
 <script>
 import { mdiFormatTitle, mdiCartArrowRight } from '@mdi/js';
+import Swal from 'sweetalert2';
 import layoutAdmin from '@/mixins/layoutAdmin';
 import { db } from '@/firebase';
-import Swal from 'sweetalert2';
 import router from '@/router';
 
 export default {

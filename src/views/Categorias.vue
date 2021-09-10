@@ -93,9 +93,9 @@
 </template>
 
 <script>
+import axios from 'axios';
 import Hero from '@/components/Global/Hero.vue';
 import Loader from '@/components/Global/Loader.vue';
-import axios from 'axios';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
 
 export default {

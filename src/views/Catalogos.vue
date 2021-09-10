@@ -77,11 +77,11 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
+import { mdiFilePdfBox, mdiOpenInNew } from '@mdi/js';
 import Hero from '@/components/Global/Hero.vue';
 import Loader from '@/components/Global/Loader.vue';
-import { mapState, mapActions } from 'vuex';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
-import { mdiFilePdfBox, mdiOpenInNew } from '@mdi/js';
 
 export default {
   name: 'Catalogos',

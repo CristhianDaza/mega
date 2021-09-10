@@ -84,7 +84,6 @@
 </template>
 
 <script>
-import layoutAdmin from '@/mixins/layoutAdmin';
 import {
   mdiAt,
   mdiLock,
@@ -93,6 +92,7 @@ import {
   mdiAccountSupervisor,
 } from '@mdi/js';
 import { mapActions, mapState } from 'vuex';
+import layoutAdmin from '@/mixins/layoutAdmin';
 
 export default {
   name: 'agregar-usaurio',

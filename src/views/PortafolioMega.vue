@@ -64,15 +64,15 @@
 </template>
 
 <script>
-import layoutPrincipal from '@/mixins/layoutPrincipal';
 import Flipbook from 'flipbook-vue';
-import Hero from '@/components/Global/Hero.vue';
 import {
   mdiArrowLeftBoldCircle,
   mdiMagnifyPlus,
   mdiMagnifyMinus,
   mdiArrowRightBoldCircle,
 } from '@mdi/js';
+import layoutPrincipal from '@/mixins/layoutPrincipal';
+import Hero from '@/components/Global/Hero.vue';
 
 export default {
   name: 'Portafolio',

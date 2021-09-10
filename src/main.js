@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import VueMeta from 'vue-meta';
-import { auth } from '@/firebase';
 import VueCarousel from 'vue-carousel';
 import flipbook from 'flipbook-vue';
 import moment from 'moment';
+import { auth } from '@/firebase';
 import router from './router';
 import App from './App.vue';
 import store from './store';

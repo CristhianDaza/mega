@@ -63,9 +63,9 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import layoutAdmin from '@/mixins/layoutAdmin';
 import Swal from 'sweetalert2';
 import { mdiDelete, mdiPencil } from '@mdi/js';
+import layoutAdmin from '@/mixins/layoutAdmin';
 
 export default {
   name: 'productos-inicio',

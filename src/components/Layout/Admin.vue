@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import MenuAdmin from '@/components/Admin/MenuAdmin.vue';
 import { mapGetters } from 'vuex';
+import MenuAdmin from '@/components/Admin/MenuAdmin.vue';
 
 export default {
   name: 'Admin',

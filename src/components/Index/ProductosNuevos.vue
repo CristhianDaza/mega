@@ -45,8 +45,8 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import Productos from '@/components/Productos/Productos.vue';
 import { mdiSale, mdiArrowRight } from '@mdi/js';
+import Productos from '@/components/Productos/Productos.vue';
 
 export default {
   name: 'ProductosNuevos',

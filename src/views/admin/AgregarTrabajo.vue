@@ -177,7 +177,6 @@
 </template>
 
 <script>
-import layoutAdmin from '@/mixins/layoutAdmin';
 import {
   mdiCalendar,
   mdiCalendarText,
@@ -187,6 +186,7 @@ import {
 } from '@mdi/js';
 import { mapState, mapActions } from 'vuex';
 import Swal from 'sweetalert2';
+import layoutAdmin from '@/mixins/layoutAdmin';
 import router from '@/router';
 import { db } from '@/firebase';
 

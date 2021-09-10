@@ -85,8 +85,6 @@
 </template>
 
 <script>
-import Logo from '@/components/Global/Logo.vue';
-import layoutAdmin from '@/mixins/layoutAdmin';
 import {
   mdiAt,
   mdiLock,
@@ -94,6 +92,8 @@ import {
   mdiEyeOff,
 } from '@mdi/js';
 import { mapActions, mapState } from 'vuex';
+import Logo from '@/components/Global/Logo.vue';
+import layoutAdmin from '@/mixins/layoutAdmin';
 
 export default {
   name: 'Login',
