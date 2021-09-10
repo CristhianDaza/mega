@@ -94,8 +94,6 @@
 
 <script>
 import axios from 'axios';
-import Hero from '@/components/Global/Hero.vue';
-import Loader from '@/components/Global/Loader.vue';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
 
 export default {
@@ -124,8 +122,8 @@ export default {
     };
   },
   components: {
-    Hero,
-    Loader,
+    Hero: () => import(/* webpackChunkName: "Hero" */ '@/components/Global/Hero.vue'),
+    Loader: () => import(/* webpackChunkName: "Loader" */ '@/components/Global/Loader.vue'),
   },
   methods: {
     async getCategorias() {

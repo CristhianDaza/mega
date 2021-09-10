@@ -46,7 +46,6 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 import { mdiSale, mdiArrowRight } from '@mdi/js';
-import Productos from '@/components/Productos/Productos.vue';
 
 export default {
   name: 'ProductosNuevos',
@@ -66,7 +65,7 @@ export default {
     this.traerProducto();
   },
   components: {
-    Productos,
+    Productos: () => import(/* webpackChunkName: "Productos" */ '@/components/Productos/Productos.vue'),
   },
 };
 </script>

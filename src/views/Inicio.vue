@@ -10,24 +10,18 @@
 </template>
 
 <script>
-import Hero from '@/components/Index/Hero.vue';
-import Carrusel from '@/components/Index/Carrusel.vue';
-import Servicios from '@/components/Index/Servicios.vue';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
-import Newsletters from '@/components/Index/Newsletters.vue';
-import ProductosNuevos from '@/components/Index/ProductosNuevos.vue';
-import VideoPromocion from '@/components/Index/VideoPromocion.vue';
 
 export default {
   name: 'Inicio',
   mixins: [layoutPrincipal],
   components: {
-    Hero,
-    Carrusel,
-    Servicios,
-    Newsletters,
-    ProductosNuevos,
-    VideoPromocion,
+    Hero: () => import(/* webpackChunkName: "Hero" */ '@/components/Index/Hero.vue'),
+    Carrusel: () => import(/* webpackChunkName: "Carrusel" */ '@/components/Index/Carrusel.vue'),
+    Servicios: () => import(/* webpackChunkName: "Servicios" */ '@/components/Index/Servicios.vue'),
+    Newsletters: () => import(/* webpackChunkName: "Newsletters" */ '@/components/Index/Newsletters.vue'),
+    ProductosNuevos: () => import(/* webpackChunkName: "ProductosNuevos" */ '@/components/Index/ProductosNuevos.vue'),
+    VideoPromocion: () => import(/* webpackChunkName: "VideoPromocion" */ '@/components/Index/VideoPromocion.vue'),
   },
   metaInfo: {
     title: 'Megapromocionales LTDA',

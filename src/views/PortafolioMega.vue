@@ -64,7 +64,6 @@
 </template>
 
 <script>
-import Flipbook from 'flipbook-vue';
 import {
   mdiArrowLeftBoldCircle,
   mdiMagnifyPlus,
@@ -72,7 +71,6 @@ import {
   mdiArrowRightBoldCircle,
 } from '@mdi/js';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
-import Hero from '@/components/Global/Hero.vue';
 
 export default {
   name: 'Portafolio',
@@ -107,8 +105,8 @@ export default {
     };
   },
   components: {
-    Flipbook,
-    Hero,
+    Flipbook: () => import(/* webpackChunkName: "flipbook" */ 'flipbook-vue'),
+    Hero: () => import(/* webpackChunkName: "Hero" */ '@/components/Global/Hero.vue'),
   },
   metaInfo: {
     title: 'Portafolio 📖',

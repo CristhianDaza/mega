@@ -3,14 +3,12 @@
 </template>
 <script>
 import { mapState } from 'vuex';
-import adminLayout from '@/components/Layout/Admin.vue';
-import defaultLayout from './components/Layout/Default.vue';
 
 export default {
   name: 'App',
   components: {
-    adminLayout,
-    defaultLayout,
+    adminLayout: () => import(/* webpackChunkName: "Admin" */ '@/components/Layout/Admin.vue'),
+    defaultLayout: () => import(/* webpackChunkName: "Default" */ '@/components/Layout/Default.vue'),
   },
   computed: {
     ...mapState(['layout']),

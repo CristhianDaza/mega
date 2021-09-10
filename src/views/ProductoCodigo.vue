@@ -192,16 +192,8 @@ import axios from 'axios';
 import {
   mdiCloseCircleOutline,
 } from '@mdi/js';
-import Loader from '@/components/Global/Loader.vue';
-import ImagenProducto from '@/components/Producto/ImagenProducto.vue';
-import InfoProducto from '@/components/Producto/InfoProducto.vue';
-import ExistenciasProducto from '@/components/Producto/ExistenciasProducto.vue';
-import VideoProducto from '@/components/Producto/VideoProducto.vue';
-import SugeridoProducto from '@/components/Producto/SugeridoProducto.vue';
 import addCommas from '@/mixins/addCommas';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
-import ImagenProductosVertical from '../components/Producto/ImagenProductosVertical.vue';
-import ImagenProductosHorizontal from '../components/Producto/ImagenProductosHorizontal.vue';
 
 export default {
   name: 'Codigo',
@@ -343,14 +335,14 @@ export default {
     ],
   },
   components: {
-    Loader,
-    ImagenProducto,
-    InfoProducto,
-    ExistenciasProducto,
-    VideoProducto,
-    SugeridoProducto,
-    ImagenProductosVertical,
-    ImagenProductosHorizontal,
+    Loader: () => import(/* webpackChunkName: "Loader" */ '@/components/Global/Loader.vue'),
+    ImagenProducto: () => import(/* webpackChunkName: "ImagenProducto" */ '@/components/Producto/ImagenProducto.vue'),
+    InfoProducto: () => import(/* webpackChunkName: "InfoProducto" */ '@/components/Producto/InfoProducto.vue'),
+    ExistenciasProducto: () => import(/* webpackChunkName: "ExistenciasProducto" */ '@/components/Producto/ExistenciasProducto.vue'),
+    VideoProducto: () => import(/* webpackChunkName: "VideoProducto" */ '@/components/Producto/VideoProducto.vue'),
+    SugeridoProducto: () => import(/* webpackChunkName: "SugeridoProducto" */ '@/components/Producto/SugeridoProducto.vue'),
+    ImagenProductosVertical: () => import(/* webpackChunkName: "ImagenProductosVertical" */ '@/components/Producto/ImagenProductosVertical.vue'),
+    ImagenProductosHorizontal: () => import(/* webpackChunkName: "ImagenProductosHorizontal" */ '@/components/Producto/ImagenProductosHorizontal.vue'),
   },
 };
 </script>

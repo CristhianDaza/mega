@@ -94,7 +94,6 @@
 </template>
 
 <script>
-import Loader from '@/components/Global/Loader.vue';
 import addCommas from '@/mixins/addCommas';
 
 export default {
@@ -106,7 +105,7 @@ export default {
     };
   },
   components: {
-    Loader,
+    Loader: () => import(/* webpackChunkName: "Loader" */ '@/components/Global/Loader.vue'),
   },
 };
 </script>

@@ -193,9 +193,6 @@
 <script>
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import Hero from '@/components/Global/Hero.vue';
-import Productos from '@/components/Productos/Productos.vue';
-import Loader from '@/components/Global/Loader.vue';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
 
 export default {
@@ -216,9 +213,9 @@ export default {
     };
   },
   components: {
-    Hero,
-    Productos,
-    Loader,
+    Hero: () => import(/* webpackChunkName: "Hero" */ '@/components/Global/Hero.vue'),
+    Loader: () => import(/* webpackChunkName: "Loader" */ '@/components/Global/Loader.vue'),
+    Productos: () => import(/* webpackChunkName: "Productos" */ '@/components/Productos/Productos.vue'),
   },
   methods: {
     async getProductosBusqueda(

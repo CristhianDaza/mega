@@ -29,7 +29,6 @@
 
 <script>
 import Imagen from '@/assets/img/header.webp';
-import Loader from '@/components/Global/Loader.vue';
 
 export default {
   name: 'Hero',
@@ -40,7 +39,7 @@ export default {
     };
   },
   components: {
-    Loader,
+    Loader: () => import(/* webpackChunkName: "Loader" */ '@/components/Global/Loader.vue'),
   },
 };
 </script>

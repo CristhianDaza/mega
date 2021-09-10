@@ -57,7 +57,6 @@
 </template>
 
 <script>
-import Hero from '@/components/Global/Hero.vue';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
 import nosotros from '@/assets/img/nosotros.svg';
 import nosotrosDark from '@/assets/img/nosotros-dark.svg';
@@ -84,7 +83,7 @@ export default {
     };
   },
   components: {
-    Hero,
+    Hero: () => import(/* webpackChunkName: "Hero" */ '@/components/Global/Hero.vue'),
   },
   metaInfo: {
     title: 'Nosotros 💙',

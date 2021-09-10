@@ -24,13 +24,11 @@
 </template>
 
 <script>
-import Loader from '@/components/Global/Loader.vue';
-
 export default {
   name: 'Logo',
   props: ['width'],
   components: {
-    Loader,
+    Loader: () => import(/* webpackChunkName: "Loader" */ '@/components/Global/Loader.vue'),
   },
 };
 </script>

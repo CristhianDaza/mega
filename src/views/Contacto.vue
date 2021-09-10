@@ -30,9 +30,6 @@
 </template>
 
 <script>
-import Hero from '@/components/Global/Hero.vue';
-import FormularioContacto from '@/components/Index/FormularioContacto.vue';
-import Redes from '@/components/Index/Redes.vue';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
 import contacto from '@/assets/img/contacto.svg';
 import contactoDark from '@/assets/img/contacto-dark.svg';
@@ -47,9 +44,9 @@ export default {
     };
   },
   components: {
-    Hero,
-    FormularioContacto,
-    Redes,
+    Hero: () => import(/* webpackChunkName: "Hero" */ '@/components/Global/Hero.vue'),
+    FormularioContacto: () => import(/* webpackChunkName: "FormularioContacto" */ '@/components/Index/FormularioContacto.vue'),
+    Redes: () => import(/* webpackChunkName: "Redes" */ '@/components/Index/Redes.vue'),
   },
   metaInfo: {
     title: 'Contacto ☎',

@@ -242,9 +242,6 @@
 <script>
 import Swal from 'sweetalert2';
 import axios from 'axios';
-import Productos from '@/components/Productos/Productos.vue';
-import Hero from '@/components/Global/Hero.vue';
-import Loader from '@/components/Global/Loader.vue';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
 import hextToRgb from '@/mixins/hextToRgb';
 
@@ -291,9 +288,9 @@ export default {
     };
   },
   components: {
-    Productos,
-    Hero,
-    Loader,
+    Productos: () => import(/* webpackChunkName: "Productos" */ '@/components/Productos/Productos.vue'),
+    Hero: () => import(/* webpackChunkName: "Hero" */ '@/components/Global/Hero.vue'),
+    Loader: () => import(/* webpackChunkName: "Loader" */ '@/components/Global/Loader.vue'),
   },
   methods: {
     async getProductos(

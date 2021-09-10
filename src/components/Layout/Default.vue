@@ -31,9 +31,6 @@
 
 <script>
 import { mdiArrowUpDropCircle } from '@mdi/js';
-import Cabecera from '@/components/Global/Cabecera.vue';
-import MenuPrincipal from '@/components/Global/MenuPrincipal.vue';
-import Footer from '@/components/Global/Footer.vue';
 
 export default {
   name: 'Default',
@@ -48,9 +45,9 @@ export default {
     name: 'App',
   }),
   components: {
-    Cabecera,
-    MenuPrincipal,
-    Footer,
+    Cabecera: () => import(/* webpackChunkName: "Cabecera" */ '@/components/Global/Cabecera.vue'),
+    MenuPrincipal: () => import(/* webpackChunkName: "MenuPrincipal" */ '@/components/Global/MenuPrincipal.vue'),
+    Footer: () => import(/* webpackChunkName: "Footer" */ '@/components/Global/Footer.vue'),
   },
   computed: {
     target() {

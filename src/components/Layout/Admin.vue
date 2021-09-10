@@ -18,7 +18,6 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import MenuAdmin from '@/components/Admin/MenuAdmin.vue';
 
 export default {
   name: 'Admin',
@@ -26,7 +25,7 @@ export default {
     ...mapGetters(['existeUsuario']),
   },
   components: {
-    MenuAdmin,
+    MenuAdmin: () => import(/* webpackChunkName: "MenuAdmin" */ '@/components/Admin/MenuAdmin.vue'),
   },
   created() {
     this.$vuetify.theme.dark = true;

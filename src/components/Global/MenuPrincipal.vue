@@ -62,8 +62,6 @@
 
 <script>
 import { mapGetters, mapActions, mapState } from 'vuex';
-import Buscador from '@/components/Global/Buscador.vue';
-import BotonTema from '@/components/Global/BotonTema.vue';
 
 export default {
   name: 'MenuPrincipal',
@@ -79,8 +77,8 @@ export default {
     },
   },
   components: {
-    Buscador,
-    BotonTema,
+    Buscador: () => import(/* webpackChunkName: "Buscador" */ '@/components/Global/Buscador.vue'),
+    BotonTema: () => import(/* webpackChunkName: "BotonTema" */ '@/components/Global/BotonTema.vue'),
   },
   methods: {
     ...mapActions(['traerMenus']),

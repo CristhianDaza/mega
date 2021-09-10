@@ -66,8 +66,6 @@ import {
 } from '@mdi/js';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import DesProducto from '@/components/Producto/DesProducto.vue';
-import PrecioProducto from '@/components/Producto/PrecioProducto.vue';
 
 export default {
   name: 'InfoProducto',
@@ -90,8 +88,8 @@ export default {
     },
   },
   components: {
-    DesProducto,
-    PrecioProducto,
+    DesProducto: () => import(/* webpackChunkName: "DesProducto" */ '@/components/Producto/DesProducto.vue'),
+    PrecioProducto: () => import(/* webpackChunkName: "PrecioProducto" */ '@/components/Producto/PrecioProducto.vue'),
   },
   methods: {
     async descargarImagenes(id, familia) {
