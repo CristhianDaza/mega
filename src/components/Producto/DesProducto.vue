@@ -40,7 +40,7 @@
         v-if="descripcion.area_impresion !== null">
         <strong class="font-weight-black"
         :style="{ color: $vuetify.theme.themes[theme].azul }"
-        >ÁREA DE IMPRESIÓN APROXIMADA: </strong>{{ descripcion.area_impresion }}
+        >ÁREA DE IMPRESIÓN APROXIMADA: </strong>{{ areaAproximada }}
       </p>
       <p
         :style="{ color: $vuetify.theme.themes[theme].colorText }"
@@ -97,6 +97,12 @@ export default {
         return this.descripcion.tecnica_marca_descripcion.replaceAll('asesora', 'asesor');
       }
       return this.descripcion.tecnica_marca_descripcion;
+    },
+    areaAproximada() {
+      if (this.descripcion.area_impresion.includes('asesora')) {
+        return this.descripcion.area_impresion.replaceAll('asesora', 'asesor');
+      }
+      return this.descripcion.area_impresion;
     },
   },
 };
