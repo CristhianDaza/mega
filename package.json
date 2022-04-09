@@ -16,7 +16,7 @@
     "firebase": "^7.24.0",
     "flipbook-vue": "^0.10.4",
     "hooper": "^0.3.4",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "sweetalert2": "^11.1.9",
     "vue": "^2.6.14",
     "vue-analytics": "^5.22.1",
