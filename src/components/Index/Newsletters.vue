@@ -38,7 +38,7 @@ import newsletter from '@/assets/img/newsletter.svg';
 import newsletterDark from '@/assets/img/newsletter-dark.svg';
 
 export default {
-  name: 'Newsletters',
+  name: 'NewslettersComponent',
   data() {
     return {
       newsletter,

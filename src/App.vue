@@ -5,10 +5,10 @@
 import { mapState } from 'vuex';
 
 export default {
-  name: 'App',
+  name: 'AppMega',
   components: {
-    adminLayout: () => import(/* webpackChunkName: "Admin" */ '@/components/Layout/Admin.vue'),
-    defaultLayout: () => import(/* webpackChunkName: "Default" */ '@/components/Layout/Default.vue'),
+    adminLayout: () => import(/* webpackChunkName: "admin" */ '@/components/Layout/Admin.vue'),
+    defaultLayout: () => import(/* webpackChunkName: "default" */ '@/components/Layout/Default.vue'),
   },
   computed: {
     ...mapState(['layout']),

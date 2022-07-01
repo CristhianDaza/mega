@@ -58,7 +58,7 @@ import layoutAdmin from '@/mixins/layoutAdmin';
 import { auth } from '@/firebase';
 
 export default {
-  name: 'usuarios',
+  name: 'usuariosView',
   mixins: [layoutAdmin],
   metaInfo: {
     title: 'Usuarios',

@@ -95,7 +95,7 @@ import { mapActions, mapState } from 'vuex';
 import layoutAdmin from '@/mixins/layoutAdmin';
 
 export default {
-  name: 'Login',
+  name: 'LoginView',
   mixins: [layoutAdmin],
   data: () => ({
     mostrar: false,
@@ -123,7 +123,7 @@ export default {
     ],
   },
   components: {
-    Logo: () => import(/* webpackChunkName: "Logo" */ '@/components/Global/Logo.vue'),
+    Logo: () => import(/* webpackChunkName: "logo" */ '@/components/Global/Logo.vue'),
   },
   methods: {
     ...mapActions(['ingresarUsaurio']),

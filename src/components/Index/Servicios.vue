@@ -48,7 +48,7 @@
 import servicios from '@/utils/servicios';
 
 export default {
-  name: 'Servicios',
+  name: 'ServiciosComponent',
   data() {
     return {
       servicios,

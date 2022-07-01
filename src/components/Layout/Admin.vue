@@ -20,12 +20,12 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'Admin',
+  name: 'AdminLayout',
   computed: {
     ...mapGetters(['existeUsuario']),
   },
   components: {
-    MenuAdmin: () => import(/* webpackChunkName: "MenuAdmin" */ '@/components/Admin/MenuAdmin.vue'),
+    MenuAdmin: () => import(/* webpackChunkName: "menuAdmin" */ '@/components/Admin/MenuAdmin.vue'),
   },
   created() {
     this.$vuetify.theme.dark = true;

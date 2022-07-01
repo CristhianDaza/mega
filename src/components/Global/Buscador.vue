@@ -24,7 +24,7 @@ import {
 import router from '@/router';
 
 export default {
-  name: 'Buscador',
+  name: 'BuscadorComponent',
   data() {
     return {
       mdiMagnify,

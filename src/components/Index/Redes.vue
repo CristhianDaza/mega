@@ -33,7 +33,7 @@
 import redes from '@/utils/redes';
 
 export default {
-  name: 'Redes',
+  name: 'RedesComponent',
   data() {
     return {
       redes,

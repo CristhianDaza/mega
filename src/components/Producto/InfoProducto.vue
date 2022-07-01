@@ -88,8 +88,8 @@ export default {
     },
   },
   components: {
-    DesProducto: () => import(/* webpackChunkName: "DesProducto" */ '@/components/Producto/DesProducto.vue'),
-    PrecioProducto: () => import(/* webpackChunkName: "PrecioProducto" */ '@/components/Producto/PrecioProducto.vue'),
+    DesProducto: () => import(/* webpackChunkName: "desProducto" */ '@/components/Producto/DesProducto.vue'),
+    PrecioProducto: () => import(/* webpackChunkName: "precioProducto" */ '@/components/Producto/PrecioProducto.vue'),
   },
   methods: {
     async descargarImagenes(id, familia) {

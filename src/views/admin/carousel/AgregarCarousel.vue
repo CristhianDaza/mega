@@ -76,7 +76,6 @@ import { mdiLinkVariant, mdiCartArrowRight } from '@mdi/js';
 import Swal from 'sweetalert2';
 import layoutAdmin from '@/mixins/layoutAdmin';
 import { storage, db } from '@/firebase';
-import router from '@/router';
 
 export default {
   name: 'agregar-slider',
@@ -147,7 +146,7 @@ export default {
               'La imagen del carrusel ha sido creada.',
               'success',
             );
-            router.push({
+            this.$router.push({
               path: '/admin/carrusel',
             });
           });

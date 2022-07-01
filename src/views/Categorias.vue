@@ -97,7 +97,7 @@ import axios from 'axios';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
 
 export default {
-  name: 'Categorias',
+  name: 'CategoriasView',
   mixins: [layoutPrincipal],
   data() {
     return {
@@ -122,8 +122,8 @@ export default {
     };
   },
   components: {
-    Hero: () => import(/* webpackChunkName: "Hero" */ '@/components/Global/Hero.vue'),
-    Loader: () => import(/* webpackChunkName: "Loader" */ '@/components/Global/Loader.vue'),
+    Hero: () => import(/* webpackChunkName: "hero" */ '@/components/Global/Hero.vue'),
+    Loader: () => import(/* webpackChunkName: "loader" */ '@/components/Global/Loader.vue'),
   },
   methods: {
     async getCategorias() {

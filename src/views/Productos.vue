@@ -144,8 +144,9 @@
                   <v-list-item-content>
                     <v-list-item-title
                       :style="{ color: $vuetify.theme.themes[theme].azul }"
-                      v-text="categoria.nombre"
-                    ></v-list-item-title>
+                    >
+                      {{ categoria.nombre }}
+                    </v-list-item-title>
                   </v-list-item-content>
                 </template>
                 <v-list-item
@@ -155,8 +156,9 @@
                 >
                   <v-list-item-content>
                     <v-list-item-title
-                    :style="{ color: $vuetify.theme.themes[theme].colorText }"
-                    v-text="subCategoria.nombre"></v-list-item-title>
+                    :style="{ color: $vuetify.theme.themes[theme].colorText }">
+                      {{ categoria.nombre }}
+                    </v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
               </v-list-group>
@@ -288,9 +290,9 @@ export default {
     };
   },
   components: {
-    Productos: () => import(/* webpackChunkName: "Productos" */ '@/components/Productos/Productos.vue'),
-    Hero: () => import(/* webpackChunkName: "Hero" */ '@/components/Global/Hero.vue'),
-    Loader: () => import(/* webpackChunkName: "Loader" */ '@/components/Global/Loader.vue'),
+    Productos: () => import(/* webpackChunkName: "productos" */ '@/components/Productos/Productos.vue'),
+    Hero: () => import(/* webpackChunkName: "hero" */ '@/components/Global/Hero.vue'),
+    Loader: () => import(/* webpackChunkName: "loader" */ '@/components/Global/Loader.vue'),
   },
   methods: {
     async getProductos(

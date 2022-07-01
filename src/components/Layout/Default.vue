@@ -6,7 +6,7 @@
     <v-main>
       <router-view :key="$route.fullPath" />
     </v-main>
-    <Footer />
+    <FooterComponent />
     <v-speed-dial>
       <template v-slot:activator>
         <v-btn
@@ -33,7 +33,7 @@
 import { mdiArrowUpDropCircle } from '@mdi/js';
 
 export default {
-  name: 'Default',
+  name: 'DefaultLayout',
   data: () => ({
     mdiArrowUpDropCircle,
     mostrarBoton: false,
@@ -45,9 +45,9 @@ export default {
     name: 'App',
   }),
   components: {
-    Cabecera: () => import(/* webpackChunkName: "Cabecera" */ '@/components/Global/Cabecera.vue'),
-    MenuPrincipal: () => import(/* webpackChunkName: "MenuPrincipal" */ '@/components/Global/MenuPrincipal.vue'),
-    Footer: () => import(/* webpackChunkName: "Footer" */ '@/components/Global/Footer.vue'),
+    Cabecera: () => import(/* webpackChunkName: "cabecera" */ '@/components/Global/Cabecera.vue'),
+    MenuPrincipal: () => import(/* webpackChunkName: "menuPrincipal" */ '@/components/Global/MenuPrincipal.vue'),
+    FooterComponent: () => import(/* webpackChunkName: "footer" */ '@/components/Global/Footer.vue'),
   },
   computed: {
     target() {

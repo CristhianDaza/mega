@@ -196,7 +196,7 @@ import Swal from 'sweetalert2';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
 
 export default {
-  name: 'Buscar',
+  name: 'BuscarView',
   mixins: [layoutPrincipal],
   data() {
     return {
@@ -213,9 +213,9 @@ export default {
     };
   },
   components: {
-    Hero: () => import(/* webpackChunkName: "Hero" */ '@/components/Global/Hero.vue'),
-    Loader: () => import(/* webpackChunkName: "Loader" */ '@/components/Global/Loader.vue'),
-    Productos: () => import(/* webpackChunkName: "Productos" */ '@/components/Productos/Productos.vue'),
+    Hero: () => import(/* webpackChunkName: "hero" */ '@/components/Global/Hero.vue'),
+    Loader: () => import(/* webpackChunkName: "loader" */ '@/components/Global/Loader.vue'),
+    Productos: () => import(/* webpackChunkName: "productos" */ '@/components/Productos/Productos.vue'),
   },
   methods: {
     async getProductosBusqueda(

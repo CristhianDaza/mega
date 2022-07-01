@@ -82,7 +82,7 @@ import { mdiFilePdfBox, mdiOpenInNew } from '@mdi/js';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
 
 export default {
-  name: 'Catalogos',
+  name: 'CatalogosView',
   mixins: [layoutPrincipal],
   data() {
     return {
@@ -103,8 +103,8 @@ export default {
     };
   },
   components: {
-    Hero: () => import(/* webpackChunkName: "Hero" */ '@/components/Global/Hero.vue'),
-    Loader: () => import(/* webpackChunkName: "Loader" */ '@/components/Global/Loader.vue'),
+    Hero: () => import(/* webpackChunkName: "hero" */ '@/components/Global/Hero.vue'),
+    Loader: () => import(/* webpackChunkName: "loader" */ '@/components/Global/Loader.vue'),
   },
   computed: {
     ...mapState(['catalogos']),

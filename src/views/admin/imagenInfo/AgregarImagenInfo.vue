@@ -74,10 +74,9 @@ import { mdiBookOpenPageVariant, mdiCartArrowRight } from '@mdi/js';
 import Swal from 'sweetalert2';
 import layoutAdmin from '@/mixins/layoutAdmin';
 import { storage, db } from '@/firebase';
-import router from '@/router';
 
 export default {
-  name: 'Agregar',
+  name: 'AgregarComponent',
   mixins: [layoutAdmin],
   data() {
     return {
@@ -141,7 +140,7 @@ export default {
               'La imagen de información ha sido creada.',
               'success',
             );
-            router.push({
+            this.$router.push({
               path: '/admin/imagen-info',
             });
           });

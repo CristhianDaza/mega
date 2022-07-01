@@ -63,7 +63,7 @@ import layoutAdmin from '@/mixins/layoutAdmin';
 import { storage } from '@/firebase';
 
 export default {
-  name: 'Carousel',
+  name: 'CarouselView',
   mixins: [layoutAdmin],
   data() {
     return {

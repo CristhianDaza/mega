@@ -77,8 +77,8 @@ export default {
     },
   },
   components: {
-    Buscador: () => import(/* webpackChunkName: "Buscador" */ '@/components/Global/Buscador.vue'),
-    BotonTema: () => import(/* webpackChunkName: "BotonTema" */ '@/components/Global/BotonTema.vue'),
+    Buscador: () => import(/* webpackChunkName: "buscador" */ '@/components/Global/Buscador.vue'),
+    BotonTema: () => import(/* webpackChunkName: "botonTema" */ '@/components/Global/BotonTema.vue'),
   },
   methods: {
     ...mapActions(['traerMenus']),

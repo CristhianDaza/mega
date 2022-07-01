@@ -63,7 +63,6 @@ import Swal from 'sweetalert2';
 import { mapActions, mapState } from 'vuex';
 import layoutAdmin from '@/mixins/layoutAdmin';
 import { db } from '@/firebase';
-import router from '@/router';
 
 export default {
   name: 'editar-producto',
@@ -106,7 +105,7 @@ export default {
             'El menu ha sido modificado.',
             'success',
           );
-          router.push({
+          this.$router.push({
             path: '/admin/menu-principal',
           });
         })

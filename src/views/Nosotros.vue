@@ -62,7 +62,7 @@ import nosotros from '@/assets/img/nosotros.svg';
 import nosotrosDark from '@/assets/img/nosotros-dark.svg';
 
 export default {
-  name: 'Nosotros',
+  name: 'NosotrosView',
   mixins: [layoutPrincipal],
   data() {
     return {
@@ -83,7 +83,7 @@ export default {
     };
   },
   components: {
-    Hero: () => import(/* webpackChunkName: "Hero" */ '@/components/Global/Hero.vue'),
+    Hero: () => import(/* webpackChunkName: "hero" */ '@/components/Global/Hero.vue'),
   },
   metaInfo: {
     title: 'Nosotros 💙',

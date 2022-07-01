@@ -33,16 +33,6 @@
               :sort-by="['end']"
               :sort-desc="[true]"
             >
-            <template v-slot:item.terminado="{ item }">
-              <v-chip
-                :color="getColor(item.terminado)"
-                dark>
-                {{ item.terminado === true
-                  ? 'OK'
-                  : 'X'
-                }}
-              </v-chip>
-            </template>
             </v-data-table>
           </v-card>
         </v-col>
@@ -125,7 +115,7 @@
                   :color="trabajoSeleccionado.color"
                   dark
                 >
-                  <v-toolbar-title v-html="trabajoSeleccionado.name"></v-toolbar-title>
+                  <v-toolbar-title>{{ trabajoSeleccionado.name }}</v-toolbar-title>
                   <v-spacer></v-spacer>
                   <v-tooltip bottom>
                     <template v-slot:activator="{ on, attrs }">
@@ -216,7 +206,7 @@ import Swal from 'sweetalert2';
 import layoutAdmin from '@/mixins/layoutAdmin';
 
 export default {
-  name: 'Admin',
+  name: 'AdminView',
   mixins: [layoutAdmin],
   data() {
     return {
@@ -303,11 +293,6 @@ export default {
   },
   methods: {
     ...mapActions(['traerTrabajosCalendario', 'eliminarTrabajoCalendario']),
-    getColor(terminado) {
-      if (terminado === true) return 'green';
-      if (terminado === false) return 'red';
-      return terminado;
-    },
     viewDay({ date }) {
       this.focus = date;
       this.type = 'day';

@@ -25,10 +25,10 @@
 
 <script>
 export default {
-  name: 'Logo',
+  name: 'LogoComponent',
   props: ['width'],
   components: {
-    Loader: () => import(/* webpackChunkName: "Loader" */ '@/components/Global/Loader.vue'),
+    Loader: () => import(/* webpackChunkName: "loader" */ '@/components/Global/Loader.vue'),
   },
 };
 </script>

@@ -13,15 +13,15 @@
 import layoutPrincipal from '@/mixins/layoutPrincipal';
 
 export default {
-  name: 'Inicio',
+  name: 'InicioView',
   mixins: [layoutPrincipal],
   components: {
-    Hero: () => import(/* webpackChunkName: "Hero" */ '@/components/Index/Hero.vue'),
-    Carrusel: () => import(/* webpackChunkName: "Carrusel" */ '@/components/Index/Carrusel.vue'),
-    Servicios: () => import(/* webpackChunkName: "Servicios" */ '@/components/Index/Servicios.vue'),
-    Newsletters: () => import(/* webpackChunkName: "Newsletters" */ '@/components/Index/Newsletters.vue'),
-    ProductosNuevos: () => import(/* webpackChunkName: "ProductosNuevos" */ '@/components/Index/ProductosNuevos.vue'),
-    VideoPromocion: () => import(/* webpackChunkName: "VideoPromocion" */ '@/components/Index/VideoPromocion.vue'),
+    Hero: () => import(/* webpackChunkName: "hero" */ '@/components/Index/Hero.vue'),
+    Carrusel: () => import(/* webpackChunkName: "carrusel" */ '@/components/Index/Carrusel.vue'),
+    Servicios: () => import(/* webpackChunkName: "servicios" */ '@/components/Index/Servicios.vue'),
+    Newsletters: () => import(/* webpackChunkName: "newsletters" */ '@/components/Index/Newsletters.vue'),
+    ProductosNuevos: () => import(/* webpackChunkName: "productosNuevos" */ '@/components/Index/ProductosNuevos.vue'),
+    VideoPromocion: () => import(/* webpackChunkName: "videoPromocion" */ '@/components/Index/VideoPromocion.vue'),
   },
   metaInfo: {
     title: 'Megapromocionales LTDA',

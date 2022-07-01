@@ -74,7 +74,6 @@ import { mdiFilePdfBox, mdiOpenInNew, mdiBookOpenPageVariant } from '@mdi/js';
 import Swal from 'sweetalert2';
 import layoutAdmin from '@/mixins/layoutAdmin';
 import { storage, db } from '@/firebase';
-import router from '@/router';
 
 export default {
   name: 'agregar-catalogo',
@@ -142,7 +141,7 @@ export default {
               'El catálogo ha sido creado.',
               'success',
             );
-            router.push({
+            this.$router.push({
               path: '/admin/catalogos',
             });
           });

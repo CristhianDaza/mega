@@ -196,7 +196,7 @@ import addCommas from '@/mixins/addCommas';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
 
 export default {
-  name: 'Codigo',
+  name: 'CodigoView',
   mixins: [addCommas, layoutPrincipal],
   data() {
     return {
@@ -335,14 +335,14 @@ export default {
     ],
   },
   components: {
-    Loader: () => import(/* webpackChunkName: "Loader" */ '@/components/Global/Loader.vue'),
-    ImagenProducto: () => import(/* webpackChunkName: "ImagenProducto" */ '@/components/Producto/ImagenProducto.vue'),
-    InfoProducto: () => import(/* webpackChunkName: "InfoProducto" */ '@/components/Producto/InfoProducto.vue'),
-    ExistenciasProducto: () => import(/* webpackChunkName: "ExistenciasProducto" */ '@/components/Producto/ExistenciasProducto.vue'),
-    VideoProducto: () => import(/* webpackChunkName: "VideoProducto" */ '@/components/Producto/VideoProducto.vue'),
-    SugeridoProducto: () => import(/* webpackChunkName: "SugeridoProducto" */ '@/components/Producto/SugeridoProducto.vue'),
-    ImagenProductosVertical: () => import(/* webpackChunkName: "ImagenProductosVertical" */ '@/components/Producto/ImagenProductosVertical.vue'),
-    ImagenProductosHorizontal: () => import(/* webpackChunkName: "ImagenProductosHorizontal" */ '@/components/Producto/ImagenProductosHorizontal.vue'),
+    Loader: () => import(/* webpackChunkName: "loader" */ '@/components/Global/Loader.vue'),
+    ImagenProducto: () => import(/* webpackChunkName: "imagenProducto" */ '@/components/Producto/ImagenProducto.vue'),
+    InfoProducto: () => import(/* webpackChunkName: "infoProducto" */ '@/components/Producto/InfoProducto.vue'),
+    ExistenciasProducto: () => import(/* webpackChunkName: "existenciasProducto" */ '@/components/Producto/ExistenciasProducto.vue'),
+    VideoProducto: () => import(/* webpackChunkName: "videoProducto" */ '@/components/Producto/VideoProducto.vue'),
+    SugeridoProducto: () => import(/* webpackChunkName: "sugeridoProducto" */ '@/components/Producto/SugeridoProducto.vue'),
+    ImagenProductosVertical: () => import(/* webpackChunkName: "imagenProductosVertical" */ '@/components/Producto/ImagenProductosVertical.vue'),
+    ImagenProductosHorizontal: () => import(/* webpackChunkName: "imagenProductosHorizontal" */ '@/components/Producto/ImagenProductosHorizontal.vue'),
   },
 };
 </script>

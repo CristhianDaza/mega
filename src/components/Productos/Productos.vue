@@ -149,7 +149,7 @@ import addCommas from '@/mixins/addCommas';
 import hextToRgb from '@/mixins/hextToRgb';
 
 export default {
-  name: 'Productos',
+  name: 'ProductosComponent',
   props: ['producto', 'colores'],
   mixins: [addCommas, hextToRgb],
   computed: {

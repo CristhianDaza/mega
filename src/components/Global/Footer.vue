@@ -196,7 +196,7 @@ import {
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'Footer',
+  name: 'FooterComponent',
   data: () => ({
     mdiHome,
     mdiCart,

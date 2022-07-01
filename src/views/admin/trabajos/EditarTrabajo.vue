@@ -152,7 +152,6 @@ import {
 import { mapActions, mapState } from 'vuex';
 import Swal from 'sweetalert2';
 import layoutAdmin from '@/mixins/layoutAdmin';
-import router from '@/router';
 import { db } from '@/firebase';
 
 export default {
@@ -230,7 +229,7 @@ export default {
             'El trabajo ha sido modificado.',
             'success',
           );
-          router.push({
+          this.$router.push({
             path: '/admin/',
           });
         })

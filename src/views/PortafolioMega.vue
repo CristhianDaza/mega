@@ -73,7 +73,7 @@ import {
 import layoutPrincipal from '@/mixins/layoutPrincipal';
 
 export default {
-  name: 'Portafolio',
+  name: 'PortafolioView',
   mixins: [layoutPrincipal],
   data() {
     return {
@@ -106,7 +106,7 @@ export default {
   },
   components: {
     Flipbook: () => import(/* webpackChunkName: "flipbook" */ 'flipbook-vue'),
-    Hero: () => import(/* webpackChunkName: "Hero" */ '@/components/Global/Hero.vue'),
+    Hero: () => import(/* webpackChunkName: "hero" */ '@/components/Global/Hero.vue'),
   },
   metaInfo: {
     title: 'Portafolio 📖',

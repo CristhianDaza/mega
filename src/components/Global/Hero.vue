@@ -31,7 +31,7 @@
 import Imagen from '@/assets/img/header.webp';
 
 export default {
-  name: 'Hero',
+  name: 'HeroComponent',
   props: ['titulo'],
   data() {
     return {
@@ -39,7 +39,7 @@ export default {
     };
   },
   components: {
-    Loader: () => import(/* webpackChunkName: "Loader" */ '@/components/Global/Loader.vue'),
+    Loader: () => import(/* webpackChunkName: "loader" */ '@/components/Global/Loader.vue'),
   },
 };
 </script>

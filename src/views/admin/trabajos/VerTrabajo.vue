@@ -54,10 +54,9 @@ import { mapActions, mapState } from 'vuex';
 import Swal from 'sweetalert2';
 import layoutAdmin from '@/mixins/layoutAdmin';
 import { db } from '@/firebase';
-import router from '@/router';
 
 export default {
-  name: 'trabajo',
+  name: 'trabajoView',
   mixins: [layoutAdmin],
   data() {
     return {
@@ -76,7 +75,7 @@ export default {
           'El trabajo aún no está terminado.',
           'error',
         );
-        router.push({
+        this.$router.push({
           path: '/admin/',
         });
       } else {
@@ -88,7 +87,7 @@ export default {
           'El trabajo ha sido terminado.',
           'success',
         );
-        router.push({
+        this.$router.push({
           path: '/admin/',
         });
       }

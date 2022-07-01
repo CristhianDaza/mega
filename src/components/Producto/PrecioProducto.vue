@@ -101,11 +101,11 @@
                             $ {{addCommas(Math.round(precio.precio_descuento))}} + iva
                           </span>
                         </template>
-                        <template
+                        <div
                           :style="{ color: $vuetify.theme.themes[theme].colorText }"
                           v-else>
                           $ {{addCommas(Math.round(precio.precio))}} + iva
-                        </template>
+                        </div>
                       </td>
                     </tr>
                   </tbody>
@@ -125,9 +125,9 @@
                   $ {{addCommas(Math.round(valorVariedad[0].precio_descuento))}} + iva
                 </span>
               </template>
-              <template v-else :style="{ color: $vuetify.theme.themes[theme].colorText }">
+              <div v-else :style="{ color: $vuetify.theme.themes[theme].colorText }">
                 <td>$ {{addCommas(Math.round(valorVariedad[0].precio))}} + iva</td>
-              </template>
+              </div>
             </template>
           </template>
         </template>
@@ -169,9 +169,9 @@
                           $ {{addCommas(Math.round(precio.precio_descuento))}} + iva
                         </span>
                       </template>
-                      <template v-else :style="{ color: $vuetify.theme.themes[theme].colorText }">
+                      <div v-else :style="{ color: $vuetify.theme.themes[theme].colorText }">
                         $ {{addCommas(Math.round(precio.precio))}} + iva
-                      </template>
+                      </div>
                     </td>
                   </tr>
                 </tbody>

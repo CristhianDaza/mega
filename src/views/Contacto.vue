@@ -35,7 +35,7 @@ import contacto from '@/assets/img/contacto.svg';
 import contactoDark from '@/assets/img/contacto-dark.svg';
 
 export default {
-  name: 'Contacto',
+  name: 'ContactoView',
   mixins: [layoutPrincipal],
   data() {
     return {
@@ -44,9 +44,9 @@ export default {
     };
   },
   components: {
-    Hero: () => import(/* webpackChunkName: "Hero" */ '@/components/Global/Hero.vue'),
-    FormularioContacto: () => import(/* webpackChunkName: "FormularioContacto" */ '@/components/Index/FormularioContacto.vue'),
-    Redes: () => import(/* webpackChunkName: "Redes" */ '@/components/Index/Redes.vue'),
+    Hero: () => import(/* webpackChunkName: "hero" */ '@/components/Global/Hero.vue'),
+    FormularioContacto: () => import(/* webpackChunkName: "formularioContacto" */ '@/components/Index/FormularioContacto.vue'),
+    Redes: () => import(/* webpackChunkName: "redes" */ '@/components/Index/Redes.vue'),
   },
   metaInfo: {
     title: 'Contacto ☎',

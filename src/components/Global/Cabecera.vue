@@ -54,7 +54,7 @@
 import { mdiWhatsapp, mdiMoonWaningCrescent, mdiWhiteBalanceSunny } from '@mdi/js';
 
 export default {
-  name: 'Cabecera',
+  name: 'CabeceraComponent',
   data() {
     return {
       mdiWhatsapp,
@@ -63,7 +63,7 @@ export default {
     };
   },
   components: {
-    Logo: () => import(/* webpackChunkName: "Logo" */ '@/components/Global/Logo.vue'),
+    Logo: () => import(/* webpackChunkName: "logo" */ '@/components/Global/Logo.vue'),
   },
 };
 </script>

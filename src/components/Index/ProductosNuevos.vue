@@ -65,7 +65,7 @@ export default {
     this.traerProducto();
   },
   components: {
-    Productos: () => import(/* webpackChunkName: "Productos" */ '@/components/Productos/Productos.vue'),
+    Productos: () => import(/* webpackChunkName: "productos" */ '@/components/Productos/Productos.vue'),
   },
 };
 </script>
