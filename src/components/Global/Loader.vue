@@ -39,15 +39,11 @@ export default {
 .loader .face:nth-child(1) {
     width: 100%;
     height: 100%;
-    color: white;
+    color: #005C91;
     border-color: currentColor transparent transparent currentColor;
     border-width: 0.2em 0.2em 0em 0em;
     --deg: -45deg;
     animation-direction: normal;
-}
-
-.loader .face.dark:nth-child(1) {
-    color: #005C91;
 }
 
 .loader .face:nth-child(2) {

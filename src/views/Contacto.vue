@@ -1,10 +1,7 @@
 <template>
   <div>
     <Hero titulo="Contacto"/>
-    <div :style="{ backgroundImage:
-        `url(${this.$vuetify.theme.dark ? contactoDark : contacto })` }"
-        class="fondoContacto"
-      >
+    <div class="fondoContacto">
       <v-container class="pt-0">
         <div class="links">
           <ul>
@@ -13,10 +10,11 @@
                 exact
                 to="/"
                 class="links__item links__itme_amarillo"
+                :style="{color: $vuetify.theme.themes[theme].colorText }"
               >INICIO</router-link>
             </li>
             <li class="links__divider">/</li>
-            <li>
+            <li :style="{color: $vuetify.theme.themes[theme].secondary }">
               CONTACTO
             </li>
           </ul>
@@ -31,16 +29,12 @@
 
 <script>
 import layoutPrincipal from '@/mixins/layoutPrincipal';
-import contacto from '@/assets/img/contacto.svg';
-import contactoDark from '@/assets/img/contacto-dark.svg';
 
 export default {
   name: 'ContactoView',
   mixins: [layoutPrincipal],
   data() {
     return {
-      contacto,
-      contactoDark,
     };
   },
   components: {

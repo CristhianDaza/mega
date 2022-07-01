@@ -34,7 +34,7 @@
         outlined
         block
         large
-        :style="{ color: $vuetify.theme.themes[theme].colorText }"
+        :style="{ color: $vuetify.theme.themes[theme].azul }"
         elevation="5"
       >
           Ver más Productos

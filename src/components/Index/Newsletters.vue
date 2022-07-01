@@ -1,9 +1,5 @@
 <template>
-  <div
-    :style="{ backgroundImage:
-    `url(${this.$vuetify.theme.dark ? newsletterDark : newsletter })` }"
-    class="fondoInformacion pt-10 pb-5"
-  >
+  <div class="fondoInformacion pt-10 pb-5">
     <h1
       :class="this.$vuetify.breakpoint.xs ? 'display-1 mt-2' : 'display-2'"
       class="mb-2 py-5 text-center font-weight-black"
@@ -34,15 +30,11 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import newsletter from '@/assets/img/newsletter.svg';
-import newsletterDark from '@/assets/img/newsletter-dark.svg';
 
 export default {
   name: 'NewslettersComponent',
   data() {
     return {
-      newsletter,
-      newsletterDark,
     };
   },
   methods: {

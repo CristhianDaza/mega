@@ -10,10 +10,11 @@
               exact
               to="/"
               class="links__item"
+              :style="{color: $vuetify.theme.themes[theme].colorText }"
             >INICIO</router-link>
           </li>
           <li class="links__divider">/</li>
-          <li>
+          <li :style="{color: $vuetify.theme.themes[theme].secondary }">
             BUSCAR
           </li>
         </ul>
@@ -106,10 +107,10 @@
         <v-col cols="12" sm="8" md="9">
           <div v-if="this.productos.length > 0">
             <h1
-              :style="{color: 'white'}"
+              :style="{color: $vuetify.theme.themes[theme].colorText }"
             >Busqueda: {{this.$route.query.busqueda}}</h1>
             <h2
-              :style="{color: 'white'}"
+              :style="{color: $vuetify.theme.themes[theme].colorText }"
               class="text-subtitle-1 mb-4">
               Resultados: {{this.infoProductos.count}}
             </h2>
@@ -118,7 +119,7 @@
               block
               outlined
               x-large
-              color="white"
+              :style="{color: $vuetify.theme.themes[theme].azul}"
               @click="cambiarPorPagina(infoProductos.count)">
                 Ver los {{ Number(this.infoProductos.count) }} productos
             </v-btn>
@@ -171,7 +172,7 @@
               block
               outlined
               x-large
-              color="white"
+              :style="{color: $vuetify.theme.themes[theme].azul}"
               @click="cambiarPorPagina(infoProductos.count)">
                 Ver los {{ Number(this.infoProductos.count) }} productos
             </v-btn>

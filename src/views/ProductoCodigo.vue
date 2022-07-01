@@ -9,18 +9,21 @@
           <li>
             <router-link
             exact
+            :style="{color: $vuetify.theme.themes[theme].colorText }"
             to="/" class="links__item">INICIO</router-link>
           </li>
           <li class="links__divider">/</li>
           <li>
             <router-link
             exact
+            :style="{color: $vuetify.theme.themes[theme].colorText }"
             to="/productos" class="links__item">PRODUCTOS</router-link>
           </li>
           <li class="links__divider">/</li>
           <li>
             <router-link
             exact
+            :style="{color: $vuetify.theme.themes[theme].colorText }"
             :to="`/productos?categoria=${productoCodigo[0].subcategoria_1.categoria.jerarquia}&titulo=${productoCodigo[0].subcategoria_1.categoria.nombre}`" class="links__item">{{this.categoriaPrincipal.toUpperCase()}}</router-link>
           </li>
           <li class="links__divider">/</li>
@@ -31,7 +34,7 @@
             :to="`/productos?subCategoria=${productoCodigo[0].subcategoria_1.jerarquia}&titulo=${productoCodigo[0].subcategoria_1.nombre}`"  class="links__item">{{this.categoriaSecundaria.toUpperCase()}}</router-link>
           </li>
           <li class="links__divider">/</li>
-          <li>
+          <li :style="{color: $vuetify.theme.themes[theme].secondary }">
             {{this.codigo}}
           </li>
         </ul>

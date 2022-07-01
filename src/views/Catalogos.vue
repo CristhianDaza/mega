@@ -11,10 +11,11 @@
               exact
               to="/"
               class="links__item"
+              :style="{color: $vuetify.theme.themes[theme].colorText }"
             >INICIO</router-link>
           </li>
           <li class="links__divider">/</li>
-          <li>
+          <li :style="{color: $vuetify.theme.themes[theme].secondary }">
             CATÁLOGOS
           </li>
         </ul>

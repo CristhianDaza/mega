@@ -12,6 +12,7 @@
               exact
               to="/"
               class="links__item"
+              :style="{color: $vuetify.theme.themes[theme].colorText }"
             >INICIO</router-link>
           </li>
           <li class="links__divider">/</li>
@@ -20,11 +21,12 @@
               exact
               to="/productos"
               class="links__item"
+              :style="{color: $vuetify.theme.themes[theme].colorText }"
             >PRODUCTOS</router-link>
           </li>
           <li class="links__divider">/</li>
-          <li>
-            CATÁLOGOS
+          <li :style="{color: $vuetify.theme.themes[theme].secondary }">
+            CATEGORÍAS
           </li>
         </ul>
       </div>

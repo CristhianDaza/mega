@@ -2,11 +2,7 @@
 <!-- eslint-disable max-len -->
   <div>
     <Hero titulo="Nosotros"/>
-    <div
-      :style="{ backgroundImage:
-        `url(${this.$vuetify.theme.dark ? nosotrosDark : nosotros })` }"
-        class="fondoNosotros"
-    >
+    <div class="fondoNosotros">
       <v-container class="py-0">
         <div
           class="links"
@@ -17,10 +13,11 @@
                 exact
                 to="/"
                 class="links__item"
+                :style="{color: $vuetify.theme.themes[theme].colorText }"
               >INICIO</router-link>
             </li>
             <li class="links__divider">/</li>
-            <li>
+            <li :style="{color: $vuetify.theme.themes[theme].secondary }">
               NOSOTROS
             </li>
           </ul>
@@ -58,8 +55,6 @@
 
 <script>
 import layoutPrincipal from '@/mixins/layoutPrincipal';
-import nosotros from '@/assets/img/nosotros.svg';
-import nosotrosDark from '@/assets/img/nosotros-dark.svg';
 
 export default {
   name: 'NosotrosView',
@@ -78,8 +73,6 @@ export default {
           href: '/nosotros/',
         },
       ],
-      nosotros,
-      nosotrosDark,
     };
   },
   components: {

@@ -15,32 +15,44 @@
               : ''"
             >
               <p
-                :style="{color: 'white'}"
+                :style="{color: $vuetify.theme.themes[theme].colorText }"
                 :class="this.$vuetify.breakpoint.xs
                 ? 'ma-0 body-1'
                 : 'subtitle-1'"
                 class="font-weight-medium">Megapromocionales LTDA</p>
               <p
-                :style="{color: 'white'}"
+                :style="{color: $vuetify.theme.themes[theme].colorText }"
                 :class="this.$vuetify.breakpoint.xs
                 ? 'ma-0 body-1'
                 : 'subtitle-1'"
                 class="font-weight-medium">Carrera 28 # 10 - 60 Local 137</p>
               <p
-                :style="{color: 'white'}"
+                :style="{color: $vuetify.theme.themes[theme].colorText }"
                 :class="this.$vuetify.breakpoint.xs
                 ? 'ma-0 body-1'
                 : 'subtitle-1'"
                 class="font-weight-medium">megapromocional@gmail.com</p>
               <p
-                :style="{color: 'white'}"
+                :style="{color: $vuetify.theme.themes[theme].colorText }"
                 :class="this.$vuetify.breakpoint.xs
                 ? 'ma-0 body-1'
                 : 'subtitle-1'"
                 class="font-weight-medium">
-                <v-icon class="pb-1" color="white">{{ mdiWhatsapp }}</v-icon> 315 927 4144 |
-                <v-icon class="pb-1 ml-2" color="white">{{ mdiWhatsapp }}</v-icon> 315 927 5144 |
-                <v-icon class="pb-1 ml-2" color="white">{{ mdiWhatsapp }}</v-icon> 320 585 5531
+                <v-icon
+                  class="pb-1"
+                  :style="{color: $vuetify.theme.themes[theme].colorText }">
+                  {{ mdiWhatsapp }}
+                </v-icon> 315 927 4144 |
+                <v-icon
+                  class="pb-1 ml-2"
+                  :style="{color: $vuetify.theme.themes[theme].colorText }">
+                  {{ mdiWhatsapp }}
+                </v-icon> 315 927 5144 |
+                <v-icon
+                  class="pb-1 ml-2"
+                  :style="{color: $vuetify.theme.themes[theme].colorText }">
+                  {{ mdiWhatsapp }}
+                </v-icon> 320 585 5531
               </p>
             </div>
           </v-col>

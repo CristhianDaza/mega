@@ -5,10 +5,14 @@
       <div class="links">
         <ul>
           <li>
-            <router-link exact to="/" class="links__item">INICIO</router-link>
+            <router-link
+              exact to="/"
+              class="links__item"
+              :style="{color: $vuetify.theme.themes[theme].colorText }"
+            >INICIO</router-link>
           </li>
           <li class="links__divider">/</li>
-          <li>
+          <li :style="{color: $vuetify.theme.themes[theme].secondary }">
             PORTAFOLIO MEGA
           </li>
         </ul>

@@ -12,16 +12,28 @@
             @click.stop="drawer = !drawer"
           ></v-app-bar-nav-icon>
         </div>
-
-        <div class="d-none d-lg-flex align-center" v-for="menu in menus" :key="menu.uid">
+        <div class="d-none d-lg-flex align-center" >
+          <template v-for="menu in menus">
+            <v-btn
+              :key="menu.uid"
+              :style="{color: $vuetify.theme.themes[theme].textoBlanco}"
+              text
+              exact
+              small
+              :to="menu.link"
+            >
+              {{menu.nombre}}
+            </v-btn>
+          </template>
           <v-btn
             :style="{color: $vuetify.theme.themes[theme].textoBlanco}"
             text
             exact
             small
-            :to="menu.link"
+            to="/admin"
+            v-if="existeUsuario"
           >
-            <span>{{menu.nombre}}</span>
+            <span>Admin</span>
           </v-btn>
         </div>
         <v-spacer></v-spacer>

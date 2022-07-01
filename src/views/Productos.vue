@@ -4,16 +4,17 @@
     <Hero :titulo="titulo"/>
     <v-container class="pt-0">
       <div class="links">
-        <ul>
+        <ul >
           <li>
             <router-link
               exact
               to="/"
               class="links__item"
+              :style="{color: $vuetify.theme.themes[theme].colorText }"
             >INICIO</router-link>
           </li>
           <li class="links__divider">/</li>
-          <li>
+          <li :style="{color: $vuetify.theme.themes[theme].secondary }">
             PRODUCTOS
           </li>
         </ul>
@@ -173,7 +174,7 @@
                 block
                 outlined
                 large
-                color="white"
+                :style="{color: $vuetify.theme.themes[theme].azul}"
                 @click="cambiarPorPagina(Number(infoProductos.count))">
                   Ver los {{Number(this.infoProductos.count) }} productos
               </v-btn>
@@ -223,7 +224,7 @@
                 block
                 outlined
                 large
-                color="white"
+                :style="{color: $vuetify.theme.themes[theme].azul}"
                 @click="cambiarPorPagina(Number(infoProductos.count))">
                   Ver los {{Number(this.infoProductos.count) }} productos
               </v-btn>

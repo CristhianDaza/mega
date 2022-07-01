@@ -45,7 +45,6 @@ body::-webkit-scrollbar-thumb {
   display: inline-flex;
   text-decoration: none;
   transition: all .3s cubic-bezier(0.25, 0.8, 0.5, 1);
-  color: white !important;
 }
 
 .links__item.links__itme_amarillo {
