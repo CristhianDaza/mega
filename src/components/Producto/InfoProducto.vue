@@ -4,14 +4,14 @@
     <DesProducto
       :descripcion="producto"
     />
-    <template v-if="existeUsuario">
+    <template v-if="isLogin">
       <PrecioProducto
         :precio="producto"
         :materiales="materiales"
       />
     </template>
     <v-card-text class="pt-0">
-      <div v-if="existeUsuario">
+      <div v-if="isLogin">
         <p v-if="producto.texto_informacion !== null" class="ma-0" :style="'color: ' + producto.color_texto_informacion">
           {{ descripcionProducto }}
         </p>
@@ -79,7 +79,7 @@ export default {
   },
   props: ['producto', 'materiales', 'transito'],
   computed: {
-    ...mapGetters(['existeUsuario']),
+    ...mapGetters(['isLogin']),
     descripcionProducto() {
       if (this.producto.texto_informacion.includes('asesora')) {
         return this.producto.texto_informacion.replaceAll('asesora', 'asesor');

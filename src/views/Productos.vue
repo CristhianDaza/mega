@@ -1,7 +1,7 @@
 <template>
 <!-- eslint-disable max-len -->
   <div>
-    <Hero :titulo="titulo"/>
+    <Hero :title="titulo"/>
     <v-container class="pt-0">
       <div class="links">
         <ul >
@@ -158,7 +158,7 @@
                   <v-list-item-content>
                     <v-list-item-title
                     :style="{ color: $vuetify.theme.themes[theme].colorText }">
-                      {{ categoria.nombre }}
+                      {{ subCategoria.nombre }}
                     </v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
@@ -203,7 +203,7 @@
                   :key="producto.id"
                   class="pa-1"
                 >
-                  <Productos :producto='producto' :colores='producto.materiales' />
+                  <Products :producto='producto' :colores='producto.materiales' />
                 </v-col>
               </v-row>
               <v-row v-if="this.productos.length > 0" justify="center">
@@ -246,13 +246,14 @@
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
-import hextToRgb from '@/mixins/hextToRgb';
+import hextToRgb from '@/helpers/hextToRgb';
 
 export default {
   name: 'ProductosMega',
-  mixins: [layoutPrincipal, hextToRgb],
+  mixins: [layoutPrincipal],
   data() {
     return {
+      hextToRgb,
       listaCategorias: true,
       productos: [],
       categorias: [],
@@ -291,7 +292,7 @@ export default {
     };
   },
   components: {
-    Productos: () => import(/* webpackChunkName: "productos" */ '@/components/Productos/Productos.vue'),
+    Products: () => import(/* webpackChunkName: "products" */ '@/components/Productos/Products.vue'),
     Hero: () => import(/* webpackChunkName: "hero" */ '@/components/Global/Hero.vue'),
     Loader: () => import(/* webpackChunkName: "loader" */ '@/components/Global/Loader.vue'),
   },

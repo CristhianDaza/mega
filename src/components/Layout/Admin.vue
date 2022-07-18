@@ -1,6 +1,6 @@
 <template>
   <v-app :style="{background: $vuetify.theme.themes[theme].primary}">
-    <div v-if="existeUsuario">
+    <div v-if="isLogin">
       <MenuAdmin class="mb-3" />
     </div>
     <v-main>
@@ -22,7 +22,7 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'AdminLayout',
   computed: {
-    ...mapGetters(['existeUsuario']),
+    ...mapGetters(['isLogin']),
   },
   components: {
     MenuAdmin: () => import(/* webpackChunkName: "menuAdmin" */ '@/components/Admin/MenuAdmin.vue'),

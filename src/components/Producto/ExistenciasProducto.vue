@@ -91,15 +91,16 @@ import {
   mdiMagnify,
 } from '@mdi/js';
 import addCommas from '@/mixins/addCommas';
-import hextToRgb from '@/mixins/hextToRgb';
+import hextToRgb from '@/helpers/hextToRgb';
 
 export default {
   name: 'ExistenciasProductos',
   props: ['inventarioDisponible'],
-  mixins: [addCommas, hextToRgb],
+  mixins: [addCommas],
   data() {
     return {
       mdiMagnify,
+      hextToRgb,
     };
   },
 };

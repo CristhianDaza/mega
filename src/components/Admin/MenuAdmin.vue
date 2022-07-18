@@ -113,9 +113,9 @@
       </template>
       <template v-else>
         <v-btn
-         to="/"
+         @click="toHome()"
          :style="{background: $vuetify.theme.themes[theme].azul}"
-          class="mr-2">Ir a la página principal</v-btn>
+          class="mr-2">Volver</v-btn>
       </template>
 
       <template v-if="this.$vuetify.breakpoint.xs">
@@ -171,10 +171,18 @@ export default {
     mdiMenu,
   }),
   methods: {
-    ...mapActions(['cerrarSesion']),
+    ...mapActions(['cerrarSesion', 'setPathToAdmin']),
+    toHome() {
+      if (this.pathToAdmin) {
+        this.$router.push({ path: this.pathToAdmin });
+        this.setPathToAdmin(null);
+        return;
+      }
+      this.$router.push({ name: 'inicio' });
+    },
   },
   computed: {
-    ...mapState(['usuario']),
+    ...mapState(['usuario', 'pathToAdmin']),
   },
 };
 </script>

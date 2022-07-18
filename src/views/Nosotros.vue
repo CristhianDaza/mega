@@ -1,7 +1,7 @@
 <template>
 <!-- eslint-disable max-len -->
   <div>
-    <Hero titulo="Nosotros"/>
+    <Hero title="Nosotros"/>
     <div class="fondoNosotros">
       <v-container class="py-0">
         <div

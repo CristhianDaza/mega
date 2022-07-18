@@ -13,7 +13,7 @@
 import layoutPrincipal from '@/mixins/layoutPrincipal';
 
 export default {
-  name: 'InicioView',
+  name: 'HomeView',
   mixins: [layoutPrincipal],
   components: {
     Hero: () => import(/* webpackChunkName: "hero" */ '@/components/Index/Hero.vue'),

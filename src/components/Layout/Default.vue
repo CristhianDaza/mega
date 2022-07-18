@@ -1,8 +1,8 @@
 <template>
 <div>
   <v-app :style="{ background: $vuetify.theme.themes[theme].primary }">
-    <Cabecera />
-    <MenuPrincipal />
+    <header-component />
+    <MainMenu />
     <v-main>
       <router-view :key="$route.fullPath" />
     </v-main>
@@ -45,8 +45,8 @@ export default {
     name: 'App',
   }),
   components: {
-    Cabecera: () => import(/* webpackChunkName: "cabecera" */ '@/components/Global/Cabecera.vue'),
-    MenuPrincipal: () => import(/* webpackChunkName: "menuPrincipal" */ '@/components/Global/MenuPrincipal.vue'),
+    HeaderComponent: () => import(/* webpackChunkName: "headerComponent" */ '@/components/Global/HeaderComponent.vue'),
+    MainMenu: () => import(/* webpackChunkName: "mainMenu" */ '@/components/Global/MainMenu.vue'),
     FooterComponent: () => import(/* webpackChunkName: "footer" */ '@/components/Global/Footer.vue'),
   },
   computed: {

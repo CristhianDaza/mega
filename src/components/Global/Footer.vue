@@ -84,7 +84,7 @@
           <span>Nosotros</span>
         </v-tooltip>
 
-        <v-tooltip v-if="existeUsuario" bottom>
+        <v-tooltip v-if="isLogin" bottom>
           <template v-slot:activator="{on, attrs}">
             <v-btn
               class="mx-4"
@@ -98,7 +98,7 @@
           <span>Admin</span>
         </v-tooltip>
 
-        <v-tooltip v-if="!existeUsuario" bottom>
+        <v-tooltip v-if="!isLogin" bottom>
           <template v-slot:activator="{on, attrs}">
             <v-btn
               class="mx-4"
@@ -210,7 +210,7 @@ export default {
     mdiCoffee,
   }),
   computed: {
-    ...mapGetters(['existeUsuario']),
+    ...mapGetters(['isLogin']),
   },
 };
 </script>

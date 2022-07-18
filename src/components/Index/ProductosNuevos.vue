@@ -20,7 +20,7 @@
           v-for="(producto) in this.productos"
           :key="producto.familia"
         >
-          <Productos :producto='producto' :colores="producto.materiales"/>
+          <Products :producto='producto' :colores="producto.materiales"/>
         </v-col>
       </v-row>
       <v-btn
@@ -65,7 +65,7 @@ export default {
     this.traerProducto();
   },
   components: {
-    Productos: () => import(/* webpackChunkName: "productos" */ '@/components/Productos/Productos.vue'),
+    Products: () => import(/* webpackChunkName: "products" */ '@/components/Productos/Products.vue'),
   },
 };
 </script>

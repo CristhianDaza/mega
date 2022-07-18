@@ -7,10 +7,14 @@ import {
   db,
 } from '@/firebase';
 import router from '@/router';
+import menu from './module/menu';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  modules: {
+    menu,
+  },
   state: {
     layout: 'defaultLayout',
     usuario: '',
@@ -29,10 +33,7 @@ export default new Vuex.Store({
       titulo: '', etiqueta: '',
     },
     titulos: [],
-    menus: [],
-    menu: {
-      nombre: '', orden: '', Link: '',
-    },
+    pathToAdmin: null,
   },
   mutations: {
     setLayout(state, layout) {
@@ -95,14 +96,8 @@ export default new Vuex.Store({
     eliminarProducto(state, id) {
       state.productos = state.productos.filter((doc) => doc.id !== id);
     },
-    setMenus(state, valor) {
-      state.menus = valor;
-    },
-    eliminarMenu(state, id) {
-      state.menus = state.menus.filter((doc) => doc.id !== id);
-    },
-    setMenu(state, valor) {
-      state.menu = valor;
+    setPathToAdmin(state, path) {
+      state.pathToAdmin = path;
     },
   },
   actions: {
@@ -340,39 +335,14 @@ export default new Vuex.Store({
         });
     },
 
-    async traerMenus({ commit }) {
-      await db.collection('menu').orderBy('orden').get()
-        .then((snapshot) => {
-          const menus = [];
-          snapshot.forEach((doc) => {
-            const menu = doc.data();
-            menu.id = doc.id;
-            menus.push(menu);
-          });
-          commit('setMenus', menus);
-        });
-    },
-    async eliminarMenu({ commit }, id) {
-      await db.collection('menu').doc(id).delete()
-        .then(() => {
-          commit('eliminarMenu', id);
-        });
-    },
-    async traerMenu({ commit }, id) {
-      await db.collection('menu').doc(id).get()
-        .then((doc) => {
-          const menu = doc.data();
-          menu.id = doc.id;
-          commit('setMenu', menu);
-        });
+    setPathToAdmin({ commit }, path) {
+      commit('setPathToAdmin', path);
     },
   },
   getters: {
-    existeUsuario(state) {
-      if (state.usuario === null || state.usuario === '' || state.usuario === undefined) {
-        return false;
-      }
-      return true;
+    isLogin(state) {
+      if (state.usuario) return true;
+      return false;
     },
   },
 });

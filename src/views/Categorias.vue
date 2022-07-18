@@ -1,7 +1,7 @@
 <template>
 <!-- eslint-disable max-len -->
   <div>
-    <Hero titulo="Categorías"/>
+    <Hero title="Categorías"/>
     <v-container class="pt-0">
       <div
         class="links"

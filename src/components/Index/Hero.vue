@@ -19,16 +19,12 @@
         <br> promocionales, comprometidos con nuestro equipo
         <br> de trabajo a tener la mejor calidad de servicio y productos.
       </p>
-      <v-btn
-        to="/contacto"
-        elevation="5"
-        large
-        outlined
-        block
-        :style="{ color: $vuetify.theme.themes[theme].azul }"
-        class="mt-2">
-        Contacto
-      </v-btn>
+      <mp-button
+        is-full
+        @click="$router.push({ name: 'contacto' })"
+      >
+        Escríbenos
+      </mp-button>
     </div>
     <div class="imgHero">
       <v-img
@@ -44,6 +40,10 @@
 
 export default {
   name: 'HeroPrincipal',
+  components: {
+    MpButton: () => import(/* webpackChunkName: "mpButton" */ '@/components/UI/Mp-Button.vue'),
+  },
+
   data() {
     return {
     };
@@ -61,7 +61,7 @@ export default {
     justify-content: space-between;
   }
   .imagenHero {
-    animation: imgHero 20s linear 0s infinite normal none;
+    animation: imgHero 10s linear 0s infinite normal none;
   }
   @keyframes imgHero {
     0%,

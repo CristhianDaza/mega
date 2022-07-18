@@ -7,9 +7,9 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'Inicio',
+    name: 'home',
     exact: true,
-    component: () => import(/* webpackChunkName: "inicio" */ '../views/Inicio.vue'),
+    component: () => import(/* webpackChunkName: "inicio" */ '../views/Home.vue'),
   },
   {
     path: '/categorias',
@@ -31,7 +31,7 @@ const routes = [
   },
   {
     path: '/contacto',
-    name: 'Contacto',
+    name: 'contacto',
     exact: true,
     component: () => import(/* webpackChunkName: "contacto" */ '../views/Contacto.vue'),
   },
@@ -42,10 +42,10 @@ const routes = [
     component: () => import(/* webpackChunkName: "nosotros" */ '../views/Nosotros.vue'),
   },
   {
-    path: '/buscar',
-    name: 'Buscar',
+    path: '/search',
+    name: 'search',
     exact: true,
-    component: () => import(/* webpackChunkName: "buscar" */ '../views/Buscar.vue'),
+    component: () => import(/* webpackChunkName: "search" */ '../views/Search.vue'),
   },
   {
     path: '/producto/:codigo',
@@ -67,7 +67,7 @@ const routes = [
   },
   {
     path: '/admin/',
-    name: 'Admin',
+    name: 'admin',
     exact: true,
     component: () => import(/* webpackChunkName: "admin" */ '../views/admin/Admin.vue'),
     meta: { requiresAuth: true },

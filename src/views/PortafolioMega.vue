@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Hero titulo="Portafolio"/>
+    <Hero title="Portafolio"/>
     <v-container class="pt-0">
       <div class="links">
         <ul>

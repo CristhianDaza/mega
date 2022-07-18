@@ -15,17 +15,17 @@
             ></v-progress-linear>
             <v-card-title>Editar Menú</v-card-title>
             <v-form
-              @submit.prevent="editarProducto(menu)"
+              @submit.prevent="editMenu(menu)"
             >
             <v-card-text>
                 <v-text-field
                   label="Nombre"
-                  v-model="menu.nombre"
+                  v-model="menu.name"
                   :prepend-icon="mdiFormatTitle">
                 </v-text-field>
                 <v-text-field
                   label="Orden"
-                  v-model="menu.orden"
+                  v-model="menu.order"
                   :prepend-icon="mdiNumeric">
                 </v-text-field>
                 <v-text-field
@@ -65,7 +65,7 @@ import layoutAdmin from '@/mixins/layoutAdmin';
 import { db } from '@/firebase';
 
 export default {
-  name: 'editar-producto',
+  name: 'editMenu',
   mixins: [layoutAdmin],
   data() {
     return {
@@ -73,9 +73,9 @@ export default {
       mdiLinkVariant,
       mdiNumeric,
       error: null,
-      nombre: '',
+      name: '',
       link: '',
-      orden: '',
+      order: '',
       loading: false,
       uploading: 0,
       id: this.$route.params.id,
@@ -90,13 +90,13 @@ export default {
     ],
   },
   methods: {
-    ...mapActions(['traerMenu']),
-    async editarProducto(menu) {
+    ...mapActions('menu', ['getMenu']),
+    async editMenu(menu) {
       this.loading = true;
-      const { nombre, orden, link } = menu;
+      const { name, order, link } = menu;
       await db.collection('menu').doc(this.id).update({
-        nombre,
-        orden,
+        name,
+        order,
         link,
       })
         .then(() => {
@@ -120,10 +120,10 @@ export default {
     },
   },
   mounted() {
-    this.traerMenu(this.id);
+    this.getMenu(this.id);
   },
   computed: {
-    ...mapState(['menu']),
+    ...mapState('menu', ['menu']),
   },
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Hero titulo="Contacto"/>
+    <Hero title="Contacto"/>
     <div class="fondoContacto">
       <v-container class="pt-0">
         <div class="links">

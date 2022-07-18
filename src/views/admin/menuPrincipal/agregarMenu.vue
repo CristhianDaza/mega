@@ -17,17 +17,17 @@
             <v-card-text>
               <v-text-field
                 label="Nombre"
-                v-model="nombre"
+                v-model="mainMenu.name"
                 :prepend-icon="mdiFormatTitle">
               </v-text-field>
               <v-text-field
                 label="Orden"
-                v-model="orden"
+                v-model="mainMenu.order"
                 :prepend-icon="mdiNumeric">
               </v-text-field>
               <v-text-field
                 label="Link"
-                v-model="link"
+                v-model="mainMenu.link"
                 :prepend-icon="mdiLinkVariant">
               </v-text-field>
             </v-card-text>
@@ -37,9 +37,9 @@
               <v-btn
                 outlined
                 :style="{color: $vuetify.theme.themes[theme].azul}"
-                @click.prevent="subirProducto"
+                @click="createMenu($event)"
                 :loading="loading">
-                  Agregar Menú
+                  Agregar Menú!
                 </v-btn>
               <v-btn
               :style="{color: $vuetify.theme.themes[theme].amarillo}"
@@ -58,7 +58,8 @@
 import { mdiFormatTitle, mdiLinkVariant, mdiNumeric } from '@mdi/js';
 import Swal from 'sweetalert2';
 import layoutAdmin from '@/mixins/layoutAdmin';
-import { db } from '@/firebase';
+// import { db } from '@/firebase';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'agregar-menu',
@@ -69,9 +70,7 @@ export default {
       mdiLinkVariant,
       mdiNumeric,
       error: null,
-      nombre: '',
-      link: '',
-      orden: '',
+      mainMenu: { name: '', order: '', link: '' },
       loading: false,
       uploading: 0,
     };
@@ -85,27 +84,19 @@ export default {
     ],
   },
   methods: {
-    async subirProducto() {
+    ...mapActions('menu', ['createMainMenu']),
+    async createMenu() {
       try {
         this.loading = true;
-        await db.collection('menu')
-          .add({
-            nombre: this.nombre,
-            orden: this.orden,
-            link: this.link,
-          })
-          .then(() => {
-            Swal.fire(
-              '¡Creada!',
-              'El menú ha sido creado.',
-              'success',
-            );
-            this.$router.push({
-              path: '/admin/menu-principal',
-            });
-          });
-
-        this.error = 'Menú creado con éxito';
+        await this.createMainMenu(this.mainMenu);
+        Swal.fire(
+          '¡Creada!',
+          'El menú ha sido creado.',
+          'success',
+        );
+        await this.$router.push({
+          path: '/admin/menu-principal',
+        });
       } catch (error) {
         Swal.fire(
           'Error!',

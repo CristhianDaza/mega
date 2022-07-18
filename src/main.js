@@ -8,10 +8,9 @@ import router from './router';
 import App from './App.vue';
 import store from './store';
 import vuetify from './plugins/vuetify';
-import './plugins/reproductor';
 import './plugins/analytics';
 import '@babel/polyfill';
-import './assets/css/globalstyle.css';
+import './assets/css/globalstyle.scss';
 
 Vue.config.productionTip = false;
 Vue.prototype.moment = moment;

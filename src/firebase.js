@@ -6,14 +6,14 @@ require('firebase/firestore');
 require('firebase/storage');
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCmc3cVSy9G3g8-kRbGROgD2_0Eu0YmG2o',
-  authDomain: 'megapromocionales2020.firebaseapp.com',
-  databaseURL: 'https://megapromocionales2020.firebaseio.com',
-  projectId: 'megapromocionales2020',
-  storageBucket: 'megapromocionales2020.appspot.com',
-  messagingSenderId: '32953139073',
-  appId: '1:32953139073:web:afce557c73323a37ff7280',
-  measurementId: 'G-23S3M5JTYT',
+  apiKey: process.env.VUE_APP_API_KEY,
+  authDomain: process.env.VUE_APP_AUTH_DOMAIN,
+  databaseURL: process.env.VUE_APP_DATABASE_URL,
+  projectId: process.env.VUE_APP_PROJECT_ID,
+  storageBucket: process.env.VUE_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.VUE_APP_MESSAGING_SENDER_ID,
+  appId: process.env.VUE_APP_APP_ID,
+  measurementId: process.env.VUE_APP_MEASUREMENT_ID,
 };
 
 firebase.initializeApp(firebaseConfig);

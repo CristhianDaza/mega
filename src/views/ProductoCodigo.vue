@@ -107,11 +107,18 @@
               @actualizarSugerencias="actualizarSugerencia"
             />
           </v-card>
-          <div v-if="productoCodigo[0].videos.length > 0" class="mt-3">
-            <VideoProducto
-              :video="productoCodigo[0]"
-            />
-          </div>
+          <template v-if="productoCodigo[0].videos.length > 0">
+            <div
+              class="mt-3"
+              v-for="{ video, id } in productoCodigo[0].videos"
+              :key="id"
+            >
+              <mp-video
+                :link-video="video"
+                controls
+              />
+            </div>
+          </template>
         </v-col>
         <v-col cols="12" sm="6" class="my-4">
           <SugeridoProducto
@@ -342,7 +349,7 @@ export default {
     ImagenProducto: () => import(/* webpackChunkName: "imagenProducto" */ '@/components/Producto/ImagenProducto.vue'),
     InfoProducto: () => import(/* webpackChunkName: "infoProducto" */ '@/components/Producto/InfoProducto.vue'),
     ExistenciasProducto: () => import(/* webpackChunkName: "existenciasProducto" */ '@/components/Producto/ExistenciasProducto.vue'),
-    VideoProducto: () => import(/* webpackChunkName: "videoProducto" */ '@/components/Producto/VideoProducto.vue'),
+    MpVideo: () => import(/* webpackChunkName: "mpVideo" */ '@/components/UI/Mp-Video.vue'),
     SugeridoProducto: () => import(/* webpackChunkName: "sugeridoProducto" */ '@/components/Producto/SugeridoProducto.vue'),
     ImagenProductosVertical: () => import(/* webpackChunkName: "imagenProductosVertical" */ '@/components/Producto/ImagenProductosVertical.vue'),
     ImagenProductosHorizontal: () => import(/* webpackChunkName: "imagenProductosHorizontal" */ '@/components/Producto/ImagenProductosHorizontal.vue'),

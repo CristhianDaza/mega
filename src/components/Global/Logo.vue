@@ -1,11 +1,11 @@
 <template>
   <div>
-    <router-link to="/">
+    <div @click="$router.push({ name: 'home' })">
       <v-img
         src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/logoWeb.webp?alt=media&token=72bc41b4-57ed-4b55-b92f-0df6c335e685"
         alt="Logotipo Megapromocionales"
-        class="logo text-left"
-        :class="this.$vuetify.breakpoint.xs ? 'mx-auto' : ''"
+        class="logo text-left pointer"
+        :class="{ 'mx-auto' : this.$vuetify.breakpoint.xs }"
         contain
         :width="width"
       >
@@ -19,7 +19,7 @@
           </v-row>
         </template>
       </v-img>
-    </router-link>
+    </div>
   </div>
 </template>
 

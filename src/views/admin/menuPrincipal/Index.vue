@@ -20,10 +20,10 @@
           </tr>
         </thead>
         <tbody >
-          <tr v-for="menu in menus" :key="menu.uid" :class="`order-${menu.orden}`">
-            <td>{{menu.nombre}}</td>
-            <td>{{menu.orden}}</td>
-            <td>{{menu.link}}</td>
+          <tr v-for="menu in mainMenu" :key="menu.id" :class="`order-${menu.order}`">
+            <td>{{ menu.name}}</td>
+            <td>{{ menu.order }}</td>
+            <td>{{ menu.link }}</td>
             <td class="text-right">
               <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
@@ -48,7 +48,7 @@
                     v-bind="attrs"
                     v-on="on"
                     class="ml-2"
-                    @click="confirmarEliminarMenu(menu.id)"
+                    @click="confirmDeleteMenu(menu.id)"
                   >
                     <v-icon>{{mdiDelete}}</v-icon>
                   </v-btn>
@@ -64,13 +64,13 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import Swal from 'sweetalert2';
 import { mdiDelete, mdiPencil } from '@mdi/js';
 import layoutAdmin from '@/mixins/layoutAdmin';
 
 export default {
-  name: 'productos-inicio',
+  name: 'mainMenu',
   mixins: [layoutAdmin],
   data() {
     return {
@@ -79,7 +79,7 @@ export default {
     };
   },
   metaInfo: {
-    title: 'Productos Inicio',
+    title: 'Menú Principal',
     titleTemplate: '%s | Megapromocionales LTDA',
     meta: [
       { charset: 'utf8' },
@@ -87,8 +87,9 @@ export default {
     ],
   },
   methods: {
-    ...mapActions(['traerMenus', 'eliminarMenu']),
-    confirmarEliminarMenu(id) {
+    ...mapActions('menu', ['getMainMenu', 'deleteMainMenu']),
+
+    confirmDeleteMenu(id) {
       Swal.fire({
         title: '¿Estas segur@?',
         text: '¡No se podrá revertir!',
@@ -100,7 +101,7 @@ export default {
         confirmButtonText: 'Si, ¡eliminarlo!',
       }).then((result) => {
         if (result.value) {
-          this.eliminarMenu(id);
+          this.deleteMainMenu(id);
           Swal.fire(
             '¡Eliminado!',
             'El menú ha sido eliminado.',
@@ -111,10 +112,10 @@ export default {
     },
   },
   computed: {
-    ...mapState(['menus']),
+    ...mapGetters('menu', ['mainMenu']),
   },
   mounted() {
-    this.traerMenus();
+    this.getMainMenu();
   },
 };
 </script>
