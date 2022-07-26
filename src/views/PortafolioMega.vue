@@ -2,21 +2,9 @@
   <div>
     <Hero title="Portafolio"/>
     <v-container class="pt-0">
-      <div class="links">
-        <ul>
-          <li>
-            <router-link
-              exact to="/"
-              class="links__item"
-              :style="{color: $vuetify.theme.themes[theme].colorText }"
-            >INICIO</router-link>
-          </li>
-          <li class="links__divider">/</li>
-          <li :style="{color: $vuetify.theme.themes[theme].secondary }">
-            PORTAFOLIO MEGA
-          </li>
-        </ul>
-      </div>
+      <mp-breadcrumbs
+        :breadcrumbs="breadcrumbs"
+      />
     </v-container>
     <div
       id="app"
@@ -29,7 +17,7 @@
           :pages="pages"
           v-slot="flipbook"
         >
-          <div class="action-bar mt-3 mb-3 pb-0">
+          <div class="action-bar mt-3 mb-3 pb-5">
             <v-icon
               class="btn left"
               :class="{ disabled: !flipbook.canFlipLeft }"
@@ -89,28 +77,23 @@ export default {
       pagesHiRes: [],
       hasMouse: true,
       pageNum: null,
-      items: [
-        {
-          titulo: 'Inicio',
-          disabled: false,
-          href: '/',
-        },
-        {
-          titulo: 'catalogos',
-          disabled: false,
-          href: '/catalogos',
-        },
-        {
-          titulo: 'portafolio mega',
-          disabled: true,
-          href: '/portafolio',
-        },
-      ],
     };
   },
   components: {
     Flipbook: () => import(/* webpackChunkName: "flipbook" */ 'flipbook-vue'),
     Hero: () => import(/* webpackChunkName: "hero" */ '@/components/Global/Hero.vue'),
+    MpBreadcrumbs: () => import(/* webpackChunkName: "mpBreadcrumbs" */ '@/components/UI/Mp-Breadcrumbs.vue'),
+  },
+  computed: {
+    breadcrumbs() {
+      const breadcrumbs = [
+        { title: 'Inicio', disabled: false, toLink: '/' },
+        { title: 'Catálogos', disabled: false, toLink: '/catalogs' },
+        { title: 'Portafolio Mega', disabled: true, toLink: '/portafolio' },
+      ];
+
+      return breadcrumbs;
+    },
   },
   metaInfo: {
     title: 'Portafolio 📖',

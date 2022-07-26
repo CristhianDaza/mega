@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div @click="$router.push({ name: 'home' })">
+  <div class="hero-logo">
+    <router-link to="/">
       <v-img
         src="https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/logoWeb.webp?alt=media&token=72bc41b4-57ed-4b55-b92f-0df6c335e685"
         alt="Logotipo Megapromocionales"
@@ -19,7 +19,7 @@
           </v-row>
         </template>
       </v-img>
-    </div>
+    </router-link>
   </div>
 </template>
 
@@ -32,3 +32,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.hero-logo {
+  display: inline-block;
+}
+</style>

@@ -59,7 +59,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .switch {
@@ -70,7 +70,7 @@ export default {
   cursor: pointer;
   display: flex;
   outline: none;
-  transition: all 2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   &:after {
     content: '';
     display: block;
@@ -82,7 +82,7 @@ export default {
     right: 30px;
     border-radius: 100px;
     box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
-    transition: all .3s linear;
+    transition: all .2s linear;
   }
 
   &.active {
@@ -102,7 +102,7 @@ export default {
     align-items: center;
     background: none;
     color: #fff;
-    transition: all 5s linear;
+    transition: all .2s linear;
   }
 }
 </style>

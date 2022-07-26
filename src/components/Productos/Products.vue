@@ -5,8 +5,8 @@
     :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
   >
     <v-card-text class="pa-0">
-      <div
-        @click="$router.push({path: `/producto/${producto.familia}`})"
+      <router-link
+        :to="{ path: `/producto/${producto.familia}` }"
         class="pointer"
       >
         <v-img
@@ -17,7 +17,7 @@
           class="imagenProducto"
         >
         </v-img>
-      </div>
+      </router-link>
     </v-card-text>
     <v-divider class="mx-8 mt-2"></v-divider>
     <v-card-title
@@ -96,13 +96,15 @@
       <div v-html="totalInventory(producto.materiales)"></div>
     </v-card-subtitle>
     <v-divider class="mx-5"></v-divider>
-    <v-card-actions>
-    <mp-button
-      is-full
-      @click="$router.push({path: `/producto/${producto.familia}`})"
-    >
-      Ver Producto
-    </mp-button>
+    <v-card-actions class="d-block">
+      <router-link :to="{ path: `/producto/${producto.familia}` }">
+        <mp-button
+          is-full
+          @click="$router.push({path: `/producto/${producto.familia}`})"
+        >
+          Ver Producto
+        </mp-button>
+      </router-link>
     </v-card-actions>
   </v-card>
 </template>
@@ -145,7 +147,7 @@ export default {
         total += product.inventario;
         inTransit += product.en_transito;
       });
-      if (total <= 0) {
+      if (total <= 10) {
         if (inTransit > 0) return `<span class="font-weight-bold blue--text text--accent-2">En transito</span> ${this.addCommas(inTransit)} unidades`;
         return '<strong class="red--text text--lighten-1">Agotado</strong>';
       }

@@ -1,9 +1,9 @@
 <template>
   <div
     class="fondoNovedades py-10"
+    v-if="this.productos.length > 0"
   >
     <h1
-      v-if="this.titulos[0]"
       :class="this.$vuetify.breakpoint.xs ? 'display-1 mt-2' : 'display-2'"
       class="mb-5 pt-5 text-center font-weight-black text-uppercase"
       :style="{color: $vuetify.theme.themes[theme].colorText}"
@@ -23,22 +23,22 @@
           <Products :producto='producto' :colores="producto.materiales"/>
         </v-col>
       </v-row>
-      <v-btn
-        class="mt-6"
-        v-if="this.productos.length > 0"
-        :to="{
-          path:
-            // eslint-disable-next-line max-len
-            `/productos?etiqueta=${this.titulos[0].etiqueta}&titulo=${this.titulos[0].titulo}&pagina=2`
-        }"
-        outlined
-        block
-        large
-        :style="{ color: $vuetify.theme.themes[theme].azul }"
-        elevation="5"
-      >
+      <router-link
+        :to="`/productos?etiqueta=${this.titulos[0].etiqueta}&titulo=${this.titulos[0].titulo}`">
+        <mp-button
+          class="mt-6"
+          is-full
+          @click="$router.push({
+            name: 'product',
+            query: {
+              etiqueta: titulos[0].etiqueta,
+              titulo: titulos[0].titulo,
+            }
+          })"
+        >
           Ver más Productos
-      </v-btn>
+        </mp-button>
+      </router-link>
     </v-container>
   </div>
 </template>
@@ -66,13 +66,13 @@ export default {
   },
   components: {
     Products: () => import(/* webpackChunkName: "products" */ '@/components/Productos/Products.vue'),
+    MpButton: () => import(/* webpackChunkName: "mpButton" */ '@/components/UI/Mp-Button.vue'),
   },
 };
 </script>
 <style>
 .fondoNovedades{
   background-position: center;
-  /* background-size: 100%; */
   background-size: cover
 }
 </style>

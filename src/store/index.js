@@ -8,12 +8,14 @@ import {
 } from '@/firebase';
 import router from '@/router';
 import menu from './module/menu';
+import categories from './module/categories';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
     menu,
+    categories,
   },
   state: {
     layout: 'defaultLayout',

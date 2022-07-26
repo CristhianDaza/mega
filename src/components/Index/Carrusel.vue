@@ -7,7 +7,7 @@
     :speed="1000"
     :autoplayTimeout="5000"
     :navigationEnabled="true"
-    :class="(this.$vuetify.theme.dark) ? 'dark' : ''"
+    :class="{ 'dark' : this.$vuetify.theme.dark }"
   >
     <slide
       v-for="(slide, i) in imagenSlider"

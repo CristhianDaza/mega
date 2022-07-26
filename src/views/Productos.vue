@@ -3,55 +3,14 @@
   <div>
     <Hero :title="titulo"/>
     <v-container class="pt-0">
-      <div class="links">
-        <ul >
-          <li>
-            <router-link
-              exact
-              to="/"
-              class="links__item"
-              :style="{color: $vuetify.theme.themes[theme].colorText }"
-            >INICIO</router-link>
-          </li>
-          <li class="links__divider">/</li>
-          <li :style="{color: $vuetify.theme.themes[theme].secondary }">
-            PRODUCTOS
-          </li>
-        </ul>
-      </div>
+      <mp-breadcrumbs
+        :breadcrumbs="breadcrumbs"
+      />
       <v-row>
         <v-col class="pt-1" cols="12" sm="4" md="3">
-          <v-card
-            v-if="this.productos.length > 0"
-            :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
-          >
-            <v-card-text class="py-0">
-              <v-list
-                :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
-              >
-                <v-subheader
-                  class="pa-0"
-                  :style="{ color: $vuetify.theme.themes[theme].colorText }"
-                >Filtrar por inventario</v-subheader>
-                <v-text-field
-                  label="Inventario Mayor a"
-                  outlined
-                  type="number"
-                  v-model="inputInventario"
-                  @keyup.enter="buscarInventario(inputInventario)"
-                >
-                </v-text-field>
-                <v-btn
-                  @click="buscarInventario(inputInventario)"
-                  :style="{ color: $vuetify.theme.themes[theme].azul }"
-                  block
-                  outlined
-                >
-                  Filtrar
-                </v-btn>
-              </v-list>
-            </v-card-text>
-          </v-card>
+          <filter-inventory
+            v-if="productos.length > 0"
+          />
           <v-card
             v-if="this.listaEtiquetas.length > 0"
             :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
@@ -74,70 +33,26 @@
               </v-list-item-group>
             </v-list>
           </v-card>
-          <v-card
-            v-if="this.listaColores.length > 0"
-            :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
-            class="mt-3">
-            <v-list
-              :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
-              dense
-            >
-              <v-subheader
-                :style="{ color: $vuetify.theme.themes[theme].colorText }"
-              >Filtrar por color</v-subheader>
-              <v-list-item-group>
-                <v-card-subtitle class="d-flex flex-wrap pt-0">
-                  <template v-for="color in this.listaColores">
-                    <div
-                      class="contenedor_color"
-                      :key="color.id"
-                      @click="buscarColor(color.id)"
-                    >
-                      <v-tooltip bottom dense>
-                        <template v-slot:activator="{on, attrs}">
-                          <div
-                            v-if="color.hex_2 !== null && color.hex_3 !== null"
-                            v-bind="attrs"
-                            v-on="on"
-                            :style="`background: linear-gradient(rgb(${hextToRgb(color.hex_1)[0]}, ${hextToRgb(color.hex_1)[1]}, ${hextToRgb(color.hex_1)[2]}) 0%, rgb(${hextToRgb(color.hex_2)[0]}, ${hextToRgb(color.hex_2)[1]}, ${hextToRgb(color.hex_2)[2]}) 48%, rgb(${hextToRgb(color.hex_2)[0]}, ${hextToRgb(color.hex_2)[1]}, ${hextToRgb(color.hex_2)[2]}) 62%, rgb(${hextToRgb(color.hex_3)[0]}, ${hextToRgb(color.hex_3)[1]}, ${hextToRgb(color.hex_3)[2]}) 66%, rgb(${hextToRgb(color.hex_3)[0]}, ${hextToRgb(color.hex_3)[1]}, ${hextToRgb(color.hex_3)[2]}) 100%)`"
-                          ></div>
-                          <div
-                            v-else-if="color.hex_2 !== null && color.hex_3 === null"
-                            v-bind="attrs"
-                            v-on="on"
-                            :style="`background: linear-gradient(rgb(${hextToRgb(color.hex_1)[0]}, ${hextToRgb(color.hex_1)[1]}, ${hextToRgb(color.hex_1)[2]}) 40%, rgb(${hextToRgb(color.hex_2)[0]}, ${hextToRgb(color.hex_2)[1]}, ${hextToRgb(color.hex_2)[2]}) 50%)`"
-                          >
-                          </div>
-                          <div
-                            v-else
-                            v-bind="attrs"
-                            v-on="on"
-                            :style="'background:' + color.hex_1"
-                          ></div>
-                        </template>
-                        <span>
-                          {{color.nombre}}
-                        </span>
-                      </v-tooltip>
-                    </div>
-                  </template>
-                </v-card-subtitle>
-              </v-list-item-group>
-            </v-list>
-          </v-card>
+          <filter-color
+            v-if="listaColores.length > 0"
+            :colorList="listaColores"
+          />
           <v-card
             :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
-            class="mt-3">
+            class="mt-3"
+            shaped
+            elevation="3"
+          >
             <v-list
               :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
-              v-if="this.categorias.length > 0"
+              v-if="categories"
               dense
             >
               <v-subheader
                 :style="{ color: $vuetify.theme.themes[theme].colorText }"
               >Categorías</v-subheader>
               <v-list-group
-                v-for="categoria in this.categorias[0]"
+                v-for="categoria in categories"
                 :key="categoria.id_pagina"
                 no-action
               >
@@ -169,15 +84,13 @@
         <v-col cols="12" sm="8" md="9">
           <h2 v-if="this.infoProductos.length > 0" class="text-subtitle-1 mb-2" :style="{color: 'white'}">Resultados: {{this.infoProductos.count}}</h2>
             <div v-if="this.productos.length > 0" >
-              <v-btn
-                v-if="Number(this.totalPaginas) > 1"
-                block
-                outlined
-                large
-                :style="{color: $vuetify.theme.themes[theme].azul}"
-                @click="cambiarPorPagina(Number(infoProductos.count))">
-                  Ver los {{Number(this.infoProductos.count) }} productos
-              </v-btn>
+              <mp-button
+                v-if="Number(totalPaginas) > 1"
+                is-full
+                @click="cambiarPorPagina(Number(infoProductos.count))"
+              >
+                VER TODOS LOS {{ Number(infoProductos.count) }} PRODUCTOS
+              </mp-button>
               <v-row justify="center">
                 <v-col v-if="Number(this.infoProductos.count) > 16" cols="12">
                   <v-container class="max-width">
@@ -219,15 +132,13 @@
                   </v-container>
                 </v-col>
               </v-row>
-              <v-btn
-                v-if="Number(this.totalPaginas) > 1"
-                block
-                outlined
-                large
-                :style="{color: $vuetify.theme.themes[theme].azul}"
-                @click="cambiarPorPagina(Number(infoProductos.count))">
-                  Ver los {{Number(this.infoProductos.count) }} productos
-              </v-btn>
+              <mp-button
+                v-if="Number(totalPaginas) > 1"
+                is-full
+                @click="cambiarPorPagina(Number(infoProductos.count))"
+              >
+                VER TODOS LOS {{ Number(infoProductos.count) }} PRODUCTOS
+              </mp-button>
             </div>
           <div v-else class="mx-auto">
             <v-container class="fill-height mt-16 mx-auto">
@@ -243,10 +154,10 @@
 </template>
 
 <script>
-import Swal from 'sweetalert2';
 import axios from 'axios';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
 import hextToRgb from '@/helpers/hextToRgb';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'ProductosMega',
@@ -256,7 +167,6 @@ export default {
       hextToRgb,
       listaCategorias: true,
       productos: [],
-      categorias: [],
       inputInventario: Number(this.$route.query.inventario) || null,
       pagina: Number(this.$route.query.pagina) || 1,
       categoria: Number(this.$route.query.categoria) || '',
@@ -274,29 +184,31 @@ export default {
         { text: '32', value: 32 },
         { text: '64', value: 64 },
       ],
-      items: [
-        {
-          titulo: 'Inicio',
-          disabled: false,
-          href: '/',
-        },
-        {
-          titulo: 'productos',
-          disabled: false,
-          href: '/productos',
-        },
-      ],
       listaEtiquetas: [],
       listaColores: [],
       nombreCategoria: 'Productos',
     };
   },
   components: {
+    FilterColor: () => import(/* webpackChunkName: "filterColor" */ '@/components/Productos/FilterColor.vue'),
+    FilterInventory: () => import(/* webpackChunkName: "filterInventory" */ '@/components/Productos/FilterInventory.vue'),
     Products: () => import(/* webpackChunkName: "products" */ '@/components/Productos/Products.vue'),
     Hero: () => import(/* webpackChunkName: "hero" */ '@/components/Global/Hero.vue'),
     Loader: () => import(/* webpackChunkName: "loader" */ '@/components/Global/Loader.vue'),
+    MpBreadcrumbs: () => import(/* webpackChunkName: "mpBreadcrumbs" */ '@/components/UI/Mp-Breadcrumbs.vue'),
+    MpButton: () => import(/* webpackChunkName: "mpButton" */ '@/components/UI/Mp-Button.vue'),
+  },
+  computed: {
+    ...mapState('categories', ['categories']),
+    breadcrumbs() {
+      return [
+        { title: 'Inicio', disabled: false, toLink: '/' },
+        { title: 'Productos', disabled: true, toLink: '/products' },
+      ];
+    },
   },
   methods: {
+    ...mapActions('categories', ['getCategories']),
     async getProductos(
       pagina,
       porPagina,
@@ -365,54 +277,6 @@ export default {
         },
       });
     },
-    // eslint-disable-next-line consistent-return
-    buscarInventario(inventario) {
-      if (inventario == null) {
-        Swal.fire(
-          '¡Error!',
-          'El filtro no puede ir vacío.',
-          'error',
-        );
-        return;
-      }
-      if (inventario.trim() === '' || inventario == null) {
-        Swal.fire(
-          '¡Error!',
-          'El filtro no puede ir vacío.',
-          'error',
-        );
-        return;
-      }
-      if (inventario.trim() < 0) {
-        Swal.fire(
-          '¡Error!',
-          'El filtro no puede ser negativo.',
-          'error',
-        );
-        return;
-      }
-      // eslint-disable-next-line eqeqeq
-      if (inventario.trim() == 0) {
-        Swal.fire(
-          '¡Error!',
-          'El filtro debe ser mayor a 0.',
-          'error',
-        );
-        return;
-      }
-      this.$router.push({
-        path: this.$route.path,
-        query: {
-          categoria: this.$route.query.categoria,
-          subCategoria: this.$route.query.subCategoria,
-          etiqueta: this.$route.query.etiqueta,
-          inventario,
-          busqueda: this.$route.query.busqueda,
-          titulo: this.$route.query.titulo,
-          color: this.$route.query.color,
-        },
-      });
-    },
     buscarEtiqueta(etiqueta) {
       this.$router.push({
         path: this.$route.path,
@@ -423,33 +287,6 @@ export default {
           titulo: this.$route.query.titulo,
           color: this.$route.query.color,
         },
-      });
-    },
-    buscarColor(color) {
-      this.$router.push({
-        path: this.$route.path,
-        query: {
-          categoria: this.$route.query.categoria,
-          subCategoria: this.$route.query.subCategoria,
-          etiqueta: this.$route.query.etiqueta,
-          titulo: this.$route.query.titulo,
-          inventario: this.$route.query.inventario,
-          color,
-        },
-      });
-    },
-    async getCategorias() {
-      const url = 'https://marpicoprod.azurewebsites.net/api/categorias/';
-      const config = {
-        method: 'get',
-        url,
-        headers: {
-          Authorization: 'Bearer Api-Key fBc8kc9ejmpvIqSLeKh9bIL955E0LOdNfFKfNZhGy3xRlGTxtDl7ADOdSzrLfgLj',
-        },
-      };
-
-      await axios(config).then((res) => {
-        this.categorias.push(res.data);
       });
     },
   },
@@ -464,7 +301,7 @@ export default {
       this.busqueda,
       this.color,
     );
-    this.getCategorias();
+    if (!this.categories) this.getCategories();
   },
   metaInfo: {
     title: 'Productos 🛒',

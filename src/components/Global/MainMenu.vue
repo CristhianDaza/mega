@@ -13,13 +13,11 @@
         </div>
         <div class="d-none d-lg-flex align-center" >
           <template v-for="{ name, id, link } in mainMenu">
-            <mp-button
-              :key="id"
-              is-menu
-              @click="$router.push({ path: link })"
-            >
-              {{ name }}
-            </mp-button>
+            <router-link :to="link" :key="id">
+              <mp-button is-menu @click="$router.push({ path: link })">
+                {{ name }}
+              </mp-button>
+            </router-link>
           </template>
           <mp-button
             v-if="isLogin"
@@ -82,7 +80,7 @@ export default {
     },
   },
   components: {
-    SearchComponent: () => import(/* webpackChunkName: "buscador" */ '@/components/Global/SearchComponent.vue'),
+    SearchComponent: () => import(/* webpackChunkName: "searchComponent" */ '@/components/Global/SearchComponent.vue'),
     ThemeButton: () => import(/* webpackChunkName: "themeButton" */ '@/components/Global/ThemeButton.vue'),
     MpButton: () => import(/* webpackChunkName: "mpButton" */ '@/components/UI/Mp-Button.vue'),
   },

@@ -3,22 +3,9 @@
     <Hero title="Contacto"/>
     <div class="fondoContacto">
       <v-container class="pt-0">
-        <div class="links">
-          <ul>
-            <li>
-              <router-link
-                exact
-                to="/"
-                class="links__item links__itme_amarillo"
-                :style="{color: $vuetify.theme.themes[theme].colorText }"
-              >INICIO</router-link>
-            </li>
-            <li class="links__divider">/</li>
-            <li :style="{color: $vuetify.theme.themes[theme].secondary }">
-              CONTACTO
-            </li>
-          </ul>
-        </div>
+        <mp-breadcrumbs
+          :breadcrumbs="breadcrumbs"
+        />
       </v-container>
       <Redes />
       <FormularioContacto />
@@ -31,7 +18,7 @@
 import layoutPrincipal from '@/mixins/layoutPrincipal';
 
 export default {
-  name: 'ContactoView',
+  name: 'ContactView',
   mixins: [layoutPrincipal],
   data() {
     return {
@@ -41,6 +28,17 @@ export default {
     Hero: () => import(/* webpackChunkName: "hero" */ '@/components/Global/Hero.vue'),
     FormularioContacto: () => import(/* webpackChunkName: "formularioContacto" */ '@/components/Index/FormularioContacto.vue'),
     Redes: () => import(/* webpackChunkName: "redes" */ '@/components/Index/Redes.vue'),
+    MpBreadcrumbs: () => import(/* webpackChunkName: "mpBreadcrumbs" */ '@/components/UI/Mp-Breadcrumbs.vue'),
+  },
+  computed: {
+    breadcrumbs() {
+      const breadcrumbs = [
+        { title: 'Inicio', disabled: false, toLink: '/' },
+        { title: 'Contacto', disabled: true, toLink: '/contact' },
+      ];
+
+      return breadcrumbs;
+    },
   },
   metaInfo: {
     title: 'Contacto ☎',

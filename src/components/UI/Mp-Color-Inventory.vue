@@ -27,7 +27,7 @@
         ></div>
       </template>
       <span>
-        {{color.color_nombre}} ({{color.inventario}})
+        {{color.color_nombre}} ({{ color.inventario <= 10 ? 0 : color.inventario }})
         <span v-if="color.variedad !== null"> - {{color.variedad}}</span>
       </span>
     </v-tooltip>

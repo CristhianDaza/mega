@@ -11,14 +11,16 @@
       :aspect-ratio="16/9"
       @click="$router.push({ path: video.urlProducto })"
     >
-      <mp-video
-        :link-video="video.linkVideo"
-        loop
-        muted
-        auto-play
-        cursor-pointer
-        :small-video="!video.completo"
-      />
+      <router-link :to="{ path: video.urlProducto }">
+        <mp-video
+          :link-video="video.linkVideo"
+          loop
+          muted
+          auto-play
+          cursor-pointer
+          :small-video="!video.completo"
+        />
+      </router-link>
     </v-responsive>
   </div>
 </template>

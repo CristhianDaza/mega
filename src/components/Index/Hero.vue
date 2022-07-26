@@ -19,12 +19,14 @@
         <br> promocionales, comprometidos con nuestro equipo
         <br> de trabajo a tener la mejor calidad de servicio y productos.
       </p>
-      <mp-button
-        is-full
-        @click="$router.push({ name: 'contacto' })"
-      >
-        Escríbenos
-      </mp-button>
+      <router-link to="/contact">
+        <mp-button
+          is-full
+          @click="$router.push({ name: 'contact' })"
+        >
+          Escríbenos
+        </mp-button>
+      </router-link>
     </div>
     <div class="imgHero">
       <v-img

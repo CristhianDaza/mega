@@ -61,13 +61,6 @@ body::-webkit-scrollbar-thumb {
   padding: 0;
 }
 
-a.v-breadcrumbs__item{
-  color: $primary-color-blue !important;
-}
-
-a.v-breadcrumbs__item--disabled {
-  color: $secondary-color-yellow !important;
-}
 .theme--light.v-sheet {
   background: inherit;
 }

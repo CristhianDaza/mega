@@ -7,6 +7,8 @@ export const searchProduct = ({
   perPage,
   inventoryInput,
   color,
+  etiqueta,
+  titulo,
 }) => new Promise((resolve, reject) => {
   try {
     const response = apiConfig.request({
@@ -18,7 +20,23 @@ export const searchProduct = ({
         inventario: inventoryInput,
         color,
         page,
+        etiqueta,
+        titulo,
       },
+    });
+
+    resolve(response);
+  } catch (e) {
+    console.log(e);
+    reject(e);
+  }
+});
+
+export const getCategories = () => new Promise((resolve, reject) => {
+  try {
+    const response = apiConfig.request({
+      method: 'GET',
+      url: 'categorias',
     });
 
     resolve(response);

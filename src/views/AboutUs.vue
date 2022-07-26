@@ -4,24 +4,9 @@
     <Hero title="Nosotros"/>
     <div class="fondoNosotros">
       <v-container class="py-0">
-        <div
-          class="links"
-        >
-          <ul>
-            <li>
-              <router-link
-                exact
-                to="/"
-                class="links__item"
-                :style="{color: $vuetify.theme.themes[theme].colorText }"
-              >INICIO</router-link>
-            </li>
-            <li class="links__divider">/</li>
-            <li :style="{color: $vuetify.theme.themes[theme].secondary }">
-              NOSOTROS
-            </li>
-          </ul>
-        </div>
+        <mp-breadcrumbs
+          :breadcrumbs="breadcrumbs"
+        />
       </v-container>
       <v-container>
         <v-row
@@ -57,26 +42,25 @@
 import layoutPrincipal from '@/mixins/layoutPrincipal';
 
 export default {
-  name: 'NosotrosView',
+  name: 'AboutUs',
   mixins: [layoutPrincipal],
   data() {
     return {
-      items: [
-        {
-          titulo: 'Inicio',
-          disabled: false,
-          href: '/',
-        },
-        {
-          titulo: 'nosotros',
-          disabled: true,
-          href: '/nosotros/',
-        },
-      ],
     };
   },
   components: {
     Hero: () => import(/* webpackChunkName: "hero" */ '@/components/Global/Hero.vue'),
+    MpBreadcrumbs: () => import(/* webpackChunkName: "mpBreadcrumbs" */ '@/components/UI/Mp-Breadcrumbs.vue'),
+  },
+  computed: {
+    breadcrumbs() {
+      const breadcrumbs = [
+        { title: 'Inicio', disabled: false, toLink: '/' },
+        { title: 'Nosotros', disabled: true, toLink: '/search' },
+      ];
+
+      return breadcrumbs;
+    },
   },
   metaInfo: {
     title: 'Nosotros 💙',

@@ -106,7 +106,7 @@
 
       <template v-if="this.$vuetify.breakpoint.xs">
         <v-btn
-          to="/"
+          @click="toHome()"
           :style="{background: $vuetify.theme.themes[theme].azul}" class="mr-2" icon>
           <v-icon>{{mdiHome}}</v-icon>
         </v-btn>
@@ -178,7 +178,7 @@ export default {
         this.setPathToAdmin(null);
         return;
       }
-      this.$router.push({ name: 'inicio' });
+      this.$router.push({ name: 'home' });
     },
   },
   computed: {

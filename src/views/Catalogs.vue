@@ -2,24 +2,9 @@
   <div>
     <Hero title="Catálogos"/>
     <v-container class="pt-0" v-if="this.catalogos.length > 0">
-      <div
-        class="links"
-      >
-        <ul>
-          <li>
-            <router-link
-              exact
-              to="/"
-              class="links__item"
-              :style="{color: $vuetify.theme.themes[theme].colorText }"
-            >INICIO</router-link>
-          </li>
-          <li class="links__divider">/</li>
-          <li :style="{color: $vuetify.theme.themes[theme].secondary }">
-            CATÁLOGOS
-          </li>
-        </ul>
-      </div>
+      <mp-breadcrumbs
+        :breadcrumbs="breadcrumbs"
+      />
       <v-row>
         <v-col cols="12" sm="6" md="4" lg="3" v-for="catalogo in catalogos" :key="catalogo.id">
           <v-hover>
@@ -106,9 +91,18 @@ export default {
   components: {
     Hero: () => import(/* webpackChunkName: "hero" */ '@/components/Global/Hero.vue'),
     Loader: () => import(/* webpackChunkName: "loader" */ '@/components/Global/Loader.vue'),
+    MpBreadcrumbs: () => import(/* webpackChunkName: "mpBreadcrumbs" */ '@/components/UI/Mp-Breadcrumbs.vue'),
   },
   computed: {
     ...mapState(['catalogos']),
+    breadcrumbs() {
+      const breadcrumbs = [
+        { title: 'INICIO', disabled: false, toLink: '/' },
+        { title: 'Catalogos', disabled: true, toLink: '/catalogs' },
+      ];
+
+      return breadcrumbs;
+    },
   },
   methods: {
     ...mapActions(['traerCatalogo']),
