@@ -6,49 +6,40 @@
         :breadcrumbs="breadcrumbs"
       />
       <v-row>
-        <v-col cols="12" sm="6" md="4" lg="3" v-for="catalogo in catalogos" :key="catalogo.id">
-          <v-hover>
-            <template v-slot:default="{ hover }">
-              <v-card
-                outlined
-                class="mx-auto transition-swing"
-                :class="`elevation-${hover ? 0 : 24}`"
-                :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
-              >
-                <div class="div-catalogo hidden">
-                  <v-img :src="catalogo.linkImagen" :alt="catalogo.nombre" class="imagen-catalogo">
-                    <template v-slot:placeholder>
-                      <v-row
-                        class="fill-height ma-0"
-                        align="center"
-                        justify="center"
-                      >
-                        <Loader />
-                      </v-row>
-                    </template>
-                  </v-img>
-                </div>
-                <v-card-actions>
-                  <a
-                    class="linksCatalogos"
-                    :href="catalogo.linkVirtual"
-                    target="_blank"
-
-                  >
-                    <v-btn
-                      :style="{ color: $vuetify.theme.themes[theme].colorText }"
-                      width="100%"
-                      text
+        <v-col
+          cols="12"
+          sm="6"
+          md="4"
+          lg="3"
+          v-for="catalogo in catalogos"
+          :key="catalogo.id"
+          class="cardCatalog"
+        >
+          <a
+            :href="catalogo.linkVirtual"
+            target="_blank"
+          >
+            <v-hover>
+              <template v-slot:default="{ hover }">
+                <v-card
+                  color="#385F73"
+                  dark
+                  outlined
+                  class="mx-auto transition-swing"
+                  :class="`elevation-${hover ? 0 : 24}`"
+                  :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
+                >
+                  <div class="div-catalogo hidden">
+                    <img
+                      :src="catalogo.linkImagen"
+                      :alt="catalogo.nombre"
+                      class="imagen-catalogo"
                     >
-                      Catálogo  {{catalogo.nombre}} <v-icon class="ml-1" small>
-                        {{mdiOpenInNew}}
-                      </v-icon>
-                    </v-btn>
-                  </a>
-                </v-card-actions>
-              </v-card>
-            </template>
-          </v-hover>
+                  </div>
+                </v-card>
+              </template>
+            </v-hover>
+          </a>
         </v-col>
       </v-row>
     </v-container>
@@ -134,6 +125,13 @@ export default {
   margin-left: auto;
   margin-right: auto;
 }
+.div-catalogo img {
+  width: 350px;
+  height: 200px;
+  background-position: top;
+  background-size: contain;
+}
+
 .div-catalogo.hidden {
   overflow: hidden;
 }
@@ -152,7 +150,6 @@ export default {
   -webkit-transform: scale(1.2);
   -o-transform: scale(1.2);
 }
-.linksCatalogos {
-  width: 100%;
+.cardCatalog {
 }
 </style>

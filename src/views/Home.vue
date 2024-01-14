@@ -4,8 +4,10 @@
     <Carrusel />
     <VideoPromocion />
     <Servicios />
-    <Newsletters />
-    <ProductosNuevos />
+<!--    <Newsletters />-->
+    <div class="container-products-new">
+      <ProductosNuevos />
+    </div>
   </div>
 </template>
 
@@ -19,7 +21,8 @@ export default {
     Hero: () => import(/* webpackChunkName: "hero" */ '@/components/Index/Hero.vue'),
     Carrusel: () => import(/* webpackChunkName: "carrusel" */ '@/components/Index/Carrusel.vue'),
     Servicios: () => import(/* webpackChunkName: "servicios" */ '@/components/Index/Servicios.vue'),
-    Newsletters: () => import(/* webpackChunkName: "newsletters" */ '@/components/Index/Newsletters.vue'),
+    // Newsletters: () => import
+    // (/* webpackChunkName: "newsletters" */ '@/components/Index/Newsletters.vue'),
     ProductosNuevos: () => import(/* webpackChunkName: "productosNuevos" */ '@/components/Index/ProductosNuevos.vue'),
     VideoPromocion: () => import(/* webpackChunkName: "videoPromocion" */ '@/components/Index/VideoPromocion.vue'),
   },

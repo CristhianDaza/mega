@@ -203,7 +203,7 @@ export default {
     breadcrumbs() {
       return [
         { title: 'Inicio', disabled: false, toLink: '/' },
-        { title: 'Productos', disabled: true, toLink: '/products' },
+        { title: 'Productos', disabled: true, toLink: '/productos' },
       ];
     },
   },

@@ -12,13 +12,13 @@
           ></v-app-bar-nav-icon>
         </div>
         <div class="d-none d-lg-flex align-center" >
-          <template v-for="{ name, id, link } in mainMenu">
-            <router-link :to="link" :key="id">
+          <div v-for="{ name, id, link } in mainMenu" :key="id">
+            <router-link :to="link">
               <mp-button is-menu @click="$router.push({ path: link })">
                 {{ name }}
               </mp-button>
             </router-link>
-          </template>
+          </div>
           <mp-button
             v-if="isLogin"
             is-menu

@@ -13,46 +13,47 @@
           :src="producto.imagen.imagen.file_md"
           width="100%"
           max-width="100%"
+          max-height="100%"
           :alt="producto.descripcion_comercial"
           class="imagenProducto"
         >
         </v-img>
       </router-link>
     </v-card-text>
-    <v-divider class="mx-8 mt-2"></v-divider>
     <v-card-title
-      class="text-center text-subtitle-2 titleProd"
+      class="text-h6 titleProd font-weight-light"
       :style="{ color: $vuetify.theme.themes[theme].colorText }"
     >
-      {{ producto.descripcion_comercial }}
+      {{ producto.descripcion_comercial }} a
     </v-card-title>
     <v-card-subtitle
-      :style="{ color: $vuetify.theme.themes[theme].colorText }"
+      class="text-subtitle-1 font-weight-bold"
+      :style="{ color: $vuetify.theme.themes[theme].invertSecondary }"
     >
       {{ producto.familia }}
     </v-card-subtitle>
     <v-card-subtitle class="d-flex flex-wrap pt-0">
-      <template v-for="color in colores">
+      <div v-for="color in colores" :key="color.codigo">
         <mp-color-inventory
-          :key="color.codigo"
           :color="color"
+          v-if="color.inventario > 10 "
         />
-      </template>
+      </div>
     </v-card-subtitle>
-    <div class="d-flex justify-center text-center my-2">
-      <template v-if="producto.etiquetas.length > 0">
-        <div
-          v-for="etiqueta in producto.etiquetas"
-          :key="etiqueta.id"
-        >
-          <img
-            width="80px"
-            :src="etiqueta.imagen.file_sm"
-            :alt="etiqueta.nombre"
-            >
-        </div>
-      </template>
-    </div>
+<!--    <div class="d-flex justify-center text-center my-2">-->
+<!--      <template v-if="producto.etiquetas.length > 0">-->
+<!--        <div-->
+<!--          v-for="etiqueta in producto.etiquetas"-->
+<!--          :key="etiqueta.id"-->
+<!--        >-->
+<!--          <img-->
+<!--            width="80px"-->
+<!--            :src="etiqueta.imagen.file_sm"-->
+<!--            :alt="etiqueta.nombre"-->
+<!--            >-->
+<!--        </div>-->
+<!--      </template>-->
+<!--    </div>-->
     <v-card-title
       :style="{ color: $vuetify.theme.themes[theme].colorText }"
       v-if="isLogin" class="precio">
@@ -160,15 +161,18 @@ export default {
 <style>
 .tarjetaProductos {
   transition: all .6s;
+  border-top-left-radius: 25px !important;
+  border-top-right-radius: 25px !important;
 }
 .tarjetaProductos:hover {
-  transform: translateY(-15px);
+  //transform: translateY(-10px);
 }
 .titleProd {
   word-break: normal;
+  text-transform: capitalize;
 }
 .imagenProducto {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
 }
 </style>

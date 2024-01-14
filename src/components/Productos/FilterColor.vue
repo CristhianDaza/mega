@@ -14,14 +14,13 @@
       >Filtrar por color</v-subheader>
       <v-list-item-group>
         <v-card-subtitle class="d-flex flex-wrap pt-0">
-          <template v-for="color in colorList">
+          <div v-for="color in colorList" :key="color.id">
             <mp-color
               :color="color"
-              :key="color.id"
               pointer
               @filterColor="searchColor"
             />
-          </template>
+          </div>
         </v-card-subtitle>
       </v-list-item-group>
     </v-list>

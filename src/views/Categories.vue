@@ -98,7 +98,7 @@ export default {
     breadcrumbs() {
       return [
         { title: 'Inicio', disabled: false, toLink: '/' },
-        { title: 'Productos', disabled: false, toLink: '/products' },
+        { title: 'Productos', disabled: false, toLink: '/productos' },
         { title: 'Categorías', disabled: true, toLink: '/search' },
       ];
     },

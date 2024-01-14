@@ -45,8 +45,8 @@
           Características:
         </h2>
       <v-row class="ml-1">
-        <template v-for="caracteristica in producto.caracteristicas">
-          <v-tooltip top :key="caracteristica.id">
+        <div v-for="caracteristica in producto.caracteristicas" :key="caracteristica.id">
+          <v-tooltip top>
             <template v-slot:activator="{on, attrs}">
               <img
                 class="imagenCaracteristica"
@@ -58,7 +58,7 @@
             </template>
             <span>{{caracteristica.nombre}}</span>
           </v-tooltip>
-        </template>
+        </div>
       </v-row>
     </div>
     <v-card
