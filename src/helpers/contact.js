@@ -4,7 +4,7 @@ import { mdiWhatsapp, mdiGmail, mdiGoogleMaps } from '@mdi/js';
 export const contacts = [
   {
     id: 1,
-    name: 'Megapromocionales LTDA',
+    name: 'MEGAPROMOCIONALES LTDA',
     nameIcon: null,
   },
   {

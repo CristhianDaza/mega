@@ -11,17 +11,19 @@
     >
       <v-subheader
         :style="{ color: $vuetify.theme.themes[theme].colorText }"
-      >COLOR</v-subheader>
+      >ETIQUETA</v-subheader>
       <v-list-item-group>
-        <v-card-subtitle class="d-flex flex-wrap pt-0">
-          <div v-for="color in colorList" :key="color.id">
-            <mp-color
-              :color="color"
-              pointer
-              @filterColor="searchColor"
-            />
-          </div>
-        </v-card-subtitle>
+        <div v-for="label in labelList" :key="label.id">
+          <v-list-item @click="searchLabel(label)">
+            <v-list-item-title
+              :style="{ color: $vuetify.theme.themes[theme].colorText }"
+            ><v-icon class="btn left">
+              {{mdiLabelOutline}}
+              </v-icon>
+              {{ label.nombre }}
+            </v-list-item-title>
+          </v-list-item>
+        </div>
       </v-list-item-group>
     </v-list>
   </v-card>
@@ -29,26 +31,30 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { mdiLabelOutline } from '@mdi/js';
 
 export default {
-  name: 'FilterColor',
-  components: {
-    MpColor: () => import(/* webpackChunkName: "MpColor" */ '@/components/UI/Mp-Color.vue'),
+  name: 'FilterLabel',
+  data() {
+    return {
+      mdiLabelOutline,
+    };
   },
   props: {
-    colorList: {
+    labelList: {
       type: Array,
       require: true,
     },
   },
   methods: {
     ...mapActions('menu', ['getMainMenu', 'setSelectedMenu']),
-    searchColor(color) {
+    searchLabel(label) {
       this.$router.push({
+        path: this.$route.path,
         query: {
           ...this.$route.query,
-          color: color.id,
-          page: 1,
+          etiqueta: label.id,
+          titulo: label.nombre,
         },
       });
       this.setSelectedMenu(this.$route.fullPath);

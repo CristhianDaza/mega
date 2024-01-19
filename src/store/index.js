@@ -9,6 +9,7 @@ import {
 import router from '@/router';
 import menu from './module/menu';
 import categories from './module/categories';
+import labels from './module/labels';
 
 Vue.use(Vuex);
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
   modules: {
     menu,
     categories,
+    labels,
   },
   state: {
     layout: 'defaultLayout',

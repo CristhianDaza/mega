@@ -3,6 +3,7 @@
   <v-card
     class="tarjetaProductos"
     :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
+    :class="{'actionCardLogin': isLogin}"
   >
     <v-card-text class="pa-0">
       <router-link
@@ -16,6 +17,7 @@
           max-height="100%"
           :alt="producto.descripcion_comercial"
           class="imagenProducto"
+          :class="{'filterImage': drained }"
         >
         </v-img>
       </router-link>
@@ -93,20 +95,22 @@
         </template>
       </template>
     </v-card-title>
-    <v-card-subtitle class="py-1">
-      <div v-html="totalInventory(producto.materiales)"></div>
-    </v-card-subtitle>
-    <v-divider class="mx-5"></v-divider>
-    <v-card-actions class="d-block">
-      <router-link :to="{ path: `/producto/${producto.familia}` }">
-        <mp-button
-          is-full
-          @click="$router.push({path: `/producto/${producto.familia}`})"
-        >
-          Ver Producto
-        </mp-button>
-      </router-link>
-    </v-card-actions>
+    <div class="actionCard">
+      <v-card-subtitle class="py-1">
+        <div v-html="totalInventory(producto.materiales)"></div>
+      </v-card-subtitle>
+      <v-divider class="mx-5"></v-divider>
+      <v-card-actions class="d-block">
+        <router-link :to="{ path: `/producto/${producto.familia}` }">
+          <mp-button
+            is-full
+            @click="$router.push({path: `/producto/${producto.familia}`})"
+          >
+            Ver Producto
+          </mp-button>
+        </router-link>
+      </v-card-actions>
+    </div>
   </v-card>
 </template>
 
@@ -135,6 +139,7 @@ export default {
   data() {
     return {
       hextToRgb,
+      drained: false,
     };
   },
   computed: {
@@ -149,10 +154,11 @@ export default {
         inTransit += product.en_transito;
       });
       if (total <= 10) {
+        this.drained = true;
         if (inTransit > 0) return `<span class="font-weight-bold blue--text text--accent-2">En transito</span> ${this.addCommas(inTransit)} unidades`;
         return '<strong class="red--text text--lighten-1">Agotado</strong>';
       }
-      return `<span class="font-weight-bold text--primary">Existencias:</span> ${this.addCommas(total)} unidades`;
+      return `<span class="font-weight-bold blue--text text--accent-1">Existencias:</span> ${this.addCommas(total)} unidades`;
     },
   },
 };
@@ -161,9 +167,15 @@ export default {
 <style>
 .tarjetaProductos {
   transition: all .6s;
-  border-top-left-radius: 25px !important;
-  border-top-right-radius: 25px !important;
+  border-top-left-radius: 20px !important;
+  border-top-right-radius: 20px !important;
+  min-height: 500px;
 }
+
+.actionCardLogin {
+  min-height: 600px;
+}
+
 .tarjetaProductos:hover {
   //transform: translateY(-10px);
 }
@@ -172,7 +184,20 @@ export default {
   text-transform: capitalize;
 }
 .imagenProducto {
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.filterImage {
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+}
+
+.actionCard {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 </style>

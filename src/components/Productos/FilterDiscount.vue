@@ -11,17 +11,15 @@
     >
       <v-subheader
         :style="{ color: $vuetify.theme.themes[theme].colorText }"
-      >COLOR</v-subheader>
+      >DESCUENTO</v-subheader>
       <v-list-item-group>
-        <v-card-subtitle class="d-flex flex-wrap pt-0">
-          <div v-for="color in colorList" :key="color.id">
-            <mp-color
-              :color="color"
-              pointer
-              @filterColor="searchColor"
-            />
-          </div>
-        </v-card-subtitle>
+        <v-checkbox
+          @click="searchDiscount"
+          v-model="discountValue"
+          label="Con descuento"
+          color="#1976d2"
+          class="ml-5"
+        ></v-checkbox>
       </v-list-item-group>
     </v-list>
   </v-card>
@@ -29,30 +27,34 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { mdiCardsPlayingOutline } from '@mdi/js';
 
 export default {
-  name: 'FilterColor',
-  components: {
-    MpColor: () => import(/* webpackChunkName: "MpColor" */ '@/components/UI/Mp-Color.vue'),
-  },
-  props: {
-    colorList: {
-      type: Array,
-      require: true,
-    },
+  name: 'FilterLabel',
+  data() {
+    return {
+      mdiCardsPlayingOutline,
+      discountValue: false,
+    };
   },
   methods: {
     ...mapActions('menu', ['getMainMenu', 'setSelectedMenu']),
-    searchColor(color) {
+    ...mapActions('labels', ['setLabels', 'deleteLabel']),
+    searchDiscount() {
       this.$router.push({
+        path: this.$route.path,
         query: {
           ...this.$route.query,
-          color: color.id,
-          page: 1,
+          discount: this.discountValue,
         },
       });
       this.setSelectedMenu(this.$route.fullPath);
     },
+  },
+  mounted() {
+    if (this.$route.query.discount) {
+      this.discountValue = this.$route.query.discount === 'true';
+    }
   },
 };
 </script>

@@ -2,7 +2,7 @@
   <button
     :class="[{
       'isFull' : isFull,
-      'themeDark' : $vuetify.theme.dark,
+      'themeDark' : isMenu ? '' : $vuetify.theme.dark,
       'menuButtons' : isMenu,
       'buttonMega' : !isMenu,
     }]"
@@ -93,33 +93,26 @@ export default {
 }
 
 .menuButtons {
-  min-width: 90px;
-  height: 40px;
+  height: 60px;
   color: #fff;
-  padding: 5px 10px;
+  padding: 5px 8px;
   cursor: pointer;
   transition: all 0.3s ease;
-  position: relative;
-  display: inline-block;
-  outline: none;
-  overflow: hidden;
-  border-radius: 5px;
-  border: none;
-  background-color: #05090C;
   font-size: 15px;
-  border-bottom: 1px solid #05090C;
-  border-left: 1px solid #05090C;
   margin-top: 2px;
 
   &:hover {
-    border-bottom: 1px solid $primary-color-blue;
-    border-left: 1px solid $primary-color-blue;
     color: $primary-color-blue;
   }
 
   &:active {
     transform: translateY(3px);
     color: $text-color-white;
+  }
+
+  &.active {
+    border-bottom: 2px solid $primary-color-blue;
+    color: $primary-color-blue;
   }
 }
 </style>

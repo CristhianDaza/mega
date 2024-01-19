@@ -3,7 +3,7 @@
   <div
     class="contenedor_color"
     :class="{ 'pointer' : pointer }"
-    @click="searchColor(color.id)"
+    @click="searchColor(color)"
   >
     <v-tooltip bottom dense>
       <template v-slot:activator="{on, attrs}">
@@ -61,8 +61,8 @@ export default {
     };
   },
   methods: {
-    searchColor(id) {
-      this.$emit('filterColor', id);
+    searchColor(color) {
+      this.$emit('filterColor', color);
     },
   },
 };

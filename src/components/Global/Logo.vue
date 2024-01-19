@@ -8,6 +8,7 @@
         :class="{ 'mx-auto' : this.$vuetify.breakpoint.xs }"
         contain
         :width="width"
+        @click="setSelectedMenu('/')"
       >
         <template v-slot:placeholder>
           <v-row
@@ -24,11 +25,16 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'LogoComponent',
   props: ['width'],
   components: {
     Loader: () => import(/* webpackChunkName: "loader" */ '@/components/Global/Loader.vue'),
+  },
+  methods: {
+    ...mapActions('menu', ['setSelectedMenu']),
   },
 };
 </script>

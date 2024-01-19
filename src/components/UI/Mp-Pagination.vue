@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'Mp-Pagination',
   props: {
@@ -25,6 +27,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions('menu', ['getMainMenu', 'setSelectedMenu']),
     changePage(page) {
       this.$router.push({
         query: {
@@ -32,6 +35,7 @@ export default {
           page,
         },
       });
+      this.setSelectedMenu(this.$route.path);
     },
   },
 };

@@ -99,7 +99,7 @@ export default {
       return [
         { title: 'Inicio', disabled: false, toLink: '/' },
         { title: 'Productos', disabled: false, toLink: '/productos' },
-        { title: 'Categorías', disabled: true, toLink: '/search' },
+        { title: 'Categorías', disabled: true, toLink: '/categories' },
       ];
     },
   },

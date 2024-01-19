@@ -2,43 +2,9 @@
 <!-- eslint-disable max-len -->
   <div v-if="this.productoCodigo.length > 0">
     <v-container class="pt-0">
-      <div class="links">
-        <ul
-          :style="{ color: $vuetify.theme.themes[theme].colorText }"
-        >
-          <li>
-            <router-link
-            exact
-            :style="{color: $vuetify.theme.themes[theme].colorText }"
-            to="/" class="links__item">INICIO</router-link>
-          </li>
-          <li class="links__divider">/</li>
-          <li>
-            <router-link
-            exact
-            :style="{color: $vuetify.theme.themes[theme].colorText }"
-            to="/productos" class="links__item">PRODUCTOS</router-link>
-          </li>
-          <li class="links__divider">/</li>
-          <li>
-            <router-link
-            exact
-            :style="{color: $vuetify.theme.themes[theme].colorText }"
-            :to="`/productos?categoria=${productoCodigo[0].subcategoria_1.categoria.jerarquia}&titulo=${productoCodigo[0].subcategoria_1.categoria.nombre}`" class="links__item">{{this.categoriaPrincipal.toUpperCase()}}</router-link>
-          </li>
-          <li class="links__divider">/</li>
-          <li>
-            <router-link
-            :style="{ color: $vuetify.theme.themes[theme].colorText }"
-            exact
-            :to="`/productos?subCategoria=${productoCodigo[0].subcategoria_1.jerarquia}&titulo=${productoCodigo[0].subcategoria_1.nombre}`"  class="links__item">{{this.categoriaSecundaria.toUpperCase()}}</router-link>
-          </li>
-          <li class="links__divider">/</li>
-          <li :style="{color: $vuetify.theme.themes[theme].secondary }">
-            {{this.codigo}}
-          </li>
-        </ul>
-      </div>
+      <mp-breadcrumbs
+        :breadcrumbs="breadcrumbs"
+      />
       <v-card
         :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
         class="mx-auto mt-2"
@@ -246,6 +212,15 @@ export default {
         easing: this.easing,
       };
     },
+    breadcrumbs() {
+      return [
+        { title: 'Inicio', disabled: false, toLink: '/' },
+        { title: 'Productos', disabled: false, toLink: '/productos' },
+        { title: this.categoriaPrincipal, disabled: false, toLink: `/productos?categoria=${this.productoCodigo[0].subcategoria_1.categoria.jerarquia}&titulo=${this.productoCodigo[0].subcategoria_1.categoria.nombre}` },
+        { title: this.categoriaSecundaria, disabled: false, toLink: `/productos?subCategoria=${this.productoCodigo[0].subcategoria_1.jerarquia}&titulo=${this.productoCodigo[0].subcategoria_1.nombre}` },
+        { title: this.codigo, disabled: true, toLink: `/producto/${this.codigo}` },
+      ];
+    },
   },
   methods: {
     coloresTransito(inventario, traking) {
@@ -353,6 +328,7 @@ export default {
     SugeridoProducto: () => import(/* webpackChunkName: "sugeridoProducto" */ '@/components/Producto/SugeridoProducto.vue'),
     ImagenProductosVertical: () => import(/* webpackChunkName: "imagenProductosVertical" */ '@/components/Producto/ImagenProductosVertical.vue'),
     ImagenProductosHorizontal: () => import(/* webpackChunkName: "imagenProductosHorizontal" */ '@/components/Producto/ImagenProductosHorizontal.vue'),
+    MpBreadcrumbs: () => import(/* webpackChunkName: "mpBreadcrumbs" */ '@/components/UI/Mp-Breadcrumbs.vue'),
   },
 };
 </script>

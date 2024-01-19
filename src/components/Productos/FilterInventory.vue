@@ -12,7 +12,7 @@
         <v-subheader
           class="pa-0"
           :style="{ color: $vuetify.theme.themes[theme].colorText }"
-        >Filtrar por inventario</v-subheader>
+        >INVENTARIO</v-subheader>
         <v-text-field
           label="Inventario Mayor a"
           outlined
@@ -39,6 +39,7 @@
 
 <script>
 import Swal from 'sweetalert2';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'Mp-FilterInventory',
@@ -51,6 +52,7 @@ export default {
     MpButton: () => import(/* webpackChunkName: "mpButton" */ '@/components/UI/Mp-Button.vue'),
   },
   methods: {
+    ...mapActions('menu', ['setSelectedMenu']),
     searchInventory(inventory) {
       if (!inventory) {
         this.showError('El filtro no puede ir vacío.');
@@ -67,6 +69,7 @@ export default {
           inventoryInput: inventory,
         },
       });
+      this.setSelectedMenu(this.$route.fullPath);
     },
     showError(info) {
       Swal.fire(

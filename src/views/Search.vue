@@ -89,6 +89,7 @@
 <script>
 import layoutPrincipal from '@/mixins/layoutPrincipal';
 import { searchProduct } from '@/api/apiProduct';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'BuscarView',
@@ -134,6 +135,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions('menu', ['setSelectedMenu']),
     async getSearchProduct() {
       try {
         const { data } = await this.searchProduct(this.paramsForSearch);
@@ -153,6 +155,7 @@ export default {
           perPage,
         },
       });
+      this.setSelectedMenu(this.$route.fullPath);
     },
   },
   mounted() {

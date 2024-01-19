@@ -9,33 +9,22 @@
       <v-row>
         <v-col class="pt-1" cols="12" sm="4" md="3">
           <filter-inventory
-            v-if="productos.length > 0"
+            v-if="Number(this.infoProductos.count) > 0"
           />
-          <v-card
-            v-if="this.listaEtiquetas.length > 0"
-            :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
-            class="mt-3">
-            <v-list
-              :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
-              dense
-            >
-              <v-subheader
-                :style="{ color: $vuetify.theme.themes[theme].colorText }"
-              >Etiquetas</v-subheader>
-              <v-list-item-group>
-                <v-list-item v-for="etiqueta in this.listaEtiquetas" :key="etiqueta.id">
-                  <v-list-item-title
-                    :style="{ color: $vuetify.theme.themes[theme].colorText }"
-                    @click="buscarEtiqueta(etiqueta.id)">
-                    {{ etiqueta.nombre }} {{ etiqueta.count === 1 ? `(${etiqueta.count} producto)` : `(${etiqueta.count} productos)` }}
-                  </v-list-item-title>
-                </v-list-item>
-              </v-list-item-group>
-            </v-list>
-          </v-card>
+          <filter-discount
+            v-if="Number(this.infoProductos.count) > 0"
+          />
+          <filter-label
+            v-if="this.listLabel.length > 0"
+            :label-list="listLabel"
+          />
           <filter-color
             v-if="listaColores.length > 0"
             :colorList="listaColores"
+          />
+          <filter-characteristic
+            v-if="characteristics.length > 0"
+            :characteristics="characteristics"
           />
           <v-card
             :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
@@ -82,6 +71,7 @@
           </v-card>
         </v-col>
         <v-col cols="12" sm="8" md="9">
+          <mp-chip v-if="Number(this.infoProductos.count) > 0" />
           <h2 v-if="this.infoProductos.length > 0" class="text-subtitle-1 mb-2" :style="{color: 'white'}">Resultados: {{this.infoProductos.count}}</h2>
             <div v-if="this.productos.length > 0" >
               <mp-button
@@ -157,7 +147,7 @@
 import axios from 'axios';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
 import hextToRgb from '@/helpers/hextToRgb';
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default {
   name: 'ProductosMega',
@@ -184,22 +174,30 @@ export default {
         { text: '32', value: 32 },
         { text: '64', value: 64 },
       ],
-      listaEtiquetas: [],
+      listLabel: [],
       listaColores: [],
       nombreCategoria: 'Productos',
+      characteristics: [],
+      characteristic: this.$route.query.characteristics || '',
+      discount: this.$route.query.discount || 'false',
     };
   },
   components: {
     FilterColor: () => import(/* webpackChunkName: "filterColor" */ '@/components/Productos/FilterColor.vue'),
     FilterInventory: () => import(/* webpackChunkName: "filterInventory" */ '@/components/Productos/FilterInventory.vue'),
+    FilterLabel: () => import(/* webpackChunkName: "filterLabel" */ '@/components/Productos/FilterLabel.vue'),
     Products: () => import(/* webpackChunkName: "products" */ '@/components/Productos/Products.vue'),
     Hero: () => import(/* webpackChunkName: "hero" */ '@/components/Global/Hero.vue'),
     Loader: () => import(/* webpackChunkName: "loader" */ '@/components/Global/Loader.vue'),
     MpBreadcrumbs: () => import(/* webpackChunkName: "mpBreadcrumbs" */ '@/components/UI/Mp-Breadcrumbs.vue'),
     MpButton: () => import(/* webpackChunkName: "mpButton" */ '@/components/UI/Mp-Button.vue'),
+    MpChip: () => import(/* webpackChunkName: "mpChip" */ '@/components/UI/Mp-Chip.vue'),
+    FilterCharacteristic: () => import(/* webpackChunkName: "filterCharacteristics" */ '@/components/Productos/FilterCharacteristic.vue'),
+    FilterDiscount: () => import(/* webpackChunkName: "filterDiscount" */ '@/components/Productos/FilterDiscount.vue'),
   },
   computed: {
     ...mapState('categories', ['categories']),
+    ...mapGetters('labels', ['getLabels']),
     breadcrumbs() {
       return [
         { title: 'Inicio', disabled: false, toLink: '/' },
@@ -209,6 +207,8 @@ export default {
   },
   methods: {
     ...mapActions('categories', ['getCategories']),
+    ...mapActions('menu', ['setSelectedMenu']),
+    ...mapActions('labels', ['setInitialLabels', 'clearLabel']),
     async getProductos(
       pagina,
       porPagina,
@@ -218,8 +218,10 @@ export default {
       inventario,
       busqueda,
       color,
+      characteristic,
+      discount,
     ) {
-      const url = `https://marpicoprod.azurewebsites.net/api/productos/?page_size=${porPagina}&page=${pagina}&categoria=${categoria}&subcategoria=${subCategoria}&order=paginacion_web&etiqueta=${etiqueta}&inventario=${inventario}&search=${busqueda}${color ? `&color=${color}` : ''}`;
+      const url = `https://marpicoprod.azurewebsites.net/api/productos/?page_size=${porPagina}&page=${pagina}&categoria=${categoria}&subcategoria=${subCategoria}&order=paginacion_web&etiqueta=${etiqueta}&inventario=${inventario}&search=${busqueda}${color ? `&color=${color}` : ''}&caracteristica=${characteristic}&descuento=${discount}`;
       const config = {
         method: 'get',
         url,
@@ -232,12 +234,14 @@ export default {
         this.productos.push(res.data.results);
         this.infoProductos = res.data;
         this.totalPaginas = Math.ceil((this.infoProductos.count / this.porPagina));
-        this.listaEtiquetas = res.data.filtros.etiquetas;
+        this.listLabel = res.data.filtros.etiquetas;
         this.listaColores = res.data.filtros.colores;
+        this.characteristics = res.data.filtros.caracteristicas || [];
       });
+      this.setInitialLabel();
     },
     cambiarPagina(pagina) {
-      this.$router.push({
+      this.$router.replace({
         path: this.$route.path,
         query: {
           pagina,
@@ -251,6 +255,7 @@ export default {
           color: this.$route.query.color,
         },
       });
+      this.setMenu(this.$route.path);
     },
     cambiarPorPagina(porPagina) {
       this.$router.push({
@@ -267,30 +272,43 @@ export default {
           color: this.$route.query.color,
         },
       });
+      this.setMenu();
     },
     buscarSubCategoria(subCategoria, titulo) {
-      this.$router.push({
+      console.log(subCategoria, titulo);
+      this.$router.replace({
         path: this.$route.path,
         query: {
           subCategoria,
           titulo,
         },
       });
+      this.setMenu();
     },
-    buscarEtiqueta(etiqueta) {
-      this.$router.push({
-        path: this.$route.path,
-        query: {
-          categoria: this.$route.query.categoria,
-          subCategoria: this.$route.query.subCategoria,
-          etiqueta,
-          titulo: this.$route.query.titulo,
-          color: this.$route.query.color,
-        },
-      });
+    setMenu() {
+      this.setSelectedMenu(this.$route.fullPath);
+    },
+    setInitialLabel() {
+      const colorSelected = this.listaColores
+        .find((item) => Number(item.id) === Number(this.color));
+
+      const characteristicsSelected = this.characteristics
+        .find((item) => Number(item.id) === Number(this.characteristic));
+
+      const labelSelected = this.listLabel
+        .find((item) => Number(item.id) === Number(this.etiqueta));
+
+      const objLabel = {
+        query: this.$route.query,
+        color: colorSelected || null,
+        characteristics: characteristicsSelected || null,
+        label: labelSelected || null,
+      };
+      this.setInitialLabels(objLabel);
     },
   },
   mounted() {
+    this.clearLabel();
     this.getProductos(
       this.pagina,
       this.porPagina,
@@ -300,6 +318,8 @@ export default {
       this.inventario,
       this.busqueda,
       this.color,
+      this.characteristic,
+      this.discount,
     );
     if (!this.categories) this.getCategories();
   },

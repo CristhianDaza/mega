@@ -13,14 +13,16 @@
         </div>
         <div class="d-none d-lg-flex align-center" >
           <div v-for="{ name, id, link } in mainMenu" :key="id">
-            <router-link :to="link">
-              <mp-button is-menu @click="$router.push({ path: link })">
+              <mp-button
+                is-menu
+                :class="{'active': selectedMenu === link}"
+                @click="goToPage(link)"
+              >
                 {{ name }}
               </mp-button>
-            </router-link>
           </div>
           <mp-button
-            v-if="isLogin"
+            v-if="!isLogin"
             is-menu
             @click="toAdmin()"
           >
@@ -86,15 +88,19 @@ export default {
   },
   methods: {
     ...mapActions(['setPathToAdmin']),
-    ...mapActions('menu', ['getMainMenu']),
+    ...mapActions('menu', ['getMainMenu', 'setSelectedMenu']),
     async toAdmin() {
-      this.setPathToAdmin(this.$route.fullPath);
+      await this.setPathToAdmin(this.$route.fullPath);
       await this.$router.push({ name: 'admin' });
+    },
+    goToPage(link) {
+      this.setSelectedMenu(link);
+      this.$router.push({ path: link });
     },
   },
   computed: {
     ...mapGetters(['isLogin']),
-    ...mapGetters('menu', ['mainMenu']),
+    ...mapGetters('menu', ['mainMenu', 'selectedMenu']),
   },
   mounted() {
     this.getMainMenu();

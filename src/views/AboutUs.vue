@@ -56,7 +56,7 @@ export default {
     breadcrumbs() {
       const breadcrumbs = [
         { title: 'Inicio', disabled: false, toLink: '/' },
-        { title: 'Nosotros', disabled: true, toLink: '/search' },
+        { title: 'Nosotros', disabled: true, toLink: '/about-us' },
       ];
 
       return breadcrumbs;

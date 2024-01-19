@@ -9,7 +9,6 @@
       :key="video.id"
       :class="{ 'container' : !video.completo }"
       :aspect-ratio="16/9"
-      @click="$router.push({ path: video.urlProducto })"
     >
       <router-link :to="{ path: video.urlProducto }">
         <mp-video
@@ -19,6 +18,7 @@
           auto-play
           cursor-pointer
           :small-video="!video.completo"
+          :link-product="video.urlProducto"
         />
       </router-link>
     </v-responsive>
@@ -41,6 +41,7 @@ export default {
   },
   methods: {
     ...mapActions(['traerVideos']),
+    ...mapActions('menu', ['setSelectedMenu']),
   },
   computed: {
     ...mapState(['videos']),

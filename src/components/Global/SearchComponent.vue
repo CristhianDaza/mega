@@ -19,6 +19,7 @@
 <script>
 import Swal from 'sweetalert2';
 import { mdiMagnify } from '@mdi/js';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'SearchComponent',
@@ -29,6 +30,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions('menu', ['setSelectedMenu']),
     searchItem(searchItem) {
       const search = document.getElementById('buscador');
       if (searchItem.trim() === '') {
@@ -47,6 +49,7 @@ export default {
       });
       this.search = '';
       search.blur();
+      this.setSelectedMenu(this.$route.fullPath);
     },
     alertError(info) {
       const isEmpty = 'La busqueda no puede ir vacía.';

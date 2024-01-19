@@ -11,15 +11,15 @@
       <template v-slot:activator>
         <v-btn
           v-scroll="onScroll"
-          v-show="mostrarBoton"
+          v-show="showButton"
           fab
           dark
           bottom
           right
-          :color="'#111b27'"
           fixed
           class="elevation-15 mr-15 mb-6"
           @click="$vuetify.goTo(target, options)"
+          :style="{ background: $vuetify.theme.themes[theme].invertSecondary }"
         >
           <v-icon>{{mdiArrowUpDropCircle}}</v-icon>
         </v-btn>
@@ -36,7 +36,7 @@ export default {
   name: 'DefaultLayout',
   data: () => ({
     mdiArrowUpDropCircle,
-    mostrarBoton: false,
+    showButton: false,
     duration: 1000,
     number: 1,
     offset: 0,
@@ -68,17 +68,13 @@ export default {
     onScroll(e) {
       if (typeof window === 'undefined') return;
       const top = window.pageYOffset || e.target.scrollTop || 0;
-      this.mostrarBoton = top > 200;
+      this.showButton = top > 200;
     },
   },
   mounted() {
     const theme = localStorage.getItem('darkTheme');
     if (theme) {
-      if (theme === 'true') {
-        this.$vuetify.theme.dark = true;
-      } else {
-        this.$vuetify.theme.dark = false;
-      }
+      this.$vuetify.theme.dark = theme === 'true';
     } else {
       this.$vuetify.theme.dark = false;
     }

@@ -11,17 +11,19 @@
     >
       <v-subheader
         :style="{ color: $vuetify.theme.themes[theme].colorText }"
-      >COLOR</v-subheader>
+      >CARACTERÍSTICA</v-subheader>
       <v-list-item-group>
-        <v-card-subtitle class="d-flex flex-wrap pt-0">
-          <div v-for="color in colorList" :key="color.id">
-            <mp-color
-              :color="color"
-              pointer
-              @filterColor="searchColor"
-            />
-          </div>
-        </v-card-subtitle>
+        <div v-for="characteristic in characteristics" :key="characteristic.id">
+          <v-list-item @click="searchCharacteristics(characteristic)">
+            <v-list-item-title
+              :style="{ color: $vuetify.theme.themes[theme].colorText }"
+            ><v-icon class="btn left">
+              {{mdiCardsPlayingOutline}}
+            </v-icon>
+              {{ characteristic.nombre }}
+            </v-list-item-title>
+          </v-list-item>
+        </div>
       </v-list-item-group>
     </v-list>
   </v-card>
@@ -29,26 +31,29 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { mdiCardsPlayingOutline } from '@mdi/js';
 
 export default {
-  name: 'FilterColor',
-  components: {
-    MpColor: () => import(/* webpackChunkName: "MpColor" */ '@/components/UI/Mp-Color.vue'),
+  name: 'FilterLabel',
+  data() {
+    return {
+      mdiCardsPlayingOutline,
+    };
   },
   props: {
-    colorList: {
+    characteristics: {
       type: Array,
       require: true,
     },
   },
   methods: {
     ...mapActions('menu', ['getMainMenu', 'setSelectedMenu']),
-    searchColor(color) {
+    searchCharacteristics(characteristic) {
       this.$router.push({
+        path: this.$route.path,
         query: {
           ...this.$route.query,
-          color: color.id,
-          page: 1,
+          characteristics: characteristic.id,
         },
       });
       this.setSelectedMenu(this.$route.fullPath);

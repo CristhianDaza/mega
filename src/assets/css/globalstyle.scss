@@ -1,8 +1,12 @@
 @import "@/assets/css/variables.scss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Oswald:wght@300&display=swap');
 
 body {
-  font-family: 'Source Sans Pro', sans-serif;
   min-height: 100vh;
+}
+
+p, span, a {
+  font-family: 'Inter', sans-serif;
 }
 
 h1,
@@ -11,7 +15,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Oswald', sans-serif;
 }
 
 body::-webkit-scrollbar-track {
@@ -27,6 +31,7 @@ body::-webkit-scrollbar {
 body::-webkit-scrollbar-thumb {
   background-color: #0077bd;
 }
+
 .links {
   align-items: center;
   display: flex;
@@ -42,6 +47,7 @@ body::-webkit-scrollbar-thumb {
   display: inline-flex;
   font-size: 14px;
 }
+
 .links__item {
   align-items: center;
   display: inline-flex;
@@ -73,7 +79,7 @@ body::-webkit-scrollbar-thumb {
   margin-right: 2px;
   user-select: none;
   overflow: hidden;
-
+  border-radius: 2px;
 }
 
 .theme--dark .contenedor_color {
