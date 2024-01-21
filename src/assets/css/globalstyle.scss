@@ -80,6 +80,7 @@ body::-webkit-scrollbar-thumb {
   user-select: none;
   overflow: hidden;
   border-radius: 2px;
+  margin-top: 2px;
 }
 
 .theme--dark .contenedor_color {
@@ -104,20 +105,21 @@ body::-webkit-scrollbar-thumb {
 
 .theme--light.v-pagination .v-pagination__item,
 .theme--light.v-pagination .v-pagination__navigation {
-  background: #E3E3E3 !important;
-  color: #05090C !important;
+  background: $primary-color-blue !important;
+  color: $secondary-color-yellow !important;
 }
 
 .theme--dark.v-pagination .v-pagination__item,
 .theme--dark.v-pagination .v-pagination__navigation {
+  background: $background-color-dark !important;
   color: $primary-color-blue !important;
 }
 
 .theme--light.v-pagination .v-pagination__item--active {
-  color: $secondary-color-yellow !important;
+  background: $background-color-dark !important;
 }
 .theme--dark.v-pagination .v-pagination__item--active {
-  background:#05090C !important;
+  background: $background-color-light !important;
 }
 
 a {

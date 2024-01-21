@@ -25,7 +25,7 @@
                 <v-card-title class="tituloCategoria headline" :style="{color: '#005C91'}" >
                   <div
                     class="pointer"
-                    @click="$router.push({ path: `/productos?categoria=${categoria.jerarquia}&titulo=${categoria.nombre}` })">
+                    @click="$router.push({ path: `/productos?category=${categoria.jerarquia}&title=${categoria.nombre}` })">
                     {{categoria.nombre}}
                   </div>
                 </v-card-title>
@@ -53,7 +53,7 @@
                   >
                     <div
                       class="pointer d-inline"
-                      @click="$router.push({ path: `/productos?subCategoria=${subCategoria.jerarquia}&titulo=${subCategoria.nombre}` })"
+                      @click="$router.push({ path: `/productos?subCategory=${subCategoria.jerarquia}&title=${subCategoria.nombre}` })"
                     >
                       {{subCategoria.nombre}}
                     </div>

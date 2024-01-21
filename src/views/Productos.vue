@@ -1,7 +1,6 @@
 <template>
-<!-- eslint-disable max-len -->
   <div>
-    <Hero :title="titulo"/>
+    <Hero :title="title"/>
     <v-container class="pt-0">
       <mp-breadcrumbs
         :breadcrumbs="breadcrumbs"
@@ -9,125 +8,89 @@
       <v-row>
         <v-col class="pt-1" cols="12" sm="4" md="3">
           <filter-inventory
-            v-if="Number(this.infoProductos.count) > 0"
+            v-if="totalProducts > 0"
           />
           <filter-discount
-            v-if="Number(this.infoProductos.count) > 0"
+            v-if="totalProducts > 0"
           />
           <filter-label
-            v-if="this.listLabel.length > 0"
-            :label-list="listLabel"
+            v-if="labelList && totalProducts > 0"
+            :label-list="labelList"
           />
           <filter-color
-            v-if="listaColores.length > 0"
-            :colorList="listaColores"
+            v-if="colorList && totalProducts > 0"
+            :colorList="colorList"
+          />
+          <filter-sub-categories
+            v-if="subCategories && totalProducts > 0"
+            :sub-category-list="subCategories"
           />
           <filter-characteristic
-            v-if="characteristics.length > 0"
+            v-if="characteristics && characteristics.length > 0 && totalProducts > 0"
             :characteristics="characteristics"
           />
-          <v-card
-            :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
-            class="mt-3"
-            shaped
-            elevation="3"
-          >
-            <v-list
-              :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
-              v-if="categories"
-              dense
-            >
-              <v-subheader
-                :style="{ color: $vuetify.theme.themes[theme].colorText }"
-              >Categorías</v-subheader>
-              <v-list-group
-                v-for="categoria in categories"
-                :key="categoria.id_pagina"
-                no-action
-              >
-                <template v-slot:activator>
-                  <v-list-item-content>
-                    <v-list-item-title
-                      :style="{ color: $vuetify.theme.themes[theme].azul }"
-                    >
-                      {{ categoria.nombre }}
-                    </v-list-item-title>
-                  </v-list-item-content>
-                </template>
-                <v-list-item
-                  v-for="subCategoria in categoria.subcategorias"
-                  :key="subCategoria.id_pagina"
-                  @click="buscarSubCategoria(subCategoria.jerarquia, subCategoria.nombre)"
-                >
-                  <v-list-item-content>
-                    <v-list-item-title
-                    :style="{ color: $vuetify.theme.themes[theme].colorText }">
-                      {{ subCategoria.nombre }}
-                    </v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list-group>
-            </v-list>
-          </v-card>
+          <filter-categories
+            v-if="categories && totalProducts > 0"
+            :category-list="categories"
+          />
         </v-col>
         <v-col cols="12" sm="8" md="9">
-          <mp-chip v-if="Number(this.infoProductos.count) > 0" />
-          <h2 v-if="this.infoProductos.length > 0" class="text-subtitle-1 mb-2" :style="{color: 'white'}">Resultados: {{this.infoProductos.count}}</h2>
-            <div v-if="this.productos.length > 0" >
+          <mp-chip v-if="totalProducts > 0" />
+          <h2
+            v-if="resultProducts > 0"
+            class="text-subtitle-1 mb-2"
+            :style="{color: 'white'}"
+          >
+            Resultados: {{totalProducts}}
+          </h2>
+            <div v-if="products.length > 0" >
               <mp-button
-                v-if="Number(totalPaginas) > 1"
+                v-if="Number(totalPages) > 1"
                 is-full
-                @click="cambiarPorPagina(Number(infoProductos.count))"
+                @click="cambiarPorPagina(totalProducts)"
               >
-                VER TODOS LOS {{ Number(infoProductos.count) }} PRODUCTOS
+                VER TODOS LOS {{ totalProducts }} PRODUCTOS
               </mp-button>
               <v-row justify="center">
-                <v-col v-if="Number(this.infoProductos.count) > 16" cols="12">
-                  <v-container class="max-width">
-                    <v-pagination
-                      circle
-                      v-model="pagina"
-                      :length="totalPaginas"
-                      @input="cambiarPagina(pagina)"
-                    >
-                    </v-pagination>
-                  </v-container>
+                <v-col v-if="totalProducts > 16" cols="12">
+                  <mp-pagination
+                    :perPage="totalPages"
+                  />
                 </v-col>
               </v-row>
 
-              <v-row v-if="this.productos.length > 0">
-                <h2 v-if="Number(this.infoProductos.count) === 0" class="text-center error mt-2 ml-2 sinResultados">Sin resultados</h2>
+              <v-row v-if="products.length > 0">
+                <h2
+                  v-if="totalProducts === 0"
+                  class="text-center error mt-2 ml-2 sinResultados"
+                >
+                  Sin resultados
+                </h2>
                 <v-col
                   cols="12"
                   sm="6"
                   md="4"
                   lg="3"
-                  v-for="(producto) in productos[0]"
-                  :key="producto.id"
+                  v-for="(product) in products[0]"
+                  :key="product.id"
                   class="pa-1"
                 >
-                  <Products :producto='producto' :colores='producto.materiales' />
+                  <Products :producto='product' :colores='product.materiales' />
                 </v-col>
               </v-row>
-              <v-row v-if="this.productos.length > 0" justify="center">
-                <v-col v-if="Number(this.infoProductos.count) > 16" cols="12">
-                  <v-container class="max-width">
-                    <v-pagination
-                      v-model="pagina"
-                      circle
-                      :length="totalPaginas"
-                      @input="cambiarPagina(pagina)"
-                    >
-                    </v-pagination>
-                  </v-container>
+              <v-row v-if="products.length > 0" justify="center">
+                <v-col v-if="totalProducts > 16" cols="12">
+                  <mp-pagination
+                    :perPage="totalPages"
+                  />
                 </v-col>
               </v-row>
               <mp-button
-                v-if="Number(totalPaginas) > 1"
+                v-if="Number(totalPages) > 1"
                 is-full
-                @click="cambiarPorPagina(Number(infoProductos.count))"
+                @click="cambiarPorPagina(totalProducts)"
               >
-                VER TODOS LOS {{ Number(infoProductos.count) }} PRODUCTOS
+                VER TODOS LOS {{ totalProducts }} PRODUCTOS
               </mp-button>
             </div>
           <div v-else class="mx-auto">
@@ -147,7 +110,7 @@
 import axios from 'axios';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
 import hextToRgb from '@/helpers/hextToRgb';
-import { mapActions, mapGetters, mapState } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'ProductosMega',
@@ -155,31 +118,31 @@ export default {
   data() {
     return {
       hextToRgb,
-      listaCategorias: true,
-      productos: [],
+      products: [],
       inputInventario: Number(this.$route.query.inventario) || null,
-      pagina: Number(this.$route.query.pagina) || 1,
-      categoria: Number(this.$route.query.categoria) || '',
-      subCategoria: Number(this.$route.query.subCategoria) || '',
+      page: Number(this.$route.query.page) || 1,
+      category: Number(this.$route.query.category) || '',
+      subCategory: Number(this.$route.query.subCategory) || '',
       etiqueta: Number(this.$route.query.etiqueta) || '',
       inventario: Number(this.$route.query.inventario) || '',
       busqueda: this.$route.query.busqueda || '',
-      titulo: this.$route.query.titulo || 'Productos',
-      color: this.$route.query.color || '',
-      infoProductos: [],
-      totalPaginas: 0,
+      title: this.$route.query.title || 'Productos',
+      color: Number(this.$route.query.color) || '',
+      resultProducts: null,
+      totalPages: 0,
       porPagina: Number(this.$route.query.porPagina) || 16,
       listaPorPaginas: [
         { text: '16', value: 16 },
         { text: '32', value: 32 },
         { text: '64', value: 64 },
       ],
-      listLabel: [],
-      listaColores: [],
+      labelList: null,
+      colorList: null,
       nombreCategoria: 'Productos',
-      characteristics: [],
-      characteristic: this.$route.query.characteristics || '',
+      characteristics: null,
+      characteristic: Number(this.$route.query.characteristics) || '',
       discount: this.$route.query.discount || 'false',
+      totalProducts: 0,
     };
   },
   components: {
@@ -194,9 +157,12 @@ export default {
     MpChip: () => import(/* webpackChunkName: "mpChip" */ '@/components/UI/Mp-Chip.vue'),
     FilterCharacteristic: () => import(/* webpackChunkName: "filterCharacteristics" */ '@/components/Productos/FilterCharacteristic.vue'),
     FilterDiscount: () => import(/* webpackChunkName: "filterDiscount" */ '@/components/Productos/FilterDiscount.vue'),
+    FilterCategories: () => import(/* webpackChunkName: "filterCategory" */ '@/components/Productos/FilterCategories.vue'),
+    FilterSubCategories: () => import(/* webpackChunkName: "filterSubcategory" */ '@/components/Productos/FilterSubCategories.vue'),
+    MpPagination: () => import(/* webpackChunkName: "mpPagination" */ '@/components/UI/Mp-Pagination.vue'),
   },
   computed: {
-    ...mapState('categories', ['categories']),
+    ...mapGetters('categories', ['categories', 'subCategories', 'characteristicsStore']),
     ...mapGetters('labels', ['getLabels']),
     breadcrumbs() {
       return [
@@ -206,14 +172,14 @@ export default {
     },
   },
   methods: {
-    ...mapActions('categories', ['getCategories']),
+    ...mapActions('categories', ['getCategories', 'setCharacteristics']),
     ...mapActions('menu', ['setSelectedMenu']),
     ...mapActions('labels', ['setInitialLabels', 'clearLabel']),
     async getProductos(
-      pagina,
+      page,
       porPagina,
-      categoria,
-      subCategoria,
+      category,
+      subCategory,
       etiqueta,
       inventario,
       busqueda,
@@ -221,7 +187,7 @@ export default {
       characteristic,
       discount,
     ) {
-      const url = `https://marpicoprod.azurewebsites.net/api/productos/?page_size=${porPagina}&page=${pagina}&categoria=${categoria}&subcategoria=${subCategoria}&order=paginacion_web&etiqueta=${etiqueta}&inventario=${inventario}&search=${busqueda}${color ? `&color=${color}` : ''}&caracteristica=${characteristic}&descuento=${discount}`;
+      const url = `https://marpicoprod.azurewebsites.net/api/productos/?page_size=${porPagina}&page=${page}&categoria=${category}&subcategoria=${subCategory}&order=paginacion_web&etiqueta=${etiqueta}&inventario=${inventario}&search=${busqueda}${color ? `&color=${color}` : ''}&caracteristica=${characteristic}&descuento=${discount}`;
       const config = {
         method: 'get',
         url,
@@ -231,56 +197,24 @@ export default {
       };
 
       await axios(config).then((res) => {
-        this.productos.push(res.data.results);
-        this.infoProductos = res.data;
-        this.totalPaginas = Math.ceil((this.infoProductos.count / this.porPagina));
-        this.listLabel = res.data.filtros.etiquetas;
-        this.listaColores = res.data.filtros.colores;
-        this.characteristics = res.data.filtros.caracteristicas || [];
+        this.products.push(res.data.results);
+        this.resultProducts = res.data || null;
+        this.totalProducts = Number(res.data.count) || 0;
+        this.totalPages = Math.ceil((this.resultProducts.count / this.porPagina));
+        this.labelList = res.data.filtros.etiquetas || null;
+        this.colorList = res.data.filtros.colores || null;
+        this.characteristics = res.data.filtros.caracteristicas || null;
+        this.setCharacteristics(res.data.filtros.caracteristicas);
       });
       this.setInitialLabel();
-    },
-    cambiarPagina(pagina) {
-      this.$router.replace({
-        path: this.$route.path,
-        query: {
-          pagina,
-          porPagina: this.$route.query.porPagina,
-          categoria: this.$route.query.categoria,
-          subCategoria: this.$route.query.subCategoria,
-          etiqueta: this.$route.query.etiqueta,
-          inventario: this.$route.query.inventario,
-          busqueda: this.$route.query.busqueda,
-          titulo: this.$route.query.titulo,
-          color: this.$route.query.color,
-        },
-      });
-      this.setMenu(this.$route.path);
     },
     cambiarPorPagina(porPagina) {
       this.$router.push({
         path: this.$route.path,
         query: {
-          pagina: 1,
+          ...this.$route.query,
+          page: 1,
           porPagina,
-          categoria: this.$route.query.categoria,
-          subCategoria: this.$route.query.subCategoria,
-          etiqueta: this.$route.query.etiqueta,
-          inventario: this.$route.query.inventario,
-          busqueda: this.$route.query.busqueda,
-          titulo: this.$route.query.titulo,
-          color: this.$route.query.color,
-        },
-      });
-      this.setMenu();
-    },
-    buscarSubCategoria(subCategoria, titulo) {
-      console.log(subCategoria, titulo);
-      this.$router.replace({
-        path: this.$route.path,
-        query: {
-          subCategoria,
-          titulo,
         },
       });
       this.setMenu();
@@ -289,20 +223,33 @@ export default {
       this.setSelectedMenu(this.$route.fullPath);
     },
     setInitialLabel() {
-      const colorSelected = this.listaColores
-        .find((item) => Number(item.id) === Number(this.color));
+      const colorSelected = this.colorList ? this.colorList
+        .find((item) => item.id === this.color) : null;
 
-      const characteristicsSelected = this.characteristics
-        .find((item) => Number(item.id) === Number(this.characteristic));
+      const characteristicsSelected = this.characteristics ? this.characteristics
+        .find((item) => item.id === this.characteristic) : null;
 
-      const labelSelected = this.listLabel
-        .find((item) => Number(item.id) === Number(this.etiqueta));
+      // console.log('characteristics', this.characteristics);
+      // console.log('characteristic', this.characteristic);
+      // console.log(this.$route);
+      // console.log('characteristicsStore', this.characteristicsStore);
+
+      const labelSelected = this.labelList ? this.labelList
+        .find((item) => item.id === this.etiqueta) : null;
+
+      const categorySelected = this.categories ? this.categories
+        .find((item) => Number(item.jerarquia) === this.category) : null;
+
+      const subCategorySelected = this.subCategories ? this.subCategories
+        .find((item) => Number(item.jerarquia) === this.subCategory) : null;
 
       const objLabel = {
         query: this.$route.query,
-        color: colorSelected || null,
-        characteristics: characteristicsSelected || null,
-        label: labelSelected || null,
+        color: colorSelected,
+        characteristics: characteristicsSelected,
+        label: labelSelected,
+        category: categorySelected,
+        subCategory: subCategorySelected,
       };
       this.setInitialLabels(objLabel);
     },
@@ -310,10 +257,10 @@ export default {
   mounted() {
     this.clearLabel();
     this.getProductos(
-      this.pagina,
+      this.page,
       this.porPagina,
-      this.categoria,
-      this.subCategoria,
+      this.category,
+      this.subCategory,
       this.etiqueta,
       this.inventario,
       this.busqueda,

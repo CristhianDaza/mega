@@ -1,5 +1,5 @@
 <template>
-  <div v-if="getLabels.length > 0">
+  <div v-if="getLabels">
     <div
       v-for="label in getLabels"
       :key="label.id"
@@ -28,9 +28,6 @@ export default {
     return {
       mdiCloseCircle,
     };
-  },
-  destroyed() {
-    // this.clearLabel();
   },
   methods: {
     ...mapActions('labels', ['deleteLabel', 'clearLabel']),

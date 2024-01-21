@@ -52,8 +52,9 @@ export default {
       this.$router.push({
         path: this.$route.path,
         query: {
-          ...this.$route.query,
+          title: characteristic.nombre,
           characteristics: characteristic.id,
+          category: this.$route.query.category,
         },
       });
       this.setSelectedMenu(this.$route.fullPath);

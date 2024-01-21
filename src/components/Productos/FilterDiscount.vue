@@ -45,6 +45,7 @@ export default {
         path: this.$route.path,
         query: {
           ...this.$route.query,
+          page: 1,
           discount: this.discountValue,
         },
       });

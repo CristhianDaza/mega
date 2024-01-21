@@ -1,17 +1,17 @@
 export default {
   namespaced: true,
   state: {
-    labels: [],
+    labels: null,
   },
   mutations: {
     SET_LABELS(state, labels) {
-      state.labels.push(labels);
+      state.labels = [...state.labels || [], labels];
     },
     DELETE_LABEL(state, id) {
       state.labels = state.labels.filter((doc) => doc.id !== id);
     },
     CLEAR_LABEL(state) {
-      state.labels = [];
+      state.labels = null;
     },
   },
   actions: {
@@ -29,6 +29,8 @@ export default {
       color,
       characteristics,
       label,
+      category,
+      subCategory,
     }) {
       if (query.color) {
         commit('SET_LABELS', { id: 'colour', name: color.nombre, filter: 'color' });
@@ -44,6 +46,12 @@ export default {
       }
       if (query.etiqueta) {
         commit('SET_LABELS', { id: 'label', name: label.nombre, filter: 'etiqueta' });
+      }
+      if (query.category) {
+        commit('SET_LABELS', { id: 'category', name: category.nombre, filter: 'category' });
+      }
+      if (query.subCategory) {
+        commit('SET_LABELS', { id: 'subCategory', name: subCategory.nombre, filter: 'subCategory' });
       }
     },
   },

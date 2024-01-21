@@ -45,3 +45,17 @@ export const getCategories = () => new Promise((resolve, reject) => {
     reject(e);
   }
 });
+
+export const getSubCategories = (id) => new Promise((resolve, reject) => {
+  try {
+    const response = apiConfig.request({
+      method: 'GET',
+      url: `categorias/subcategoria/count/${id}`,
+    });
+
+    resolve(response);
+  } catch (e) {
+    console.log(e);
+    reject(e);
+  }
+});

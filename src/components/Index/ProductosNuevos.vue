@@ -24,7 +24,7 @@
         </v-col>
       </v-row>
       <router-link
-        :to="`/productos?etiqueta=${this.titulos[0].etiqueta}&titulo=${this.titulos[0].titulo}`">
+        :to="`/productos?etiqueta=${this.titulos[0].etiqueta}&title=${this.titulos[0].titulo}`">
         <mp-button
           class="mt-6"
           is-full
@@ -32,7 +32,7 @@
             name: 'product',
             query: {
               etiqueta: titulos[0].etiqueta,
-              titulo: titulos[0].titulo,
+              title: titulos[0].titulo
             }
           })"
         >

@@ -48,16 +48,19 @@ export default {
   },
   methods: {
     ...mapActions('menu', ['getMainMenu', 'setSelectedMenu']),
+    ...mapActions('categories', ['cleanSubCategories']),
     searchLabel(label) {
       this.$router.push({
         path: this.$route.path,
         query: {
           ...this.$route.query,
+          page: 1,
           etiqueta: label.id,
-          titulo: label.nombre,
+          title: label.nombre,
         },
       });
       this.setSelectedMenu(this.$route.fullPath);
+      this.cleanSubCategories();
     },
   },
 };
