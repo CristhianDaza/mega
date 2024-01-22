@@ -1,110 +1,117 @@
 <template>
-<!-- eslint-disable max-len -->
   <v-card
-    class="tarjetaProductos"
+    class="cardProducts"
     :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
-    :class="{'actionCardLogin': isLogin}"
+    :class="{'cardProductsLogin': isLogin}"
   >
     <v-card-text class="pa-0">
       <router-link
-        :to="{ path: `/producto/${producto.familia}` }"
+        :to="{ path: `/producto/${product.familia}` }"
         class="pointer"
       >
         <v-img
-          :src="producto.imagen.imagen.file_md"
+          :src="product.imagen.imagen.file_md"
           width="100%"
           max-width="100%"
           max-height="100%"
-          :alt="producto.descripcion_comercial"
-          class="imagenProducto"
+          :alt="product.descripcion_comercial"
+          class="imageProduct"
           :class="{'filterImage': drained }"
         >
         </v-img>
       </router-link>
     </v-card-text>
     <v-card-title
-      class="text-h6 titleProd font-weight-light"
+      class="text-subtitle-1 titleProd pb-2 font-weight-light"
       :style="{ color: $vuetify.theme.themes[theme].colorText }"
     >
-      {{ producto.descripcion_comercial }} a
+      {{ product.descripcion_comercial }}
     </v-card-title>
     <v-card-subtitle
-      class="text-subtitle-1 font-weight-bold"
+      class="text-subtitle-2 font-weight-bold pb-1"
       :style="{ color: $vuetify.theme.themes[theme].invertSecondary }"
     >
-      {{ producto.familia }}
+      {{ product.familia }}
     </v-card-subtitle>
-    <v-card-subtitle class="d-flex flex-wrap pt-0">
-      <div v-for="color in colores" :key="color.codigo">
+    <v-card-subtitle class="d-flex flex-wrap pt-0 pb-2">
+      <div v-for="color in colors" :key="color.codigo">
         <mp-color-inventory
           :color="color"
-          v-if="color.inventario > 10 "
+          v-if="color.inventario > 10"
         />
       </div>
     </v-card-subtitle>
-<!--    <div class="d-flex justify-center text-center my-2">-->
-<!--      <template v-if="producto.etiquetas.length > 0">-->
-<!--        <div-->
-<!--          v-for="etiqueta in producto.etiquetas"-->
-<!--          :key="etiqueta.id"-->
-<!--        >-->
-<!--          <img-->
-<!--            width="80px"-->
-<!--            :src="etiqueta.imagen.file_sm"-->
-<!--            :alt="etiqueta.nombre"-->
-<!--            >-->
-<!--        </div>-->
-<!--      </template>-->
-<!--    </div>-->
     <v-card-title
       :style="{ color: $vuetify.theme.themes[theme].colorText }"
-      v-if="isLogin" class="precio">
-      <template v-if="producto.etiquetas.length > 0">
-        <template v-if="producto.etiquetas[0].id == 4 || producto.etiquetas[0].id == 10 || producto.etiquetas[0].id == 20">
-          $ {{addCommas(Math.round(producto.materiales[0].precio * 1.35))}} + iva
+      v-if="isLogin"
+      class="precio pt-0"
+    >
+      <template v-if="product.etiquetas.length > 0">
+        <template
+          v-if="product.etiquetas[0].id === 4 ||
+          product.etiquetas[0].id === 10 ||
+          product.etiquetas[0].id === 20 ||
+          product.etiquetas[0].id === 36"
+        >
+          $ {{addCommas(Math.round(product.materiales[0].precio * 1.35))}} + iva
         </template>
 
         <template v-else>
-          <template v-if="producto.materiales[0].precio > producto.materiales[0].precio_descuento">
+          <template v-if="product.materiales[0].precio > product.materiales[0].precio_descuento">
             <span
             :style="{ color: $vuetify.theme.themes[theme].textoError }"
             class="text-decoration-line-through mr-3 subtitle-1"
             >
-              $ {{addCommas(Math.round(producto.materiales[0].precio))}} + iva
+              $ {{addCommas(Math.round(product.materiales[0].precio))}} + iva
             </span>
-            $ {{addCommas(Math.round(producto.materiales[0].precio_descuento))}} + iva
+            $ {{addCommas(Math.round(product.materiales[0].precio_descuento))}} + iva
           </template>
           <template v-else>
-            $ {{addCommas(Math.round(producto.materiales[0].precio))}} + iva
+            $ {{addCommas(Math.round(product.materiales[0].precio))}} + iva
           </template>
         </template>
       </template>
 
       <template v-else>
-        <template v-if="producto.materiales[0].precio > producto.materiales[0].precio_descuento">
+        <template v-if="product.materiales[0].precio > product.materiales[0].precio_descuento">
           <span
           :style="{ color: $vuetify.theme.themes[theme].textoError }"
           class="text-decoration-line-through mr-3 subtitle-1"
           >
-            $ {{addCommas(Math.round(producto.materiales[0].precio))}} + iva
+            $ {{addCommas(Math.round(product.materiales[0].precio))}} + iva
           </span>
-          $ {{addCommas(Math.round(producto.materiales[0].precio_descuento))}} + iva
+          $ {{addCommas(Math.round(product.materiales[0].precio_descuento))}} + iva
         </template>
         <template v-else>
-          $ {{addCommas(Math.round(producto.materiales[0].precio))}} + iva
+          $ {{addCommas(Math.round(product.materiales[0].precio))}} + iva
         </template>
       </template>
     </v-card-title>
     <div class="actionCard">
+      <div class="d-flex justify-center text-center my-2 pointer">
+        <template v-if="product.etiquetas.length > 0">
+          <div
+            v-for="label in product.etiquetas"
+            :key="label.id"
+            @click="filterLabel(label)"
+          >
+            <img
+              width="60px"
+              :src="label.imagen.file_sm"
+              :alt="label.nombre"
+            >
+          </div>
+        </template>
+      </div>
       <v-card-subtitle class="py-1">
-        <div v-html="totalInventory(producto.materiales)"></div>
+        <div v-html="totalInventory(product.materiales)"></div>
       </v-card-subtitle>
       <v-divider class="mx-5"></v-divider>
       <v-card-actions class="d-block">
-        <router-link :to="{ path: `/producto/${producto.familia}` }">
+        <router-link :to="{ path: `/producto/${product.familia}` }">
           <mp-button
             is-full
-            @click="$router.push({path: `/producto/${producto.familia}`})"
+            @click="$router.push({path: `/producto/${product.familia}`})"
           >
             Ver Producto
           </mp-button>
@@ -115,22 +122,22 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import addCommas from '@/mixins/addCommas';
 import hextToRgb from '@/helpers/hextToRgb';
 
 export default {
-  name: 'ProductosComponent',
+  name: 'ProductsComponent',
   components: {
     MpColorInventory: () => import(/* webpackChunkName: "filterColor" */ '@/components/UI/Mp-Color-Inventory.vue'),
     MpButton: () => import(/* webpackChunkName: "filterColor" */ '@/components/UI/Mp-Button.vue'),
   },
   props: {
-    producto: {
+    product: {
       type: Object,
       require: true,
     },
-    colores: {
+    colors: {
       type: Array,
       require: true,
     },
@@ -146,6 +153,7 @@ export default {
     ...mapGetters(['isLogin']),
   },
   methods: {
+    ...mapActions('menu', ['setSelectedMenu']),
     totalInventory(products) {
       let total = 0;
       let inTransit = 0;
@@ -160,30 +168,40 @@ export default {
       }
       return `<span class="font-weight-bold blue--text text--accent-1">Existencias:</span> ${this.addCommas(total)} unidades`;
     },
+    filterLabel(label) {
+      this.$router.push({
+        path: this.$route.path,
+        query: {
+          ...this.$route.query,
+          page: 1,
+          etiqueta: label.id,
+          title: label.nombre,
+        },
+      });
+      this.setSelectedMenu(this.$route.fullPath);
+    },
   },
 };
 </script>
 
 <style>
-.tarjetaProductos {
+.cardProducts {
   transition: all .6s;
   border-top-left-radius: 20px !important;
   border-top-right-radius: 20px !important;
-  min-height: 500px;
+  min-height: 490px;
 }
 
-.actionCardLogin {
-  min-height: 600px;
+.cardProductsLogin {
+  min-height: 590px;
 }
 
-.tarjetaProductos:hover {
-  //transform: translateY(-10px);
-}
 .titleProd {
   word-break: normal;
   text-transform: capitalize;
 }
-.imagenProducto {
+
+.imageProduct {
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
@@ -191,8 +209,6 @@ export default {
 .filterImage {
   filter: grayscale(100%);
   -webkit-filter: grayscale(100%);
-  -moz-filter: grayscale(100%);
-  -o-filter: grayscale(100%);
 }
 
 .actionCard {

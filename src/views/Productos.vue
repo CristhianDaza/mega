@@ -75,7 +75,7 @@
                   :key="product.id"
                   class="pa-1"
                 >
-                  <Products :producto='product' :colores='product.materiales' />
+                  <Products :product='product' :colors='product.materiales' />
                 </v-col>
               </v-row>
               <v-row v-if="products.length > 0" justify="center">

@@ -20,7 +20,7 @@
           v-for="(producto) in this.productos"
           :key="producto.familia"
         >
-          <Products :producto='producto' :colores="producto.materiales"/>
+          <Products :product='producto' :colors="producto.materiales"/>
         </v-col>
       </v-row>
       <router-link

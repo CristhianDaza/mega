@@ -12,8 +12,8 @@
             cols="12"
             sm="6"
             lg="4"
-            v-for="categoria in categories"
-            :key="categoria.id_pagina"
+            v-for="category in categories"
+            :key="category.id_pagina"
           >
             <v-card
               :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
@@ -25,8 +25,9 @@
                 <v-card-title class="tituloCategoria headline" :style="{color: '#005C91'}" >
                   <div
                     class="pointer"
-                    @click="$router.push({ path: `/productos?category=${categoria.jerarquia}&title=${categoria.nombre}` })">
-                    {{categoria.nombre}}
+                    @click="goToPage('category', category)"
+                  >
+                    {{category.nombre}}
                   </div>
                 </v-card-title>
                 <v-avatar
@@ -37,8 +38,8 @@
                   <v-img
                     class="imageCategories"
                     :aspect-ratio="16/9"
-                    :src="categoria.imagen.file_md"
-                    :alt="categoria.nombre">
+                    :src="category.imagen.file_md"
+                    :alt="category.nombre">
                   </v-img>
                 </v-avatar>
               </div>
@@ -46,16 +47,16 @@
               <v-card-subtitle class="tituloCategoria">
                 <ul>
                   <li
-                    v-for="subCategoria in categoria.subcategorias"
-                    :key="subCategoria.id_pagina"
+                    v-for="subCategory in category.subcategorias"
+                    :key="subCategory.id_pagina"
                     class="font-weight-medium"
                     :style="{ color: $vuetify.theme.themes[theme].colorText }"
                   >
                     <div
                       class="pointer d-inline"
-                      @click="$router.push({ path: `/productos?subCategory=${subCategoria.jerarquia}&title=${subCategoria.nombre}` })"
+                      @click="goToPage('subCategory', subCategory)"
                     >
-                      {{subCategoria.nombre}}
+                      {{subCategory.nombre}}
                     </div>
                   </li>
                 </ul>
@@ -89,6 +90,29 @@ export default {
   },
   methods: {
     ...mapActions('categories', ['getCategories']),
+    ...mapActions('categories', ['getSubCategories']),
+    goToPage(select, item) {
+      if (select === 'category') {
+        this.$router.push({
+          path: '/productos',
+          query: {
+            category: item.jerarquia,
+            title: item.nombre,
+          },
+        });
+        this.getSubCategories(item.jerarquia);
+      } else {
+        this.$router.push({
+          path: '/productos',
+          query: {
+            category: item.categoria,
+            subCategory: item.jerarquia,
+            title: item.nombre,
+          },
+        });
+        this.getSubCategories(item.categoria);
+      }
+    },
   },
   mounted() {
     if (!this.categories) this.getCategories();

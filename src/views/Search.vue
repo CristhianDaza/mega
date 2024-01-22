@@ -54,7 +54,7 @@
                 :key="producto.id"
                 class="pa-1 mb-5"
               >
-                <Products :producto='producto' :colores='producto.materiales' />
+                <Products :product='producto' :colors='producto.materiales' />
               </v-col>
             </v-row>
             <v-row justify="center">

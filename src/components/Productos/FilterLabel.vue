@@ -47,7 +47,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions('menu', ['getMainMenu', 'setSelectedMenu']),
+    ...mapActions('menu', ['setSelectedMenu']),
     ...mapActions('categories', ['cleanSubCategories']),
     searchLabel(label) {
       this.$router.push({
