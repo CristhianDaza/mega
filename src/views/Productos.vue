@@ -6,7 +6,7 @@
         :breadcrumbs="breadcrumbs"
       />
       <v-row>
-        <v-col class="pt-1" cols="12" sm="4" md="3">
+        <v-col cols="12" sm="4" md="3">
           <filter-inventory
             v-if="totalProducts > 0"
           />
@@ -44,21 +44,6 @@
             Resultados: {{totalProducts}}
           </h2>
             <div v-if="products.length > 0" >
-              <mp-button
-                v-if="Number(totalPages) > 1"
-                is-full
-                @click="cambiarPorPagina(totalProducts)"
-              >
-                VER TODOS LOS {{ totalProducts }} PRODUCTOS
-              </mp-button>
-              <v-row justify="center">
-                <v-col v-if="totalProducts > 16" cols="12">
-                  <mp-pagination
-                    :perPage="totalPages"
-                  />
-                </v-col>
-              </v-row>
-
               <v-row v-if="products.length > 0">
                 <h2
                   v-if="totalProducts === 0"
@@ -87,10 +72,9 @@
               </v-row>
               <mp-button
                 v-if="Number(totalPages) > 1"
-                is-full
                 @click="cambiarPorPagina(totalProducts)"
               >
-                VER TODOS LOS {{ totalProducts }} PRODUCTOS
+                VER TODOS
               </mp-button>
             </div>
           <div v-else class="mx-auto">

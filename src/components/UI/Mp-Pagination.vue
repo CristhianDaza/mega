@@ -1,10 +1,12 @@
 <template>
   <v-container class="max-width">
     <v-pagination
-      circle
       v-model="page"
       :length="perPage"
       @input="changePage(page)"
+      prev-icon="mdi-menu-left"
+      next-icon="mdi-menu-right"
+      navigationColor="#fff"
     >
     </v-pagination>
   </v-container>

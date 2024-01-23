@@ -18,6 +18,9 @@
           class="imageProduct"
           :class="{'filterImage': drained }"
         >
+          <span v-if="product.materiales[0].descuento" class="percent">
+            {{ product.materiales[0].descuento }}%
+          </span>
         </v-img>
       </router-link>
     </v-card-text>
@@ -215,5 +218,21 @@ export default {
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+
+.imageProduct span {
+  width: 110px;
+  height: 20px;
+  top: 11px;
+  right: -36px;
+  position: absolute;
+  display: block;
+  background: #005C91;
+  color: #fff;
+  font-size: 15px;
+  text-align: center;
+  line-height: 22px;
+  transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
 }
 </style>
