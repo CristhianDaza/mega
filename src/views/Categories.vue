@@ -89,8 +89,8 @@ export default {
     MpBreadcrumbs: () => import(/* webpackChunkName: "mpBreadcrumbs" */ '@/components/UI/Mp-Breadcrumbs.vue'),
   },
   methods: {
-    ...mapActions('categories', ['getCategories']),
-    ...mapActions('categories', ['getSubCategories']),
+    ...mapActions('categories', ['getCategories', 'getSubCategories']),
+    ...mapActions('menu', ['setSelectedMenu']),
     goToPage(select, item) {
       if (select === 'category') {
         this.$router.push({
@@ -112,6 +112,7 @@ export default {
         });
         this.getSubCategories(item.categoria);
       }
+      this.setSelectedMenu(this.$route.path);
     },
   },
   mounted() {

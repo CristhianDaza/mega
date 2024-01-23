@@ -20,7 +20,7 @@
             ><v-icon class="btn left">
               {{mdiLabelOutline}}
               </v-icon>
-              {{ label.nombre }}
+              {{ filterLabel(label.nombre) }}
             </v-list-item-title>
           </v-list-item>
         </div>
@@ -61,6 +61,9 @@ export default {
       });
       this.setSelectedMenu(this.$route.fullPath);
       this.cleanSubCategories();
+    },
+    filterLabel(label) {
+      return label.replace(/_/g, ' ').replace(/\d+$/, '').trim();
     },
   },
 };

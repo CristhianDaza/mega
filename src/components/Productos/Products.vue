@@ -99,7 +99,7 @@
             @click="filterLabel(label)"
           >
             <img
-              width="60px"
+              width="80px"
               :src="label.imagen.file_sm"
               :alt="label.nombre"
             >

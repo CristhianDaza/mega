@@ -1,7 +1,5 @@
 <template>
-  <keep-alive>
-    <component :is="layout"></component>
-  </keep-alive>
+  <component :is="layout"></component>
 </template>
 <script>
 import { mapState } from 'vuex';
