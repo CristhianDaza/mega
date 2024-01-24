@@ -1,5 +1,4 @@
 <template>
-<!-- eslint-disable max-len -->
   <v-simple-table
     :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
   >

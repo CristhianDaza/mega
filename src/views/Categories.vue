@@ -1,5 +1,4 @@
 <template>
-<!-- eslint-disable max-len -->
   <div>
     <Hero title="Categorías"/>
     <v-container class="pt-0">

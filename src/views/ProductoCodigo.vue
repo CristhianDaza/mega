@@ -1,5 +1,4 @@
 <template>
-<!-- eslint-disable max-len -->
   <div v-if="this.productoCodigo.length > 0">
     <v-container class="pt-0">
       <mp-breadcrumbs
@@ -95,7 +94,12 @@
 
     </v-container>
 
-    <v-dialog v-model="dialogTransito" max-width="750" overlay-color="blue-grey darken-4" overlay-opacity="0.9">
+    <v-dialog
+      v-model="dialogTransito"
+      max-width="750"
+      overlay-color="blue-grey darken-4"
+      overlay-opacity="0.9"
+    >
       <v-btn dark icon class="mr-5" color="white" @click.stop="dialogTransito = false">
         <v-icon>{{mdiCloseCircleOutline}}</v-icon>
       </v-btn>
@@ -126,7 +130,10 @@
             <td
               :style="{ color: $vuetify.theme.themes[theme].colorText }"
               v-if="existencia.trackings_importacion[0] !== undefined">
-              {{ coloresTransito(inventarioDisponible, existencia.trackings_importacion[0].material) }}
+              {{ coloresTransito(
+                  inventarioDisponible,
+                  existencia.trackings_importacion[0].material
+              ) }}
             </td>
             <td
               :style="{ color: $vuetify.theme.themes[theme].colorText }"
@@ -146,7 +153,9 @@
             <td
               :style="{ color: $vuetify.theme.themes[theme].colorText }"
               v-if="existencia.trackings_importacion[0] !== undefined">
-              {{moment(existencia.trackings_importacion[0].ultima_actualizacion).locale('es-CO').format('LL')}}
+              {{moment(
+                existencia.trackings_importacion[0].ultima_actualizacion
+                ).locale('es-CO').format('LL')}}
             </td>
           </tr>
         </tbody>
@@ -216,8 +225,8 @@ export default {
       return [
         { title: 'Inicio', disabled: false, toLink: '/' },
         { title: 'Productos', disabled: false, toLink: '/productos' },
-        { title: this.categoriaPrincipal, disabled: false, toLink: `/productos?categoria=${this.productoCodigo[0].subcategoria_1.categoria.jerarquia}&titulo=${this.productoCodigo[0].subcategoria_1.categoria.nombre}` },
-        { title: this.categoriaSecundaria, disabled: false, toLink: `/productos?subCategoria=${this.productoCodigo[0].subcategoria_1.jerarquia}&titulo=${this.productoCodigo[0].subcategoria_1.nombre}` },
+        { title: this.categoriaPrincipal, disabled: false, toLink: `/productos?category=${this.productoCodigo[0].subcategoria_1.categoria.jerarquia}&title=${this.productoCodigo[0].subcategoria_1.categoria.nombre}` },
+        { title: this.categoriaSecundaria, disabled: false, toLink: `/productos?subCategory=${this.productoCodigo[0].subcategoria_1.jerarquia}&title=${this.productoCodigo[0].subcategoria_1.nombre}` },
         { title: this.codigo, disabled: true, toLink: `/producto/${this.codigo}` },
       ];
     },
