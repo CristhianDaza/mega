@@ -107,7 +107,7 @@ export default {
       page: Number(this.$route.query.page) || 1,
       category: Number(this.$route.query.category) || '',
       subCategory: Number(this.$route.query.subCategory) || '',
-      etiqueta: Number(this.$route.query.etiqueta) || '',
+      label: Number(this.$route.query.label) || '',
       inventario: Number(this.$route.query.inventario) || '',
       busqueda: this.$route.query.busqueda || '',
       title: this.$route.query.title || 'Productos',
@@ -164,14 +164,14 @@ export default {
       porPagina,
       category,
       subCategory,
-      etiqueta,
+      label,
       inventario,
       busqueda,
       color,
       characteristic,
       discount,
     ) {
-      const url = `https://marpicoprod.azurewebsites.net/api/productos/?page_size=${porPagina}&page=${page}&categoria=${category}&subcategoria=${subCategory}&order=paginacion_web&etiqueta=${etiqueta}&inventario=${inventario}&search=${busqueda}${color ? `&color=${color}` : ''}&caracteristica=${characteristic}&descuento=${discount}`;
+      const url = `https://marpicoprod.azurewebsites.net/api/productos/?page_size=${porPagina}&page=${page}&categoria=${category}&subcategoria=${subCategory}&order=paginacion_web&etiqueta=${label}&inventario=${inventario}&search=${busqueda}${color ? `&color=${color}` : ''}&caracteristica=${characteristic}&descuento=${discount}`;
       const config = {
         method: 'get',
         url,
@@ -213,13 +213,8 @@ export default {
       const characteristicsSelected = this.characteristics ? this.characteristics
         .find((item) => item.id === this.characteristic) : null;
 
-      // console.log('characteristics', this.characteristics);
-      // console.log('characteristic', this.characteristic);
-      // console.log(this.$route);
-      // console.log('characteristicsStore', this.characteristicsStore);
-
       const labelSelected = this.labelList ? this.labelList
-        .find((item) => item.id === this.etiqueta) : null;
+        .find((item) => item.id === this.label) : null;
 
       const categorySelected = this.categories ? this.categories
         .find((item) => Number(item.jerarquia) === this.category) : null;
@@ -245,7 +240,7 @@ export default {
       this.porPagina,
       this.category,
       this.subCategory,
-      this.etiqueta,
+      this.label,
       this.inventario,
       this.busqueda,
       this.color,

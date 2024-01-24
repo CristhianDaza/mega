@@ -1,59 +1,53 @@
 <template>
-<!-- eslint-disable max-len -->
   <div>
     <DesProducto
-      :descripcion="producto"
+      :description="product"
     />
     <template v-if="isLogin">
       <PrecioProducto
-        :precio="producto"
+        :price="product"
         :materiales="materiales"
       />
     </template>
     <v-card-text class="pt-0">
-      <div v-if="isLogin">
-        <p v-if="producto.texto_informacion !== null" class="ma-0" :style="'color: ' + producto.color_texto_informacion">
-          {{ descripcionProducto }}
-        </p>
-      </div>
+      <p
+        v-if="product.texto_informacion"
+        class="ma-0 text-caption"
+      >
+        {{ replaceSeller(product.texto_informacion) }}
+      </p>
     </v-card-text>
     <v-card-text
       class="d-block title my-2 py-0"
       :style="{ color: $vuetify.theme.themes[theme].azul }"
-      v-if="Math.round(producto.materiales[0].precio_descuento) !== Math.round(producto.materiales[0].precio)">
-        Producto con descuento del {{Math.abs(Math.round(producto.materiales[0].descuento))}}%.
+      v-if="Math.round(product.materiales[0].precio_descuento) !==
+      Math.round(product.materiales[0].precio)"
+    >
+      {{Math.abs(Math.round(product.materiales[0].descuento))}}% de descuento.
     </v-card-text>
-    <v-card-actions class="ml-1 pt-0">
-      <v-btn
-        block
-        large
-        outlined
-        :style="{ color: $vuetify.theme.themes[theme].azul }"
+    <div class="ml-1 pt-0">
+      <mp-button
         :loading="loading"
-        :disabled="loading"
-        @click="descargarImagenes(producto.id, producto.familia)"
+        @click="downloadImage(product.id, product.familia)"
+        is-full
       >
         Descargar Imágenes
         <v-icon>
           {{ mdiDownload }}
         </v-icon>
-      </v-btn>
-    </v-card-actions>
-    <v-card-actions class="ml-1 pt-0" v-if="producto.materiales[0].en_transito > 0">
-      <v-btn
-        outlined
-        block
-        large
-        :style="{ color: $vuetify.theme.themes[theme].azul }"
-        class="my-1 pa-4"
-        @click.stop="$emit('dialogo')"
+      </mp-button>
+    </div>
+    <div class="ml-1 pt-2" v-if="product.materiales[0].en_transito > 0">
+      <mp-button
+        @click="$emit('dialogo')"
+        is-full
       >
         Importaciones
-        <v-icon class="ml-1">
-          {{mdiFerry}}
+        <v-icon>
+          {{ mdiFerry }}
         </v-icon>
-      </v-btn>
-    </v-card-actions>
+      </mp-button>
+    </div>
   </div>
 </template>
 
@@ -77,22 +71,20 @@ export default {
       loading: false,
     };
   },
-  props: ['producto', 'materiales', 'transito'],
+  props: ['product', 'materiales', 'transito'],
   computed: {
     ...mapGetters(['isLogin']),
-    descripcionProducto() {
-      if (this.producto.texto_informacion.includes('asesora')) {
-        return this.producto.texto_informacion.replaceAll('asesora', 'asesor');
-      }
-      return this.producto.texto_informacion;
-    },
   },
   components: {
+    MpButton: () => import(/* webpackChunkName: "mpButton" */ '@/components/UI/Mp-Button.vue'),
     DesProducto: () => import(/* webpackChunkName: "desProducto" */ '@/components/Producto/DesProducto.vue'),
     PrecioProducto: () => import(/* webpackChunkName: "precioProducto" */ '@/components/Producto/PrecioProducto.vue'),
   },
   methods: {
-    async descargarImagenes(id, familia) {
+    replaceSeller(text) {
+      return text.includes('asesora') ? text.replaceAll('asesora', 'asesor') : text;
+    },
+    async downloadImage(id, familia) {
       this.loading = true;
       const urlBlob = `https://marpicoprod.azurewebsites.net/api/productos/imagenes/${id}?producto=${familia}`;
 

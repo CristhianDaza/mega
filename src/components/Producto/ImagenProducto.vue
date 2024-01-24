@@ -7,7 +7,6 @@
       :src="producto.imagenes[0].imagen.file_md"
       :alt="producto.descripcion_comercial"
     />
-
     <img
       v-else
       class="fotoTarjeta border-black elevation-5"
@@ -17,22 +16,24 @@
     />
       <p
         :style="{ color: $vuetify.theme.themes[theme].azul }"
-        class="mt-5 font-weight-bold"
+        class="mt-5 font-weight-bold text-body-2"
       >
-          El color de los artículos pueden variar según la calibración y resolución de la pantalla.
-        </p>
+        El color de los artículos pueden variar según la calibración y resolución de la pantalla.
+      </p>
     <v-card-actions v-if="producto.etiquetas.length > 0">
       <v-row>
         <template>
           <div
-            v-for="etiqueta in producto.etiquetas"
-            :key="etiqueta.id"
+            v-for="label in producto.etiquetas"
+            :key="label.id"
+            @click="filterLabel(label)"
           >
             <img
               width="100px"
-              :src="etiqueta.imagen.file_sm"
-              :alt="etiqueta.nombre"
-              >
+              class="pointer"
+              :src="label.imagen.file_sm"
+              :alt="label.nombre"
+            >
           </div>
         </template>
       </v-row>
@@ -84,14 +85,14 @@
       <v-btn dark icon class="float-right mr-5" color="white" @click.stop="dialog = false">
         <v-icon>{{mdiCloseCircleOutline}}</v-icon>
       </v-btn>
-      <img
+      <v-img
         v-if="imagenPrincipalGrande === ''" :src="producto.imagenes[0].imagen.file"
         max-width="100%"
         width="100%"
         cover
         :alt="producto.descripcion_comercial"
       />
-      <img
+      <v-img
         v-else
         :src="imagenPrincipalGrande"
         max-width="100%"
@@ -105,6 +106,7 @@
 
 <script>
 import { mdiCloseCircleOutline } from '@mdi/js';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'ImagenProducto',
@@ -117,12 +119,23 @@ export default {
   },
   props: ['producto', 'imagenPrincipalMediana', 'imagenPrincipalGrande', 'inventarioDisponible'],
   methods: {
+    ...mapActions('menu', ['setSelectedMenu']),
     mostrarTextoInfo(texto) {
       this.textoInfo = texto;
     },
-
     cerrarTextoInfo() {
       this.textoInfo = '';
+    },
+    filterLabel(label) {
+      this.$router.push({
+        path: '/productos',
+        query: {
+          page: 1,
+          label: label.id,
+          title: label.nombre,
+        },
+      });
+      this.setSelectedMenu(this.$route.fullPath);
     },
   },
 };

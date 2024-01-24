@@ -177,7 +177,7 @@ export default {
         query: {
           ...this.$route.query,
           page: 1,
-          etiqueta: label.id,
+          label: label.id,
           title: label.nombre,
         },
       });

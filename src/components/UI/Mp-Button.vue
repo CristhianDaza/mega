@@ -1,15 +1,19 @@
 <template>
-  <button
-    :class="[{
+  <div>
+    <button
+      v-if="!loading"
+      :class="[{
       'isFull' : isFull,
       'themeDark' : isMenu ? '' : $vuetify.theme.dark,
       'menuButtons' : isMenu,
       'buttonMega' : !isMenu,
     }]"
-    @click.prevent="setAction"
-  >
-    <slot></slot>
-  </button>
+      @click.prevent="setAction"
+    >
+      <slot></slot>
+    </button>
+    <div v-else class="loading spinner"></div>
+  </div>
 </template>
 
 <script>
@@ -21,6 +25,10 @@ export default {
       default: false,
     },
     isMenu: {
+      type: Boolean,
+      default: false,
+    },
+    loading: {
       type: Boolean,
       default: false,
     },
@@ -114,5 +122,29 @@ export default {
     border-bottom: 2px solid $primary-color-blue;
     color: $primary-color-blue;
   }
+}
+
+.loading {
+  border-radius: 50px;
+  width: 50px;
+  left: calc(50vw - 25px);
+}
+
+.spinner {
+  display: block;
+  width: 34px;
+  height: 34px;
+  top: 8px;
+  left: calc(50% - 17px);
+  background: transparent;
+  box-sizing: border-box;
+  border-top: 4px solid $primary-color-blue;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-radius: 100%;
+  animation: spin 0.6s ease-out infinite;
+}
+@keyframes spin {
+  100% {transform: rotate(360deg)}
 }
 </style>

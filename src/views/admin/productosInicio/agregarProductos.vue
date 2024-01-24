@@ -84,7 +84,7 @@ export default {
         await db.collection('producto')
           .add({
             titulo: this.titulo,
-            etiqueta: this.etiqueta,
+            label: this.etiqueta,
           })
           .then(() => {
             Swal.fire(

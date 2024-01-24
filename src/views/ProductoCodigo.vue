@@ -52,7 +52,7 @@
           >
             <v-container class="pl-0 pb-0 mb-5 mr-2 infoProd">
               <InfoProducto
-                :producto="productoCodigo[0]"
+                :product="productoCodigo[0]"
                 :materiales="this.materiales"
                 @dialogo="dialogTransito = true"
               />

@@ -31,7 +31,7 @@
           @click="$router.push({
             name: 'product',
             query: {
-              etiqueta: titulos[0].etiqueta,
+              label: titulos[0].etiqueta,
               title: titulos[0].titulo
             }
           })"

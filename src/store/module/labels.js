@@ -44,8 +44,8 @@ export default {
       if (query.inventoryInput) {
         commit('SET_LABELS', { id: 'inventory', name: `Inventario mayor a ${query.inventoryInput}`, filter: 'inventoryInput' });
       }
-      if (query.etiqueta) {
-        commit('SET_LABELS', { id: 'label', name: label.nombre.replace(/_/g, ' ').replace(/\d+$/, '').trim(), filter: 'etiqueta' });
+      if (query.label) {
+        commit('SET_LABELS', { id: 'label', name: label.nombre.replace(/_/g, ' ').replace(/\d+$/, '').trim(), filter: 'label' });
       }
       if (query.category) {
         commit('SET_LABELS', { id: 'category', name: category.nombre, filter: 'category' });

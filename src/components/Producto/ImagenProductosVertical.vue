@@ -15,6 +15,7 @@
       <slide
         v-for="(imagen, i) in imagenes"
         :key="i"
+        :index="i"
       >
         <v-img
           @click="$emit('cambiarImagen', imagen.imagen.file_md, imagen.imagen.file)"
