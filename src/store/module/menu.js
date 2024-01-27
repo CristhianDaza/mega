@@ -4,8 +4,14 @@ export default {
   namespaced: true,
   state: {
     mainMenu: [],
-    menu: { name: '', order: '', link: '' },
+    menu: {
+      name: '',
+      order: '',
+      link: '',
+      isExternal: false,
+    },
     selectedMenu: null,
+    mainMenuDefault: [],
   },
   mutations: {
     SET_MAIN_MENU(state, menu) {
@@ -28,6 +34,7 @@ export default {
           name: menu.name,
           order: menu.order,
           link: menu.link,
+          isExternal: menu.isExternal,
         });
     },
 

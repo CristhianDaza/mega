@@ -179,6 +179,7 @@ import {
 } from '@mdi/js';
 import addCommas from '@/mixins/addCommas';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'CodigoView',
@@ -232,6 +233,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions('menu', ['setSelectedMenu']),
     coloresTransito(inventario, traking) {
       let codigo;
       inventario.forEach((data) => {
@@ -311,7 +313,8 @@ export default {
     },
   },
   async mounted() {
-    this.getProductoCodigo();
+    await this.getProductoCodigo();
+    await this.setSelectedMenu(this.$route.fullPath);
   },
   metaInfo: {
     title: 'Producto 🛒',

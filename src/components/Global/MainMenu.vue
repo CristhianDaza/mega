@@ -12,24 +12,33 @@
           ></v-app-bar-nav-icon>
         </div>
         <div class="d-none d-lg-flex align-center" >
-          <div v-for="{ name, id, link } in mainMenu" :key="id">
-              <mp-button
-                is-menu
-                :class="{'active': selectedMenu === link}"
-                @click="goToPage(link)"
+          <template v-for="{ name, id, link, isExternal } in mainMenu">
+            <mp-button
+              is-menu
+              :is-active="selectedMenu === link"
+              @click="goToPage(link, isExternal)"
+              :key="id"
+            >
+              {{ name }}
+              <v-icon
+                v-if="isExternal"
+                class="ml-1 white--text"
+                small
               >
-                {{ name }}
-              </mp-button>
-          </div>
-          <mp-button
-            v-if="!isLogin"
-            is-menu
-            @click="toAdmin()"
-          >
-            Admin
-          </mp-button>
+                {{mdiOpenInNew}}
+              </v-icon>
+            </mp-button>
+          </template>
         </div>
         <v-spacer></v-spacer>
+        <mp-button
+          v-if="isLogin"
+          is-menu
+          @click="toAdmin()"
+          class="mr-1"
+        >
+          Admin
+        </mp-button>
         <ThemeButton />
         <SearchComponent />
       </v-layout>
@@ -66,11 +75,13 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import { mdiOpenInNew } from '@mdi/js';
 
 export default {
   name: 'MenuPrincipal',
   data() {
     return {
+      mdiOpenInNew,
       drawer: false,
       group: null,
       linkBackground: 'https://firebasestorage.googleapis.com/v0/b/megapromocionales2020.appspot.com/o/opt_FondoMenu.webp?alt=media&token=298c8002-37d6-457c-8cb1-dababcfca57c',
@@ -93,7 +104,11 @@ export default {
       await this.setPathToAdmin(this.$route.fullPath);
       await this.$router.push({ name: 'admin' });
     },
-    goToPage(link) {
+    goToPage(link, isExternal = false) {
+      if (isExternal) {
+        window.open(link, '_blank');
+        return;
+      }
       this.setSelectedMenu(link);
       this.$router.push({ path: link });
     },

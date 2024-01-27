@@ -7,6 +7,7 @@
       'themeDark' : isMenu ? '' : $vuetify.theme.dark,
       'menuButtons' : isMenu,
       'buttonMega' : !isMenu,
+      'active': isActive,
     }]"
       @click.prevent="setAction"
     >
@@ -32,6 +33,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    isActive: {
+      type: Boolean,
+      default: false,
+    },
   },
   methods: {
     setAction() {
@@ -41,7 +46,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "@/assets/css/variables.scss";
 
 .buttonMega {
@@ -83,7 +88,7 @@ export default {
 }
 
 .themeDark {
-  background: #111B27;
+  background: $background-color-dark;
   border: 2px solid $secondary-color-yellow;
   color: $text-color-white;
 
@@ -121,6 +126,10 @@ export default {
   &.active {
     border-bottom: 2px solid $primary-color-blue;
     color: $primary-color-blue;
+  }
+
+  &:hover span {
+    color: $primary-color-blue !important;
   }
 }
 
