@@ -29,7 +29,7 @@ export default {
   },
   actions: {
     async createMainMenu(_, menu) {
-      await db.collection('menu')
+      await db.collection('mainMenu')
         .add({
           name: menu.name,
           order: menu.order,
@@ -39,7 +39,7 @@ export default {
     },
 
     async getMainMenu({ commit }) {
-      await db.collection('menu').orderBy('order').get()
+      await db.collection('mainMenu').orderBy('order').get()
         .then((snapshot) => {
           const mainMenu = [];
           snapshot.forEach((doc) => {
@@ -52,7 +52,7 @@ export default {
     },
 
     async getMenu({ commit }, id) {
-      await db.collection('menu').doc(id).get()
+      await db.collection('mainMenu').doc(id).get()
         .then((doc) => {
           const result = doc.data();
           result.id = doc.id;
@@ -61,12 +61,21 @@ export default {
     },
 
     async deleteMainMenu({ commit }, id) {
-      await db.collection('menu').doc(id).delete()
+      await db.collection('mainMenu').doc(id).delete()
         .then(() => commit('DELETE_MAIN_MENU', id));
     },
 
     setSelectedMenu({ commit }, menu) {
       commit('SET_SELECTED_MENU', menu);
+    },
+
+    async editMainMenu(_, menu) {
+      await db.collection('mainMenu').doc(menu.id).update({
+        name: menu.name,
+        order: menu.order,
+        link: menu.link,
+        isExternal: menu.isExternal,
+      }).then();
     },
   },
   getters: {

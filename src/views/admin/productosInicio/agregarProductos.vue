@@ -17,30 +17,38 @@
             <v-card-text>
               <v-text-field
                 label="Titulo"
-                v-model="titulo"
+                v-model="title"
+                color="white darken-2"
                 :prepend-icon="mdiFormatTitle">
               </v-text-field>
               <v-text-field
-                label="Etiqueta"
-                v-model="etiqueta"
+                label="N. Etiqueta"
+                v-model="label"
+                color="white darken-2"
+                type="number"
                 :prepend-icon="mdiCartArrowRight">
               </v-text-field>
             </v-card-text>
-            <v-card-text v-if="error != null">{{error}}</v-card-text>
             <v-divider class="mx-5"></v-divider>
             <v-card-actions>
+              <v-spacer></v-spacer>
               <v-btn
-                outlined
-                :style="{color: $vuetify.theme.themes[theme].azul}"
-                @click.prevent="subirProducto"
-                :loading="loading">
-                  Agregar Producto
-                </v-btn>
+                :style="{color: $vuetify.theme.themes[theme].textoBlanco,
+                  background: $vuetify.theme.themes['dark'].azul}"
+                @click.prevent="createProduct"
+                :loading="loading"
+                :disabled="isValidProduct"
+              >
+                Agregar Producto
+              </v-btn>
               <v-btn
                 outlined
                 @click="$router.back()"
-                :style="{color: $vuetify.theme.themes[theme].amarillo}"
-              >Atras</v-btn>
+                :style="{color: $vuetify.theme.themes[theme].textoNegro,
+                background: $vuetify.theme.themes['dark'].amarillo}"
+              >
+                Atras
+              </v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -53,7 +61,7 @@
 import { mdiFormatTitle, mdiCartArrowRight } from '@mdi/js';
 import Swal from 'sweetalert2';
 import layoutAdmin from '@/mixins/layoutAdmin';
-import { db } from '@/firebase';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'agregar-slider',
@@ -62,9 +70,8 @@ export default {
     return {
       mdiFormatTitle,
       mdiCartArrowRight,
-      error: null,
-      titulo: '',
-      etiqueta: '',
+      title: null,
+      label: null,
       loading: false,
       uploading: 0,
     };
@@ -78,28 +85,25 @@ export default {
     ],
   },
   methods: {
-    async subirProducto() {
+    ...mapActions('homeProduct', ['createProductHome']),
+    async createProduct() {
       try {
         this.loading = true;
-        await db.collection('producto')
-          .add({
-            titulo: this.titulo,
-            label: this.etiqueta,
-          })
-          .then(() => {
-            Swal.fire(
-              '¡Creada!',
-              'El producto ha sido creado.',
-              'success',
-            );
-            this.$router.push({
-              path: '/admin/productos-inicio',
-            });
-          });
-
-        this.error = 'Producto creado con éxito';
+        const productHomeCreate = {
+          title: this.title,
+          label: this.label,
+        };
+        await this.createProductHome(productHomeCreate);
+        await Swal.fire(
+          '¡Creada!',
+          'El producto ha sido creado.',
+          'success',
+        );
+        await this.$router.push({
+          path: '/admin/productos-inicio',
+        });
       } catch (error) {
-        Swal.fire(
+        await Swal.fire(
           'Error!',
           'Hubo un error, intente de nuevo.',
           'error',
@@ -107,6 +111,14 @@ export default {
       } finally {
         this.loading = false;
       }
+    },
+  },
+  computed: {
+    isValidProduct() {
+      if (this.title && this.label) {
+        return false;
+      }
+      return true;
     },
   },
 };

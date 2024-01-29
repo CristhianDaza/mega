@@ -9,6 +9,7 @@
     <v-divider class="my-5"></v-divider>
     <v-simple-table
       :style="{background: $vuetify.theme.themes[theme].fondoTarjeta}"
+      v-if="mainMenu.length > 0"
     >
       <template v-slot:default>
         <thead>

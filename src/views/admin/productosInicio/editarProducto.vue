@@ -14,32 +14,35 @@
               :indeterminate="loading"
             ></v-progress-linear>
             <v-card-title>Editar Producto</v-card-title>
-            <v-form @submit.prevent="editarProducto(producto)">
+            <v-form @submit.prevent="editProduct(selectedProductHome)">
               <v-card-text>
                 <v-text-field
                   label="Titulo"
-                  v-model="producto.titulo"
-                  :prepend-icon="mdiFormatTitle">
-                </v-text-field>
+                  v-model="selectedProductHome.title"
+                  color="white darken-2"
+                  :prepend-icon="mdiFormatTitle"
+                ></v-text-field>
                 <v-text-field
                   label="Etiqueta"
-                  v-model="producto.etiqueta"
-                  :prepend-icon="mdiCartArrowRight">
-                </v-text-field>
+                  v-model="selectedProductHome.label"
+                  color="white darken-2"
+                  :prepend-icon="mdiCartArrowRight"
+                ></v-text-field>
               </v-card-text>
               <v-card-text v-if="error != null">{{error}}</v-card-text>
               <v-divider class="mx-5"></v-divider>
               <v-card-actions>
+                <v-spacer></v-spacer>
                 <v-btn
-                  outlined
-                  :style="{color: $vuetify.theme.themes[theme].azul}"
+                  :style="{color: $vuetify.theme.themes[theme].textoBlanco,
+                  background: $vuetify.theme.themes['dark'].azul}"
                   type="submit"
                   :loading="loading">
                     Editar Producto
                   </v-btn>
                 <v-btn
-                  outlined
-                  :style="{color: $vuetify.theme.themes[theme].amarillo}"
+                  :style="{color: $vuetify.theme.themes[theme].textoNegro,
+                    background: $vuetify.theme.themes['dark'].amarillo}"
                   @click="$router.back()"
                 >Atras</v-btn>
               </v-card-actions>
@@ -54,9 +57,8 @@
 <script>
 import { mdiFormatTitle, mdiCartArrowRight } from '@mdi/js';
 import Swal from 'sweetalert2';
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import layoutAdmin from '@/mixins/layoutAdmin';
-import { db } from '@/firebase';
 
 export default {
   name: 'editar-producto',
@@ -66,8 +68,8 @@ export default {
       mdiFormatTitle,
       mdiCartArrowRight,
       error: null,
-      titulo: '',
-      etiqueta: '',
+      title: '',
+      label: '',
       loading: false,
       uploading: 0,
       id: this.$route.params.id,
@@ -82,39 +84,36 @@ export default {
     ],
   },
   methods: {
-    ...mapActions(['traerProductoId']),
-    async editarProducto(producto) {
-      this.loading = true;
-      const { titulo, etiqueta } = producto;
-      await db.collection('producto').doc(this.id).update({
-        titulo,
-        etiqueta,
-      })
-        .then(() => {
-          Swal.fire(
-            '¡Modificado!',
-            'El prodcuto ha sido modificado.',
-            'success',
-          );
-          this.$router.push({
-            path: '/admin/productos-inicio',
-          });
-        })
-        .catch(() => {
-          Swal.fire(
-            '¡Error!',
-            'Hubo un error, por favor intente de nuevo.',
-            'error',
-          );
+    ...mapActions('homeProduct', ['getProductHomeId', 'editProductHome']),
+    async editProduct(product) {
+      try {
+        this.loading = true;
+        await this.editProductHome(product);
+        await Swal.fire(
+          '¡Modificado!',
+          'El prodcuto ha sido modificado.',
+          'success',
+        );
+        await this.$router.push({
+          path: '/admin/productos-inicio',
         });
-      this.loading = false;
+      } catch (error) {
+        await Swal.fire(
+          '¡Error!',
+          'Hubo un error, por favor intente de nuevo.',
+          'error',
+        );
+        console.log(error);
+      } finally {
+        this.loading = false;
+      }
     },
   },
   computed: {
-    ...mapState(['producto']),
+    ...mapGetters('homeProduct', ['selectedProductHome']),
   },
   mounted() {
-    this.traerProductoId(this.id);
+    this.getProductHomeId(this.id);
   },
 };
 </script>

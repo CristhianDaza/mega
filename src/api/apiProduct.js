@@ -1,6 +1,5 @@
 import apiConfig from '@/services/apiConfig';
 
-// eslint-disable-next-line import/prefer-default-export,max-len
 export const searchProduct = ({
   search,
   page,
@@ -51,6 +50,23 @@ export const getSubCategories = (id) => new Promise((resolve, reject) => {
     const response = apiConfig.request({
       method: 'GET',
       url: `categorias/subcategoria/count/${id}`,
+    });
+
+    resolve(response);
+  } catch (e) {
+    console.log(e);
+    reject(e);
+  }
+});
+
+export const searchProductLabel = (label) => new Promise((resolve, reject) => {
+  try {
+    const response = apiConfig.request({
+      method: 'GET',
+      url: 'productos',
+      params: {
+        etiqueta: label,
+      },
     });
 
     resolve(response);

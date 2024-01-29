@@ -21,32 +21,43 @@
                 <v-text-field
                   label="Nombre"
                   v-model="menu.name"
+                  color="white darken-2"
                   :prepend-icon="mdiFormatTitle">
                 </v-text-field>
                 <v-text-field
                   label="Orden"
                   v-model="menu.order"
+                  color="white darken-2"
                   :prepend-icon="mdiNumeric">
                 </v-text-field>
                 <v-text-field
                   label="Link"
                   v-model="menu.link"
+                  color="white darken-2"
                   :prepend-icon="mdiLinkVariant">
                 </v-text-field>
+                <v-checkbox
+                  v-model="menu.isExternal"
+                  label="Link externo"
+                  class="ml-4"
+                  color="#1976d2"
+                ></v-checkbox>
               </v-card-text>
-              <v-card-text v-if="error != null">{{error}}</v-card-text>
               <v-divider class="mx-5"></v-divider>
               <v-card-actions>
+                <v-spacer></v-spacer>
                 <v-btn
-                  outlined
-                  :style="{color: $vuetify.theme.themes[theme].azul}"
                   type="submit"
-                  :loading="loading">
+                  :style="{color: $vuetify.theme.themes[theme].textoBlanco,
+                  background: $vuetify.theme.themes['dark'].azul}"
+                  :loading="loading"
+                >
                     Editar Menú
                   </v-btn>
-                <v-btn outlined
+                <v-btn
+                  :style="{color: $vuetify.theme.themes[theme].textoNegro,
+                background: $vuetify.theme.themes['dark'].amarillo}"
                 @click="$router.back()"
-                :style="{color: $vuetify.theme.themes[theme].amarillo}"
               >Atras</v-btn>
               </v-card-actions>
             </v-form>
@@ -62,7 +73,6 @@ import { mdiFormatTitle, mdiLinkVariant, mdiNumeric } from '@mdi/js';
 import Swal from 'sweetalert2';
 import { mapActions, mapState } from 'vuex';
 import layoutAdmin from '@/mixins/layoutAdmin';
-import { db } from '@/firebase';
 
 export default {
   name: 'editMenu',
@@ -72,12 +82,7 @@ export default {
       mdiFormatTitle,
       mdiLinkVariant,
       mdiNumeric,
-      error: null,
-      name: '',
-      link: '',
-      order: '',
       loading: false,
-      uploading: 0,
       id: this.$route.params.id,
     };
   },
@@ -90,33 +95,29 @@ export default {
     ],
   },
   methods: {
-    ...mapActions('menu', ['getMenu']),
+    ...mapActions('menu', ['getMenu', 'editMainMenu']),
     async editMenu(menu) {
-      this.loading = true;
-      const { name, order, link } = menu;
-      await db.collection('menu').doc(this.id).update({
-        name,
-        order,
-        link,
-      })
-        .then(() => {
-          Swal.fire(
-            '¡Modificado!',
-            'El menu ha sido modificado.',
-            'success',
-          );
-          this.$router.push({
-            path: '/admin/menu-principal',
-          });
-        })
-        .catch(() => {
-          Swal.fire(
-            '¡Error!',
-            'Hubo un error, por favor intente de nuevo.',
-            'error',
-          );
+      try {
+        this.loading = true;
+        await this.editMainMenu(menu);
+        await Swal.fire(
+          '¡Modificado!',
+          'El menu ha sido modificado.',
+          'success',
+        );
+        await this.$router.push({
+          path: '/admin/menu-principal',
         });
-      this.loading = false;
+      } catch (error) {
+        await Swal.fire(
+          '¡Error!',
+          'Hubo un error, por favor intente de nuevo.',
+          'error',
+        );
+        console.log(error);
+      } finally {
+        this.loading = false;
+      }
     },
   },
   mounted() {

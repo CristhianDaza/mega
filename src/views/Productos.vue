@@ -103,12 +103,11 @@ export default {
     return {
       hextToRgb,
       products: [],
-      inputInventario: Number(this.$route.query.inventario) || null,
       page: Number(this.$route.query.page) || 1,
       category: Number(this.$route.query.category) || '',
       subCategory: Number(this.$route.query.subCategory) || '',
       label: Number(this.$route.query.label) || '',
-      inventario: Number(this.$route.query.inventario) || '',
+      inventory: Number(this.$route.query.inventoryInput) || '',
       busqueda: this.$route.query.busqueda || '',
       title: this.$route.query.title || 'Productos',
       color: Number(this.$route.query.color) || '',
@@ -165,13 +164,13 @@ export default {
       category,
       subCategory,
       label,
-      inventario,
+      inventory,
       busqueda,
       color,
       characteristic,
       discount,
     ) {
-      const url = `https://marpicoprod.azurewebsites.net/api/productos/?page_size=${porPagina}&page=${page}&categoria=${category}&subcategoria=${subCategory}&order=paginacion_web&etiqueta=${label}&inventario=${inventario}&search=${busqueda}${color ? `&color=${color}` : ''}&caracteristica=${characteristic}&descuento=${discount}`;
+      const url = `https://marpicoprod.azurewebsites.net/api/productos/?page_size=${porPagina}&page=${page}&categoria=${category}&subcategoria=${subCategory}&order=paginacion_web&etiqueta=${label}&inventario=${inventory}&search=${busqueda}${color ? `&color=${color}` : ''}&caracteristica=${characteristic}&descuento=${discount}`;
       const config = {
         method: 'get',
         url,
@@ -241,7 +240,7 @@ export default {
       this.category,
       this.subCategory,
       this.label,
-      this.inventario,
+      this.inventory,
       this.busqueda,
       this.color,
       this.characteristic,

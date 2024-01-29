@@ -1,38 +1,38 @@
 <template>
   <div
     class="fondoNovedades py-10"
-    v-if="this.productos.length > 0"
+    v-if="productsHome.length > 0"
   >
     <h1
       :class="this.$vuetify.breakpoint.xs ? 'display-1 mt-2' : 'display-2'"
       class="mb-5 pt-5 text-center font-weight-black text-uppercase"
       :style="{color: $vuetify.theme.themes[theme].colorText}"
     >
-      {{this.titulos[0].titulo}}
+      {{productHome[0].title}}
     </h1>
     <v-container>
-      <v-row v-if="this.productos.length > 0">
+      <v-row>
         <v-col
           cols="12"
           sm="6"
           md="4"
           lg="3"
-          v-for="(producto) in this.productos"
-          :key="producto.familia"
+          v-for="(product) in productsHome"
+          :key="product.familia"
         >
-          <Products :product='producto' :colors="producto.materiales"/>
+          <Products :product='product' :colors="product.materiales"/>
         </v-col>
       </v-row>
       <router-link
-        :to="`/productos?etiqueta=${this.titulos[0].etiqueta}&title=${this.titulos[0].titulo}`">
+        :to="`/productos?label=${productHome[0].label}&title=${productHome[0].title}`">
         <mp-button
           class="mt-6"
           is-full
           @click="$router.push({
             name: 'product',
             query: {
-              label: titulos[0].etiqueta,
-              title: titulos[0].titulo
+              label: productHome[0].label,
+              title: productHome[0].title
             }
           })"
         >
@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import { mdiSale, mdiArrowRight } from '@mdi/js';
 
 export default {
@@ -56,13 +56,14 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['traerProducto']),
+    ...mapActions('homeProduct', ['getProductLabel', 'getProductHome']),
   },
   computed: {
-    ...mapState(['productos', 'titulos']),
+    ...mapGetters('homeProduct', ['productHome', 'productsHome']),
   },
-  mounted() {
-    this.traerProducto();
+  async mounted() {
+    await this.getProductHome();
+    await this.getProductLabel(this.productHome[0].label);
   },
   components: {
     Products: () => import(/* webpackChunkName: "products" */ '@/components/Productos/Products.vue'),

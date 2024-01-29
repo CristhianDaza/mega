@@ -209,7 +209,7 @@ export default {
           order: this.menuOrder,
         };
         await this.createMainMenu(menuCreate);
-        Swal.fire(
+        await Swal.fire(
           '¡Creada!',
           'El menú ha sido creado.',
           'success',
@@ -219,7 +219,7 @@ export default {
         });
         this.cleanPage();
       } catch (error) {
-        Swal.fire(
+        await Swal.fire(
           'Error!',
           'Hubo un error, intente de nuevo.',
           'error',

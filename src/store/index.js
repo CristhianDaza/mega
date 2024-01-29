@@ -10,6 +10,7 @@ import router from '@/router';
 import menu from './module/menu';
 import categories from './module/categories';
 import labels from './module/labels';
+import homeProduct from './module/homeProduct';
 
 Vue.use(Vuex);
 
@@ -18,6 +19,7 @@ export default new Vuex.Store({
     menu,
     categories,
     labels,
+    homeProduct,
   },
   state: {
     layout: 'defaultLayout',
