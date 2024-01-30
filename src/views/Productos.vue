@@ -1,91 +1,84 @@
 <template>
   <div>
     <Hero :title="title"/>
-    <v-container class="pt-0">
+    <v-container class="pt-0" >
       <mp-breadcrumbs
         :breadcrumbs="breadcrumbs"
       />
-      <v-row>
-        <v-col cols="12" sm="4" md="3">
-          <filter-inventory
-            v-if="totalProducts > 0"
-          />
-          <filter-discount
-            v-if="totalProducts > 0"
-          />
-          <filter-label
-            v-if="labelList && totalProducts > 0"
-            :label-list="labelList"
-          />
-          <filter-color
-            v-if="colorList && totalProducts > 0"
-            :colorList="colorList"
-          />
-          <filter-sub-categories
-            v-if="subCategories && totalProducts > 0"
-            :sub-category-list="subCategories"
-          />
-          <filter-characteristic
-            v-if="characteristics && characteristics.length > 0 && totalProducts > 0"
-            :characteristics="characteristics"
-          />
-          <filter-categories
-            v-if="categories && totalProducts > 0"
-            :category-list="categories"
-          />
-        </v-col>
-        <v-col cols="12" sm="8" md="9">
-          <mp-chip v-if="totalProducts > 0" />
-          <h2
-            v-if="resultProducts > 0"
-            class="text-subtitle-1 mb-2"
-            :style="{color: 'white'}"
-          >
-            Resultados: {{totalProducts}}
-          </h2>
-            <div v-if="products.length > 0" >
-              <v-row v-if="products.length > 0">
-                <h2
-                  v-if="totalProducts === 0"
-                  class="text-center error mt-2 ml-2 sinResultados"
-                >
-                  Sin resultados
-                </h2>
-                <v-col
-                  cols="12"
-                  sm="6"
-                  md="4"
-                  lg="3"
-                  v-for="(product) in products[0]"
-                  :key="product.id"
-                  class="pa-1"
-                >
-                  <Products :product='product' :colors='product.materiales' />
-                </v-col>
-              </v-row>
-              <v-row v-if="products.length > 0" justify="center">
-                <v-col v-if="totalProducts > 16" cols="12">
-                  <mp-pagination
-                    :perPage="totalPages"
-                  />
-                </v-col>
-              </v-row>
-              <mp-button
-                v-if="Number(totalPages) > 1"
-                @click="cambiarPorPagina(totalProducts)"
+      <template v-if="products.length > 0 && !showComponentWithout">
+        <v-row>
+          <v-col cols="12" sm="4" md="3">
+            <filter-inventory />
+            <filter-discount />
+            <filter-label
+              v-if="labelList"
+              :label-list="labelList"
+            />
+            <filter-color
+              v-if="colorList"
+              :colorList="colorList"
+            />
+            <filter-sub-categories
+              v-if="subCategories"
+              :sub-category-list="subCategories"
+            />
+            <filter-characteristic
+              v-if="characteristics && characteristics.length > 0"
+              :characteristics="characteristics"
+            />
+            <filter-categories
+              v-if="categories"
+              :category-list="categories"
+            />
+          </v-col>
+          <v-col cols="12" sm="8" md="9">
+            <mp-chip />
+            <h2
+              v-if="resultProducts > 0"
+              class="text-subtitle-1 mb-2"
+              :style="{color: 'white'}"
+            >
+              Resultados: {{totalProducts}}
+            </h2>
+            <v-row v-if="products.length > 0">
+              <v-col
+                cols="12"
+                sm="6"
+                md="4"
+                lg="3"
+                v-for="(product) in products[0]"
+                :key="product.id"
+                class="pa-1"
               >
-                VER TODOS
-              </mp-button>
-            </div>
-          <div v-else class="mx-auto">
-            <v-container class="fill-height mt-16 mx-auto">
-              <v-row align="center" justify="center">
-                <Loader />
-              </v-row>
-            </v-container>
-          </div>
-        </v-col>
-      </v-row>
+                <Products :product='product' :colors='product.materiales' />
+              </v-col>
+            </v-row>
+            <v-row justify="center">
+              <v-col v-if="totalProducts > 16" cols="12">
+                <mp-pagination
+                  :perPage="totalPages"
+                />
+              </v-col>
+            </v-row>
+            <mp-button
+              v-if="Number(totalPages) > 1"
+              @click="cambiarPorPagina(totalProducts)"
+            >
+              VER TODOS
+            </mp-button>
+          </v-col>
+        </v-row>
+      </template>
+      <div v-if="products.length < 1" class="mx-auto">
+        <v-container class="fill-height mt-16 mx-auto">
+          <v-row align="center" justify="center">
+            <Loader />
+          </v-row>
+        </v-container>
+      </div>
+      <template v-if="showComponentWithout">
+        <without-results />
+      </template>
     </v-container>
   </div>
 </template>
@@ -126,6 +119,7 @@ export default {
       characteristic: Number(this.$route.query.characteristics) || '',
       discount: this.$route.query.discount || 'false',
       totalProducts: 0,
+      showComponentWithout: false,
     };
   },
   components: {
@@ -143,6 +137,7 @@ export default {
     FilterCategories: () => import(/* webpackChunkName: "filterCategory" */ '@/components/Productos/FilterCategories.vue'),
     FilterSubCategories: () => import(/* webpackChunkName: "filterSubcategory" */ '@/components/Productos/FilterSubCategories.vue'),
     MpPagination: () => import(/* webpackChunkName: "mpPagination" */ '@/components/UI/Mp-Pagination.vue'),
+    WithoutResults: () => import(/* webpackChunkName: "withoutResults" */ '@/components/Global/WithoutResults.vue'),
   },
   computed: {
     ...mapGetters('categories', ['categories', 'subCategories', 'characteristicsStore']),
@@ -188,6 +183,7 @@ export default {
         this.colorList = res.data.filtros.colores || null;
         this.characteristics = res.data.filtros.caracteristicas || null;
         this.setCharacteristics(res.data.filtros.caracteristicas);
+        this.showComponentWithout = this.totalProducts === 0;
       });
       this.setInitialLabel();
     },

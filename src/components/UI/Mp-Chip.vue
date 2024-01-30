@@ -1,7 +1,7 @@
 <template>
-  <div v-if="getLabels">
+  <div v-if="labels">
     <div
-      v-for="label in getLabels"
+      v-for="label in labels"
       :key="label.id"
       class="d-inline-flex"
     >
@@ -44,6 +44,9 @@ export default {
   },
   computed: {
     ...mapGetters('labels', ['getLabels']),
+    labels() {
+      return this.getLabels;
+    },
   },
 };
 </script>

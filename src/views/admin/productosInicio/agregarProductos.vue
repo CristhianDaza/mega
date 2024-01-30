@@ -95,7 +95,7 @@ export default {
         };
         await this.createProductHome(productHomeCreate);
         await Swal.fire(
-          '¡Creada!',
+          '¡Creado!',
           'El producto ha sido creado.',
           'success',
         );

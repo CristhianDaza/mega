@@ -94,7 +94,7 @@ export default {
       Swal.fire({
         title: '¿Estas segur@?',
         text: '¡No se podrá revertir!',
-        icon: 'warning',
+        icon: 'question',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',

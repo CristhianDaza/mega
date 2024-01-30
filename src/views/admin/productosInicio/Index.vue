@@ -6,7 +6,7 @@
       to="/admin/productos-inicio/agregar-productos"
       :disabled="productHome.length === 1"
     >
-      Agregar Productos
+      Agregar Producto
     </v-btn>
     <v-divider class="my-5"></v-divider>
     <v-simple-table
@@ -103,7 +103,7 @@ export default {
         if (result.value) {
           this.deleteProductHome(id);
           Swal.fire(
-            '¡Eliminada!',
+            '¡Eliminado!',
             'El producto ha sido eliminado.',
             'success',
           );

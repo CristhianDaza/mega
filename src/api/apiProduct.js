@@ -6,8 +6,9 @@ export const searchProduct = ({
   perPage,
   inventoryInput,
   color,
-  etiqueta,
+  label,
   titulo,
+  discount,
 }) => new Promise((resolve, reject) => {
   try {
     const response = apiConfig.request({
@@ -19,8 +20,9 @@ export const searchProduct = ({
         inventario: inventoryInput,
         color,
         page,
-        etiqueta,
+        etiqueta: label,
         titulo,
+        descuento: discount,
       },
     });
 

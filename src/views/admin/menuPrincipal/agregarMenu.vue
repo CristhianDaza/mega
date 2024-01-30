@@ -210,7 +210,7 @@ export default {
         };
         await this.createMainMenu(menuCreate);
         await Swal.fire(
-          '¡Creada!',
+          '¡Creado!',
           'El menú ha sido creado.',
           'success',
         );
@@ -220,7 +220,7 @@ export default {
         this.cleanPage();
       } catch (error) {
         await Swal.fire(
-          'Error!',
+          '¡Error!',
           'Hubo un error, intente de nuevo.',
           'error',
         );

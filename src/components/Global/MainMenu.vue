@@ -12,7 +12,7 @@
           ></v-app-bar-nav-icon>
         </div>
         <div class="d-none d-lg-flex align-center" >
-          <template v-for="{ name, id, link, isExternal } in mainMenu">
+          <template v-for="{ name, id, link, isExternal } in menus">
             <mp-button
               is-menu
               :is-active="selectedMenu === link"
@@ -58,7 +58,7 @@
         <v-list-item-group
           v-model="group"
           :style="{color: $vuetify.theme.themes[theme].textoBlanco}"
-          v-for="menu in mainMenu"
+          v-for="menu in menus"
           :key="menu.id"
         >
           <v-list-item exact :to="menu.link">
@@ -116,6 +116,9 @@ export default {
   computed: {
     ...mapGetters(['isLogin']),
     ...mapGetters('menu', ['mainMenu', 'selectedMenu']),
+    menus() {
+      return this.mainMenu;
+    },
   },
   mounted() {
     this.getMainMenu();

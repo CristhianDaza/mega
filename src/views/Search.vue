@@ -5,46 +5,33 @@
       <mp-breadcrumbs
         :breadcrumbs="breadcrumbs"
       />
-      <v-row>
-        <v-col cols="12" sm="4" md="3">
-          <filter-inventory
-            v-if="products"
-          />
-          <FilterColor
-            v-if="colorList"
-            :colorList="colorList"
-          />
-        </v-col>
-        <v-col cols="12" sm="8" md="9">
-          <div v-if="products">
+      <template v-if="products.length > 0">
+        <v-row>
+          <v-col cols="12" sm="4" md="3">
+            <filter-inventory />
+            <filter-discount />
+            <FilterColor
+              v-if="colorList"
+              :colorList="colorList"
+            />
+            <filter-label
+              v-if="labelList"
+              :label-list="labelList"
+            />
+          </v-col>
+          <v-col cols="12" sm="8" md="9">
             <h1
               :style="{color: $vuetify.theme.themes[theme].colorText }"
-            >Busqueda: {{ $route.query.searchItem.toUpperCase() }}</h1>
+            >
+              Busqueda: {{ $route.query.searchItem.toUpperCase() }}
+            </h1>
             <h2
               :style="{color: $vuetify.theme.themes[theme].colorText }"
-              class="text-subtitle-1 mb-4">
-              Resultados en total: {{ infoProducts.count }}
-            </h2>
-            <mp-button
-              v-if="perPage > 1"
-              is-full
-              @click="changePerPage(infoProducts.count)"
+              class="text-subtitle-1 mb-4"
             >
-              VER TODOS LOS {{ Number(infoProducts.count) }} PRODUCTOS
-            </mp-button>
-            <v-row justify="center">
-              <v-col v-if="Number(infoProducts.count) > 18" cols="12">
-                <mp-pagination
-                  :perPage="perPage"
-                />
-              </v-col>
-            </v-row>
+              <span class="font-weight-bold">Productos encontrados:</span> {{ infoProducts.count }}
+            </h2>
             <v-row>
-              <h2
-                v-if="Number(infoProducts.count) === 0"
-                class="text-center error mt-2 ml-2 sinResultados">
-                Sin resultados
-              </h2>
               <v-col
                 cols="12"
                 sm="6"
@@ -66,22 +53,23 @@
             </v-row>
             <mp-button
               v-if="Number(perPage) > 1"
-              is-full
               @click="changePerPage(infoProducts.count)"
             >
-              VER TODOS LOS {{ Number(infoProducts.count) }} PRODUCTOS
+              VER TODOS
             </mp-button>
-          </div>
-
-          <div v-else class="mx-auto">
-            <v-container class="fill-height mt-16 mx-auto">
-              <v-row align="center" justify="center">
-                <Loader />
-              </v-row>
-            </v-container>
-          </div>
-        </v-col>
-      </v-row>
+          </v-col>
+        </v-row>
+      </template>
+      <div v-if="isLoading" class="mx-auto">
+        <v-container class="fill-height mt-16 mx-auto">
+          <v-row align="center" justify="center">
+            <Loader />
+          </v-row>
+        </v-container>
+      </div>
+      <template v-if="showComponentWithout">
+        <without-results />
+      </template>
     </v-container>
   </div>
 </template>
@@ -96,11 +84,14 @@ export default {
   mixins: [layoutPrincipal],
   data() {
     return {
-      products: null,
+      products: [],
       infoProducts: null,
       colorList: null,
       perPage: 0,
       searchProduct,
+      showComponentWithout: false,
+      isLoading: true,
+      labelList: null,
     };
   },
   components: {
@@ -112,26 +103,27 @@ export default {
     MpPagination: () => import(/* webpackChunkName: "mpPagination" */ '@/components/UI/Mp-Pagination.vue'),
     FilterInventory: () => import(/* webpackChunkName: "filterInventory" */ '@/components/Productos/FilterInventory.vue'),
     FilterColor: () => import(/* webpackChunkName: "filterColor" */ '@/components/Productos/FilterColor.vue'),
+    WithoutResults: () => import(/* webpackChunkName: "withoutResults" */ '@/components/Global/WithoutResults.vue'),
+    FilterLabel: () => import(/* webpackChunkName: "filterLabel" */ '@/components/Productos/FilterLabel.vue'),
+    FilterDiscount: () => import(/* webpackChunkName: "filterDiscount" */ '@/components/Productos/FilterDiscount.vue'),
   },
   computed: {
     paramsForSearch() {
-      const params = {
+      return {
         search: this.$route.query.searchItem || null,
         perPage: Number(this.$route.query.perPage) || 20,
         inventoryInput: Number(this.$route.query.inventoryInput) || null,
         color: this.$route.query.color || null,
         page: Number(this.$route.query.page) || 1,
+        label: Number(this.$route.query.label) || null,
+        discount: this.$route.query.discount || 'false',
       };
-
-      return params;
     },
     breadcrumbs() {
-      const breadcrumbs = [
+      return [
         { title: 'INICIO', disabled: false, toLink: '/' },
         { title: 'BUSCAR', disabled: true, toLink: '/search' },
       ];
-
-      return breadcrumbs;
     },
   },
   methods: {
@@ -143,8 +135,12 @@ export default {
         this.infoProducts = data;
         this.perPage = Math.ceil((data?.count / this.paramsForSearch.perPage));
         this.colorList = data?.filtros?.colores.length > 0 ? data?.filtros?.colores : null;
+        this.showComponentWithout = this.infoProducts.count === 0;
+        this.labelList = data?.filtros?.etiquetas.length > 0 ? data?.filtros?.etiquetas : null;
       } catch (e) {
         console.log(e);
+      } finally {
+        this.isLoading = false;
       }
     },
     changePerPage(perPage) {
@@ -180,9 +176,3 @@ export default {
   },
 };
 </script>
-
-<style>
-  .sinResultados {
-    width: 100%;
-  }
-</style>
