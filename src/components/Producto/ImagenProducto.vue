@@ -1,18 +1,18 @@
 <template>
   <div>
     <img
-      v-if="imagenPrincipalMediana === ''"
+      v-if="imagePrincipalMedium === ''"
       class="fotoTarjeta border-black elevation-5"
       @click.stop="dialog = true"
-      :src="producto.imagenes[0].imagen.file_md"
-      :alt="producto.descripcion_comercial"
+      :src="product.imagenes[0].imagen.file_md"
+      :alt="product.descripcion_comercial"
     />
     <img
       v-else
       class="fotoTarjeta border-black elevation-5"
       @click.stop="dialog = true"
-      :src="imagenPrincipalMediana"
-      :alt="producto.descripcion_comercial"
+      :src="imagePrincipalMedium"
+      :alt="product.descripcion_comercial"
     />
       <p
         :style="{ color: $vuetify.theme.themes[theme].azul }"
@@ -20,11 +20,11 @@
       >
         El color de los artículos pueden variar según la calibración y resolución de la pantalla.
       </p>
-    <v-card-actions v-if="producto.etiquetas.length > 0">
+    <v-card-actions v-if="product.etiquetas.length > 0">
       <v-row>
         <template>
           <div
-            v-for="label in producto.etiquetas"
+            v-for="label in product.etiquetas"
             :key="label.id"
             @click="filterLabel(label)"
           >
@@ -38,7 +38,7 @@
         </template>
       </v-row>
     </v-card-actions>
-    <div v-if="producto.caracteristicas.length > 0" class="mt-8">
+    <div v-if="product.caracteristicas.length > 0" class="mt-8">
       <h2
         class="h6"
         :style="{ color: $vuetify.theme.themes[theme].azul }"
@@ -46,7 +46,7 @@
           Características:
         </h2>
       <v-row class="ml-1">
-        <div v-for="caracteristica in producto.caracteristicas" :key="caracteristica.id">
+        <div v-for="caracteristica in product.caracteristicas" :key="caracteristica.id">
           <v-tooltip top>
             <template v-slot:activator="{on, attrs}">
               <img
@@ -86,19 +86,19 @@
         <v-icon>{{mdiCloseCircleOutline}}</v-icon>
       </v-btn>
       <v-img
-        v-if="imagenPrincipalGrande === ''" :src="producto.imagenes[0].imagen.file"
+        v-if="imagePrincipalBig === ''" :src="product.imagenes[0].imagen.file"
         max-width="100%"
         width="100%"
         cover
-        :alt="producto.descripcion_comercial"
+        :alt="product.descripcion_comercial"
       />
       <v-img
         v-else
-        :src="imagenPrincipalGrande"
+        :src="imagePrincipalBig"
         max-width="100%"
         width="100%"
         cover
-        :alt="producto.descripcion_comercial"
+        :alt="product.descripcion_comercial"
       />
     </v-dialog>
   </div>
@@ -117,7 +117,7 @@ export default {
       mdiCloseCircleOutline,
     };
   },
-  props: ['producto', 'imagenPrincipalMediana', 'imagenPrincipalGrande', 'inventarioDisponible'],
+  props: ['product', 'imagePrincipalMedium', 'imagePrincipalBig'],
   methods: {
     ...mapActions('menu', ['setSelectedMenu']),
     mostrarTextoInfo(texto) {

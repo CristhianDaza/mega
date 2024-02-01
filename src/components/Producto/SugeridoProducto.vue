@@ -4,8 +4,8 @@
       Productos Sugeridos
     </h1>
     <v-divider class="mx-10"></v-divider>
-    <v-row class="mt-3" v-if="sugerencia.length > 0">
-      <v-col cols="12" md="6" v-for="product in sugerencia" :key="product.familia">
+    <v-row class="mt-3" v-if="suggestion.length > 0">
+      <v-col cols="12" md="6" v-for="product in suggestion" :key="product.familia">
         <v-card
           :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
           outlined
@@ -98,7 +98,7 @@ import addCommas from '@/mixins/addCommas';
 
 export default {
   name: 'SugeridoProducto',
-  props: ['sugerencia'],
+  props: ['suggestion'],
   mixins: [addCommas],
   data() {
     return {

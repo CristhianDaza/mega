@@ -81,3 +81,48 @@ export const searchProductLabel = (label) => new Promise((resolve, reject) => {
     reject(e);
   }
 });
+
+export const getProductId = (id) => new Promise(
+  (resolve, reject) => {
+    try {
+      const response = apiConfig.request({
+        method: 'GET',
+        url: `productos/detail/${id}`,
+      });
+      resolve(response);
+    } catch (e) {
+      console.log(e);
+      reject(e);
+    }
+  },
+);
+
+export const getTracking = (product) => new Promise(
+  (resolve, reject) => {
+    try {
+      const response = apiConfig.request({
+        method: 'GET',
+        url: `inventarios/materialesAPIByProducto?producto=${product}`,
+      });
+      resolve(response);
+    } catch (e) {
+      console.log(e);
+      reject(e);
+    }
+  },
+);
+
+export const getSuggested = (product) => new Promise(
+  (resolve, reject) => {
+    try {
+      const response = apiConfig.request({
+        method: 'GET',
+        url: `productos/sugeridos?material_origen=${product}`,
+      });
+      resolve(response);
+    } catch (e) {
+      console.log(e);
+      reject(e);
+    }
+  },
+);

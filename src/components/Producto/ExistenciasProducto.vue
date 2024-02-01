@@ -20,28 +20,28 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(existencia, index) in inventarioDisponible" :key="index">
+        <tr v-for="(existence, index) in availableInventory" :key="index">
           <td class="d-flex">
             <div
               :style="{ color: $vuetify.theme.themes[theme].colorText }"
               class="mt-3"
             >
-              {{existencia.color_nombre}}
+              {{existence.color_nombre}}
             </div>
           </td>
           <td
             :style="{ color: $vuetify.theme.themes[theme].colorText }"
           >
-            {{existencia.variedad}}
+            {{existence.variedad}}
           </td>
           <td
             :style="{ color: $vuetify.theme.themes[theme].textoError }"
-            v-if="existencia.inventario < 10"
+            v-if="existence.inventario < 10"
           >Agotado</td>
           <td
             :style="{ color: $vuetify.theme.themes[theme].colorText }"
             v-else
-          >{{addCommas(Math.round(existencia.inventario))}}</td>
+          >{{addCommas(Math.round(existence.inventario))}}</td>
           <td>
             <v-tooltip right>
               <template v-slot:activator="{on, attrs}">
@@ -50,13 +50,13 @@
                   v-bind="attrs"
                   icon
                   small
-                  @click.stop="$emit('actualizarSugerencias', existencia.codigo)"
+                  @click.stop="$emit('updateSuggested', existence.codigo)"
                   :style="{color: '#005C91'}"
                 >
                   <v-icon>{{mdiMagnify}}</v-icon>
                 </v-btn>
               </template>
-              <span>Sugerencia en color {{existencia.color_nombre}}</span>
+              <span>Sugerencia en color {{existence.color_nombre}}</span>
             </v-tooltip>
           </td>
         </tr>
@@ -74,7 +74,7 @@ import hextToRgb from '@/helpers/hextToRgb';
 
 export default {
   name: 'ExistenciasProductos',
-  props: ['inventarioDisponible'],
+  props: ['availableInventory'],
   mixins: [addCommas],
   data() {
     return {

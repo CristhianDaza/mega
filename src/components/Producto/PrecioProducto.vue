@@ -231,12 +231,12 @@ import addCommas from '@/mixins/addCommas';
 
 export default {
   name: 'PrecioProducto',
-  props: ['materiales', 'price'],
+  props: ['materials', 'price'],
   mixins: [addCommas],
   computed: {
     priceVariety() {
       return Object.values(
-        this.materiales.reduce((prev, next) => Object.assign(prev, { [next.variedad]: next }), {}),
+        this.materials.reduce((prev, next) => Object.assign(prev, { [next.variedad]: next }), {}),
       );
     },
   },

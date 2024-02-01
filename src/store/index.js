@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import axios from 'axios';
 import Vuex from 'vuex';
 import Swal from 'sweetalert2';
 import {
@@ -98,9 +97,6 @@ export default new Vuex.Store({
     },
     setTitulo(state, valor) {
       state.titulos = valor;
-    },
-    eliminarProducto(state, id) {
-      state.productos = state.productos.filter((doc) => doc.id !== id);
     },
     setPathToAdmin(state, path) {
       state.pathToAdmin = path;
@@ -295,49 +291,6 @@ export default new Vuex.Store({
       await db.collection('video').doc(id).delete()
         .then(() => {
           commit('eliminarVideo', id);
-        });
-    },
-    async traerProducto({ commit }) {
-      await db.collection('producto').get()
-        .then((snapshot) => {
-          const productos = [];
-          snapshot.forEach((doc) => {
-            const producto = doc.data();
-            producto.id = doc.id;
-            productos.push(producto);
-          });
-          const url = `https://marpicoprod.azurewebsites.net/api/productos/?page_size=12&page=1&order=paginacion_web&etiqueta=${productos[0].etiqueta}`;
-          const config = {
-            method: 'get',
-            url,
-            headers: {
-              Authorization: 'Bearer Api-Key fBc8kc9ejmpvIqSLeKh9bIL955E0LOdNfFKfNZhGy3xRlGTxtDl7ADOdSzrLfgLj',
-            },
-          };
-          const productosEtiqueta = [];
-          axios(config).then((res) => {
-            res.data.results.forEach((producto) => {
-              productosEtiqueta.push(producto);
-            });
-          });
-          commit('setProducto', productosEtiqueta);
-          commit('setTitulo', productos);
-        });
-    },
-
-    async eliminarProducto({ commit }, id) {
-      await db.collection('producto').doc(id).delete()
-        .then(() => {
-          commit('eliminarProducto', id);
-        });
-    },
-
-    async traerProductoId({ commit }, id) {
-      await db.collection('producto').doc(id).get()
-        .then((doc) => {
-          const producto = doc.data();
-          producto.id = doc.id;
-          commit('setProductoId', producto);
         });
     },
 

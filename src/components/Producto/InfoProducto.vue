@@ -6,7 +6,7 @@
     <template v-if="isLogin">
       <PrecioProducto
         :price="product"
-        :materiales="materiales"
+        :materials="materials"
       />
     </template>
     <v-card-text class="pt-0">
@@ -71,7 +71,7 @@ export default {
       loading: false,
     };
   },
-  props: ['product', 'materiales', 'transito'],
+  props: ['product', 'materials', 'transito'],
   computed: {
     ...mapGetters(['isLogin']),
   },
