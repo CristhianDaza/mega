@@ -62,7 +62,8 @@
             </v-row>
             <mp-button
               v-if="Number(totalPages) > 1"
-              @click="cambiarPorPagina(totalProducts)"
+              @click="changePerPage(totalProducts)"
+              class="mt-5"
             >
               VER TODOS
             </mp-button>
@@ -84,59 +85,54 @@
 </template>
 
 <script>
-import axios from 'axios';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
 import hextToRgb from '@/helpers/hextToRgb';
 import { mapActions, mapGetters } from 'vuex';
+import { searchProduct } from '@/api/apiProduct';
 
 export default {
-  name: 'ProductosMega',
+  name: 'ProductsMega',
   mixins: [layoutPrincipal],
   data() {
     return {
-      hextToRgb,
-      products: [],
-      page: Number(this.$route.query.page) || 1,
-      category: Number(this.$route.query.category) || '',
-      subCategory: Number(this.$route.query.subCategory) || '',
-      label: Number(this.$route.query.label) || '',
-      inventory: Number(this.$route.query.inventoryInput) || '',
-      busqueda: this.$route.query.busqueda || '',
-      title: this.$route.query.title || 'Productos',
-      color: Number(this.$route.query.color) || '',
-      resultProducts: null,
-      totalPages: 0,
-      porPagina: Number(this.$route.query.porPagina) || 16,
-      listaPorPaginas: [
-        { text: '16', value: 16 },
-        { text: '32', value: 32 },
-        { text: '64', value: 64 },
-      ],
-      labelList: null,
-      colorList: null,
-      nombreCategoria: 'Productos',
+      category: Number(this.$route.query.category) || null,
+      characteristic: Number(this.$route.query.characteristics) || null,
       characteristics: null,
-      characteristic: Number(this.$route.query.characteristics) || '',
-      discount: this.$route.query.discount || 'false',
-      totalProducts: 0,
+      color: Number(this.$route.query.color) || null,
+      colorList: null,
+      discount: this.$route.query.discount || null,
+      hextToRgb,
+      inventory: Number(this.$route.query.inventory) || null,
+      label: Number(this.$route.query.label) || null,
+      labelList: null,
+      page: Number(this.$route.query.page) || null,
+      perPage: Number(this.$route.query.perPage) || 16,
+      products: [],
+      resultProducts: null,
+      search: this.$route.query.search || null,
+      searchProduct,
       showComponentWithout: false,
+      subCategory: Number(this.$route.query.subCategory) || null,
+      title: this.$route.query.title || 'Productos',
+      totalPages: 0,
+      totalProducts: 0,
     };
   },
   components: {
+    FilterCategories: () => import(/* webpackChunkName: "filterCategory" */ '@/components/Productos/FilterCategories.vue'),
+    FilterCharacteristic: () => import(/* webpackChunkName: "filterCharacteristics" */ '@/components/Productos/FilterCharacteristic.vue'),
     FilterColor: () => import(/* webpackChunkName: "filterColor" */ '@/components/Productos/FilterColor.vue'),
+    FilterDiscount: () => import(/* webpackChunkName: "filterDiscount" */ '@/components/Productos/FilterDiscount.vue'),
     FilterInventory: () => import(/* webpackChunkName: "filterInventory" */ '@/components/Productos/FilterInventory.vue'),
     FilterLabel: () => import(/* webpackChunkName: "filterLabel" */ '@/components/Productos/FilterLabel.vue'),
-    Products: () => import(/* webpackChunkName: "products" */ '@/components/Productos/Products.vue'),
+    FilterSubCategories: () => import(/* webpackChunkName: "filterSubcategory" */ '@/components/Productos/FilterSubCategories.vue'),
     Hero: () => import(/* webpackChunkName: "hero" */ '@/components/Global/Hero.vue'),
     Loader: () => import(/* webpackChunkName: "loader" */ '@/components/Global/Loader.vue'),
     MpBreadcrumbs: () => import(/* webpackChunkName: "mpBreadcrumbs" */ '@/components/UI/Mp-Breadcrumbs.vue'),
     MpButton: () => import(/* webpackChunkName: "mpButton" */ '@/components/UI/Mp-Button.vue'),
     MpChip: () => import(/* webpackChunkName: "mpChip" */ '@/components/UI/Mp-Chip.vue'),
-    FilterCharacteristic: () => import(/* webpackChunkName: "filterCharacteristics" */ '@/components/Productos/FilterCharacteristic.vue'),
-    FilterDiscount: () => import(/* webpackChunkName: "filterDiscount" */ '@/components/Productos/FilterDiscount.vue'),
-    FilterCategories: () => import(/* webpackChunkName: "filterCategory" */ '@/components/Productos/FilterCategories.vue'),
-    FilterSubCategories: () => import(/* webpackChunkName: "filterSubcategory" */ '@/components/Productos/FilterSubCategories.vue'),
     MpPagination: () => import(/* webpackChunkName: "mpPagination" */ '@/components/UI/Mp-Pagination.vue'),
+    Products: () => import(/* webpackChunkName: "products" */ '@/components/Productos/Products.vue'),
     WithoutResults: () => import(/* webpackChunkName: "withoutResults" */ '@/components/Global/WithoutResults.vue'),
   },
   computed: {
@@ -148,52 +144,50 @@ export default {
         { title: 'Productos', disabled: true, toLink: '/productos' },
       ];
     },
+    paramsToSearch() {
+      return {
+        page: this.page,
+        perPage: this.perPage,
+        category: this.category,
+        subCategory: this.subCategory,
+        label: this.label,
+        inventory: this.inventory,
+        search: this.search,
+        color: this.color,
+        characteristic: this.characteristic,
+        discount: this.discount,
+      };
+    },
   },
   methods: {
     ...mapActions('categories', ['getCategories', 'setCharacteristics']),
     ...mapActions('menu', ['setSelectedMenu']),
     ...mapActions('labels', ['setInitialLabels', 'clearLabel']),
-    async getProductos(
-      page,
-      porPagina,
-      category,
-      subCategory,
-      label,
-      inventory,
-      busqueda,
-      color,
-      characteristic,
-      discount,
-    ) {
-      const url = `https://marpicoprod.azurewebsites.net/api/productos/?page_size=${porPagina}&page=${page}&categoria=${category}&subcategoria=${subCategory}&order=paginacion_web&etiqueta=${label}&inventario=${inventory}&search=${busqueda}${color ? `&color=${color}` : ''}&caracteristica=${characteristic}&descuento=${discount}`;
-      const config = {
-        method: 'get',
-        url,
-        headers: {
-          Authorization: 'Bearer Api-Key fBc8kc9ejmpvIqSLeKh9bIL955E0LOdNfFKfNZhGy3xRlGTxtDl7ADOdSzrLfgLj',
-        },
-      };
-
-      await axios(config).then((res) => {
-        this.products.push(res.data.results);
-        this.resultProducts = res.data || null;
-        this.totalProducts = Number(res.data.count) || 0;
-        this.totalPages = Math.ceil((this.resultProducts.count / this.porPagina));
-        this.labelList = res.data.filtros.etiquetas || null;
-        this.colorList = res.data.filtros.colores || null;
-        this.characteristics = res.data.filtros.caracteristicas || null;
-        this.setCharacteristics(res.data.filtros.caracteristicas);
+    async getProducts() {
+      try {
+        const { data } = await this.searchProduct(this.paramsToSearch);
+        this.products.push(data?.results);
+        this.resultProducts = data || null;
+        this.totalProducts = Number(data.count) || 0;
+        this.totalPages = Math.ceil((this.resultProducts.count / this.perPage));
+        this.labelList = data?.filtros.etiquetas || null;
+        this.colorList = data?.filtros?.colores || null;
+        this.characteristics = data?.filtros?.caracteristicas || null;
+        this.setCharacteristics(data?.filtros?.caracteristicas);
         this.showComponentWithout = this.totalProducts === 0;
-      });
-      this.setInitialLabel();
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.setInitialLabel();
+      }
     },
-    cambiarPorPagina(porPagina) {
+    changePerPage(perPage) {
       this.$router.push({
         path: this.$route.path,
         query: {
           ...this.$route.query,
           page: 1,
-          porPagina,
+          perPage,
         },
       });
       this.setMenu();
@@ -230,18 +224,7 @@ export default {
   },
   mounted() {
     this.clearLabel();
-    this.getProductos(
-      this.page,
-      this.porPagina,
-      this.category,
-      this.subCategory,
-      this.label,
-      this.inventory,
-      this.busqueda,
-      this.color,
-      this.characteristic,
-      this.discount,
-    );
+    this.getProducts();
     if (!this.categories) this.getCategories();
   },
   metaInfo: {
@@ -261,9 +244,3 @@ export default {
   },
 };
 </script>
-
-<style>
-  .v-text-field__details {
-    display: none !important;
-  }
-</style>

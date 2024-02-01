@@ -41,8 +41,8 @@ export default {
       if (query.discount === 'true') {
         commit('SET_LABELS', { id: 'discount', name: 'Con descuento', filter: 'discount' });
       }
-      if (query.inventoryInput) {
-        commit('SET_LABELS', { id: 'inventory', name: `Inventario mayor a ${query.inventoryInput}`, filter: 'inventoryInput' });
+      if (query.inventory) {
+        commit('SET_LABELS', { id: 'inventory', name: `Inventario mayor a ${query.inventory}`, filter: 'inventory' });
       }
       if (query.label) {
         commit('SET_LABELS', { id: 'label', name: label?.nombre?.replace(/_/g, ' ').replace(/\d+$/, '').trim(), filter: 'label' });

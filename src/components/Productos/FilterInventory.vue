@@ -17,18 +17,18 @@
           label="Inventario Mayor a"
           outlined
           type="number"
-          v-model="inventoryInput"
+          v-model="inventory"
           dense
           rounded
           maxlength="25"
           color="#005C91"
           class="pt-2"
-          @keyup.enter="searchInventory(inventoryInput)"
+          @keyup.enter="searchInventory(inventory)"
         >
         </v-text-field>
         <mp-button
           is-full
-          @click="searchInventory(inventoryInput)"
+          @click="searchInventory(inventory)"
         >
           Filtrar
         </mp-button>
@@ -45,7 +45,7 @@ export default {
   name: 'Mp-FilterInventory',
   data() {
     return {
-      inventoryInput: Number(this.$route.query.inventoryInput) || null,
+      inventory: Number(this.$route.query.inventory) || null,
     };
   },
   components: {
@@ -66,7 +66,7 @@ export default {
         query: {
           ...this.$route.query,
           page: 1,
-          inventoryInput: inventory,
+          inventory,
         },
       });
       this.setSelectedMenu(this.$route.fullPath);

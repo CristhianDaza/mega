@@ -1,28 +1,32 @@
 import apiConfig from '@/services/apiConfig';
 
 export const searchProduct = ({
-  search,
+  category,
+  characteristic,
+  color,
+  discount,
+  inventory,
+  label,
   page,
   perPage,
-  inventoryInput,
-  color,
-  label,
-  titulo,
-  discount,
+  search,
+  subCategory,
 }) => new Promise((resolve, reject) => {
   try {
     const response = apiConfig.request({
       method: 'GET',
       url: 'productos',
       params: {
-        search,
-        page_size: perPage,
-        inventario: inventoryInput,
+        caracteristica: characteristic,
+        categoria: category,
         color,
-        page,
-        etiqueta: label,
-        titulo,
         descuento: discount,
+        etiqueta: label,
+        inventario: inventory,
+        page,
+        page_size: perPage,
+        search,
+        subcategoria: subCategory,
       },
     });
 
