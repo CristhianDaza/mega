@@ -26,7 +26,6 @@ export default new Vuex.Store({
     usuarios: '',
     error: '',
     imagenSlider: [],
-    imagenInfo: [],
     catalogos: [],
     trabajosCalendario: [],
     trabajoCalendario: {
@@ -67,12 +66,6 @@ export default new Vuex.Store({
     },
     eliminarCatalogo(state, id) {
       state.catalogos = state.catalogos.filter((doc) => doc.id !== id);
-    },
-    setImagenInfo(state, valor) {
-      state.imagenInfo = valor;
-    },
-    eliminarImagenInfo(state, id) {
-      state.imagenInfo = state.imagenInfo.filter((doc) => doc.id !== id);
     },
     setTrabajosCalendario(state, valor) {
       state.trabajosCalendario = valor;
@@ -231,24 +224,6 @@ export default new Vuex.Store({
           commit('eliminarCatalogo', id);
         });
     },
-    async traerImagenInfo({ commit }) {
-      await db.collection('info').get()
-        .then((snapshot) => {
-          const imagenes = [];
-          snapshot.forEach((doc) => {
-            const imagen = doc.data();
-            imagen.id = doc.id;
-            imagenes.push(imagen);
-          });
-          commit('setImagenInfo', imagenes);
-        });
-    },
-    async eliminarImagenInfo({ commit }, id) {
-      await db.collection('info').doc(id).delete()
-        .then(() => {
-          commit('eliminarImagenInfo', id);
-        });
-    },
     async traerTrabajosCalendario({ commit }) {
       await db.collection('trabajos').get()
         .then((snapshot) => {
@@ -300,8 +275,7 @@ export default new Vuex.Store({
   },
   getters: {
     isLogin(state) {
-      if (state.usuario) return true;
-      return false;
+      return !!state.usuario;
     },
   },
 });

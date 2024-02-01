@@ -126,3 +126,21 @@ export const getSuggested = (product) => new Promise(
     }
   },
 );
+
+export const getImageZip = (id, code) => new Promise(
+  (resolve, reject) => {
+    try {
+      const response = apiConfig.request({
+        method: 'GET',
+        url: `/productos/imagenes/${id}?producto=${code}`,
+        responseType: 'blob',
+      });
+
+      const blob = new Blob([response.data], { type: 'application/zip' });
+      resolve(window.URL.createObjectURL(blob));
+    } catch (e) {
+      console.log(e);
+      reject(e);
+    }
+  },
+);

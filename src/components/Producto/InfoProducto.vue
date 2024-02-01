@@ -53,22 +53,19 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import {
-  mdiFerry,
-  mdiDownload,
-  mdiCloseCircleOutline,
-} from '@mdi/js';
-import axios from 'axios';
+import { mdiCloseCircleOutline, mdiDownload, mdiFerry } from '@mdi/js';
 import Swal from 'sweetalert2';
+import { getImageZip } from '@/api/apiProduct';
 
 export default {
   name: 'InfoProducto',
   data() {
     return {
-      mdiFerry,
-      mdiDownload,
-      mdiCloseCircleOutline,
+      getImageZip,
       loading: false,
+      mdiCloseCircleOutline,
+      mdiDownload,
+      mdiFerry,
     };
   },
   props: ['product', 'materials', 'transito'],
@@ -84,30 +81,15 @@ export default {
     replaceSeller(text) {
       return text.includes('asesora') ? text.replaceAll('asesora', 'asesor') : text;
     },
-    async downloadImage(id, familia) {
+    async downloadImage(id, code) {
       this.loading = true;
-      const urlBlob = `https://marpicoprod.azurewebsites.net/api/productos/imagenes/${id}?producto=${familia}`;
-
-      await axios({
-        methods: 'GET',
-        url: urlBlob,
-        responseType: 'blob',
-      })
-        .then((res) => {
-          const blob = new Blob([res.data], { type: 'application/zip' });
-          const url = window.URL.createObjectURL(blob);
-          window.location.href = url;
-        })
-        .catch(() => {
-          Swal.fire(
-            'Error!',
-            'Hubo un error, intente de nuevo.',
-            'error',
-          );
-        })
-        .finally(() => {
-          this.loading = false;
-        });
+      try {
+        window.location.href = await getImageZip(id, code);
+      } catch (error) {
+        await Swal.fire('Error!', 'Hubo un error, inténtelo de nuevo.', 'error');
+      } finally {
+        this.loading = false;
+      }
     },
   },
 };

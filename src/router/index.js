@@ -136,20 +136,6 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: '/admin/imagen-info',
-    name: 'Imagen Informartiva',
-    exact: true,
-    component: () => import(/* webpackChunkName: "imagenInfo" */ '../views/admin/imagenInfo/Index.vue'),
-    meta: { requiresAuth: true },
-  },
-  {
-    path: '/admin/imagen-info/agregar-imagen-info',
-    name: 'Agregar Imagen Informativa',
-    exact: true,
-    component: () => import(/* webpackChunkName: "agregarImagenInfo" */ '../views/admin/imagenInfo/AgregarImagenInfo.vue'),
-    meta: { requiresAuth: true },
-  },
-  {
     path: '/admin/videoPromocion',
     name: 'Video',
     exact: true,
