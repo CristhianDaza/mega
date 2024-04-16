@@ -1,6 +1,6 @@
 {
   "name": "megapromocionales",
-  "version": "0.2.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve",
@@ -10,18 +10,19 @@
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
     "@mdi/js": "^5.9.55",
-    "axios": "^0.21.4",
-    "core-js": "^3.23.3",
+    "axios": "1.6.0",
+    "core-js": "^3.35.0",
     "emailjs-com": "^2.6.4",
     "firebase": "^7.24.0",
     "flipbook-vue": "^0.10.4",
     "hooper": "^0.3.4",
-    "moment": "^2.29.3",
-    "sweetalert2": "^11.4.19",
+    "moment": "^2.30.1",
+    "node-sass": "9.0.0",
+    "sass-loader": "^13.3.3",
+    "sweetalert2": "^11.10.2",
     "vue": "^2.6.14",
     "vue-analytics": "^5.22.1",
     "vue-carousel": "^0.18.0",
-    "vue-core-video-player": "^0.2.0",
     "vue-meta": "^2.4.0",
     "vue-router": "^3.5.3",
     "vue-router-sitemap": "^0.0.4",
@@ -29,16 +30,16 @@
     "vuex": "^3.6.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.18.6",
-    "@babel/eslint-parser": "^7.18.2",
-    "@vue/cli-plugin-babel": "^5.0.6",
-    "@vue/cli-plugin-eslint": "^5.0.6",
-    "@vue/cli-service": "^5.0.6",
+    "@babel/core": "^7.23.7",
+    "@babel/eslint-parser": "^7.23.3",
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-plugin-eslint": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
     "@vue/eslint-config-airbnb": "^5.3.0",
-    "eslint": "^8.18.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-vue": "^9.1.1",
-    "vue-cli-plugin-vuetify": "^2.5.1",
-    "vue-template-compiler": "^2.6.14"
+    "eslint": "^8.56.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-vue": "^9.19.2",
+    "vue-cli-plugin-vuetify": "^2.5.8",
+    "vue-template-compiler": "^2.7.16"
   }
 }

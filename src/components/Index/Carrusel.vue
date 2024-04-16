@@ -7,14 +7,20 @@
     :speed="1000"
     :autoplayTimeout="5000"
     :navigationEnabled="true"
-    :class="(this.$vuetify.theme.dark) ? 'dark' : ''"
+    :class="{ 'dark' : this.$vuetify.theme.dark }"
   >
     <slide
       v-for="(slide, i) in imagenSlider"
       :key="i"
     >
       <router-link :to="slide.urlProducto">
-        <img width="100%" height="100%" :src="slide.linkImagen" :alt="slide.nombreProducto">
+        <img
+          width="100%"
+          height="100%"
+          :src="slide.linkImagen"
+          :alt="slide.nombreProducto"
+          @click="setSelectedMenu(slide.urlProducto)"
+        >
       </router-link>
     </slide>
   </carousel>
@@ -32,6 +38,7 @@ export default {
   },
   methods: {
     ...mapActions(['traerImagenSlider']),
+    ...mapActions('menu', ['setSelectedMenu']),
   },
   computed: {
     ...mapState(['imagenSlider']),

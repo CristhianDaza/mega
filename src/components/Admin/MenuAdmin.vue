@@ -19,12 +19,21 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link to="/admin/usuarios">
+        <v-list-item link to="/admin/menu-principal">
           <v-list-item-action>
-            <v-icon>{{ mdiAccountMultiple }}</v-icon>
+            <v-icon>{{ mdiMenu }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Usuarios</v-list-item-title>
+            <v-list-item-title>Menú Principal</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link to="/admin/productos-inicio">
+          <v-list-item-action>
+            <v-icon>{{ mdiCart }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Productos Home</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -37,6 +46,15 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item link to="/admin/videoPromocion">
+          <v-list-item-action>
+            <v-icon>{{ mdiYoutube }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Video Principal</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
         <v-list-item link to="/admin/catalogos">
           <v-list-item-action>
             <v-icon>{{ mdiBookOpenPageVariant }}</v-icon>
@@ -46,41 +64,23 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link to="/admin/imagen-info">
+        <v-list-item link to="/admin/usuarios">
           <v-list-item-action>
-            <v-icon>{{ mdiInformation }}</v-icon>
+            <v-icon>{{ mdiAccountMultiple }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Imágenes Boletín</v-list-item-title>
+            <v-list-item-title>Usuarios</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link to="/admin/videoPromocion">
-          <v-list-item-action>
-            <v-icon>{{ mdiYoutube }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Videos</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-list-item link to="/admin/productos-inicio">
-          <v-list-item-action>
-            <v-icon>{{ mdiCart }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Productos Inicio</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-list-item link to="/admin/menu-principal">
-          <v-list-item-action>
-            <v-icon>{{ mdiMenu }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Menú Principal</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+<!--        <v-list-item link to="/admin/imagen-info">-->
+<!--          <v-list-item-action>-->
+<!--            <v-icon>{{ mdiInformation }}</v-icon>-->
+<!--          </v-list-item-action>-->
+<!--          <v-list-item-content>-->
+<!--            <v-list-item-title>Imágenes Boletín</v-list-item-title>-->
+<!--          </v-list-item-content>-->
+<!--        </v-list-item>-->
 
       </v-list>
     </v-navigation-drawer>
@@ -106,16 +106,16 @@
 
       <template v-if="this.$vuetify.breakpoint.xs">
         <v-btn
-          to="/"
+          @click="toHome()"
           :style="{background: $vuetify.theme.themes[theme].azul}" class="mr-2" icon>
           <v-icon>{{mdiHome}}</v-icon>
         </v-btn>
       </template>
       <template v-else>
         <v-btn
-         to="/"
+         @click="toHome()"
          :style="{background: $vuetify.theme.themes[theme].azul}"
-          class="mr-2">Ir a la página principal</v-btn>
+          class="mr-2">Volver</v-btn>
       </template>
 
       <template v-if="this.$vuetify.breakpoint.xs">
@@ -171,10 +171,18 @@ export default {
     mdiMenu,
   }),
   methods: {
-    ...mapActions(['cerrarSesion']),
+    ...mapActions(['cerrarSesion', 'setPathToAdmin']),
+    toHome() {
+      if (this.pathToAdmin) {
+        this.$router.push({ path: this.pathToAdmin });
+        this.setPathToAdmin(null);
+        return;
+      }
+      this.$router.push({ name: 'home' });
+    },
   },
   computed: {
-    ...mapState(['usuario']),
+    ...mapState(['usuario', 'pathToAdmin']),
   },
 };
 </script>

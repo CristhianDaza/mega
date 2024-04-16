@@ -3,7 +3,7 @@
     <v-row align="center" justify="center" class=" mb-5">
       <v-col cols="12" sm="6" class="px-10">
         <h1
-          :style="{ color: $vuetify.theme.themes[theme].textoBlanco }"
+          :style="{color: $vuetify.theme.themes[theme].colorText }"
           :class="this.$vuetify.breakpoint.xs ? 'title' : 'headline'">
           MANTENTE EN CONTACTO CON NOSOTROS
         </h1>

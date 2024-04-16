@@ -34,7 +34,7 @@
               class="mx-4"
               v-on="on"
               v-bind="attrs"
-              icon to="/categorias"
+              icon to="/categories"
             >
               <v-icon>{{mdiCart}}</v-icon>
             </v-btn>
@@ -48,7 +48,7 @@
               class="mx-4"
               v-on="on"
               v-bind="attrs"
-              icon to="/catalogos"
+              icon to="/catalogs"
             >
               <v-icon>{{mdiLibrary}}</v-icon>
             </v-btn>
@@ -62,7 +62,7 @@
               class="mx-4"
               v-on="on"
               v-bind="attrs"
-              icon to="/contacto"
+              icon to="/contact"
             >
               <v-icon>{{mdiCardAccountPhone}}</v-icon>
             </v-btn>
@@ -76,7 +76,7 @@
               class="mx-4"
               v-on="on"
               v-bind="attrs"
-              icon to="/nosotros"
+              icon to="/about-us"
             >
               <v-icon>{{mdiAccountGroup}}</v-icon>
             </v-btn>
@@ -84,7 +84,7 @@
           <span>Nosotros</span>
         </v-tooltip>
 
-        <v-tooltip v-if="existeUsuario" bottom>
+        <v-tooltip bottom>
           <template v-slot:activator="{on, attrs}">
             <v-btn
               class="mx-4"
@@ -92,26 +92,11 @@
               v-bind="attrs"
               icon to="/admin"
             >
-              <v-icon>{{mdiCoffee}}</v-icon>
+              <v-icon>{{ mdiCoffee }}</v-icon>
             </v-btn>
           </template>
-          <span>Admin</span>
+          <span>{{ isLogin ? "Admin" : "Login" }}</span>
         </v-tooltip>
-
-        <v-tooltip v-if="!existeUsuario" bottom>
-          <template v-slot:activator="{on, attrs}">
-            <v-btn
-              class="mx-4"
-              v-on="on"
-              v-bind="attrs"
-              icon to="/admin/login"
-            >
-              <v-icon>{{mdiCoffee}}</v-icon>
-            </v-btn>
-          </template>
-          <span>Login</span>
-        </v-tooltip>
-
       </v-card-text>
       <v-card-title>
         <v-container>
@@ -169,7 +154,7 @@
         ]"
       >
         Design by
-        <a href="https://co.linkedin.com/in/cristhiandaza?trk=people-guest_people_search-card" target="_blank">
+        <a href="https://co.linkedin.com/in/cristhiandaza" target="_blank">
           <strong :style="{color: $vuetify.theme.themes[theme].azul}">
               Cristhian Daza
             </strong>
@@ -210,7 +195,7 @@ export default {
     mdiCoffee,
   }),
   computed: {
-    ...mapGetters(['existeUsuario']),
+    ...mapGetters(['isLogin']),
   },
 };
 </script>

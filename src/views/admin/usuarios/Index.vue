@@ -17,7 +17,6 @@
       <template v-slot:default>
         <thead>
           <tr>
-            <th>Nombre</th>
             <th>Correo</th>
             <th>Rol</th>
             <th class="text-right">Acción</th>
@@ -25,7 +24,6 @@
         </thead>
         <tbody>
           <tr v-for="usuario in usuarios" :key="usuario.uid">
-            <th>{{usuario.nombre}}</th>
             <th>{{usuario.email}}</th>
             <th>{{usuario.rol}}</th>
             <th class="text-right">

@@ -7,18 +7,18 @@
       :prev-icon="mdiChevronLeft"
       :next-icon="mdiChevronRight"
     >
-      <v-slide-item v-for="imagen in imagenes" :key="imagen.id">
+      <v-slide-item v-for="image in images" :key="image.id">
         <v-row class="grupoImagenes">
           <v-card
             outlined
             fondoCard
           >
             <v-img
-              @click="$emit('cambiarImagen', imagen.imagen.file_md, imagen.imagen.file)"
-              :alt="imagenes.nombre_original"
+              @click="$emit('changeImage', image.imagen.file_md, image.imagen.file)"
+              :alt="image.nombre_original"
               width="150"
               max-height="100"
-              :src="imagen.imagen.file_sm"
+              :src="image.imagen.file_sm"
               class="imagenReferencia"
               contain
             >
@@ -45,7 +45,7 @@ export default {
       model: null,
     };
   },
-  props: ['imagenes'],
+  props: ['images'],
 };
 </script>
 

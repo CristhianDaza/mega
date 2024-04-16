@@ -1,5 +1,4 @@
 <template>
-<!-- eslint-disable max-len -->
   <v-container class="fill-height" fluid>
     <v-row align="center" justify="center">
       <v-col cols="12" sm="8" md="5" xl="6">
@@ -52,7 +51,12 @@
                   v-on="on"
                 ></v-text-field>
               </template>
-              <v-date-picker v-model="trabajoCalendario.start" scrollable locale="es-co" :weekdays="[1, 2, 3, 4, 5, 6, 0]" color="primary">
+              <v-date-picker
+                v-model="trabajoCalendario.start"
+                scrollable locale="es-co"
+                :weekdays="[1, 2, 3, 4, 5, 6, 0]"
+                color="primary"
+              >
                 <v-spacer></v-spacer>
                 <v-btn text color="primary" @click="modalInicio = false">Cancelar</v-btn>
                 <v-btn text color="primary" @click="$refs.dialogInicio.save(start)">OK</v-btn>
@@ -76,7 +80,12 @@
                   v-on="on"
                 ></v-text-field>
               </template>
-              <v-date-picker v-model="trabajoCalendario.end" scrollable locale="es-co" :weekdays="[1, 2, 3, 4, 5, 6, 0]" color="primary">
+              <v-date-picker
+                v-model="trabajoCalendario.end"
+                scrollable locale="es-co"
+                :weekdays="[1, 2, 3, 4, 5, 6, 0]"
+                color="primary"
+              >
                 <v-spacer></v-spacer>
                 <v-btn text color="primary" @click="modalFin = false">Cancelar</v-btn>
                 <v-btn text color="primary" @click="$refs.dialogFin.save(end)">OK</v-btn>

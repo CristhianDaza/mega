@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import axios from 'axios';
 import Vuex from 'vuex';
 import Swal from 'sweetalert2';
 import {
@@ -7,17 +6,26 @@ import {
   db,
 } from '@/firebase';
 import router from '@/router';
+import menu from './module/menu';
+import categories from './module/categories';
+import labels from './module/labels';
+import homeProduct from './module/homeProduct';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  modules: {
+    menu,
+    categories,
+    labels,
+    homeProduct,
+  },
   state: {
     layout: 'defaultLayout',
     usuario: '',
     usuarios: '',
     error: '',
     imagenSlider: [],
-    imagenInfo: [],
     catalogos: [],
     trabajosCalendario: [],
     trabajoCalendario: {
@@ -29,10 +37,7 @@ export default new Vuex.Store({
       titulo: '', etiqueta: '',
     },
     titulos: [],
-    menus: [],
-    menu: {
-      nombre: '', orden: '', Link: '',
-    },
+    pathToAdmin: null,
   },
   mutations: {
     setLayout(state, layout) {
@@ -62,12 +67,6 @@ export default new Vuex.Store({
     eliminarCatalogo(state, id) {
       state.catalogos = state.catalogos.filter((doc) => doc.id !== id);
     },
-    setImagenInfo(state, valor) {
-      state.imagenInfo = valor;
-    },
-    eliminarImagenInfo(state, id) {
-      state.imagenInfo = state.imagenInfo.filter((doc) => doc.id !== id);
-    },
     setTrabajosCalendario(state, valor) {
       state.trabajosCalendario = valor;
     },
@@ -92,17 +91,8 @@ export default new Vuex.Store({
     setTitulo(state, valor) {
       state.titulos = valor;
     },
-    eliminarProducto(state, id) {
-      state.productos = state.productos.filter((doc) => doc.id !== id);
-    },
-    setMenus(state, valor) {
-      state.menus = valor;
-    },
-    eliminarMenu(state, id) {
-      state.menus = state.menus.filter((doc) => doc.id !== id);
-    },
-    setMenu(state, valor) {
-      state.menu = valor;
+    setPathToAdmin(state, path) {
+      state.pathToAdmin = path;
     },
   },
   actions: {
@@ -234,24 +224,6 @@ export default new Vuex.Store({
           commit('eliminarCatalogo', id);
         });
     },
-    async traerImagenInfo({ commit }) {
-      await db.collection('info').get()
-        .then((snapshot) => {
-          const imagenes = [];
-          snapshot.forEach((doc) => {
-            const imagen = doc.data();
-            imagen.id = doc.id;
-            imagenes.push(imagen);
-          });
-          commit('setImagenInfo', imagenes);
-        });
-    },
-    async eliminarImagenInfo({ commit }, id) {
-      await db.collection('info').doc(id).delete()
-        .then(() => {
-          commit('eliminarImagenInfo', id);
-        });
-    },
     async traerTrabajosCalendario({ commit }) {
       await db.collection('trabajos').get()
         .then((snapshot) => {
@@ -296,83 +268,14 @@ export default new Vuex.Store({
           commit('eliminarVideo', id);
         });
     },
-    async traerProducto({ commit }) {
-      await db.collection('producto').get()
-        .then((snapshot) => {
-          const productos = [];
-          snapshot.forEach((doc) => {
-            const producto = doc.data();
-            producto.id = doc.id;
-            productos.push(producto);
-          });
-          const url = `https://marpicoprod.azurewebsites.net/api/productos/?page_size=12&page=1&order=paginacion_web&etiqueta=${productos[0].etiqueta}`;
-          const config = {
-            method: 'get',
-            url,
-            headers: {
-              Authorization: 'Bearer Api-Key fBc8kc9ejmpvIqSLeKh9bIL955E0LOdNfFKfNZhGy3xRlGTxtDl7ADOdSzrLfgLj',
-            },
-          };
-          const productosEtiqueta = [];
-          axios(config).then((res) => {
-            res.data.results.forEach((producto) => {
-              productosEtiqueta.push(producto);
-            });
-          });
-          commit('setProducto', productosEtiqueta);
-          commit('setTitulo', productos);
-        });
-    },
 
-    async eliminarProducto({ commit }, id) {
-      await db.collection('producto').doc(id).delete()
-        .then(() => {
-          commit('eliminarProducto', id);
-        });
-    },
-
-    async traerProductoId({ commit }, id) {
-      await db.collection('producto').doc(id).get()
-        .then((doc) => {
-          const producto = doc.data();
-          producto.id = doc.id;
-          commit('setProductoId', producto);
-        });
-    },
-
-    async traerMenus({ commit }) {
-      await db.collection('menu').orderBy('orden').get()
-        .then((snapshot) => {
-          const menus = [];
-          snapshot.forEach((doc) => {
-            const menu = doc.data();
-            menu.id = doc.id;
-            menus.push(menu);
-          });
-          commit('setMenus', menus);
-        });
-    },
-    async eliminarMenu({ commit }, id) {
-      await db.collection('menu').doc(id).delete()
-        .then(() => {
-          commit('eliminarMenu', id);
-        });
-    },
-    async traerMenu({ commit }, id) {
-      await db.collection('menu').doc(id).get()
-        .then((doc) => {
-          const menu = doc.data();
-          menu.id = doc.id;
-          commit('setMenu', menu);
-        });
+    setPathToAdmin({ commit }, path) {
+      commit('setPathToAdmin', path);
     },
   },
   getters: {
-    existeUsuario(state) {
-      if (state.usuario === null || state.usuario === '' || state.usuario === undefined) {
-        return false;
-      }
-      return true;
+    isLogin(state) {
+      return !!state.usuario;
     },
   },
 });

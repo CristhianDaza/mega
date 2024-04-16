@@ -14,7 +14,7 @@ export default new Vuetify({
     dark: false,
     themes: {
       light: {
-        primary: '#005C91',
+        primary: '#EBEBEB',
         secondary: '#FFCD17',
         colorText: '#2B2B2B',
         amarillo: '#FFCD17',
@@ -23,6 +23,8 @@ export default new Vuetify({
         textoBlanco: '#E3E3E3',
         fondoTarjeta: '#E3E3E3',
         textoError: '#D13D3D',
+        invertPrimary: '#111B27',
+        invertSecondary: '#05090C',
       },
       dark: {
         primary: '#111B27',
@@ -34,6 +36,8 @@ export default new Vuetify({
         textoBlanco: '#E3E3E3',
         fondoTarjeta: '#05090C',
         textoError: '#D13D3D',
+        invertPrimary: '#EBEBEB',
+        invertSecondary: '#FFCD17',
       },
     },
   },

@@ -2,7 +2,7 @@
   <div>
     <v-img
       alt="Productos Megapromocionales"
-      :src="Imagen"
+      :src="img"
       height="220px"
     >
       <template v-slot:placeholder>
@@ -19,23 +19,28 @@
         :class="this.$vuetify.breakpoint.xs ? 'title fondoOscuro' : 'headline'"
         justify="center">
         <h1
-          :class="this.$vuetify.breakpoint.xs ? '' : 'mitadAncho'"
+          :class="{ 'mitadAncho' : this.$vuetify.breakpoint.xs }"
           :style="{color: $vuetify.theme.themes.dark.basetexto}"
-        >{{titulo}}</h1>
+        >{{ title }}</h1>
       </v-container>
     </v-img>
   </div>
 </template>
 
 <script>
-import Imagen from '@/assets/img/header.webp';
+import img from '@/assets/img/header.webp';
 
 export default {
   name: 'HeroComponent',
-  props: ['titulo'],
+  props: {
+    title: {
+      type: String,
+      default: '',
+    },
+  },
   data() {
     return {
-      Imagen,
+      img,
     };
   },
   components: {

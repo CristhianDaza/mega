@@ -13,11 +13,12 @@
       ref="carousel"
     >
       <slide
-        v-for="(imagen, i) in imagenes"
+        v-for="(imagen, i) in images"
         :key="i"
+        :index="i"
       >
         <v-img
-          @click="$emit('cambiarImagen', imagen.imagen.file_md, imagen.imagen.file)"
+          @click="$emit('changeImage', imagen.imagen.file_md, imagen.imagen.file)"
           class="imgSlideVertical"
           aspect-ratio="1.4"
           :src="imagen.imagen.file_sm">
@@ -41,7 +42,7 @@ import 'hooper/dist/hooper.css';
 
 export default {
   name: 'ImagenProductosVertical',
-  props: ['imagenes'],
+  props: ['images'],
   data() {
     return {
       mdiArrowUpBoldCircle,

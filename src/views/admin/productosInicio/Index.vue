@@ -3,11 +3,14 @@
     <v-btn
       :style="{color: $vuetify.theme.themes[theme].amarillo}"
       large outlined
-      to="/admin/productos-inicio/agregar-productos">
-      Agregar Productos
+      to="/admin/productos-inicio/agregar-productos"
+      :disabled="productHome.length === 1"
+    >
+      Agregar Producto
     </v-btn>
     <v-divider class="my-5"></v-divider>
     <v-simple-table
+      v-if="productHome.length > 0"
       :style="{background: $vuetify.theme.themes[theme].fondoTarjeta}"
     >
       <template v-slot:default>
@@ -19,9 +22,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="producto in titulos" :key="producto.uid">
-            <td>{{producto.titulo}}</td>
-            <td>{{producto.etiqueta}}</td>
+          <tr v-for="product in productHome" :key="product.uid">
+            <td>{{product.title}}</td>
+            <td>{{product.label}}</td>
             <td class="text-right">
               <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
@@ -31,7 +34,7 @@
                     v-bind="attrs"
                     v-on="on"
                     class="ml-2"
-                    :to="`productos-inicio/editar-producto/${producto.id}`"
+                    :to="`productos-inicio/editar-producto/${product.id}`"
                   >
                     <v-icon>{{mdiPencil}}</v-icon>
                   </v-btn>
@@ -46,7 +49,7 @@
                     v-bind="attrs"
                     v-on="on"
                     class="ml-2"
-                    @click="confirmarEliminarProduto(producto.id)"
+                    @click="confirmDeleteProduct(product.id)"
                   >
                     <v-icon>{{mdiDelete}}</v-icon>
                   </v-btn>
@@ -62,7 +65,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import Swal from 'sweetalert2';
 import { mdiDelete, mdiPencil } from '@mdi/js';
 import layoutAdmin from '@/mixins/layoutAdmin';
@@ -85,8 +88,8 @@ export default {
     ],
   },
   methods: {
-    ...mapActions(['traerProducto', 'eliminarProducto']),
-    confirmarEliminarProduto(id) {
+    ...mapActions('homeProduct', ['getProductHome', 'deleteProductHome']),
+    confirmDeleteProduct(id) {
       Swal.fire({
         title: '¿Estas segur@?',
         text: '¡No se podrá revertir!',
@@ -98,9 +101,9 @@ export default {
         confirmButtonText: 'Si, ¡eliminarlo!',
       }).then((result) => {
         if (result.value) {
-          this.eliminarProducto(id);
+          this.deleteProductHome(id);
           Swal.fire(
-            '¡Eliminada!',
+            '¡Eliminado!',
             'El producto ha sido eliminado.',
             'success',
           );
@@ -109,10 +112,10 @@ export default {
     },
   },
   computed: {
-    ...mapState(['titulos']),
+    ...mapGetters('homeProduct', ['productHome']),
   },
   mounted() {
-    this.traerProducto();
+    this.getProductHome();
   },
 };
 </script>

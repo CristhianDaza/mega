@@ -1,121 +1,95 @@
 <template>
-<!-- eslint-disable max-len -->
   <div>
     <DesProducto
-      :descripcion="producto"
+      :description="product"
     />
-    <template v-if="existeUsuario">
+    <template v-if="isLogin">
       <PrecioProducto
-        :precio="producto"
-        :materiales="materiales"
+        :price="product"
+        :materials="materials"
       />
     </template>
     <v-card-text class="pt-0">
-      <div v-if="existeUsuario">
-        <p v-if="producto.texto_informacion !== null" class="ma-0" :style="'color: ' + producto.color_texto_informacion">
-          {{ descripcionProducto }}
-        </p>
-      </div>
+      <p
+        v-if="product.texto_informacion"
+        class="ma-0 text-caption"
+      >
+        {{ replaceSeller(product.texto_informacion) }}
+      </p>
     </v-card-text>
     <v-card-text
       class="d-block title my-2 py-0"
       :style="{ color: $vuetify.theme.themes[theme].azul }"
-      v-if="Math.round(producto.materiales[0].precio_descuento) !== Math.round(producto.materiales[0].precio)">
-        Producto con descuento del {{Math.abs(Math.round(producto.materiales[0].descuento))}}%.
+      v-if="Math.round(product.materiales[0].precio_descuento) !==
+      Math.round(product.materiales[0].precio)"
+    >
+      {{Math.abs(Math.round(product.materiales[0].descuento))}}% de descuento.
     </v-card-text>
-    <v-card-actions class="ml-1 pt-0">
-      <v-btn
-        block
-        large
-        outlined
-        :style="{ color: $vuetify.theme.themes[theme].azul }"
+    <div class="ml-1 pt-0">
+      <mp-button
         :loading="loading"
-        :disabled="loading"
-        @click="descargarImagenes(producto.id, producto.familia)"
+        @click="downloadImage(product.id, product.familia)"
+        is-full
       >
         Descargar Imágenes
         <v-icon>
           {{ mdiDownload }}
         </v-icon>
-      </v-btn>
-    </v-card-actions>
-    <v-card-actions class="ml-1 pt-0" v-if="producto.materiales[0].en_transito > 0">
-      <v-btn
-        outlined
-        block
-        large
-        :style="{ color: $vuetify.theme.themes[theme].azul }"
-        class="my-1 pa-4"
-        @click.stop="$emit('dialogo')"
+      </mp-button>
+    </div>
+    <div class="ml-1 pt-2" v-if="product.materiales[0].en_transito > 0">
+      <mp-button
+        @click="$emit('dialogo')"
+        is-full
       >
         Importaciones
-        <v-icon class="ml-1">
-          {{mdiFerry}}
+        <v-icon>
+          {{ mdiFerry }}
         </v-icon>
-      </v-btn>
-    </v-card-actions>
+      </mp-button>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import {
-  mdiFerry,
-  mdiDownload,
-  mdiCloseCircleOutline,
-} from '@mdi/js';
-import axios from 'axios';
+import { mdiCloseCircleOutline, mdiDownload, mdiFerry } from '@mdi/js';
 import Swal from 'sweetalert2';
+import { getImageZip } from '@/api/apiProduct';
 
 export default {
   name: 'InfoProducto',
   data() {
     return {
-      mdiFerry,
-      mdiDownload,
-      mdiCloseCircleOutline,
+      getImageZip,
       loading: false,
+      mdiCloseCircleOutline,
+      mdiDownload,
+      mdiFerry,
     };
   },
-  props: ['producto', 'materiales', 'transito'],
+  props: ['product', 'materials', 'transito'],
   computed: {
-    ...mapGetters(['existeUsuario']),
-    descripcionProducto() {
-      if (this.producto.texto_informacion.includes('asesora')) {
-        return this.producto.texto_informacion.replaceAll('asesora', 'asesor');
-      }
-      return this.producto.texto_informacion;
-    },
+    ...mapGetters(['isLogin']),
   },
   components: {
+    MpButton: () => import(/* webpackChunkName: "mpButton" */ '@/components/UI/Mp-Button.vue'),
     DesProducto: () => import(/* webpackChunkName: "desProducto" */ '@/components/Producto/DesProducto.vue'),
     PrecioProducto: () => import(/* webpackChunkName: "precioProducto" */ '@/components/Producto/PrecioProducto.vue'),
   },
   methods: {
-    async descargarImagenes(id, familia) {
+    replaceSeller(text) {
+      return text.includes('asesora') ? text.replaceAll('asesora', 'asesor') : text;
+    },
+    async downloadImage(id, code) {
       this.loading = true;
-      const urlBlob = `https://marpicoprod.azurewebsites.net/api/productos/imagenes/${id}?producto=${familia}`;
-
-      await axios({
-        methods: 'GET',
-        url: urlBlob,
-        responseType: 'blob',
-      })
-        .then((res) => {
-          const blob = new Blob([res.data], { type: 'application/zip' });
-          const url = window.URL.createObjectURL(blob);
-          window.location.href = url;
-        })
-        .catch(() => {
-          Swal.fire(
-            'Error!',
-            'Hubo un error, intente de nuevo.',
-            'error',
-          );
-        })
-        .finally(() => {
-          this.loading = false;
-        });
+      try {
+        window.location.href = await getImageZip(id, code);
+      } catch (error) {
+        await Swal.fire('Error!', 'Hubo un error, inténtelo de nuevo.', 'error');
+      } finally {
+        this.loading = false;
+      }
     },
   },
 };

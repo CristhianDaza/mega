@@ -1,41 +1,9 @@
 <template>
-<!-- eslint-disable max-len -->
-  <div v-if="this.productoCodigo.length > 0">
+  <div v-if="productCode.length > 0">
     <v-container class="pt-0">
-      <div class="links">
-        <ul
-          :style="{ color: $vuetify.theme.themes[theme].colorText }"
-        >
-          <li>
-            <router-link
-            exact
-            to="/" class="links__item">INICIO</router-link>
-          </li>
-          <li class="links__divider">/</li>
-          <li>
-            <router-link
-            exact
-            to="/productos" class="links__item">PRODUCTOS</router-link>
-          </li>
-          <li class="links__divider">/</li>
-          <li>
-            <router-link
-            exact
-            :to="`/productos?categoria=${productoCodigo[0].subcategoria_1.categoria.jerarquia}&titulo=${productoCodigo[0].subcategoria_1.categoria.nombre}`" class="links__item">{{this.categoriaPrincipal.toUpperCase()}}</router-link>
-          </li>
-          <li class="links__divider">/</li>
-          <li>
-            <router-link
-            :style="{ color: $vuetify.theme.themes[theme].colorText }"
-            exact
-            :to="`/productos?subCategoria=${productoCodigo[0].subcategoria_1.jerarquia}&titulo=${productoCodigo[0].subcategoria_1.nombre}`"  class="links__item">{{this.categoriaSecundaria.toUpperCase()}}</router-link>
-          </li>
-          <li class="links__divider">/</li>
-          <li>
-            {{this.codigo}}
-          </li>
-        </ul>
-      </div>
+      <mp-breadcrumbs
+        :breadcrumbs="breadcrumbs"
+      />
       <v-card
         :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
         class="mx-auto mt-2"
@@ -44,8 +12,8 @@
           <v-col cols="6" sm="3" md="2" class="ProductosVertical">
             <v-container>
               <ImagenProductosVertical
-                :imagenes="productoCodigo[0].imagenes"
-                @cambiarImagen="cambiarImagenHijo"
+                :images="productCode[0].imagenes"
+                @changeImage="changeImage"
               />
             </v-container>
           </v-col>
@@ -58,18 +26,17 @@
             >
             <v-container>
               <ImagenProducto
-                :producto='productoCodigo[0]'
-                :imagenPrincipalMediana='this.imagenPrincipalMediana'
-                :imagenPrincipalGrande='this.imagenPrincipalGrande'
-                :inventarioDisponible="inventarioDisponible"
+                :product='productCode[0]'
+                :imagePrincipalMedium='this.imagePrincipalMedium'
+                :imagePrincipalBig='this.imagePrincipalBig'
               />
               <v-col cols="12" class="contenedorProductosHorizontal pa-0">
                 <v-container
                   class="pa-0"
                 >
                   <ImagenProductosHorizontal
-                    :imagenes="productoCodigo[0].imagenes"
-                    @cambiarImagen="cambiarImagenHijoHorizontal"
+                    :image="productCode[0].imagenes"
+                    @changeImage="updateImage"
                   />
                 </v-container>
               </v-col>
@@ -83,9 +50,9 @@
           >
             <v-container class="pl-0 pb-0 mb-5 mr-2 infoProd">
               <InfoProducto
-                :producto="productoCodigo[0]"
-                :materiales="this.materiales"
-                @dialogo="dialogTransito = true"
+                :product="productCode[0]"
+                :materials="this.materials"
+                @dialogo="modalTransit = true"
               />
             </v-container>
           </v-col>
@@ -100,27 +67,39 @@
             :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
           >
             <ExistenciasProducto
-              :inventarioDisponible="inventarioDisponible"
-              @actualizarSugerencias="actualizarSugerencia"
+              :availableInventory="availableInventory"
+              @updateSuggested="updateSuggested"
             />
           </v-card>
-          <div v-if="productoCodigo[0].videos.length > 0" class="mt-3">
-            <VideoProducto
-              :video="productoCodigo[0]"
-            />
-          </div>
+          <template v-if="productCode[0].videos.length > 0">
+            <div
+              class="mt-3"
+              v-for="{ video, id } in productCode[0].videos"
+              :key="id"
+            >
+              <mp-video
+                :link-video="video"
+                controls
+              />
+            </div>
+          </template>
         </v-col>
         <v-col cols="12" sm="6" class="my-4">
           <SugeridoProducto
-            :sugerencia="productoSugerencia"
+            :suggestion="productSuggestion"
           />
         </v-col>
       </v-row>
 
     </v-container>
 
-    <v-dialog v-model="dialogTransito" max-width="750" overlay-color="blue-grey darken-4" overlay-opacity="0.9">
-      <v-btn dark icon class="mr-5" color="white" @click.stop="dialogTransito = false">
+    <v-dialog
+      v-model="modalTransit"
+      max-width="750"
+      overlay-color="blue-grey darken-4"
+      overlay-opacity="0.9"
+    >
+      <v-btn dark icon class="mr-5" color="white" @click.stop="modalTransit = false">
         <v-icon>{{mdiCloseCircleOutline}}</v-icon>
       </v-btn>
       <v-simple-table
@@ -146,11 +125,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(existencia, index) in productoTraking[0]" :key="index">
+          <tr v-for="(existencia, index) in productTracking[0]" :key="index">
             <td
               :style="{ color: $vuetify.theme.themes[theme].colorText }"
               v-if="existencia.trackings_importacion[0] !== undefined">
-              {{ coloresTransito(inventarioDisponible, existencia.trackings_importacion[0].material) }}
+              {{ colorsTransit(existencia.trackings_importacion[0].material) }}
             </td>
             <td
               :style="{ color: $vuetify.theme.themes[theme].colorText }"
@@ -170,7 +149,9 @@
             <td
               :style="{ color: $vuetify.theme.themes[theme].colorText }"
               v-if="existencia.trackings_importacion[0] !== undefined">
-              {{moment(existencia.trackings_importacion[0].ultima_actualizacion).locale('es-CO').format('LL')}}
+              {{moment(
+                existencia.trackings_importacion[0].ultima_actualizacion
+                ).locale('es-CO').format('LL')}}
             </td>
           </tr>
         </tbody>
@@ -188,45 +169,50 @@
 </template>
 
 <script>
-import axios from 'axios';
 import {
   mdiCloseCircleOutline,
 } from '@mdi/js';
 import addCommas from '@/mixins/addCommas';
 import layoutPrincipal from '@/mixins/layoutPrincipal';
+import { mapActions } from 'vuex';
+import { getProductId, getTracking, getSuggested } from '@/api/apiProduct';
 
 export default {
   name: 'CodigoView',
   mixins: [addCommas, layoutPrincipal],
   data() {
     return {
-      productoCodigo: [],
-      productoSugerencia: [],
-      productoTraking: [],
-      imagenPrincipalMediana: '',
-      imagenPrincipalGrande: '',
-      codigo: this.$route.params.codigo,
-      dialogTransito: false,
-      mdiCloseCircleOutline,
-      categoriaPrincipal: '',
-      categoriaSecundaria: '',
+      firsCategory: '',
+      secondCategory: '',
+      code: this.$route.params.code,
+      modalTransit: false,
       duration: 1000,
+      easing: 'easeInQuart',
+      getSuggested,
+      getProductId,
+      getTracking,
+      imagePrincipalBig: '',
+      imagePrincipalMedium: '',
+      materials: [],
+      mdiCloseCircleOutline,
       number2: 200,
       offset: 0,
-      easing: 'easeInQuart',
+      productCode: [],
+      productSuggestion: [],
+      productTracking: [],
       type2: 'number2',
-      materiales: [],
     };
   },
   computed: {
-    inventarioDisponible() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      return this.materiales.sort((a, b) => a.codigo - b.codigo);
+    availableInventory() {
+      const materialsCopy = [...this.materials];
+      return materialsCopy.sort((a, b) => a.codigo - b.codigo);
     },
     target2() {
       const value = this[this.type2];
-      // eslint-disable-next-line no-restricted-globals
-      if (!isNaN(value)) return Number(value);
+      if (!Number.isNaN(value)) {
+        return Number(value);
+      }
       return value;
     },
     options2() {
@@ -236,88 +222,98 @@ export default {
         easing: this.easing,
       };
     },
+    breadcrumbs() {
+      const homeBreadcrumb = { title: 'Inicio', disabled: false, toLink: '/' };
+      const productsBreadcrumb = { title: 'Productos', disabled: false, toLink: '/productos' };
+
+      const categoryBreadcrumb = this.createCategoryBreadcrumb();
+      const subCategoryBreadcrumb = this.createSubCategoryBreadcrumb();
+      const productBreadcrumb = this.createProductBreadcrumb();
+
+      return [
+        homeBreadcrumb,
+        productsBreadcrumb,
+        categoryBreadcrumb,
+        subCategoryBreadcrumb,
+        productBreadcrumb,
+      ];
+    },
   },
   methods: {
-    coloresTransito(inventario, traking) {
-      let codigo;
-      inventario.forEach((data) => {
-        if (data.codigo === traking) {
-          codigo = data.color_nombre;
+    ...mapActions('menu', ['setSelectedMenu']),
+    colorsTransit(tracking) {
+      let code;
+      this.availableInventory.forEach((data) => {
+        if (data.codigo === tracking) {
+          code = data.color_nombre;
         }
       });
 
-      return codigo;
+      return code;
     },
-    imagenReferencia(imagenMediana, imagenGrande) {
-      this.imagenPrincipalMediana = imagenMediana;
-      this.imagenPrincipalGrande = imagenGrande;
+    referenceImage(imgMedium, imgBig) {
+      this.imagePrincipalMedium = imgMedium;
+      this.imagePrincipalBig = imgBig;
     },
-    actualizar(codigo) {
-      this.productoSugerencia = [];
-      this.getProductosSugerencia(codigo);
+    updateSuggested(code) {
+      this.productSuggestion = [];
+      this.getProductSuggested(code);
     },
-    actualizarSugerencia(codigoSugerencia) {
-      this.actualizar(codigoSugerencia);
-    },
-    cambiarImagenHijoHorizontal(imagen1, imagen2) {
-      this.imagenReferencia(imagen1, imagen2);
+    updateImage(imageOne, imageTwo) {
+      this.referenceImage(imageOne, imageTwo);
       this.$vuetify.goTo(this.target2, this.options2);
     },
-    cambiarImagenHijo(imagen1, imagen2) {
-      this.imagenReferencia(imagen1, imagen2);
+    changeImage(imageOne, imageTwo) {
+      this.referenceImage(imageOne, imageTwo);
     },
-    async getProductoCodigo() {
-      const url = `https://marpicoprod.azurewebsites.net/api/productos/detail/${this.codigo}`;
-      const config = {
-        method: 'get',
-        url,
-        headers: {
-          Authorization: 'Bearer Api-Key fBc8kc9ejmpvIqSLeKh9bIL955E0LOdNfFKfNZhGy3xRlGTxtDl7ADOdSzrLfgLj',
-        },
-      };
-
-      await axios(config).then((res) => {
-        this.productoCodigo.push(res.data);
-        this.getProductosSugerencia(this.productoCodigo[0].materiales[0].codigo);
-        this.getProductoTraking(this.codigo);
-        this.categoriaPrincipal = this.productoCodigo[0].subcategoria_1.categoria.nombre;
-        this.categoriaSecundaria = this.productoCodigo[0].subcategoria_1.nombre;
-        this.materiales = this.productoCodigo[0].materiales;
-      });
+    async getProductCode() {
+      const { data } = await this.getProductId(this.code);
+      this.productCode.push(data);
+      this.firsCategory = this.productCode[0]?.subcategoria_1?.categoria?.nombre;
+      this.secondCategory = this.productCode[0]?.subcategoria_1?.nombre;
+      this.materials = this.productCode[0]?.materiales;
+      await this.getProductSuggested(this.productCode[0]?.materiales[0]?.codigo);
+      await this.getProductTracking(this.code);
     },
-    async getProductoTraking(producto) {
-      const url = `https://marpicoprod.azurewebsites.net/api/inventarios/materialesAPIByProducto?producto=${producto}`;
-      const config = {
-        method: 'get',
-        url,
-        headers: {
-          Authorization: 'Bearer Api-Key fBc8kc9ejmpvIqSLeKh9bIL955E0LOdNfFKfNZhGy3xRlGTxtDl7ADOdSzrLfgLj',
-        },
-      };
-
-      await axios(config).then((res) => {
-        this.productoTraking.push(res.data[0].materiales);
-      });
+    async getProductTracking(product) {
+      const { data } = await this.getTracking(product);
+      this.productTracking.push(data[0].materiales);
     },
-    async getProductosSugerencia(codigo) {
-      const url = `https://marpicoprod.azurewebsites.net/api/productos/sugeridos?material_origen=${codigo}`;
-      const config = {
-        method: 'get',
-        url,
-        headers: {
-          Authorization: 'Bearer Api-Key fBc8kc9ejmpvIqSLeKh9bIL955E0LOdNfFKfNZhGy3xRlGTxtDl7ADOdSzrLfgLj',
-        },
-      };
+    async getProductSuggested(product) {
+      const { data } = await this.getSuggested(product);
+      this.productSuggestion = data;
+    },
+    createCategoryBreadcrumb() {
+      if (!this.firsCategory) return null;
 
-      await axios(config).then((res) => {
-        res.data.forEach((producto) => {
-          this.productoSugerencia.push(producto);
-        });
-      });
+      return {
+        title: this.firsCategory,
+        disabled: false,
+        toLink: `/productos?category=${this.productCode[0].subcategoria_1.categoria.jerarquia}&title=${this.productCode[0].subcategoria_1.categoria.nombre}`,
+      };
+    },
+    createSubCategoryBreadcrumb() {
+      if (!this.secondCategory) return null;
+
+      return {
+        title: this.secondCategory,
+        disabled: false,
+        toLink: `/productos?subCategory=${this.productCode[0].subcategoria_1.jerarquia}&title=${this.productCode[0].subcategoria_1.nombre}`,
+      };
+    },
+    createProductBreadcrumb() {
+      if (!this.code) return null;
+
+      return {
+        title: this.code,
+        disabled: true,
+        toLink: `/producto/${this.code}`,
+      };
     },
   },
   async mounted() {
-    this.getProductoCodigo();
+    await this.getProductCode();
+    await this.setSelectedMenu(this.$route.fullPath);
   },
   metaInfo: {
     title: 'Producto 🛒',
@@ -339,10 +335,11 @@ export default {
     ImagenProducto: () => import(/* webpackChunkName: "imagenProducto" */ '@/components/Producto/ImagenProducto.vue'),
     InfoProducto: () => import(/* webpackChunkName: "infoProducto" */ '@/components/Producto/InfoProducto.vue'),
     ExistenciasProducto: () => import(/* webpackChunkName: "existenciasProducto" */ '@/components/Producto/ExistenciasProducto.vue'),
-    VideoProducto: () => import(/* webpackChunkName: "videoProducto" */ '@/components/Producto/VideoProducto.vue'),
+    MpVideo: () => import(/* webpackChunkName: "mpVideo" */ '@/components/UI/Mp-Video.vue'),
     SugeridoProducto: () => import(/* webpackChunkName: "sugeridoProducto" */ '@/components/Producto/SugeridoProducto.vue'),
     ImagenProductosVertical: () => import(/* webpackChunkName: "imagenProductosVertical" */ '@/components/Producto/ImagenProductosVertical.vue'),
     ImagenProductosHorizontal: () => import(/* webpackChunkName: "imagenProductosHorizontal" */ '@/components/Producto/ImagenProductosHorizontal.vue'),
+    MpBreadcrumbs: () => import(/* webpackChunkName: "mpBreadcrumbs" */ '@/components/UI/Mp-Breadcrumbs.vue'),
   },
 };
 </script>

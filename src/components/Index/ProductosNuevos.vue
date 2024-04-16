@@ -1,50 +1,50 @@
 <template>
   <div
     class="fondoNovedades py-10"
+    v-if="products.length > 0"
   >
     <h1
-      v-if="this.titulos[0]"
       :class="this.$vuetify.breakpoint.xs ? 'display-1 mt-2' : 'display-2'"
       class="mb-5 pt-5 text-center font-weight-black text-uppercase"
       :style="{color: $vuetify.theme.themes[theme].colorText}"
     >
-      {{this.titulos[0].titulo}}
+      {{productLabel[0].title}}
     </h1>
     <v-container>
-      <v-row v-if="this.productos.length > 0">
+      <v-row>
         <v-col
           cols="12"
           sm="6"
           md="4"
           lg="3"
-          v-for="(producto) in this.productos"
-          :key="producto.familia"
+          v-for="(product) in products"
+          :key="product.familia"
         >
-          <Productos :producto='producto' :colores="producto.materiales"/>
+          <Products :product='product' :colors="product.materiales"/>
         </v-col>
       </v-row>
-      <v-btn
-        class="mt-6"
-        v-if="this.productos.length > 0"
-        :to="{
-          path:
-            // eslint-disable-next-line max-len
-            `/productos?etiqueta=${this.titulos[0].etiqueta}&titulo=${this.titulos[0].titulo}&pagina=2`
-        }"
-        outlined
-        block
-        large
-        :style="{ color: $vuetify.theme.themes[theme].colorText }"
-        elevation="5"
-      >
+      <router-link
+        :to="`/productos?label=${productLabel[0].label}&title=${productLabel[0].title}`">
+        <mp-button
+          class="mt-6"
+          is-full
+          @click="$router.push({
+            name: 'product',
+            query: {
+              label: productLabel[0].label,
+              title: productLabel[0].title
+            }
+          })"
+        >
           Ver más Productos
-      </v-btn>
+        </mp-button>
+      </router-link>
     </v-container>
   </div>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import { mdiSale, mdiArrowRight } from '@mdi/js';
 
 export default {
@@ -56,23 +56,30 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['traerProducto']),
+    ...mapActions('homeProduct', ['getProductLabel', 'getProductHome']),
   },
   computed: {
-    ...mapState(['productos', 'titulos']),
+    ...mapGetters('homeProduct', ['productHome', 'productsHome']),
+    products() {
+      return this.productsHome;
+    },
+    productLabel() {
+      return this.productHome;
+    },
   },
-  mounted() {
-    this.traerProducto();
+  async mounted() {
+    await this.getProductHome();
+    await this.getProductLabel(this.productLabel[0].label);
   },
   components: {
-    Productos: () => import(/* webpackChunkName: "productos" */ '@/components/Productos/Productos.vue'),
+    Products: () => import(/* webpackChunkName: "products" */ '@/components/Productos/Products.vue'),
+    MpButton: () => import(/* webpackChunkName: "mpButton" */ '@/components/UI/Mp-Button.vue'),
   },
 };
 </script>
 <style>
 .fondoNovedades{
   background-position: center;
-  /* background-size: 100%; */
   background-size: cover
 }
 </style>
