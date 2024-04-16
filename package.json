@@ -26,7 +26,7 @@
     "vue-meta": "^2.4.0",
     "vue-router": "^3.5.3",
     "vue-router-sitemap": "^0.0.4",
-    "vuetify": "^2.6.7",
+    "vuetify": "^2.6.14",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
