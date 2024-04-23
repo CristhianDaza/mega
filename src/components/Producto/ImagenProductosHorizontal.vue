@@ -7,18 +7,18 @@
       :prev-icon="mdiChevronLeft"
       :next-icon="mdiChevronRight"
     >
-      <v-slide-item v-for="image in images" :key="image.id">
+      <v-slide-item v-for="(image, i) in images" :key="i">
         <v-row class="grupoImagenes">
           <v-card
             outlined
             fondoCard
           >
             <v-img
-              @click="$emit('changeImage', image.imagen.file_md, image.imagen.file)"
-              :alt="image.nombre_original"
+              @click="$emit('changeImage', image)"
+              :alt="image"
               width="150"
               max-height="100"
-              :src="image.imagen.file_sm"
+              :src="image"
               class="imagenReferencia"
               contain
             >

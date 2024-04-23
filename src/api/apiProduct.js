@@ -1,33 +1,10 @@
 import apiConfig from '@/services/apiConfig';
 
-export const searchProduct = ({
-  category,
-  characteristic,
-  color,
-  discount,
-  inventory,
-  label,
-  page,
-  perPage,
-  search,
-  subCategory,
-}) => new Promise((resolve, reject) => {
+export const searchProduct = () => new Promise((resolve, reject) => {
   try {
     const response = apiConfig.request({
       method: 'GET',
-      url: 'productos',
-      params: {
-        caracteristica: characteristic,
-        categoria: category,
-        color,
-        descuento: discount,
-        etiqueta: label,
-        inventario: inventory,
-        page,
-        page_size: perPage,
-        search,
-        subcategoria: subCategory,
-      },
+      url: 'materialesAPI',
     });
 
     resolve(response);
@@ -87,11 +64,13 @@ export const getProductId = (id) => new Promise(
     try {
       const response = apiConfig.request({
         method: 'GET',
-        url: `productos/detail/${id}`,
+        url: 'materialesAPIByProducto',
+        params: {
+          producto: id,
+        },
       });
       resolve(response);
     } catch (e) {
-      console.log(e);
       reject(e);
     }
   },

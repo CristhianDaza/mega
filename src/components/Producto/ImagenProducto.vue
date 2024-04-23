@@ -1,17 +1,9 @@
 <template>
   <div>
     <img
-      v-if="imagePrincipalMedium === ''"
       class="fotoTarjeta border-black elevation-5"
       @click.stop="dialog = true"
-      :src="product.imagenes[0].imagen.file_md"
-      :alt="product.descripcion_comercial"
-    />
-    <img
-      v-else
-      class="fotoTarjeta border-black elevation-5"
-      @click.stop="dialog = true"
-      :src="imagePrincipalMedium"
+      :src="mainImage"
       :alt="product.descripcion_comercial"
     />
       <p
@@ -20,62 +12,22 @@
       >
         El color de los artículos pueden variar según la calibración y resolución de la pantalla.
       </p>
-    <v-card-actions v-if="product.etiquetas.length > 0">
+    <v-card-actions v-if="imageProduct">
       <v-row>
         <template>
           <div
             v-for="label in product.etiquetas"
             :key="label.id"
-            @click="filterLabel(label)"
           >
             <img
               width="100px"
-              class="pointer"
-              :src="label.imagen.file_sm"
+              :src="label.imagen"
               :alt="label.nombre"
             >
           </div>
         </template>
       </v-row>
     </v-card-actions>
-    <div v-if="product.caracteristicas.length > 0" class="mt-8">
-      <h2
-        class="h6"
-        :style="{ color: $vuetify.theme.themes[theme].azul }"
-        >
-          Características:
-        </h2>
-      <v-row class="ml-1">
-        <div v-for="caracteristica in product.caracteristicas" :key="caracteristica.id">
-          <v-tooltip top>
-            <template v-slot:activator="{on, attrs}">
-              <img
-                class="imagenCaracteristica"
-                :src="caracteristica.imagen"
-                v-on="on"
-                v-bind="attrs"
-                :alt="caracteristica.nombre"
-                @click.stop="mostrarTextoInfo(caracteristica.descripcion)">
-            </template>
-            <span>{{caracteristica.nombre}}</span>
-          </v-tooltip>
-        </div>
-      </v-row>
-    </div>
-    <v-card
-      :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
-      v-if="this.textoInfo !== ''" class="mt-5 elevation-10">
-      <v-card-text class="pb-0">
-        <p
-          :style="{ color: $vuetify.theme.themes[theme].colorText }"
-        >{{textoInfo}}</p>
-      </v-card-text>
-      <v-card-actions class="pt-0">
-        <v-btn
-        :style="{ color: $vuetify.theme.themes[theme].azul }"
-        block outlined small @click="cerrarTextoInfo">Cerrar</v-btn>
-      </v-card-actions>
-    </v-card>
     <v-dialog
       v-model="dialog"
       max-width="700"
@@ -86,15 +38,7 @@
         <v-icon>{{mdiCloseCircleOutline}}</v-icon>
       </v-btn>
       <v-img
-        v-if="imagePrincipalBig === ''" :src="product.imagenes[0].imagen.file"
-        max-width="100%"
-        width="100%"
-        cover
-        :alt="product.descripcion_comercial"
-      />
-      <v-img
-        v-else
-        :src="imagePrincipalBig"
+        :src="mainImage"
         max-width="100%"
         width="100%"
         cover
@@ -117,25 +61,13 @@ export default {
       mdiCloseCircleOutline,
     };
   },
-  props: ['product', 'imagePrincipalMedium', 'imagePrincipalBig'],
+  props: ['product', 'mainImage'],
   methods: {
     ...mapActions('menu', ['setSelectedMenu']),
-    mostrarTextoInfo(texto) {
-      this.textoInfo = texto;
-    },
-    cerrarTextoInfo() {
-      this.textoInfo = '';
-    },
-    filterLabel(label) {
-      this.$router.push({
-        path: '/productos',
-        query: {
-          page: 1,
-          label: label.id,
-          title: label.nombre,
-        },
-      });
-      this.setSelectedMenu(this.$route.fullPath);
+  },
+  computed: {
+    imageProduct() {
+      return this.product !== {};
     },
   },
 };

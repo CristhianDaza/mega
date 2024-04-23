@@ -7,21 +7,24 @@
         <tr>
           <th
           :style="{ color: $vuetify.theme.themes[theme].azul }"
-          >COLOR DEL<br> PRODUCTO</th>
+          >COLOR DEL PRODUCTO</th>
           <th
           :style="{ color: $vuetify.theme.themes[theme].azul }"
           ></th>
           <th
           :style="{ color: $vuetify.theme.themes[theme].azul }"
-          >UNIDADES<br>DISPONIBLES</th>
-          <th
-          :style="{ color: $vuetify.theme.themes[theme].azul }"
-          >PRODUCTOS<br>SUGERIDOS</th>
+          >UNIDADES DISPONIBLES</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(existence, index) in availableInventory" :key="index">
+        <tr v-for="(existence) in availableInventory" :key="existence.codigo">
           <td class="d-flex">
+            <img
+              v-if="existence.imagenes.length > 0"
+              class="mr-5 rounded"
+              :src="existence.imagenes[0]"
+              :alt="existence.color_nombre"
+            />
             <div
               :style="{ color: $vuetify.theme.themes[theme].colorText }"
               class="mt-3"
@@ -32,33 +35,16 @@
           <td
             :style="{ color: $vuetify.theme.themes[theme].colorText }"
           >
-            {{existence.variedad}}
+            <span v-html="changeText(existence.variedad)"></span>
           </td>
           <td
             :style="{ color: $vuetify.theme.themes[theme].textoError }"
-            v-if="existence.inventario < 10"
-          >Agotado</td>
+            v-if="existence.inventario_almacen[0].cantidad < 10"
+          >0</td>
           <td
             :style="{ color: $vuetify.theme.themes[theme].colorText }"
             v-else
-          >{{addCommas(Math.round(existence.inventario))}}</td>
-          <td>
-            <v-tooltip right>
-              <template v-slot:activator="{on, attrs}">
-                <v-btn
-                  v-on="on"
-                  v-bind="attrs"
-                  icon
-                  small
-                  @click.stop="$emit('updateSuggested', existence.codigo)"
-                  :style="{color: '#005C91'}"
-                >
-                  <v-icon>{{mdiMagnify}}</v-icon>
-                </v-btn>
-              </template>
-              <span>Sugerencia en color {{existence.color_nombre}}</span>
-            </v-tooltip>
-          </td>
+          >{{addCommas(Math.round(existence.inventario_almacen[0].cantidad))}}</td>
         </tr>
       </tbody>
     </template>
@@ -81,6 +67,14 @@ export default {
       mdiMagnify,
       hextToRgb,
     };
+  },
+  methods: {
+    changeText(value) {
+      if (value === 'Linea') {
+        return '';
+      }
+      return value;
+    },
   },
 };
 </script>

@@ -18,11 +18,11 @@
         :index="i"
       >
         <v-img
-          @click="$emit('changeImage', imagen.imagen.file_md, imagen.imagen.file)"
+          @click="$emit('changeImage', imagen)"
           class="imgSlideVertical"
           aspect-ratio="1.4"
-          :src="imagen.imagen.file_sm">
-          </v-img>
+          :src="imagen"
+        ></v-img>
       </slide>
     </Hooper>
     <button @click.prevent="slideNext" class="iconVertical">

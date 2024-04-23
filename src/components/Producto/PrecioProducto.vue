@@ -1,229 +1,48 @@
 <template>
-  <v-card-text class="py-0">
-    <v-card-subtitle
-      class="font-weight-black px-0 pb-0"
-      :style="{ color: $vuetify.theme.themes[theme].azul }"
+  <v-card-title
+    :style="{ color: $vuetify.theme.themes[theme].colorText }"
+    class="pa-0"
+  >
+    <v-simple-table
+      :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
+      style="width: 100%;"
+      class="mb-5"
+      v-if="priceVariety.length > 1"
     >
-      PRECIO:
-    </v-card-subtitle>
-    <v-card-title
-      :style="{ color: $vuetify.theme.themes[theme].colorText }"
-      class="pa-0">
-      <template
-        v-if="price.etiquetas.length > 0"
-      >
-        <template
-          v-if="price.etiquetas[0].id === 4 ||
-          price.etiquetas[0].id === 10 ||
-          price.etiquetas[0].id === 20 ||
-          price.etiquetas[0].id === 36"
-        >
-          <template
-            v-if="priceVariety.length > 1"
+      <template v-slot:default>
+        <thead>
+          <tr>
+            <th
+              class="text-left"
+              :style="{ color: $vuetify.theme.themes[theme].azul }"
+              v-if="!isCard"
+            >Precio</th>
+            <th
+              class="text-left"
+              :style="{ color: $vuetify.theme.themes[theme].azul }"
+              v-if="!isCard"
+            >Variedad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="(value, index) in priceVariety"
+            :key="index"
           >
-            <v-simple-table
-              :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
-            >
-              <template v-slot:default>
-                <thead>
-                  <tr>
-                    <th
-                      class="text-left"
-                      :style="{ color: $vuetify.theme.themes[theme].azul }"
-                    >
-                      Variedad
-                    </th>
-                    <th
-                      class="text-left"
-                      :style="{ color: $vuetify.theme.themes[theme].azul }"
-                    >
-                      Precio
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="(price, index) in priceVariety" :key="index">
-                    <td
-                      :style="{ color: $vuetify.theme.themes[theme].colorText }"
-                    >
-                      {{ price.variedad }}
-                    </td>
-                    <td :style="{ color: $vuetify.theme.themes[theme].colorText }">
-                      $ {{addCommas(Math.round(price.precio * 1.35))}} + iva
-                    </td>
-                  </tr>
-                </tbody>
-              </template>
-            </v-simple-table>
-          </template>
-
-          <template v-else>
-            <td
-              :style="{ color: $vuetify.theme.themes[theme].colorText }"
-            >
-              $ {{addCommas(Math.round(priceVariety[0].precio * 1.35))}} + iva
+            <td>
+              <span v-html="priceWithCommas(value)"></span>
             </td>
-          </template>
-        </template>
-
-          <template v-else>
-            <template v-if="priceVariety.length > 1">
-              <v-simple-table
-                :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
-              >
-                <template v-slot:default>
-                  <thead>
-                    <tr>
-                      <th
-                        class="text-left"
-                        :style="{ color: $vuetify.theme.themes[theme].azul }"
-                      >
-                        Variedad
-                      </th>
-                      <th
-                        class="text-left"
-                        :style="{ color: $vuetify.theme.themes[theme].azul }"
-                      >
-                        Precio
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="(price, index) in priceVariety" :key="index">
-                      <td
-                        :style="{ color: $vuetify.theme.themes[theme].colorText }"
-                      >{{ price.variedad }}</td>
-                      <td>
-                        <template v-if="price.precio > price.precio_descuento">
-                          <span
-                            :style="{ color: $vuetify.theme.themes[theme].textoError }"
-                            class="text-decoration-line-through mr-3 subtitle-1"
-                          >
-                            $ {{addCommas(Math.round(price.precio))}} + iva
-                          </span>
-                          <span
-                            :style="{ color: $vuetify.theme.themes[theme].colorText }"
-                          >
-                            $ {{addCommas(Math.round(price.precio_descuento))}} + iva
-                          </span>
-                        </template>
-                        <div
-                          :style="{ color: $vuetify.theme.themes[theme].colorText }"
-                          v-else>
-                          $ {{addCommas(Math.round(price.precio))}} + iva
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </template>
-              </v-simple-table>
-            </template>
-
-            <template v-else>
-              <template v-if="priceVariety[0].precio > priceVariety[0].precio_descuento">
-                <span
-                  class="text-decoration-line-through mr-3 subtitle-1"
-                  :style="{ color: $vuetify.theme.themes[theme].textoError }"
-                >
-                  $ {{addCommas(Math.round(priceVariety[0].precio))}} + iva
-                </span>
-                <span :style="{ color: $vuetify.theme.themes[theme].colorText }">
-                  $ {{addCommas(Math.round(priceVariety[0].precio_descuento))}} + iva
-                </span>
-              </template>
-              <div v-else :style="{ color: $vuetify.theme.themes[theme].colorText }">
-                <span>$ {{addCommas(Math.round(priceVariety[0].precio))}} + iva</span>
-              </div>
-            </template>
-          </template>
-        </template>
-
-        <template v-else>
-          <template v-if="priceVariety.length > 1">
-            <v-simple-table
-            :style="{ background: $vuetify.theme.themes[theme].fondoTarjeta }"
-            >
-              <template v-slot:default>
-                <thead>
-                  <tr>
-                    <th
-                      class="text-left"
-                      :style="{ color: $vuetify.theme.themes[theme].azul }"
-                    >
-                      Variedad
-                    </th>
-                    <th
-                      class="text-left"
-                      :style="{ color: $vuetify.theme.themes[theme].azul }"
-                    >
-                      Precio
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="(price, index) in priceVariety" :key="index">
-                    <td
-                      :style="{ color: $vuetify.theme.themes[theme].colorText }"
-                    >
-                      {{ price.variedad }}
-                    </td>
-                    <td>
-                      <template v-if="price.precio > price.precio_descuento">
-                        <span
-                          :style="{ color: $vuetify.theme.themes[theme].textoError }"
-                          class="text-decoration-line-through mr-3 subtitle-1"
-                        >
-                          $ {{addCommas(Math.round(price.precio))}} + iva
-                        </span>
-                        <span :style="{ color: $vuetify.theme.themes[theme].colorText }">
-                          $ {{addCommas(Math.round(price.precio_descuento))}} + iva
-                        </span>
-                      </template>
-                      <div v-else :style="{ color: $vuetify.theme.themes[theme].colorText }">
-                        $ {{addCommas(Math.round(price.precio))}} + iva
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </template>
-            </v-simple-table>
-          </template>
-
-          <template v-else>
-            <template v-if="priceVariety[0].precio > priceVariety[0].precio_descuento">
-              <span
-                :style="{ color: $vuetify.theme.themes[theme].textoError }"
-                class="text-decoration-line-through mr-3 subtitle-1"
-              >
-                $ {{addCommas(Math.round(priceVariety[0].precio))}} + iva
-              </span>
-              <span :style="{ color: $vuetify.theme.themes[theme].colorText }">
-                $ {{addCommas(Math.round(priceVariety[0].precio_descuento))}} + iva
-              </span>
-            </template>
-            <template v-else>
-              <td
-                :style="{ color: $vuetify.theme.themes[theme].colorText }"
-              >
-                $ {{addCommas(Math.round(priceVariety[0].precio))}} + iva
-              </td>
-            </template>
-          </template>
-        </template>
-      </v-card-title>
-
-    <v-card-subtitle class="px-0 pt-5">
-      <span
-        :style="{ color: $vuetify.theme.themes[theme].azul }"
-        class="font-weight-black"
-      >
-       Actualizado: </span> <span
-          :style="{ color: $vuetify.theme.themes[theme].colorText }"
-      >
-        {{moment(price.materiales[0].ultima_actualizacion_precio).locale('es-CO').format('LL')}}
-      </span>
-    </v-card-subtitle>
-  </v-card-text>
+            <td v-if="!isCard">
+              <span v-html="changeText(value.variedad)"></span>
+            </td>
+        </tr>
+        </tbody>
+      </template>
+    </v-simple-table>
+    <template v-else>
+      <span :class="{'text-body-1': isCard}" v-html="priceWithCommas(priceVariety[0])"></span>
+    </template>
+  </v-card-title>
 </template>
 
 <script>
@@ -231,13 +50,37 @@ import addCommas from '@/mixins/addCommas';
 
 export default {
   name: 'PrecioProducto',
-  props: ['materials', 'price'],
+  props: ['materials', 'price', 'isCard'],
   mixins: [addCommas],
   computed: {
     priceVariety() {
       return Object.values(
         this.materials.reduce((prev, next) => Object.assign(prev, { [next.variedad]: next }), {}),
       );
+    },
+  },
+  methods: {
+    absoluteValue(value) {
+      return Math.abs(value);
+    },
+    roundValue(value) {
+      return this.addCommas(Math.round(value));
+    },
+    priceWithDiscount(price) {
+      if (this.absoluteValue(price?.descuento) > 0) {
+        const discount = (price.precio * this.absoluteValue(price.descuento)) / 100;
+        return `<span class="text-decoration-line-through colorError word-break">$ ${this.roundValue(price.precio)} + iva</span> <span class="word-break">$ ${this.roundValue(price.precio - discount)} + iva</span>`;
+      }
+      return `$ ${this.roundValue(price?.precio)} + iva`;
+    },
+    priceWithCommas(value) {
+      return this.priceWithDiscount(value);
+    },
+    changeText(value) {
+      if (value === 'Linea') {
+        return '';
+      }
+      return value;
     },
   },
 };
