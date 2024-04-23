@@ -4,73 +4,68 @@
       :description="product"
     />
     <template v-if="isLogin">
-      <PrecioProducto
-        :price="product"
-        :materials="materials"
-      />
+      <v-card-text class="py-0">
+        <v-card-subtitle
+          class="font-weight-black px-0 pb-0"
+          :style="{ color: $vuetify.theme.themes[theme].azul }"
+        >
+          PRECIO:
+        </v-card-subtitle>
+        <PrecioProducto
+          :price="product"
+          :materials="materials"
+        />
+      </v-card-text>
     </template>
-    <v-card-text class="pt-0">
-      <p
-        v-if="product.texto_informacion"
-        class="ma-0 text-caption"
+    <template v-if="productInfo">
+      <v-card-text
+        class="d-block title my-2 py-0"
+        :style="{ color: $vuetify.theme.themes[theme].azul }"
+        v-if="isDiscount"
       >
-        {{ replaceSeller(product.texto_informacion) }}
-      </p>
-    </v-card-text>
-    <v-card-text
-      class="d-block title my-2 py-0"
-      :style="{ color: $vuetify.theme.themes[theme].azul }"
-      v-if="Math.round(product.materiales[0].precio_descuento) !==
-      Math.round(product.materiales[0].precio)"
-    >
-      {{Math.abs(Math.round(product.materiales[0].descuento))}}% de descuento.
-    </v-card-text>
-    <div class="ml-1 pt-0">
-      <mp-button
-        :loading="loading"
-        @click="downloadImage(product.id, product.familia)"
-        is-full
-      >
-        Descargar Imágenes
-        <v-icon>
-          {{ mdiDownload }}
-        </v-icon>
-      </mp-button>
-    </div>
-    <div class="ml-1 pt-2" v-if="product.materiales[0].en_transito > 0">
-      <mp-button
-        @click="$emit('dialogo')"
-        is-full
-      >
-        Importaciones
-        <v-icon>
-          {{ mdiFerry }}
-        </v-icon>
-      </mp-button>
-    </div>
+        {{discount}}% de descuento.
+      </v-card-text>
+    </template>
+    <template v-if="productInfo">
+      <div class="ml-1 pt-2" v-if="isTracking(productInfo.materiales)">
+        <mp-button
+          @click="$emit('dialogo')"
+          is-full
+        >
+          Importaciones
+          <v-icon>
+            {{ mdiFerry }}
+          </v-icon>
+        </mp-button>
+      </div>
+    </template>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 import { mdiCloseCircleOutline, mdiDownload, mdiFerry } from '@mdi/js';
-import Swal from 'sweetalert2';
-import { getImageZip } from '@/api/apiProduct';
 
 export default {
   name: 'InfoProducto',
   data() {
     return {
-      getImageZip,
       loading: false,
       mdiCloseCircleOutline,
       mdiDownload,
       mdiFerry,
+      productInfo: null,
     };
   },
   props: ['product', 'materials', 'transito'],
   computed: {
     ...mapGetters(['isLogin']),
+    isDiscount() {
+      return Math.round(Math.abs(this.product?.materiales?.[0]?.descuento)) > 0;
+    },
+    discount() {
+      return Math.abs(this.productInfo?.materiales?.[0]?.descuento);
+    },
   },
   components: {
     MpButton: () => import(/* webpackChunkName: "mpButton" */ '@/components/UI/Mp-Button.vue'),
@@ -78,19 +73,15 @@ export default {
     PrecioProducto: () => import(/* webpackChunkName: "precioProducto" */ '@/components/Producto/PrecioProducto.vue'),
   },
   methods: {
-    replaceSeller(text) {
-      return text.includes('asesora') ? text.replaceAll('asesora', 'asesor') : text;
+    isTracking(materials) {
+      if (!materials) return false;
+      return materials.some((material) => material?.trackings_importacion.length > 0);
     },
-    async downloadImage(id, code) {
-      this.loading = true;
-      try {
-        window.location.href = await getImageZip(id, code);
-      } catch (error) {
-        await Swal.fire('Error!', 'Hubo un error, inténtelo de nuevo.', 'error');
-      } finally {
-        this.loading = false;
-      }
-    },
+  },
+  updated() {
+    if (this.product) {
+      this.productInfo = this.product;
+    }
   },
 };
 </script>

@@ -5,24 +5,23 @@
     :class="{'cardProductsLogin': isLogin}"
   >
     <v-card-text class="pa-0">
-      <router-link
-        :to="{ path: `/producto/${product.familia}` }"
+      <div
+        @click="goToProduct(product)"
         class="pointer"
       >
         <v-img
-          :src="product.imagen.imagen.file_md"
+          :src="product.imagen"
           width="100%"
           max-width="100%"
           max-height="100%"
           :alt="product.descripcion_comercial"
           class="imageProduct"
-          :class="{'filterImage': drained }"
         >
-          <span v-if="product.materiales[0].descuento" class="percent">
+          <span v-if="Math.abs(product.materiales[0].descuento) > 0" class="percent">
             {{ product.materiales[0].descuento }}%
           </span>
         </v-img>
-      </router-link>
+      </div>
     </v-card-text>
     <v-card-title
       class="text-subtitle-1 titleProd pb-2 font-weight-light"
@@ -49,58 +48,22 @@
       v-if="isLogin"
       class="precio pt-0"
     >
-      <template v-if="product.etiquetas.length > 0">
-        <template
-          v-if="product.etiquetas[0].id === 4 ||
-          product.etiquetas[0].id === 10 ||
-          product.etiquetas[0].id === 20 ||
-          product.etiquetas[0].id === 36"
-        >
-          $ {{addCommas(Math.round(product.materiales[0].precio * 1.35))}} + iva
-        </template>
-
-        <template v-else>
-          <template v-if="product.materiales[0].precio > product.materiales[0].precio_descuento">
-            <span
-            :style="{ color: $vuetify.theme.themes[theme].textoError }"
-            class="text-decoration-line-through mr-3 subtitle-1"
-            >
-              $ {{addCommas(Math.round(product.materiales[0].precio))}} + iva
-            </span>
-            $ {{addCommas(Math.round(product.materiales[0].precio_descuento))}} + iva
-          </template>
-          <template v-else>
-            $ {{addCommas(Math.round(product.materiales[0].precio))}} + iva
-          </template>
-        </template>
-      </template>
-
-      <template v-else>
-        <template v-if="product.materiales[0].precio > product.materiales[0].precio_descuento">
-          <span
-          :style="{ color: $vuetify.theme.themes[theme].textoError }"
-          class="text-decoration-line-through mr-3 subtitle-1"
-          >
-            $ {{addCommas(Math.round(product.materiales[0].precio))}} + iva
-          </span>
-          $ {{addCommas(Math.round(product.materiales[0].precio_descuento))}} + iva
-        </template>
-        <template v-else>
-          $ {{addCommas(Math.round(product.materiales[0].precio))}} + iva
-        </template>
-      </template>
+      <PrecioProducto
+        :price="product"
+        :materials="product.materiales"
+        :is-card="true"
+      />
     </v-card-title>
     <div class="actionCard">
-      <div class="d-flex justify-center text-center my-2 pointer">
+      <div class="d-flex justify-center text-center my-2">
         <template v-if="product.etiquetas.length > 0">
           <div
             v-for="label in product.etiquetas"
             :key="label.id"
-            @click="filterLabel(label)"
           >
             <img
-              width="80px"
-              :src="label.imagen.file_sm"
+              width="60px"
+              :src="label.imagen"
               :alt="label.nombre"
             >
           </div>
@@ -114,7 +77,7 @@
         <router-link :to="{ path: `/producto/${product.familia}` }">
           <mp-button
             is-full
-            @click="$router.push({path: `/producto/${product.familia}`})"
+            @click="goToProduct(product)"
           >
             Ver Producto
           </mp-button>
@@ -134,6 +97,7 @@ export default {
   components: {
     MpColorInventory: () => import(/* webpackChunkName: "filterColor" */ '@/components/UI/Mp-Color-Inventory.vue'),
     MpButton: () => import(/* webpackChunkName: "filterColor" */ '@/components/UI/Mp-Button.vue'),
+    PrecioProducto: () => import(/* webpackChunkName: "precioProducto" */ '@/components/Producto/PrecioProducto.vue'),
   },
   props: {
     product: {
@@ -149,7 +113,6 @@ export default {
   data() {
     return {
       hextToRgb,
-      drained: false,
     };
   },
   computed: {
@@ -157,31 +120,24 @@ export default {
   },
   methods: {
     ...mapActions('menu', ['setSelectedMenu']),
+    ...mapActions('products', ['setProduct']),
     totalInventory(products) {
       let total = 0;
       let inTransit = 0;
       products.forEach((product) => {
-        total += product.inventario;
-        inTransit += product.en_transito;
+        total += product.inventario_almacen?.[0]?.cantidad;
+        inTransit += product.trackings_importacion?.[0]?.cantidad;
       });
       if (total <= 10) {
-        this.drained = true;
         if (inTransit > 0) return `<span class="font-weight-bold blue--text text--accent-2">En transito</span> ${this.addCommas(inTransit)} unidades`;
         return '<strong class="red--text text--lighten-1">Agotado</strong>';
       }
       return `<span class="font-weight-bold blue--text text--accent-1">Existencias:</span> ${this.addCommas(total)} unidades`;
     },
-    filterLabel(label) {
-      this.$router.push({
-        path: this.$route.path,
-        query: {
-          ...this.$route.query,
-          page: 1,
-          label: label.id,
-          title: label.nombre,
-        },
-      });
-      this.setSelectedMenu(this.$route.fullPath);
+    goToProduct(product) {
+      this.setProduct(product);
+      this.setSelectedMenu('producto');
+      this.$router.push({ path: `/producto/${product.familia}` });
     },
   },
 };
@@ -207,11 +163,6 @@ export default {
 .imageProduct {
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-}
-
-.filterImage {
-  filter: grayscale(100%);
-  -webkit-filter: grayscale(100%);
 }
 
 .actionCard {

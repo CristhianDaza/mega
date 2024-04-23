@@ -31,14 +31,16 @@
       <p
         :style="{ color: $vuetify.theme.themes[theme].colorText }"
         class="ma-0"
-        v-if="description.medidas !== null"
       >
         <span
           class="font-weight-black"
           :style="{ color: $vuetify.theme.themes[theme].azul }"
         >
           MEDIDAS:
-        </span> {{ description.medidas }}
+        </span>
+          {{ description.medidas_largo }}cm x
+          {{ description.medidas_ancho }}cm x
+          {{ description.medidas_alto }}cm
       </p>
       <p
         :style="{ color: $vuetify.theme.themes[theme].colorText }"
@@ -66,17 +68,6 @@
       <p
         :style="{ color: $vuetify.theme.themes[theme].colorText }"
         class="ma-0"
-        v-if="description.empaque !== null">
-        <span
-          class="font-weight-black"
-          :style="{ color: $vuetify.theme.themes[theme].azul }"
-        >
-          EMPAQUE:
-        </span> {{ description.empaque }}
-      </p>
-      <p
-        :style="{ color: $vuetify.theme.themes[theme].colorText }"
-        class="ma-0"
       >
         <span
           class="font-weight-black"
@@ -85,16 +76,20 @@
           CATEGORIAS:
         </span>
         <span
-          class="linkCategories pointer"
-          @click="goToCategories('category', description.subcategoria_1.categoria)"
+          class="linkCategories"
+          v-if="description.subcategoria_1"
         >
-          {{description.subcategoria_1.categoria.nombre}}
-        </span> |
+          {{description.subcategoria_1.nombre}}
+        </span>
         <span
-          class="linkCategories pointer"
-          @click="goToCategories('subCategory', description.subcategoria_1)"
-        >
-          {{ description.subcategoria_1.nombre }}
+          class="linkCategories"
+          v-if="description.subcategoria_2"
+        > | {{ description.subcategoria_2.nombre }}
+        </span>
+        <span
+          class="linkCategories"
+          v-if="description.subcategoria_3"
+        > | {{ description.subcategoria_3.nombre }}
         </span>
       </p>
     </v-card-text>
@@ -121,30 +116,8 @@ export default {
   methods: {
     ...mapActions('categories', ['getCategories', 'getSubCategories']),
     ...mapActions('menu', ['setSelectedMenu']),
-    goToCategories(select, item) {
-      if (select === 'category') {
-        this.$router.push({
-          path: '/productos',
-          query: {
-            category: item.jerarquia,
-            title: item.nombre,
-          },
-        });
-        this.getSubCategories(item.jerarquia);
-      } else {
-        this.$router.push({
-          path: '/productos',
-          query: {
-            category: item.categoria.jerarquia,
-            subCategory: item.jerarquia,
-            title: item.nombre,
-          },
-        });
-        this.getSubCategories(item.categoria.jerarquia);
-      }
-      this.setSelectedMenu(this.$route.path);
-    },
     replaceSeller(text) {
+      if (!text) return '';
       return text.includes('asesora') ? text.replaceAll('asesora', 'asesor') : text;
     },
   },
@@ -157,12 +130,4 @@ export default {
   word-break: normal;
 }
 
-.linkCategories {
-  color: #0077bd;
-  transition: color .3s;
-}
-
-.linkCategories:hover {
-  color: #007fca !important;
-}
 </style>

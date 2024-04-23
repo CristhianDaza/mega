@@ -153,10 +153,18 @@ a:hover {
   cursor: pointer;
 }
 
+.word-break {
+  word-break: break-word;
+}
+
 .colorYellow {
   color: $secondary-color-yellow;
 }
 
 .colorBlue {
   color: $primary-color-blue;
+}
+
+.colorError {
+  color: $color-error;
 }

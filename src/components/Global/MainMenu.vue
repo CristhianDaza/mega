@@ -40,7 +40,6 @@
           Admin
         </mp-button>
         <ThemeButton />
-        <SearchComponent />
       </v-layout>
     </v-app-bar>
 
@@ -93,7 +92,6 @@ export default {
     },
   },
   components: {
-    SearchComponent: () => import(/* webpackChunkName: "searchComponent" */ '@/components/Global/SearchComponent.vue'),
     ThemeButton: () => import(/* webpackChunkName: "themeButton" */ '@/components/Global/ThemeButton.vue'),
     MpButton: () => import(/* webpackChunkName: "mpButton" */ '@/components/UI/Mp-Button.vue'),
   },

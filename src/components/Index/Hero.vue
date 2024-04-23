@@ -22,9 +22,9 @@
       <router-link to="/contact">
         <mp-button
           is-full
-          @click="$router.push({ name: 'contact' })"
+          @click="$router.push({ name: 'product' })"
         >
-          Escríbenos
+          Ver productos
         </mp-button>
       </router-link>
     </div>

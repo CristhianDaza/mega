@@ -8,6 +8,7 @@
       'menuButtons' : isMenu,
       'buttonMega' : !isMenu,
       'active': isActive,
+      'isOutline': isOutline
     }]"
       @click.prevent="setAction"
     >
@@ -34,6 +35,10 @@ export default {
       default: false,
     },
     isActive: {
+      type: Boolean,
+      default: false,
+    },
+    isOutline: {
       type: Boolean,
       default: false,
     },
@@ -84,6 +89,16 @@ export default {
     height: 0;
     width: 100%;
     background: $primary-color-blue;
+  }
+
+  &.isOutline {
+    background: none;
+    color: $primary-color-blue;
+    border: none;
+
+    &:after {
+      background: none;
+    }
   }
 }
 
