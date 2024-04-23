@@ -51,7 +51,20 @@ export default {
     getProduct: (state) => state.product,
     getCurrentPage: (state) => state.currentPage,
     getMessageError: (state) => state.messageError,
-    // eslint-disable-next-line max-len
-    getFilterProducts: (state) => (search) => state.products.filter((product) => product?.descripcion_comercial.toLowerCase().indexOf(search.toLowerCase()) > -1),
+    getFilterProducts: (state) => (search) => {
+      if (!search || search.trim() === '') {
+        return state.products;
+      }
+      const normalizeString = (str) => str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      const searchLower = normalizeString(search.toLowerCase());
+
+      return state.products.filter((product) => {
+        const description = normalizeString(product?.descripcion_comercial?.toLowerCase());
+        const code = normalizeString(product?.familia?.toLowerCase());
+
+        return description.includes(searchLower) || code.includes(searchLower);
+      });
+    },
+
   },
 };

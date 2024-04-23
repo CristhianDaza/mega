@@ -8,7 +8,8 @@
       'menuButtons' : isMenu,
       'buttonMega' : !isMenu,
       'active': isActive,
-      'isOutline': isOutline
+      'isOutline': isOutline,
+      'isDisabled': disabled
     }]"
       @click.prevent="setAction"
     >
@@ -39,6 +40,10 @@ export default {
       default: false,
     },
     isOutline: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
       type: Boolean,
       default: false,
     },
@@ -98,6 +103,21 @@ export default {
 
     &:after {
       background: none;
+    }
+  }
+
+  &.isDisabled {
+    cursor: not-allowed;
+    background: $color-disabled;
+    color: $text-color-white;
+    border: 2px solid $color-disabled;
+
+    &:hover {
+      color: $text-color-white;
+    }
+
+    &:after {
+      background: $color-disabled;
     }
   }
 }

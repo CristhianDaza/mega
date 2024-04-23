@@ -31,8 +31,12 @@
                 <mp-button
                   @click="prevPage"
                   :is-active="getCurrentPage === 1"
+                  :disabled="getCurrentPage === 1"
                 >Anterior</mp-button>
-                <mp-button @click="nextPage">Siguiente</mp-button>
+                <mp-button
+                  @click="nextPage"
+                  :disabled="disabledButton"
+                >Siguiente</mp-button>
               </v-col>
             </v-row>
           </v-col>
@@ -70,6 +74,10 @@ export default {
       type2: 'number2',
       number2: 400,
       productsSearch: [],
+      searchProduct: '',
+      endIndex: 0,
+      startIndex: 0,
+      disabledButton: false,
     };
   },
   components: {
@@ -113,13 +121,17 @@ export default {
         this.showComponentWithout = true;
         return;
       }
-      const startIndex = (this.getCurrentPage - 1) * this.pageSize;
-      const endIndex = startIndex + this.pageSize;
-      this.items = this.getProducts?.slice(startIndex, endIndex);
+      this.setPageToView();
+      this.items = this.getFilterProducts(this.searchProduct)?.slice(
+        this.startIndex,
+        this.endIndex,
+      );
     },
     nextPage() {
-      this.setCurrentPage(this.getCurrentPage + 1);
-      this.pageClick();
+      if (this.getFilterProducts(this.searchProduct).length > this.pageSize) {
+        this.setCurrentPage(this.getCurrentPage + 1);
+        this.pageClick();
+      }
     },
     prevPage() {
       if (this.getCurrentPage > 1) {
@@ -131,8 +143,19 @@ export default {
       this.showProducts();
       this.$vuetify.goTo(this.target1, this.options);
     },
+    setPageToView() {
+      this.startIndex = (this.getCurrentPage - 1) * this.pageSize;
+      this.endIndex = this.startIndex + this.pageSize;
+    },
     search(value) {
-      console.log(value);
+      this.searchProduct = value;
+      this.setCurrentPage(1);
+      this.setPageToView();
+      this.items = this.getFilterProducts(value)?.slice(
+        this.startIndex,
+        this.endIndex,
+      );
+      this.disabledButton = this.getFilterProducts(value).length <= this.pageSize;
     },
   },
   async mounted() {

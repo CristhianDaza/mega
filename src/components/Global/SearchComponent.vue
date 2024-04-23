@@ -10,6 +10,7 @@
     :color="$vuetify.theme.dark ? 'white' : 'blue'"
     class="d-flex align-center ml-2"
     @input="searchProduct"
+    autocomplete="off"
   ></v-text-field>
 </template>
 
